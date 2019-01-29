@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="All Test Suite" duration-ms="10380" started-at="2019-01-29T14:47:36Z" finished-at="2019-01-29T14:47:46Z">
+    <groups>
+      <group name="cucumber">
+        <method signature="AbstractTestNGCucumberTests.feature(cucumber.api.testng.CucumberFeatureWrapper)[pri:0, instance:runner.TestRunner@26a7b76d]" name="feature" class="cucumber.api.testng.AbstractTestNGCucumberTests"/>
+      </group> <!-- cucumber -->
+    </groups>
+    <test name="full test" duration-ms="10380" started-at="2019-01-29T14:47:36Z" finished-at="2019-01-29T14:47:46Z">
+      <class name="runner.TestRunner">
+        <test-method status="PASS" signature="setUpClass()[pri:0, instance:runner.TestRunner@26a7b76d]" name="setUpClass" is-config="true" duration-ms="164" started-at="2019-01-29T14:47:36Z" finished-at="2019-01-29T14:47:36Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpClass -->
+        <test-method status="PASS" signature="startDriver(java.lang.String)[pri:0, instance:runner.TestRunner@26a7b76d]" name="startDriver" is-config="true" duration-ms="967" started-at="2019-01-29T14:47:36Z" finished-at="2019-01-29T14:47:37Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome-headless]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startDriver -->
+        <test-method status="PASS" signature="feature(cucumber.api.testng.CucumberFeatureWrapper)[pri:0, instance:runner.TestRunner@26a7b76d]" name="feature" duration-ms="9096" started-at="2019-01-29T14:47:37Z" description="Runs Cucumber Feature" data-provider="features" finished-at="2019-01-29T14:47:46Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Home page]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- feature -->
+        <test-method status="PASS" signature="stopDriver()[pri:0, instance:runner.TestRunner@26a7b76d]" name="stopDriver" is-config="true" duration-ms="74" started-at="2019-01-29T14:47:46Z" finished-at="2019-01-29T14:47:46Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- stopDriver -->
+        <test-method status="PASS" signature="tearDownClass()[pri:0, instance:runner.TestRunner@26a7b76d]" name="tearDownClass" is-config="true" duration-ms="7" started-at="2019-01-29T14:47:46Z" finished-at="2019-01-29T14:47:46Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownClass -->
+      </class> <!-- runner.TestRunner -->
+    </test> <!-- full test -->
+  </suite> <!-- All Test Suite -->
+</testng-results>

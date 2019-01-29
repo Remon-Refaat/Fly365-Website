@@ -18,7 +18,7 @@ Feature: Home page
   Scenario: Verify that "Sign up" link in the footer open on the correct link
     And Press on 'Sign up'
     Then 'Sign Up' page is opened
-
+  
   Scenario: Verify that "Support Center" link in the footer open on the correct link
     And Press on 'Support Center'
     Then 'Support Center' page is opened
