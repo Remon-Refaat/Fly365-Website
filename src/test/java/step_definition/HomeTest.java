@@ -16,7 +16,6 @@ public class HomeTest  extends TestBase{
     By termsConditionsLink = By.xpath("//a[text()='Terms and Conditions']");
     By privacyPolicyLink = By.xpath("//a[text()='Privacy policy']");
 
-
     @Given("^Navigate to URl$")
     public void navigate_to_URl()
     {
