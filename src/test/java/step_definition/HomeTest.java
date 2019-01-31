@@ -3,9 +3,15 @@ package step_definition;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class HomeTest  extends TestBase{
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
+public class HomeTest extends TestBase {
+
+    WebDriverWait wait = new WebDriverWait(driver, 10);
 
     By aboutUsLink = By.xpath("//a[text()='About us']");
     By contactUsLink = By.xpath("//a[text()='Contact Us']");
@@ -15,10 +21,16 @@ public class HomeTest  extends TestBase{
     By faqsLink = By.xpath("//a[text()='FAQs']");
     By termsConditionsLink = By.xpath("//a[text()='Terms and Conditions']");
     By privacyPolicyLink = By.xpath("//a[text()='Privacy policy']");
+    By oneWayTab = By.id("tab-oneWay");
+    By originTxt = By.xpath("//input[@name='origin']");
+    By destinationTxt = By.xpath("//input[@name='destination']");
+    By airportSearchResultOrigin = By.xpath("//li[contains(@id, '-0')]");
+    By airportSearchResultDestination = By.xpath("//li[contains(@id, '-0')]");
+    By calenderDatePicker = By.xpath("//input[@name='fromDate']");
+    By searchNowBtn = By.xpath("//button[@class='btn uppercase font-bold w-full btn-primary-second h-full']");
 
     @Given("^Navigate to URl$")
-    public void navigate_to_URl()
-    {
+    public void navigate_to_URl() {
 
         driver.navigate().to("https://www.fly365stage.com/en");
     }
@@ -64,7 +76,40 @@ public class HomeTest  extends TestBase{
     }
 
 
+    @And("^Select One Way trip$")
+    public void selectOneWayTrip() {
+        driver.findElement(oneWayTab).click();
+    }
 
+    @And("^Add airport to the Origin$")
+    public void addAirportToTheOrigin() {
+        driver.findElement(originTxt).sendKeys("Cairo International Airport (CAI), Egypt");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(airportSearchResultOrigin));
+        driver.findElement(airportSearchResultOrigin).click();
+    }
+
+    @And("^Add airport to the Destination$")
+    public void addAirportToTheDestination() {
+        driver.findElement(destinationTxt).sendKeys("Dublin International (DUB), Ireland");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(airportSearchResultDestination));
+        driver.findElement(airportSearchResultDestination).click();
+    }
+
+    @And("^Select the date of the trip$")
+    public void selectTheDateOfTheTrip()  {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, 10);
+        String pattern = "dd MMM yyyy";
+        SimpleDateFormat simpleFormat = new SimpleDateFormat(pattern);
+        String date = simpleFormat.format(cal.getTime());
+        driver.findElement(calenderDatePicker).sendKeys(date);
+    }
+
+    @And("^Press on Search Now$")
+    public void pressOnSearchNow() throws InterruptedException {
+        driver.findElement(searchNowBtn).click();
+        Thread.sleep(10000);
+    }
 
 
 }

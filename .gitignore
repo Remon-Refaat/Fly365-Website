@@ -1,0 +1,5 @@
+# Comment
+
+/target/*
+/.idea/*
+*.jar
