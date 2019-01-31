@@ -3,6 +3,8 @@ package step_definition;
 import cucumber.api.java.en.And;
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import helper.TestBase;
+
 
 public class AFTATest extends TestBase {
 

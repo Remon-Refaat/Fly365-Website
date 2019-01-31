@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import helper.TestBase;
+
 
 public class TermsConditionsTest extends TestBase {
 
