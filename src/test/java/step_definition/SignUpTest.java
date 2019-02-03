@@ -3,6 +3,8 @@ package step_definition;
 import com.github.javafaker.Faker;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import helper.DataBase;
+import helper.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -31,9 +33,9 @@ public class SignUpTest extends TestBase {
     {
         Faker fakerdata = new Faker();
         //need specific data with integration with database
-        driver.findElement(firstNameTxt).sendKeys(fakerdata.name().firstName());
-        driver.findElement(lastNameTxt).sendKeys(fakerdata.name().lastName());
-        driver.findElement(emailTxt).sendKeys(fakerdata.internet().emailAddress());
+        driver.findElement(firstNameTxt).sendKeys("John");
+        driver.findElement(lastNameTxt).sendKeys("Smith");
+        driver.findElement(emailTxt).sendKeys("mido@mailinator.com");
         driver.findElement(passwordTxt).sendKeys(fakerdata.internet().password());
     }
 
@@ -42,6 +44,16 @@ public class SignUpTest extends TestBase {
     {
 
         driver.findElement(creatAccountBtn).click();
+    }
+
+
+    @And("The new record set on database")
+    public void Check_DataBase()
+    {
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432","user_api","select email from users where email='mido@mailinator.com'");
+        System.out.println(DataBase.data);
+        Assert.assertEquals(DataBase.data,"mido@mailinator.com");
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432","user_api","delete from users where email='mido@mailinator.com'");
     }
 
     @Then("The user created successfully")

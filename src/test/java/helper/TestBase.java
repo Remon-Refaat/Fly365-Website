@@ -1,18 +1,22 @@
-package step_definition;
+package helper;
 
 import cucumber.api.testng.AbstractTestNGCucumberTests;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+
+import java.util.concurrent.TimeUnit;
 
 public class TestBase extends AbstractTestNGCucumberTests {
 
     public static WebDriver driver;
 
-    @BeforeClass
+    @BeforeSuite
     @Parameters({"browser"})
     public void startDriver(@Optional("chrome") String browserName) {
         if (browserName.equalsIgnoreCase("chrome")) {
@@ -26,20 +30,15 @@ public class TestBase extends AbstractTestNGCucumberTests {
         } else if (browserName.equalsIgnoreCase("safari")) {
             driver = new SafariDriver();
         }
-        else if (browserName.equalsIgnoreCase("chrome-headless")) {
-            String chromePath = System.getProperty("user.dir") + "/Resources/chromedriver";
-            System.setProperty("webdriver.chrome.driver", chromePath);
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--headless");
-            options.addArguments("--window-size=1920,1080");
-            driver = new ChromeDriver(options);
-        }
-
         driver.manage().window().maximize();
+
+        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+        driver.manage().timeouts().setScriptTimeout(60, TimeUnit.SECONDS);
 
     }
 
-    @AfterClass
+    @AfterSuite
     public void stopDriver() {
         driver.quit();
     }
