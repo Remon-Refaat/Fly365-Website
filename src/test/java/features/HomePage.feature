@@ -3,7 +3,7 @@ Feature: Home page
   Background:
     Given Navigate to URl
 
-@Remon
+  @Remon
   Scenario: Verify that the user can book a trip
     And Select One Way trip
     And Add airport to the Origin

@@ -14,13 +14,13 @@ public class SupportCenterTest extends TestBase {
 
 
     By supportCenterLink = By.xpath("//a[@class='link text-sm font-normal mr-5 router-link-exact-active router-link-active']");
+
     @Then("^'Support Center' page is opened$")
     public void supportCenterPageIsOpened() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(supportCenterLink));
         String headerText = driver.findElement(supportCenterLink).getText();
-        Assert.assertEquals(headerText,"Support Center");
+        Assert.assertEquals(headerText, "Support Center");
     }
-
 
 
 }

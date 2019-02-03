@@ -23,14 +23,13 @@ public class SignUpTest extends TestBase {
     By creatAccountBtn = By.xpath("//button[text()='CREATE ACCOUNT']");
 
 
-    @And("Open Sign up page")
-    public void go_to_signup_page()  {
+    @And("^Open Sign up page$")
+    public void go_to_signup_page() {
         driver.findElement(signUpBtn).click();
     }
 
-    @And("Fill required data")
-    public void fill_data()
-    {
+    @And("^Fill required data$")
+    public void fill_data() {
         Faker fakerdata = new Faker();
         //need specific data with integration with database
         driver.findElement(firstNameTxt).sendKeys("John");
@@ -39,26 +38,23 @@ public class SignUpTest extends TestBase {
         driver.findElement(passwordTxt).sendKeys(fakerdata.internet().password());
     }
 
-    @And("Click on Create Account")
-    public void Click_button()
-    {
+    @And("^Click on Create Account$")
+    public void Click_button() {
 
         driver.findElement(creatAccountBtn).click();
     }
 
 
-    @And("The new record set on database")
-    public void Check_DataBase()
-    {
-        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432","user_api","select email from users where email='mido@mailinator.com'");
+    @And("^The new record set on database$")
+    public void Check_DataBase() {
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "select email from users where email='mido@mailinator.com'");
         System.out.println(DataBase.data);
-        Assert.assertEquals(DataBase.data,"mido@mailinator.com");
-        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432","user_api","delete from users where email='mido@mailinator.com'");
+        Assert.assertEquals(DataBase.data, "mido@mailinator.com");
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "delete from users where email='mido@mailinator.com'");
     }
 
-    @Then("The user created successfully")
-    public void userCreatedSuccessfully()
-    {
+    @Then("^The user created successfully$")
+    public void userCreatedSuccessfully() {
 
         driver.getTitle().contains("Fly365");
     }
@@ -67,7 +63,7 @@ public class SignUpTest extends TestBase {
     public void signUpPageIsOpened() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(SignUpHeader));
         String headerText = driver.findElement(SignUpHeader).getText();
-        Assert.assertEquals(headerText,"Sign in or sign up");
+        Assert.assertEquals(headerText, "Sign in or sign up");
 
     }
 }

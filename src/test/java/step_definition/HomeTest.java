@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import helper.TestBase;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -96,7 +97,7 @@ public class HomeTest extends TestBase {
     }
 
     @And("^Select the date of the trip$")
-    public void selectTheDateOfTheTrip()  {
+    public void selectTheDateOfTheTrip() {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, 10);
         String pattern = "dd MMM yyyy";

@@ -8,7 +8,7 @@ import org.testng.Assert;
 import helper.TestBase;
 
 
-public class AboutUsTest extends TestBase{
+public class AboutUsTest extends TestBase {
 
     WebDriverWait wait = new WebDriverWait(driver, 10);
 
@@ -17,9 +17,9 @@ public class AboutUsTest extends TestBase{
     @Then("^'About Us' page is opened$")
     public void aboutUsPageIsOpened() {
 
-       wait.until(ExpectedConditions.visibilityOfElementLocated(aboutUsHeader));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(aboutUsHeader));
         String headerText = driver.findElement(aboutUsHeader).getText();
-        Assert.assertEquals(headerText,"About Fly365");
+        Assert.assertEquals(headerText, "About Fly365");
 
     }
 
