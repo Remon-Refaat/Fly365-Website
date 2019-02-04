@@ -2,24 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="24383404-ffe0-4e0f-8a87-fbd2cffbc75d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/features/SignInPage.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/d05c32ff-1ec2-47a0-9c2c-b49a359c1c1d.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/features/HomePage.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/features/HomePage.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/features/SignIn.feature" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/helper/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/helper/DataBase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/helper/TestBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/helper/TestBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/runner/TestRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/runner/TestRunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/step_definition/AFTATest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/step_definition/AFTATest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/step_definition/AboutUsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/step_definition/AboutUsTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/step_definition/ContactUsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/step_definition/ContactUsTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/step_definition/FAQsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/step_definition/FAQsTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/step_definition/HomeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/step_definition/HomeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/step_definition/PrivacyPolicyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/step_definition/PrivacyPolicyTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/step_definition/SignInTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/step_definition/SignInTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/step_definition/SignUpTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/step_definition/SignUpTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/step_definition/SupportCenterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/step_definition/SupportCenterTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/step_definition/TermsConditionsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/step_definition/TermsConditionsTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -87,7 +73,58 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/features/BookingTripPage.feature">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="20" lean-forward="true" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/step_definition/HomeTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="287">
+              <caret line="110" column="34" selection-start-line="110" selection-start-column="34" selection-end-line="110" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1698#1699#0" expanded="true" />
+                <element signature="e#1753#1754#0" expanded="true" />
+                <element signature="e#1827#1828#0" expanded="true" />
+                <element signature="e#1884#1885#0" expanded="true" />
+                <element signature="e#1952#1953#0" expanded="true" />
+                <element signature="e#2006#2007#0" expanded="true" />
+                <element signature="e#2074#2075#0" expanded="true" />
+                <element signature="e#2128#2129#0" expanded="true" />
+                <element signature="e#2210#2211#0" expanded="true" />
+                <element signature="e#2271#2272#0" expanded="true" />
+                <element signature="e#2334#2335#0" expanded="true" />
+                <element signature="e#2386#2387#0" expanded="true" />
+                <element signature="e#2479#2480#0" expanded="true" />
+                <element signature="e#2542#2543#0" expanded="true" />
+                <element signature="e#2624#2625#0" expanded="true" />
+                <element signature="e#2685#2686#0" expanded="true" />
+                <element signature="e#2758#2759#0" expanded="true" />
+                <element signature="e#2811#2812#0" expanded="true" />
+                <element signature="e#3968#3969#0" expanded="true" />
+                <element signature="e#4024#4025#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/features/HomePage.feature">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="16" column="33" lean-forward="true" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -124,13 +161,11 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/test/java/features/SignIn.feature" />
-        <option value="$PROJECT_DIR$/src/test/java/helper/TestBase.java" />
         <option value="$PROJECT_DIR$/src/test/java/runner/TestRunner.java" />
         <option value="$PROJECT_DIR$/src/test/java/step_definition/AboutUsTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/step_definition/AFTATest.java" />
         <option value="$PROJECT_DIR$/src/test/java/step_definition/ContactUsTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/step_definition/FAQsTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/step_definition/HomeTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/step_definition/PrivacyPolicyTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/step_definition/SupportCenterTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/step_definition/TermsConditionsTest.java" />
@@ -139,11 +174,14 @@
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/6263d12a-3005-4fdc-8ee1-ab6b0b042c18/console_2.sql" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/6263d12a-3005-4fdc-8ee1-ab6b0b042c18/console_3.sql" />
         <option value="$PROJECT_DIR$/src/test/java/helper/DataBase.java" />
-        <option value="$PROJECT_DIR$/src/test/java/features/HomePage.feature" />
         <option value="$PROJECT_DIR$/src/test/java/features/SignUpPage.feature" />
         <option value="$PROJECT_DIR$/src/test/java/features/SignInPage.feature" />
         <option value="$PROJECT_DIR$/src/test/java/step_definition/SignUpTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/step_definition/SignInTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/step_definition/SearchResultTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/helper/TestBase.java" />
+        <option value="$PROJECT_DIR$/src/test/java/features/HomePage.feature" />
+        <option value="$PROJECT_DIR$/src/test/java/step_definition/HomeTest.java" />
       </list>
     </option>
   </component>
@@ -176,73 +214,60 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="automation_site" type="b2602c69:ProjectViewProjectNode" />
-              <item name="automation_site" type="462c0819:PsiDirectoryNode" />
+              <item name="fly365" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fly365" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="automation_site" type="b2602c69:ProjectViewProjectNode" />
-              <item name="automation_site" type="462c0819:PsiDirectoryNode" />
+              <item name="fly365" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fly365" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="automation_site" type="b2602c69:ProjectViewProjectNode" />
-              <item name="automation_site" type="462c0819:PsiDirectoryNode" />
+              <item name="fly365" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fly365" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="automation_site" type="b2602c69:ProjectViewProjectNode" />
-              <item name="automation_site" type="462c0819:PsiDirectoryNode" />
+              <item name="fly365" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fly365" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="automation_site" type="b2602c69:ProjectViewProjectNode" />
-              <item name="automation_site" type="462c0819:PsiDirectoryNode" />
+              <item name="fly365" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fly365" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="features" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="automation_site" type="b2602c69:ProjectViewProjectNode" />
-              <item name="automation_site" type="462c0819:PsiDirectoryNode" />
+              <item name="fly365" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fly365" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="helper" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="automation_site" type="b2602c69:ProjectViewProjectNode" />
-              <item name="automation_site" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="runner" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="automation_site" type="b2602c69:ProjectViewProjectNode" />
-              <item name="automation_site" type="462c0819:PsiDirectoryNode" />
+              <item name="fly365" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fly365" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="step_definition" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="automation_site" type="b2602c69:ProjectViewProjectNode" />
-              <item name="automation_site" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -250,7 +275,7 @@
     <property name="DatabaseDriversLRU" value="postgresql" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549191888150" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549304089762" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect" value="PostgreSQL" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -421,7 +446,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="98817000" />
+    <option name="totallyTimeSpent" value="99898000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -433,16 +458,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="817" extended-state="0" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27825466" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2532189" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Database Console" sideWeight="0.49928468" weight="0.32965517" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4985694" visible="true" weight="0.32827586" />
@@ -457,6 +482,7 @@
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5007153" side_tool="true" weight="0.32965517" />
       <window_info anchor="bottom" id="Java Enterprise" order="12" weight="0.32891566" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.32891566" />
+      <window_info anchor="bottom" id="Database Console" order="14" sideWeight="0.49928468" weight="0.32965517" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.24964234" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -570,9 +596,7 @@
     <entry file="file://$PROJECT_DIR$/../../automation_site/src/test/java/runner/TestRunner.java" />
     <entry file="file://$PROJECT_DIR$/../../automation_site/pom.xml" />
     <entry file="file://$PROJECT_DIR$/../../automation_site/src/test/java/helper/TestBase.java" />
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/3c0a517e-227b-44f9-8923-8ab8d3d4b359/console.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/3c0a517e-227b-44f9-8923-8ab8d3d4b359/console.sql" />
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="423">
@@ -580,13 +604,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/seleniumhq/selenium/selenium-support/3.141.59/selenium-support-3.141.59-sources.jar!/org/openqa/selenium/support/ui/ExpectedConditions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="199" column="46" selection-start-line="199" selection-start-column="46" selection-end-line="199" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/seleniumhq/selenium/selenium-support/3.141.59/selenium-support-3.141.59-sources.jar!/org/openqa/selenium/support/ui/ExpectedConditions.java" />
     <entry file="file://$PROJECT_DIR$/src/test/java/step_definition/ContactUsTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -611,16 +629,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/step_definition/HomeTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="116" lean-forward="true" selection-start-line="116" selection-end-line="116" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -657,51 +665,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/src.zip!/java.sql/java/sql/Statement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="93" column="8" selection-start-line="93" selection-start-column="8" selection-end-line="93" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/6263d12a-3005-4fdc-8ee1-ab6b0b042c18/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="15" lean-forward="true" selection-start-line="3" selection-end-line="3" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/6263d12a-3005-4fdc-8ee1-ab6b0b042c18/console_1.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="87" selection-start-column="87" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/6263d12a-3005-4fdc-8ee1-ab6b0b042c18/console_2.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="26" selection-end-column="158" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/6263d12a-3005-4fdc-8ee1-ab6b0b042c18/console_3.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="7" selection-start-column="7" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/helper/TestBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-190">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/src.zip!/java.sql/java/sql/Statement.java" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/6263d12a-3005-4fdc-8ee1-ab6b0b042c18/console.sql" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/6263d12a-3005-4fdc-8ee1-ab6b0b042c18/console_1.sql" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/6263d12a-3005-4fdc-8ee1-ab6b0b042c18/console_2.sql" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/6263d12a-3005-4fdc-8ee1-ab6b0b042c18/console_3.sql" />
     <entry file="file://$PROJECT_DIR$/src/test/java/step_definition/AboutUsTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -712,30 +680,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/features/SignUpPage.feature">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="10" lean-forward="true" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/features/SignInPage.feature">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" column="4" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/target/report.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/features/HomePage.feature">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="41" column="12" selection-start-line="41" selection-start-column="12" selection-end-line="41" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/target/report.html" />
     <entry file="file://$PROJECT_DIR$/src/test/java/step_definition/SignUpTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="179">
@@ -769,6 +714,91 @@
           <caret line="167" selection-start-line="167" selection-end-line="167" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/step_definition/SearchResultTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="40" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/features/SignUpPage.feature">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="10" lean-forward="true" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/features/SignInPage.feature">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/step_definition/PassengersDetailsTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-437">
+          <caret line="20" column="54" selection-start-line="20" selection-start-column="54" selection-end-line="20" selection-end-column="54" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/helper/TestBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="52" column="4" selection-start-line="52" selection-start-column="4" selection-end-line="52" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/features/BookingTripPage.feature">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="20" lean-forward="true" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/features/HomePage.feature">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="33" lean-forward="true" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/step_definition/HomeTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="110" column="34" selection-start-line="110" selection-start-column="34" selection-end-line="110" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1698#1699#0" expanded="true" />
+            <element signature="e#1753#1754#0" expanded="true" />
+            <element signature="e#1827#1828#0" expanded="true" />
+            <element signature="e#1884#1885#0" expanded="true" />
+            <element signature="e#1952#1953#0" expanded="true" />
+            <element signature="e#2006#2007#0" expanded="true" />
+            <element signature="e#2074#2075#0" expanded="true" />
+            <element signature="e#2128#2129#0" expanded="true" />
+            <element signature="e#2210#2211#0" expanded="true" />
+            <element signature="e#2271#2272#0" expanded="true" />
+            <element signature="e#2334#2335#0" expanded="true" />
+            <element signature="e#2386#2387#0" expanded="true" />
+            <element signature="e#2479#2480#0" expanded="true" />
+            <element signature="e#2542#2543#0" expanded="true" />
+            <element signature="e#2624#2625#0" expanded="true" />
+            <element signature="e#2685#2686#0" expanded="true" />
+            <element signature="e#2758#2759#0" expanded="true" />
+            <element signature="e#2811#2812#0" expanded="true" />
+            <element signature="e#3968#3969#0" expanded="true" />
+            <element signature="e#4024#4025#0" expanded="true" />
           </folding>
         </state>
       </provider>

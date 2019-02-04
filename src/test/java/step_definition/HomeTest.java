@@ -2,10 +2,10 @@ package step_definition;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import helper.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import helper.TestBase;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -82,24 +82,25 @@ public class HomeTest extends TestBase {
         driver.findElement(oneWayTab).click();
     }
 
-    @And("^Add airport to the Origin$")
-    public void addAirportToTheOrigin() {
-        driver.findElement(originTxt).sendKeys("Cairo International Airport (CAI), Egypt");
+    @And("^Add airport to the Origin \"(.*)\"$")
+    public void addAirportToTheOrigin(String originAirport) {
+        driver.findElement(originTxt).sendKeys(originAirport);
         wait.until(ExpectedConditions.visibilityOfElementLocated(airportSearchResultOrigin));
         driver.findElement(airportSearchResultOrigin).click();
     }
 
-    @And("^Add airport to the Destination$")
-    public void addAirportToTheDestination() {
-        driver.findElement(destinationTxt).sendKeys("Dublin International (DUB), Ireland");
+    @And("^Add airport to the Destination \"(.*)\"$")
+    public void addAirportToTheDestination(String destinationAirport) {
+        driver.findElement(destinationTxt).sendKeys(destinationAirport);
         wait.until(ExpectedConditions.visibilityOfElementLocated(airportSearchResultDestination));
         driver.findElement(airportSearchResultDestination).click();
     }
 
-    @And("^Select the date of the trip$")
-    public void selectTheDateOfTheTrip() {
+
+    @And("^Select the date of the trip, after \"(.*)\" day from today$")
+    public void selectTheDateOfTheTrip(int period)  {
         Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, 10);
+        cal.add(Calendar.DATE, period);
         String pattern = "dd MMM yyyy";
         SimpleDateFormat simpleFormat = new SimpleDateFormat(pattern);
         String date = simpleFormat.format(cal.getTime());
@@ -107,10 +108,10 @@ public class HomeTest extends TestBase {
     }
 
     @And("^Press on Search Now$")
-    public void pressOnSearchNow() throws InterruptedException {
+    public void pressOnSearchNow() {
         driver.findElement(searchNowBtn).click();
-        Thread.sleep(10000);
     }
+
 
 
 }

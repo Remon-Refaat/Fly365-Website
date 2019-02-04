@@ -3,21 +3,6 @@ Feature: Home page
   Background:
     Given Navigate to URl
 
-  @Remon
-  Scenario: Verify that the user can book a trip
-    And Select One Way trip
-    And Add airport to the Origin
-    And Add airport to the Destination
-    And Select the date of the trip
-    And Press on Search Now
-    And Choose a trip
-    And Add a valid data in the passenger form
-    And Click on Next Step
-    And Add a valid data for the credit card
-    And Add a valid data for the Billing Address
-    And Select the Fare Rules and Terms and Conditions
-    And Press on Pay button
-    Then Confirmation message is displayed
 
   Scenario: Verify that "About Us" link in the footer open on the correct link
     And Press on 'About us'
