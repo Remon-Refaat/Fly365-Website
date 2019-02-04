@@ -37,6 +37,21 @@ public class SignInTest extends TestBase {
     private By EmailErrorMSG = By.xpath("//span[@class='tooltiptext with-arrow']");
     private By HomePageTitle = By.xpath("//span[@class='text-primary-second']");
 
+    By SignInHeader = By.xpath("//div[@class='text-xs mb-8 text-primary-fourth']");
+    By LoginHeaderBtn = By.xpath("/html/body/div[1]/div[1]/div/div/div[2]/div/div[4]/a");
+    By LoginEmailTxt = By.xpath("/html/body/div[1]/div[2]/div/div[2]/div[3]/div/form/div[2]/div[1]/div/div/div[2]/div/div/div[1]/input");
+    By LoginPassWordTxt = By.xpath("/html/body/div[1]/div[2]/div/div[2]/div[3]/div/form/div[2]/div[2]/div/div/div[2]/div/div/div[1]/div/input");
+    By LoginBtn = By.xpath("/html/body/div[1]/div[2]/div/div[2]/div[3]/div/form/div[2]/div[4]/div/button");
+    By ProfileNameBtn = By.xpath("/html[1]/body[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[4]/span[1]");
+    By LogoutBtn = By.xpath("//li[contains(text(),'Sign Out')]");
+
+
+    @Then("^'Sign In' page is opened$")
+    public void signInPageIsOpened() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(SignInHeader));
+        String headerText = driver.findElement(SignInHeader).getText();
+        Assert.assertEquals(headerText,"Good to see you again");
+    }
 
     @And("^open login page$")
     public void openLoginPage() {
