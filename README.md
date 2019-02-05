@@ -3,8 +3,8 @@ Please keep the following format among the whole project
 
 - Elements: Any elements should be written with combination of two phrases {Description}+{FieldType} where Description start with lowercase and FieldTypes as follows TXT: Text, DDL: Drop Down List, BTM: Button, BOX: Check Box, LINK: Link, TAB: Tab, MSG: Message, DPK: Date Picker
 For example, selectDepartureDateFromDPK
-In case of validation messages it should contains 3 phrases {Description}+{FieldName}+{Success or Warning or Error} 
-For example, empty_IDNumber_Error_MSG
+In case of validation messages it should contains 3 phrases {Description}+{FieldName}+{Successful or Warning or Error} 
+For example, emptyIDNumberErrorMSG
 - Variables: Any variable should be begin with lowercase and capitalize first letters for other words 
 For example, emailAddress
 - Methods: Any method must be created from feature file with the same step name except general method 
