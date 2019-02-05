@@ -44,11 +44,12 @@ public class SignInTest extends TestBase {
     By LoginBtn = By.xpath("/html/body/div[1]/div[2]/div/div[2]/div[3]/div/form/div[2]/div[4]/div/button");
     By ProfileNameBtn = By.xpath("/html[1]/body[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[4]/span[1]");
     By LogoutBtn = By.xpath("//li[contains(text(),'Sign Out')]");
+
     @Then("^'Sign In' page is opened$")
     public void signInPageIsOpened() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(SignInHeader));
         String headerText = driver.findElement(SignInHeader).getText();
-        Assert.assertEquals(headerText,"Good to see you again");
+        Assert.assertEquals(headerText, "Good to see you again");
     }
 
     @And("^open login page$")
