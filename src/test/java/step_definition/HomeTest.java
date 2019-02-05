@@ -30,10 +30,10 @@ public class HomeTest extends TestBase {
     By calenderDatePicker = By.xpath("//input[@name='fromDate']");
     By searchNowBtn = By.xpath("//button[@class='btn uppercase font-bold w-full btn-primary-second h-full']");
 
-    @Given("^Navigate to URl$")
-    public void navigate_to_URl() {
+    @Given("^Navigate to Fly365 \"(.*)\" site$")
+    public void NavigateToFly365StageSite(String site) {
 
-        driver.navigate().to("https://www.fly365stage.com/en");
+        driver.navigate().to("https://www.fly365"+site+".com/en");
     }
 
     @And("^Press on 'About us'$")

@@ -1,7 +1,7 @@
 Feature: Booking a Trip
 
   Background:
-    Given Navigate to URl
+    Given Navigate to Fly365 "stage" site
 
   @Remon
   Scenario: Verify that the user can book a trip
