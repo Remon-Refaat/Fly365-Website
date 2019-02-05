@@ -16,14 +16,16 @@ Feature: Booking a Trip
       | Mr    | John       | William     | Smith     | 5   | February | 1985 |
 
     And Add the following data in the Contact Details
-      | Subject    | Value                |
-      | Title      | Mr                   |
-      | First Name | Remon                |
-      | Last Name  | Refaat               |
-      | email      | remon@mailinator.com |
+      | Title | First Name | Last Name | Email                |
+      | Mr    | Remon      | Refaat    | remon@mailinator.com |
+
     And Click on Next Step
     And Add a valid data for the credit card
+      | Card Holder Number | Card Number         | Card Expire Date | Card CVV |
+      | John Smith         | 5399 9999 9999 9999 | 0225             | 123      |
     And Add a valid data for the Billing Address
+      | Addres Line 1            | Addres Line 2                | State      | Zip Code |
+      | 8287 Lincoln Rd. Fontana | 64 West Evergreen Lane Tracy | California | 90001    |
     And Select the Fare Rules and Terms and Conditions
     And Press on Pay button
-    Then Confirmation message is displayed
+    Then 'Thank you for booking with Fly365' message is displayed

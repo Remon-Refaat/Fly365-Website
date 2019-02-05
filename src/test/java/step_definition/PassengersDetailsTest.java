@@ -2,84 +2,73 @@ package step_definition;
 
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
+import helper.GeneralMethods;
 import helper.TestBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.List;
 import java.util.Map;
 
 public class PassengersDetailsTest extends TestBase {
 
-    WebDriverWait wait = new WebDriverWait(driver, 10);
+    GeneralMethods generalMethodsObject = new GeneralMethods();
 
-
-
-    By titleField = By.xpath("//input[@placeholder='Title']");
-    By titleDropDownList = By.xpath("//body/div[7]//ul");
-    By firstNameTxt = By.xpath("//input[@placeholder='John']");
-    By middleNameTxt = By.xpath("//input[@placeholder='William']");
-    By lastNameTxt = By.xpath("//input[@placeholder='Smith']");
+    By passengerTitleField = By.xpath("//div[@class='passenger-form mb-5'][1]//input[@placeholder='Title']");
+    By passengerTitleDropDownList = By.xpath("//iframe[@name='_hjRemoteVarsFrame']//following::div[1]//ul");
+    By passengerFirstNameTxt = By.xpath("//input[@placeholder='John']");
+    By passengerMiddleNameTxt = By.xpath("//input[@placeholder='William']");
+    By passengerLastNameTxt = By.xpath("//input[@placeholder='Smith']");
     By dayField = By.xpath("//input[@placeholder='Day']");
     By dayDropDownList = By.xpath("//body/div[4]//ul");
     By monthField = By.xpath("//input[@placeholder='Month']");
     By monthDropDownList = By.xpath("//body/div[5]//ul");
     By yearField = By.xpath("//input[@placeholder='Year']");
     By yearDropDownList = By.xpath("//body/div[6]//ul");
+    By contactTitleField = By.xpath("//div[@class='contact-details-name px-12 py-10']//input[@placeholder='Title']");
+    By contactTitleDropDownList = By.xpath("//body/div[7]//ul");
+    By contactFirstNameTxt = By.xpath("//div[@class='contact-details-name px-12 py-10']//input[@placeholder='John']");
+    By contactLastNameTxt = By.xpath("//div[@class='contact-details-name px-12 py-10']//input[@placeholder='Smith']");
+    By contactEmailAddressTxt = By.xpath("//div[@class='contact-details-name px-12 py-10']//input[@placeholder='john@company.com']");
+    By nextStepBTN = By.xpath("//button[text()='Next Step']");
+
+
 
 
 
 
     @And("^Add the following data in the passenger Details$")
-    public void addTheFollowingDataInThePassengerDetails(DataTable passengerData) throws InterruptedException {
+    public void addTheFollowingDataInThePassengerDetails(DataTable passengerData) {
         for (Map<String, String> passengerDetails : passengerData.asMaps (String.class,String.class)){
 
-//            selectFromAutoCompleteDDL(titleField, titleDropDownList, passengerDetails.get("Title"));
-            driver.findElement(titleField).click();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(titleDropDownList));
-            WebElement select1 = driver.findElement(titleDropDownList);
-            List<WebElement> options1 = select1.findElements(By.tagName("li"));
-            for (WebElement option1 : options1) {
+            generalMethodsObject.selectFromAutoCompleteDDL(passengerTitleField, passengerTitleDropDownList, passengerDetails.get("Title"));
+            driver.findElement(passengerFirstNameTxt).sendKeys(passengerDetails.get("First Name"));
+            driver.findElement(passengerMiddleNameTxt).sendKeys(passengerDetails.get("Middle Name"));
+            driver.findElement(passengerLastNameTxt).sendKeys(passengerDetails.get("Last Name"));
+            generalMethodsObject.selectFromAutoCompleteDDL(dayField, dayDropDownList, passengerDetails.get("Day"));
+            generalMethodsObject.selectFromAutoCompleteDDL(monthField, monthDropDownList, passengerDetails.get("Month"));
+            generalMethodsObject.selectFromAutoCompleteDDL(yearField, yearDropDownList, passengerDetails.get("Year"));
 
-                if(passengerDetails.get("Title").equals(option1.getText().trim()))
-
-                    option1.click();
-            }
-
-            driver.findElement(firstNameTxt).sendKeys(passengerDetails.get("First Name"));
-            driver.findElement(middleNameTxt).sendKeys(passengerDetails.get("Middle Name"));
-            driver.findElement(lastNameTxt).sendKeys(passengerDetails.get("Last Name"));
-            selectFromAutoCompleteDDL(dayField, dayDropDownList, passengerDetails.get("Day"));
-            selectFromAutoCompleteDDL(monthField, monthDropDownList, passengerDetails.get("Month"));
-            selectFromAutoCompleteDDL(yearField, yearDropDownList, passengerDetails.get("Year"));
-
-
-
-
-
-
-//            driver.findElement(monthList).sendKeys(passengerDetails.get("February"));
-//            driver.findElement(yearList).sendKeys(passengerDetails.get("1985"));
-
-            Thread.sleep(7000);
         }
     }
 
-    public void selectFromAutoCompleteDDL(By field, By dropDownList, String value)
-    {
-        driver.findElement(field).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(dropDownList));
-        WebElement select1 = driver.findElement(dropDownList);
-        List<WebElement> options1 = select1.findElements(By.tagName("li"));
-        for (WebElement option1 : options1) {
 
-            if(value.equals(option1.getText().trim()))
+    @And("^Add the following data in the Contact Details$")
+    public void addTheFollowingDataInTheContactDetails(DataTable contactData) {
 
-                option1.click();
+        for (Map<String, String> contactDetails : contactData.asMaps (String.class,String.class)){
+
+            generalMethodsObject.selectFromAutoCompleteDDL(contactTitleField, contactTitleDropDownList, contactDetails.get("Title"));
+            driver.findElement(contactFirstNameTxt).sendKeys(contactDetails.get("First Name"));
+            driver.findElement(contactLastNameTxt).sendKeys(contactDetails.get("Last Name"));
+            driver.findElement(contactEmailAddressTxt).sendKeys(contactDetails.get("Email"));
         }
     }
+
+    @And("^Click on Next Step$")
+    public void clickOnNextStep() throws InterruptedException {
+        driver.findElement(nextStepBTN).click();
+        Thread.sleep(8000);
+    }
+
 
 
 }
