@@ -19,6 +19,6 @@ public class PrivacyPolicyTest extends TestBase {
     public void privacyPolicyPageIsOpened() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(privacyPolicyLink));
         String headerText = driver.findElement(privacyPolicyLink).getText();
-        Assert.assertEquals(headerText,"Privacy Policy");
+        Assert.assertEquals(headerText, "Privacy Policy");
     }
 }

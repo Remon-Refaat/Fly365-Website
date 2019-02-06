@@ -16,13 +16,11 @@ public class AFTATest extends TestBase {
         String currentWindow = driver.getWindowHandle();
         driver.findElement(aftaLink).click();
         Thread.sleep(15000);
-        for (String windowID : driver.getWindowHandles())
-        {
+        for (String windowID : driver.getWindowHandles()) {
             String title = driver.switchTo().window(windowID).getTitle();
-            if (title.equals("Australian Federation of Travel Agents") )
-            {
+            if (title.equals("Australian Federation of Travel Agents")) {
                 String headerText = driver.findElement(aftaheader).getText();
-                Assert.assertEquals(headerText,"WELCOME TO AFTA");
+                Assert.assertEquals(headerText, "WELCOME TO AFTA");
                 driver.close();
                 break;
             }

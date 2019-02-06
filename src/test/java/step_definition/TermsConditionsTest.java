@@ -19,6 +19,6 @@ public class TermsConditionsTest extends TestBase {
     public void termsAndConditionsPageIsOpened() throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOfElementLocated(termsConditionsLink));
         String headerText = driver.findElement(termsConditionsLink).getText();
-        Assert.assertEquals(headerText,"Terms and Conditions");
+        Assert.assertEquals(headerText, "Terms and Conditions");
     }
 }

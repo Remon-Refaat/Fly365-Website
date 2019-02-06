@@ -18,7 +18,7 @@ public class FAQsTest extends TestBase {
     public void faqsPageIsOpened() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(faqsLink));
         String headerText = driver.findElement(faqsLink).getText();
-        Assert.assertEquals(headerText,"FAQs");
+        Assert.assertEquals(headerText, "FAQs");
     }
 
 

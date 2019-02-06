@@ -18,7 +18,7 @@ public class ContactUsTest extends TestBase {
     public void contactUsPageIsOpened() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(contactUsHeader));
         String headerText = driver.findElement(contactUsHeader).getText();
-        Assert.assertEquals(headerText,"Contact Us");
+        Assert.assertEquals(headerText, "Contact Us");
     }
 
 
