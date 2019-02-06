@@ -2,8 +2,7 @@
 Feature: Sign Up
 
   Background: Open Fly365 Site
-    Given Navigate to URl
-
+    Given Navigate to Fly365 "stage" site
 
   Scenario: Verify that the user can open sign up
     And Open Sign up page
