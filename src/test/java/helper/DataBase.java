@@ -42,7 +42,6 @@ public class DataBase {
         try {
             String url = "jdbc:postgresql://" + hostName + "/" + dbsName;
 
-            // no need to call Class.forName(driver) from JDK 6 onward
             Connection con = DriverManager.getConnection(url, USER, PASS);
             Statement stmt = con.createStatement();
             int rs = stmt.executeUpdate(query);

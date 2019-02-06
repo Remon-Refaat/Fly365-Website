@@ -1,105 +1,101 @@
 Feature: login to account
   login to a created account
 
-  Scenario: verify that uer can't login with unregistered data
+  Background:
     Given Navigate to Fly365 "stage" site
+
+  Scenario: verify that uer can't login with unregistered data
     And open login page
     And 'Sign In' page is opened
     And user enter unregistered email
-    And user enter the right password
+    And user enter password "@test123"
     When the user click on login button
     Then user shall see InValid Login Error Message
 
   Scenario: login into account with wrong password
-    Given Navigate to Fly365 "stage" site
     And open login page
+    And insert new user at database "m.sayed.89@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
     And 'Sign In' page is opened
-    And user enter a valid email
-    And user enter the wrong password
+    And user enter email "M.saYed.89@Gmail.CoM"
+    And user enter password "1122334455"
     When the user click on login button
     Then user shall see InValid Login Error Message
+    And delete new user at database "m.sayed.89@gmail.com"
 
   Scenario: login into account with password less than 8 chars
-    Given Navigate to Fly365 "stage" site
     And open login page
     And 'Sign In' page is opened
-    And user enter a valid email
-    And user enter the password less than 8 chars
+    And user enter email "M.saYed.89@Gmail.CoM"
+    And user enter password "111"
     When the user click on login button
     Then user shall see password error message
 
   Scenario: login into account with password more than 60 chars
-    Given Navigate to Fly365 "stage" site
     And open login page
     And 'Sign In' page is opened
-    And user enter a valid email
-    And user enter the password more than 60 chars
+    And user enter email "M.saYed.89@Gmail.CoM"
+    And user enter password "1111111111111111111111111111111111111111111111111111111111111"
     When the user click on login button
     Then user shall see password error message
 
   Scenario: login into account with empty password
-    Given Navigate to Fly365 "stage" site
     And open login page
     And 'Sign In' page is opened
-    And user enter a valid email
+    And user enter email "M.saYed.89@Gmail.CoM"
     And user enter empty password
     When the user click on login button
     Then user shall see empty password error message
 
   Scenario: Login into account with empty email
-    Given Navigate to Fly365 "stage" site
     And open login page
     And 'Sign In' page is opened
     And user enter an empty email
-    And user enter the right password
+    And user enter password "@Test123"
     When the user click on login button
     Then user shall see email empty error message
 
   Scenario: Login into account with invalid email formation
-    Given Navigate to Fly365 "stage" site
     And open login page
     And 'Sign In' page is opened
-    And user enter an invalid email
-    And user enter the right password
+    And user enter email "M.saYed.89Gmail.CoM"
+    And user enter password "@Test123"
     When the user click on login button
     Then user shall see email error message
 
   Scenario: Login into account with correct details
-    Given Navigate to Fly365 "stage" site
-    And insert new user at database
+    And insert new user at database "m.sayed.89@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
     And open login page
     And 'Sign In' page is opened
-    And user enter a valid email
-    And user enter the right password
+    And user enter email "M.saYed.89@Gmail.CoM"
+    And user enter password "@Test123"
     When the user click on login button
     Then the user shall be redirect to my booking page
     And user logout
-    And delete new user at database
+    And delete new user at database "m.sayed.89@gmail.com"
 
   Scenario: Login into account with correct Upper case email
-    Given Navigate to Fly365 "stage" site
-    And insert new user at database
+    And insert new user at database "m.sayed.89@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
     And open login page
     And 'Sign In' page is opened
-    And user enter an upper case right email
-    And user enter the right password
+    And user enter email "M.saYed.89@Gmail.CoM"
+    And user enter password "@Test123"
     When the user click on login button
     Then the user shall be redirect to my booking page
     And user logout
-    And delete new user at database
+    And delete new user at database "m.sayed.89@gmail.com"
 
   Scenario: Customer forget password with exist email
-    And insert new user at database
+    And insert new user at database "m.sayed.89@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
     And open login page
     And 'Sign In' page is opened
     And press on forget password link
-    And enter a valid email at forget password text
+    And enter email at forget password text "m.sayed.89@gmail.com"
     When click on send email button
     Then page shall be redirect to login page
-    And delete new user at database
+    And 'Sign In' page is opened
+    And delete new user at database "m.sayed.89@gmail.com"
 
   Scenario: Customer forget password with empty email
-    Given Navigate to Fly365 "stage" site
     And open login page
     And 'Sign In' page is opened
     And press on forget password link
@@ -107,16 +103,14 @@ Feature: login to account
     Then user shall see empty email error message at forget password page
 
   Scenario: Customer forget password with invalid email
-    Given Navigate to Fly365 "stage" site
     And open login page
     And 'Sign In' page is opened
     And press on forget password link
-    And enter invalid email formation at email text at forget password page
+    And enter email at forget password text "m.sayed.89gmail.com"
     When click on send email button
     Then user shall see email error message at forget password page
 
   Scenario: Customer forget password with Unregistered email
-    Given Navigate to Fly365 "stage" site
     And open login page
     And 'Sign In' page is opened
     And press on forget password link

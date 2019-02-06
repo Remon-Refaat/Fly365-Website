@@ -16,8 +16,6 @@ public class ForgetPasswordTest extends TestBase {
     private WebDriverWait wait = new WebDriverWait(driver, 60);
     private Faker fakerLogin = new Faker();
 
-    private String userEmail = "m.sayed.89@gmail.com";
-
     private By ForgetPassWordBTN = By.xpath("//a[@class='link-forgot text-sm no-underline text-primary-fourth hover:text-black']");
     private By ForgeEmailTXT = By.xpath("//input[@placeholder='john@example.com']");
     private By SendEmailBTN = By.xpath("//button[contains(text(),'Send')]");
@@ -30,9 +28,9 @@ public class ForgetPasswordTest extends TestBase {
         driver.findElement(ForgetPassWordBTN).click();
     }
 
-    @And("^enter a valid email at forget password text$")
-    public void enterAValidEmailAtForgetPasswordText() {
-        driver.findElement(ForgeEmailTXT).sendKeys(userEmail);
+    @And("^enter email at forget password text \"(.*)\"$")
+    public void enterEmailAtForgetPasswordText(String registeredEmail) {
+        driver.findElement(ForgeEmailTXT).sendKeys(registeredEmail);
     }
 
     @When("^click on send email button$")
@@ -47,14 +45,19 @@ public class ForgetPasswordTest extends TestBase {
         Assert.assertEquals(driver.getTitle(), "Fly365 - Login");
     }
 
-    @And("^enter invalid email formation at email text at forget password page$")
-    public void enterInvalidEmailFormationAtEmailTextAtForgetPasswordPage() {
-        driver.findElement(ForgeEmailTXT).sendKeys("M.saYed.89gmailcom");
+    @And("^enter invalid email formation at email text at forget password page \"(.*)\"$")
+    public void enterInvalidEmailFormationAtEmailTextAtForgetPasswordPage(String inValidEmail) {
+        driver.findElement(ForgeEmailTXT).sendKeys(inValidEmail);
     }
 
     @And("^enter unregistered email at forget password page$")
     public void enterUnregisteredEmailAtForgetPasswordPage() {
         driver.findElement(ForgeEmailTXT).sendKeys(fakerLogin.internet().emailAddress());
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Then("^user shall see empty email error message at forget password page$")

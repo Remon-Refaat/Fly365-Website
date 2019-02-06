@@ -13,15 +13,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-
 public class SignInTest extends TestBase {
 
     private WebDriverWait wait = new WebDriverWait(driver, 60);
     private Faker fakerLogin = new Faker();
 
-    private String userEmail = "m.sayed.89@gmail.com";
-    private String userHashPassWord = "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK.\n";
-    private String userPassWord = "@Test123";
     private String hostName = "k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432";
     private String dbsName = "user_api";
 
@@ -55,14 +51,9 @@ public class SignInTest extends TestBase {
         Assert.assertTrue(LoginPassWordTXT.isDisplayed());
     }
 
-    @And("^user enter a valid email$")
-    public void userEnterAValidEmail() {
-        driver.findElement(LoginEmailTXT).sendKeys(userEmail);
-    }
-
-    @And("^user enter the right password$")
-    public void userEnterTheRightPassword() {
-        driver.findElement(LoginPassWordTXT).sendKeys(userPassWord);
+    @And("^user enter email \"(.*)\"$")
+    public void userEnterAValidEmail(String LoginEmail) {
+        driver.findElement(LoginEmailTXT).sendKeys(LoginEmail);
     }
 
     @When("^the user click on login button$")
@@ -101,16 +92,6 @@ public class SignInTest extends TestBase {
         Assert.assertEquals(PassWordErrorMSGText, "!Password length must be between 8 to 50 characters");
     }
 
-    @And("^user enter the wrong password$")
-    public void userEnterTheWrongPassword() {
-        driver.findElement(LoginPassWordTXT).sendKeys("@test123");
-    }
-
-    @And("^user enter the password less than 8 chars$")
-    public void userEnterThePasswordLessThanChars() {
-        driver.findElement(LoginPassWordTXT).sendKeys("12345");
-    }
-
     @Then("^user shall see empty password error message$")
     public void userShallSeeEmptyPasswordErrorMessage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(PassWordErrorMSG));
@@ -120,14 +101,9 @@ public class SignInTest extends TestBase {
         Assert.assertEquals(PassWordErrorMSGText, "!Please enter password");
     }
 
-    @And("^user enter the password more than 60 chars$")
-    public void userEnterThePassWordMoreThanChars() {
-        driver.findElement(LoginPassWordTXT).sendKeys("1111111111111111111111111111111111111111111111111111111111111");
-    }
-
-    @And("^user enter an invalid email$")
-    public void userEnterAnInValidEmail() {
-        driver.findElement(LoginEmailTXT).sendKeys("M.saYed.89gmailcom");
+    @And("^user enter password \"(.*)\"$")
+    public void userEnterThePassWordMoreThanChars(String Password) {
+        driver.findElement(LoginPassWordTXT).sendKeys(Password);
     }
 
     @Then("^user shall see email empty error message$")
@@ -158,11 +134,6 @@ public class SignInTest extends TestBase {
         driver.findElement(LoginPassWordTXT).sendKeys("");
     }
 
-    @And("^user enter an upper case right email$")
-    public void userEnterAnUpperCaseRightEmail() {
-        driver.findElement(LoginEmailTXT).sendKeys(userEmail.toUpperCase());
-    }
-
     @And("^user logout$")
     public void userLogout() {
         driver.findElement(ProfileNameBTN).click();
@@ -173,13 +144,13 @@ public class SignInTest extends TestBase {
         Assert.assertEquals(homeText, "Low Fares");
     }
 
-    @And("^insert new user at database$")
-    public void insertNewUserAtDataBase() {
+    @And("^insert new user at database \"(.*)\" \"(.*)\"$")
+    public void insertNewUserAtDataBase(String userEmail, String userHashPassWord) {
         DataBase.execute_update(hostName, dbsName, "insert into users (email, \"lastName\",\"firstName\",password,\"storeId\", \"groupId\",\"isActive\",\"isLocked\")values('" + userEmail + "','Sayed','Mahmoud','" + userHashPassWord + "','fly365_com','fly365',True,False)");
     }
 
-    @And("^delete new user at database$")
-    public void deleteTheNewUserAtDataBase() {
+    @And("^delete new user at database \"(.*)\"$")
+    public void deleteTheNewUserAtDataBase(String userEmail) {
         DataBase.execute_query_dbs(hostName, dbsName, "delete from users where email='" + userEmail + "'");
     }
 
