@@ -22,6 +22,7 @@ Feature: login to account
     Then user shall see InValid Login Error Message
     And delete new user at database "m.sayed.89@gmail.com"
 
+    ## covered in sign up form ##
   Scenario: login into account with password less than 8 chars
     And open login page
     And 'Sign In' page is opened
@@ -30,6 +31,7 @@ Feature: login to account
     When the user click on login button
     Then user shall see password error message
 
+        ## covered in sign up form ##
   Scenario: login into account with password more than 60 chars
     And open login page
     And 'Sign In' page is opened
@@ -54,6 +56,7 @@ Feature: login to account
     When the user click on login button
     Then user shall see email empty error message
 
+        ## covered in sign up form ##
   Scenario: Login into account with invalid email formation
     And open login page
     And 'Sign In' page is opened

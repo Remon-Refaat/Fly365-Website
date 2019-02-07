@@ -4,9 +4,10 @@ Feature: Sign Up
   Background: Open Fly365 Site
     Given Navigate to Fly365 "stage" site
 
+
   Scenario: Verify that the user can open sign up
     And Open Sign up page
-    Then 'Sign Up' page is opened
+    Then Sign Up page is opened
 
 
   Scenario: Verify that the user can sign up
@@ -75,10 +76,31 @@ Feature: Sign Up
       | John       | Smith     | john.smith.fly365@gmail.com | Hell@oo  |
 
 
-#  Scenario: Verify that the user can't sign up with the same email twice
-#    Given Insert new user in database
-#    And Open Sign up page
-#    And Enter First Name
-#    And Enter Last Name
-#    And Enter Email
+  Scenario: Verify that the user can't sign up with the same email twice
+    Given insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
+    And Open Sign up page
+    And   Fill the following required data
+      | First Name | Last Name | Email Address               | Password |
+      | John       | Smith     | john.smith.fly365@gmail.com | 12345678 |
+    And Click on Create Account
+    Then The system display validation message for email already exist
+
+
+  Scenario: Verify that the user can show and hide the entered password
+    And Open Sign up page
+    And   Fill the following required data
+      | First Name | Last Name | Email Address               | Password |
+      | John       | Smith     | john.smith.fly365@gmail.com | 12345678 |
+    And Click on Show beside password
+    Then The password should display
+
+
+  Scenario: Verify that the user can hide the entered password after show it
+    And Open Sign up page
+    And   Fill the following required data
+      | First Name | Last Name | Email Address               | Password |
+      | John       | Smith     | john.smith.fly365@gmail.com | 12345678 |
+    And Click on Show beside password
+    And Click on Hide beside password
+    Then The password should hide
 

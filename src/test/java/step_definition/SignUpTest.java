@@ -2,10 +2,12 @@ package step_definition;
 
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import helper.DataBase;
 import helper.TestBase;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -14,45 +16,47 @@ import java.util.Map;
 
 public class SignUpTest extends TestBase {
 
-    WebDriverWait wait = new WebDriverWait(driver, 30 );
+    WebDriverWait wait = new WebDriverWait(driver, 50 );
 
-    By SignUpHeader = By.xpath("//div[@class='text-xs mb-8 text-primary-fourth']");
-    By signUpBtn = By.xpath("//li/a[text()='Sign up']");
-    By firstNameTxt = By.xpath("//input[@placeholder='John']");
-    By lastNameTxt = By.xpath("//input[@placeholder='Smith']");
-    By emailTxt = By.xpath("//input[@placeholder='john@example.com']");
-    By passwordTxt = By.xpath("//input[@placeholder='******************']");
-    By creatAccountBtn = By.xpath("//button[text()='CREATE ACCOUNT']");
-    By validationNameMessage = By.xpath("//span[text()='Name must be letters only']");
-    By validationEmailMessage = By.xpath("//span[text()='Please enter a valid email']");
-    By validationPasswordMessage = By.xpath("//span[text()='Password length must be between 8 to 50 characters']");
-    By firstNameRequiredMessage = By.xpath("//span[text()='Please enter first name']");
-    By lastNameRequiredMessage = By.xpath("//span[text()='Please enter last name']");
-    By emailRequiredMessage = By.xpath("//span[text()='Please enter email']");
-    By passwordRequiredMessage = By.xpath("//span[text()='Please enter password']");
+    String hostName = "k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432";
+    String dbs = "user_api";
 
+    By signUpHDR = By.xpath("//div[@class='text-xs mb-8 text-primary-fourth']");
+    By signUpBTN = By.xpath("//li/a[text()='Sign up']");
+    By firstNameTXT = By.xpath("//input[@placeholder='John']");
+    By lastNameTXT = By.xpath("//input[@placeholder='Smith']");
+    By emailTXT = By.xpath("//input[@placeholder='john@example.com']");
+    By passwordTXT = By.xpath("//input[@placeholder='******************']");
+    By creatAccountBTN = By.xpath("//button[text()='CREATE ACCOUNT']");
+    By validationNameErrorMSG = By.xpath("//span[text()='Name must be letters only']");
+    By validationEmailErrorMSG = By.xpath("//span[text()='Please enter a valid email']");
+    By validationPasswordErrorMSG = By.xpath("//span[text()='Password length must be between 8 to 50 characters']");
+    By firstNameRequiredErrorMSG = By.xpath("//span[text()='Please enter first name']");
+    By lastNameRequiredErrorMSG = By.xpath("//span[text()='Please enter last name']");
+    By emailRequiredErrorMSG = By.xpath("//span[text()='Please enter email']");
+    By passwordRequiredErrorMSG = By.xpath("//span[text()='Please enter password']");
+    By emailExitErrorMSG = By.xpath("//span[text()='email already existed']");
+    By showPasswordBTN = By.xpath("//span[text()='Show']");
+    By hidePasswordBTN = By.xpath("//span[text()='Hide']");
+    By passwordDisplayedLBL = By.xpath("//div[@class='password-input el-input']/input[@type='text']");
+    By passwordNotDisplayedLBL = By.xpath("//div[@class='password-input el-input']/input[@type='password']");
 
-
-//    @Given("^Insert new user in database$")
-//    public void insertNewUserInDatabase()
-//    {
-//    }
 
     @And("Open Sign up page")
-    public void OpenSignUpPage()
+    public void openSignUpPage()
     {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(signUpBtn));
-        driver.findElement(signUpBtn).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(signUpBTN));
+        driver.findElement(signUpBTN).click();
     }
 
 
     @And("^Fill required data \"(.*)\", \"(.*)\", \"(.*)\", \"(.*)\"$")
     public void fillRequiredData(String fName, String lName, String eMAIL, String password)
     {
-            driver.findElement(firstNameTxt).sendKeys(fName);
-            driver.findElement(lastNameTxt).sendKeys(lName);
-            driver.findElement(emailTxt).sendKeys(eMAIL);
-            driver.findElement(passwordTxt).sendKeys(password);
+            driver.findElement(firstNameTXT).sendKeys(fName);
+            driver.findElement(lastNameTXT).sendKeys(lName);
+            driver.findElement(emailTXT).sendKeys(eMAIL);
+            driver.findElement(passwordTXT).sendKeys(password);
     }
 
 
@@ -61,53 +65,40 @@ public class SignUpTest extends TestBase {
     {
         for (Map<String, String> userData : usersData.asMaps(String.class, String.class))
         {
-            driver.findElement(firstNameTxt).sendKeys(userData.get("First Name"));
-            driver.findElement(lastNameTxt).sendKeys(userData.get("Last Name"));
-            driver.findElement(emailTxt).sendKeys(userData.get("Email Address"));
-            driver.findElement(passwordTxt).sendKeys(userData.get("Password"));
+            driver.findElement(firstNameTXT).sendKeys(userData.get("First Name"));
+            driver.findElement(lastNameTXT).sendKeys(userData.get("Last Name"));
+            driver.findElement(emailTXT).sendKeys(userData.get("Email Address"));
+            driver.findElement(passwordTXT).sendKeys(userData.get("Password"));
         }
     }
-
-//    @And("Enter First Name")
-//    public void fill_firstName()
-//    {
-//        driver.findElement(firstNameTxt).sendKeys("John");
-//    }
-//
-//    @And("Enter Last Name")
-//    public void fill_lastName()
-//    {
-//        driver.findElement(lastNameTxt).sendKeys("Smith");
-//    }
-//
-//    @And("Enter Email")
-//    public void fill_email()
-//    {
-//        Faker fakerdata = new Faker();
-//        driver.findElement(emailTxt).sendKeys(fakerdata.internet().emailAddress());
-//    }
-
-//    @And("Enter Password")
-//    public void fill_password()
-//    {
-//        driver.findElement(passwordTxt).sendKeys("12345678");
-//    }
 
     @And("Click on Create Account")
     public void clickOnCreateAccount()
     {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(creatAccountBtn));
-        driver.findElement(creatAccountBtn).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(creatAccountBTN));
+        driver.findElement(creatAccountBTN).click();
     }
 
 
     @And("The new record set on database")
     public void theNewRecordSetOnDatabase()
     {
-        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432","user_api","select email from users where email='john.smith.fly365@gmail.com'");
-        System.out.println(DataBase.data);
+        DataBase.execute_query_dbs(hostName,dbs,"select email from users where email='john.smith.fly365@gmail.com'");
         Assert.assertEquals(DataBase.data,"john.smith.fly365@gmail.com");
-        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432","user_api","delete from users where email='john.smith.fly365@gmail.com'");
+        DataBase.execute_query_dbs(hostName,dbs,"delete from users where email='john.smith.fly365@gmail.com'");
+    }
+
+    @And("^Click on Show beside password$")
+    public void clickOnShowBesidePassword()
+    {
+        driver.findElement(showPasswordBTN).click();
+    }
+
+
+    @And("^Click on Hide beside password$")
+    public void clickOnHideBesidePassword()
+    {
+        driver.findElement(hidePasswordBTN).click();
     }
 
     @Then("The user created successfully")
@@ -116,48 +107,76 @@ public class SignUpTest extends TestBase {
         driver.getTitle().contains("Fly365");
     }
 
-    @Then("^'Sign Up' page is opened$")
-    public void signUpPageIsOpened() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(SignUpHeader));
-        String headerText = driver.findElement(SignUpHeader).getText();
+
+    @Then("^Sign Up page is opened$")
+    public void signUpPageIsOpened()
+    {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(signUpHDR));
+        String headerText = driver.findElement(signUpHDR).getText();
         Assert.assertEquals(headerText,"Sign in or sign up");
     }
 
     @Then("The system display validation messages for all mandatory fields")
     public void theSystemDisplayValidationMessagesForAllMandatoryFields()
     {
-        String fErrorMSG = driver.findElement(firstNameRequiredMessage).getText();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(firstNameRequiredErrorMSG));
+        String fErrorMSG = driver.findElement(firstNameRequiredErrorMSG).getText();
         Assert.assertEquals(fErrorMSG,"Please enter first name");
 
-        String lErrorMSG = driver.findElement(lastNameRequiredMessage).getText();
+        String lErrorMSG = driver.findElement(lastNameRequiredErrorMSG).getText();
         Assert.assertEquals(lErrorMSG,"Please enter last name");
 
-        String eErrorMSG = driver.findElement(emailRequiredMessage).getText();
+        String eErrorMSG = driver.findElement(emailRequiredErrorMSG).getText();
         Assert.assertEquals(eErrorMSG,"Please enter email");
 
-        String pErrorMSG = driver.findElement(passwordRequiredMessage).getText();
+        String pErrorMSG = driver.findElement(passwordRequiredErrorMSG).getText();
         Assert.assertEquals(pErrorMSG,"Please enter password");
     }
 
     @Then("^The system should display validation message for invalid name$")
     public void theSystemShouldDisplayValidationMessageForInvalidName()
     {
-        String error_message = driver.findElement(validationNameMessage).getText();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(validationNameErrorMSG));
+        String error_message = driver.findElement(validationNameErrorMSG).getText();
         Assert.assertEquals(error_message,"Name must be letters only");
     }
 
     @Then("^The system should display validation message for invalid email$")
     public void theSystemShouldDisplayValidationMessageForInvalidEmail()
     {
-        String error_message = driver.findElement(validationEmailMessage).getText();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(validationEmailErrorMSG));
+        String error_message = driver.findElement(validationEmailErrorMSG).getText();
         Assert.assertEquals(error_message,"Please enter a valid email");
     }
 
     @Then("^The system should display validation message for invalid password$")
     public void theSystemShouldDisplayValidationMessageForInvalidPassword()
     {
-        String pass_error = driver.findElement(validationPasswordMessage).getText();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(validationPasswordErrorMSG));
+        String pass_error = driver.findElement(validationPasswordErrorMSG).getText();
         Assert.assertEquals(pass_error,"Password length must be between 8 to 50 characters");
     }
 
+    @Then("^The system display validation message for email already exist$")
+    public void theSystemDisplayValidationMessageForEmailAlreadyExist()
+    {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(emailExitErrorMSG));
+        String emailError = driver.findElement(emailExitErrorMSG).getText();
+        System.out.println(emailExitErrorMSG);
+        Assert.assertEquals(emailError,"email already existed");
+    }
+
+
+    @Then("^The password should display$")
+    public void thePasswordShouldDisplay()
+    {
+        Assert.assertTrue(true, String.valueOf(driver.findElement(passwordDisplayedLBL).isDisplayed()));
+    }
+
+
+    @Then("^The password should hide$")
+    public void thePasswordShouldHide()
+    {
+        Assert.assertTrue(true,String.valueOf(driver.findElement(passwordNotDisplayedLBL).isDisplayed()));
+    }
 }
