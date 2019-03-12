@@ -13,12 +13,12 @@ public class PrivacyPolicyTest extends TestBase {
     WebDriverWait wait = new WebDriverWait(driver, 10);
 
 
-    By privacyPolicyLink = By.xpath("//a[@class='text-sm font-normal link router-link-exact-active router-link-active']");
+    By privacyPolicyLINK = By.xpath("//a[@class='text-sm font-normal link router-link-exact-active router-link-active']");
 
     @Then("^'Privacy Policy' page is opened$")
     public void privacyPolicyPageIsOpened() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(privacyPolicyLink));
-        String headerText = driver.findElement(privacyPolicyLink).getText();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(privacyPolicyLINK));
+        String headerText = driver.findElement(privacyPolicyLINK).getText();
         Assert.assertEquals(headerText, "Privacy Policy");
     }
 }

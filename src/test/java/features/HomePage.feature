@@ -8,8 +8,12 @@ Feature: Home page
     And Press on 'About us'
     Then 'About Us' page is opened
 
-  Scenario: Verify that "Contact Us" link in the footer open on the correct link
-    And Press on 'Contact Us'
+  Scenario: Verify that first "Contact Us" link in the footer open on the correct link
+    And Press on first 'Contact Us'
+    Then 'Contact Us' page is opened
+
+  Scenario: Verify that second "Contact Us" link in the footer open on the correct link
+    And Press on second 'Contact Us'
     Then 'Contact Us' page is opened
 
   Scenario: Verify that "Sign in" link in the footer open on the correct link
@@ -18,10 +22,14 @@ Feature: Home page
 
   Scenario: Verify that "Sign up" link in the footer open on the correct link
     And Press on 'Sign up'
-    Then 'Sign Up' page is opened
+    Then Sign Up page is opened
 
-  Scenario: Verify that "Support Center" link in the footer open on the correct link
-    And Press on 'Support Center'
+  Scenario: Verify that first "Support Center" link in the footer open on the correct link
+    And Press on first 'Support Center'
+    Then 'Support Center' page is opened
+
+  Scenario: Verify that second "Support Center" link in the footer open on the correct link
+    And Press on second 'Support Center'
     Then 'Support Center' page is opened
 
   Scenario: Verify that "FAQs" link in the footer open on the correct link
