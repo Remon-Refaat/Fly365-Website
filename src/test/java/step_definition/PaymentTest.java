@@ -44,7 +44,7 @@ public class PaymentTest extends TestBase {
     @And("^Add a valid data for the Billing Address$")
     public void addAValidDataForTheBillingAddress(DataTable billingAddressData) {
 
-        for (Map<String,String> billingAddressDetails : billingAddressData.asMaps(String.class,String.class)){
+        for (Map<String, String> billingAddressDetails : billingAddressData.asMaps(String.class, String.class)) {
             driver.findElement(addressLine1TXT).sendKeys(billingAddressDetails.get("Addres Line 1"));
             driver.findElement(addressLine2TXT).sendKeys(billingAddressDetails.get("Addres Line 2"));
             driver.findElement(stateTXT).sendKeys(billingAddressDetails.get("State"));

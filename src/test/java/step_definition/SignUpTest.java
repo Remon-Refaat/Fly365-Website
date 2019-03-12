@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class SignUpTest extends TestBase {
 
-    WebDriverWait wait = new WebDriverWait(driver, 50 );
+    WebDriverWait wait = new WebDriverWait(driver, 50);
 
     String hostName = "k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432";
     String dbs = "user_api";
@@ -43,28 +43,24 @@ public class SignUpTest extends TestBase {
 
 
     @And("Open Sign up page")
-    public void openSignUpPage()
-    {
+    public void openSignUpPage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(signUpBTN));
         driver.findElement(signUpBTN).click();
     }
 
 
     @And("^Fill required data \"(.*)\", \"(.*)\", \"(.*)\", \"(.*)\"$")
-    public void fillRequiredData(String fName, String lName, String eMAIL, String password)
-    {
-            driver.findElement(firstNameTXT).sendKeys(fName);
-            driver.findElement(lastNameTXT).sendKeys(lName);
-            driver.findElement(emailTXT).sendKeys(eMAIL);
-            driver.findElement(passwordTXT).sendKeys(password);
+    public void fillRequiredData(String fName, String lName, String eMAIL, String password) {
+        driver.findElement(firstNameTXT).sendKeys(fName);
+        driver.findElement(lastNameTXT).sendKeys(lName);
+        driver.findElement(emailTXT).sendKeys(eMAIL);
+        driver.findElement(passwordTXT).sendKeys(password);
     }
 
 
     @And("^Fill the following required data$")
-    public void fillTheFollowingRequiredData(DataTable usersData)
-    {
-        for (Map<String, String> userData : usersData.asMaps(String.class, String.class))
-        {
+    public void fillTheFollowingRequiredData(DataTable usersData) {
+        for (Map<String, String> userData : usersData.asMaps(String.class, String.class)) {
             driver.findElement(firstNameTXT).sendKeys(userData.get("First Name"));
             driver.findElement(lastNameTXT).sendKeys(userData.get("Last Name"));
             driver.findElement(emailTXT).sendKeys(userData.get("Email Address"));
@@ -73,110 +69,97 @@ public class SignUpTest extends TestBase {
     }
 
     @And("Click on Create Account")
-    public void clickOnCreateAccount()
-    {
+    public void clickOnCreateAccount() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(creatAccountBTN));
         driver.findElement(creatAccountBTN).click();
     }
 
 
     @And("The new record set on database")
-    public void theNewRecordSetOnDatabase()
-    {
-        DataBase.execute_query_dbs(hostName,dbs,"select email from users where email='john.smith.fly365@gmail.com'");
-        Assert.assertEquals(DataBase.data,"john.smith.fly365@gmail.com");
-        DataBase.execute_query_dbs(hostName,dbs,"delete from users where email='john.smith.fly365@gmail.com'");
+    public void theNewRecordSetOnDatabase() {
+        DataBase.execute_query_dbs(hostName, dbs, "select email from users where email='john.smith.fly365@gmail.com'");
+        Assert.assertEquals(DataBase.data, "john.smith.fly365@gmail.com");
+        DataBase.execute_query_dbs(hostName, dbs, "delete from users where email='john.smith.fly365@gmail.com'");
     }
 
     @And("^Click on Show beside password$")
-    public void clickOnShowBesidePassword()
-    {
+    public void clickOnShowBesidePassword() {
         driver.findElement(showPasswordBTN).click();
     }
 
 
     @And("^Click on Hide beside password$")
-    public void clickOnHideBesidePassword()
-    {
+    public void clickOnHideBesidePassword() {
         driver.findElement(hidePasswordBTN).click();
     }
 
     @Then("The user created successfully")
-    public void theUserCreatedSuccessfully()
-    {
+    public void theUserCreatedSuccessfully() {
         driver.getTitle().contains("Fly365");
     }
 
 
     @Then("^Sign Up page is opened$")
-    public void signUpPageIsOpened()
-    {
+    public void signUpPageIsOpened() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(signUpHDR));
         String headerText = driver.findElement(signUpHDR).getText();
-        Assert.assertEquals(headerText,"Sign in or sign up");
+        Assert.assertEquals(headerText, "Sign in or sign up");
     }
 
     @Then("The system display validation messages for all mandatory fields")
-    public void theSystemDisplayValidationMessagesForAllMandatoryFields()
-    {
+    public void theSystemDisplayValidationMessagesForAllMandatoryFields() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(firstNameRequiredErrorMSG));
         String fErrorMSG = driver.findElement(firstNameRequiredErrorMSG).getText();
-        Assert.assertEquals(fErrorMSG,"Please enter first name");
+        Assert.assertEquals(fErrorMSG, "Please enter first name");
 
         String lErrorMSG = driver.findElement(lastNameRequiredErrorMSG).getText();
-        Assert.assertEquals(lErrorMSG,"Please enter last name");
+        Assert.assertEquals(lErrorMSG, "Please enter last name");
 
         String eErrorMSG = driver.findElement(emailRequiredErrorMSG).getText();
-        Assert.assertEquals(eErrorMSG,"Please enter email");
+        Assert.assertEquals(eErrorMSG, "Please enter email");
 
         String pErrorMSG = driver.findElement(passwordRequiredErrorMSG).getText();
-        Assert.assertEquals(pErrorMSG,"Please enter password");
+        Assert.assertEquals(pErrorMSG, "Please enter password");
     }
 
     @Then("^The system should display validation message for invalid name$")
-    public void theSystemShouldDisplayValidationMessageForInvalidName()
-    {
+    public void theSystemShouldDisplayValidationMessageForInvalidName() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(validationNameErrorMSG));
         String error_message = driver.findElement(validationNameErrorMSG).getText();
-        Assert.assertEquals(error_message,"Name must be letters only");
+        Assert.assertEquals(error_message, "Name must be letters only");
     }
 
     @Then("^The system should display validation message for invalid email$")
-    public void theSystemShouldDisplayValidationMessageForInvalidEmail()
-    {
+    public void theSystemShouldDisplayValidationMessageForInvalidEmail() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(validationEmailErrorMSG));
         String error_message = driver.findElement(validationEmailErrorMSG).getText();
-        Assert.assertEquals(error_message,"Please enter a valid email");
+        Assert.assertEquals(error_message, "Please enter a valid email");
     }
 
     @Then("^The system should display validation message for invalid password$")
-    public void theSystemShouldDisplayValidationMessageForInvalidPassword()
-    {
+    public void theSystemShouldDisplayValidationMessageForInvalidPassword() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(validationPasswordErrorMSG));
         String pass_error = driver.findElement(validationPasswordErrorMSG).getText();
-        Assert.assertEquals(pass_error,"Password length must be between 8 to 50 characters");
+        Assert.assertEquals(pass_error, "Password length must be between 8 to 50 characters");
     }
 
     @Then("^The system display validation message for email already exist$")
-    public void theSystemDisplayValidationMessageForEmailAlreadyExist()
-    {
+    public void theSystemDisplayValidationMessageForEmailAlreadyExist() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(emailExitErrorMSG));
         String emailError = driver.findElement(emailExitErrorMSG).getText();
         System.out.println(emailExitErrorMSG);
-        Assert.assertEquals(emailError,"email already existed");
+        Assert.assertEquals(emailError, "email already existed");
     }
 
 
     @Then("^The password should display$")
-    public void thePasswordShouldDisplay()
-    {
+    public void thePasswordShouldDisplay() {
         Assert.assertTrue(true, String.valueOf(driver.findElement(passwordDisplayedLBL).isDisplayed()));
     }
 
 
     @Then("^The password should hide$")
-    public void thePasswordShouldHide()
-    {
-        Assert.assertTrue(true,String.valueOf(driver.findElement(passwordNotDisplayedLBL).isDisplayed()));
+    public void thePasswordShouldHide() {
+        Assert.assertTrue(true, String.valueOf(driver.findElement(passwordNotDisplayedLBL).isDisplayed()));
     }
 }

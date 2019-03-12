@@ -23,32 +23,30 @@ public class PassengersDetailsTest extends TestBase {
     By nextStepBTN = By.xpath("//button[text()='Next Step']");
 
 
-
-
-
     @And("^Add the following data in the passenger Details$")
     public void addTheFollowingDataInThePassengerDetails(DataTable passengerData) throws InterruptedException {
 
         int i = 0;
 
-        for (Map<String, String> passengerDetails : passengerData.asMaps (String.class,String.class)){
+        for (Map<String, String> passengerDetails : passengerData.asMaps(String.class, String.class)) {
 
-            gmObject.selectFromDDL(By.id("title-"+i+""), passengerDetails.get("Title"));
-            driver.findElement(By.id("firstname-"+i+"")).sendKeys(passengerDetails.get("First Name"));
-            driver.findElement(By.id("middlename-"+i+"")).sendKeys(passengerDetails.get("Middle Name"));
-            driver.findElement(By.id("lastName-"+i+"")).sendKeys(passengerDetails.get("Last Name"));
-            gmObject.selectFromDDL(By.xpath("//*[@id='birthdate-"+i+"']//input[@placeholder='Day']"), passengerDetails.get("Day"));
-            gmObject.selectFromDDL(By.xpath("//*[@id='birthdate-"+i+"']//input[@placeholder='Month']"), passengerDetails.get("Month"));
-            gmObject.selectFromDDL(By.xpath("//*[@id='birthdate-"+i+"']//input[@placeholder='Year']"), passengerDetails.get("Year"));
+            gmObject.selectFromDDL(By.id("title-" + i + ""), passengerDetails.get("Title"));
+            driver.findElement(By.id("firstname-" + i + "")).sendKeys(passengerDetails.get("First Name"));
+            driver.findElement(By.id("middlename-" + i + "")).sendKeys(passengerDetails.get("Middle Name"));
+            driver.findElement(By.id("lastName-" + i + "")).sendKeys(passengerDetails.get("Last Name"));
+            gmObject.selectFromDDL(By.xpath("//*[@id='birthdate-" + i + "']//input[@placeholder='Day']"), passengerDetails.get("Day"));
+            gmObject.selectFromDDL(By.xpath("//*[@id='birthdate-" + i + "']//input[@placeholder='Month']"), passengerDetails.get("Month"));
+            gmObject.selectFromDDL(By.xpath("//*[@id='birthdate-" + i + "']//input[@placeholder='Year']"), passengerDetails.get("Year"));
             i++;
         }
 
 
     }
+
     @And("^Add the following data in the Contact Details$")
     public void addTheFollowingDataInTheContactDetails(DataTable contactData) throws InterruptedException {
 
-        for (Map<String, String> contactDetails : contactData.asMaps (String.class,String.class)){
+        for (Map<String, String> contactDetails : contactData.asMaps(String.class, String.class)) {
 
             gmObject.selectFromDDL(contactTitleField, contactDetails.get("Title"));
             driver.findElement(contactFirstNameTXT).sendKeys(contactDetails.get("First Name"));
@@ -61,7 +59,6 @@ public class PassengersDetailsTest extends TestBase {
     public void clickOnNextStep() {
         driver.findElement(nextStepBTN).click();
     }
-
 
 
 }

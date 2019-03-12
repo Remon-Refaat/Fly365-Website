@@ -56,7 +56,7 @@ public class HomeTest extends TestBase {
 
     @Given("^Navigate to Fly365 \"(.*)\" site$")
     public void NavigateToFly365Site(String site) {
-        driver.navigate().to("https://www.fly365"+site+".com/en");
+        driver.navigate().to("https://www.fly365" + site + ".com/en");
     }
 
     @And("^Press on 'About us'$")
@@ -143,20 +143,20 @@ public class HomeTest extends TestBase {
 
 
     @And("^Select the date of the departure, after \"(.*)\" day from today$")
-    public void selectTheDateOfTheDepartureAfterDayFromToday(int period)  {
-        String departureDate = gmObject.addDateWithCertainPeriodAndFormat(period,"dd MMM yyyy");
+    public void selectTheDateOfTheDepartureAfterDayFromToday(int period) {
+        String departureDate = gmObject.addDateWithCertainPeriodAndFormat(period, "dd MMM yyyy");
         driver.findElement(departureCalenderDPK).sendKeys(departureDate);
     }
 
     @And("^Select the date of the departure for round trip, after \"(.*)\" day from today$")
-    public void selectTheDateOfTheDepartureForRoundTripAfterDayFromToday(int period)  {
-        String returnDate = gmObject.addDateWithCertainPeriodAndFormat(period,"dd MMM yyyy");
+    public void selectTheDateOfTheDepartureForRoundTripAfterDayFromToday(int period) {
+        String returnDate = gmObject.addDateWithCertainPeriodAndFormat(period, "dd MMM yyyy");
         driver.findElement(departureRoundCalenderDPK).sendKeys(returnDate);
     }
 
     @And("^Select the date of the return for round trip, after \"(.*)\" day from today$")
-    public void selectTheDateOfTheReturnForRoundTripAfterDayFromToday(int period)  {
-        String returnDate = gmObject.addDateWithCertainPeriodAndFormat(period,"dd MMM yyyy");
+    public void selectTheDateOfTheReturnForRoundTripAfterDayFromToday(int period) {
+        String returnDate = gmObject.addDateWithCertainPeriodAndFormat(period, "dd MMM yyyy");
         driver.findElement(returnRoundCalenderDPK).sendKeys(returnDate);
     }
 
@@ -168,15 +168,15 @@ public class HomeTest extends TestBase {
 
     @And("^Book a trip from API for \"(.*)\" and get \"(.*)\"$")
     public void bookATripFromAPIForAndGet(String domain, String reference) {
-        String requestUrl="https://api.fly365"+domain+".com/flight/search";
-        String allAvailableTrips = apiObject.sendPostRequest(requestUrl,apiObject.oneWayAPI());
+        String requestUrl = "https://api.fly365" + domain + ".com/flight/search";
+        String allAvailableTrips = apiObject.sendPostRequest(requestUrl, apiObject.oneWayAPI());
         String itinaryID = apiObject.getItineraryId(allAvailableTrips, 2);
         String cardID = apiObject.createCart(itinaryID);
         apiObject.addPassenger(cardID);
-        if (reference.equals("Fly365 Reference")){
+        if (reference.equals("Fly365 Reference")) {
             orderNumber = apiObject.checkoutTrip(cardID)[0];
         }
-        if (reference.equals("Airline Reference")){
+        if (reference.equals("Airline Reference")) {
             pnrNumber = apiObject.checkoutTrip(cardID)[1];
         }
     }
@@ -195,10 +195,10 @@ public class HomeTest extends TestBase {
     @And("^Add a valid \"(.*)\"$")
     public void addAValidReference(String reference) {
 
-        if (reference.equals("Fly365 Reference")){
+        if (reference.equals("Fly365 Reference")) {
             driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(orderNumber);
         }
-        if (reference.equals("Airline Reference")){
+        if (reference.equals("Airline Reference")) {
             driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(pnrNumber);
         }
     }
@@ -210,7 +210,7 @@ public class HomeTest extends TestBase {
 
 
     @And("^Select Passengers: \"(.*)\" adult, \"(.*)\" child, \"(.*)\" infant$")
-    public void selectPassengersAdultChildInfant(int adultCount, int childCount, int infantCount)  {
+    public void selectPassengersAdultChildInfant(int adultCount, int childCount, int infantCount) {
         driver.findElement(passengerCabinBOX).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(passengerCabinPOPUP));
 
@@ -229,14 +229,14 @@ public class HomeTest extends TestBase {
     }
 
     @And("^Select \"(.*)\" Class$")
-    public void selectClass(String cabinClass)  {
+    public void selectClass(String cabinClass) {
 
-        driver.findElement(By.xpath("//span[text()='"+cabinClass+"']/preceding-sibling::span")).click();
+        driver.findElement(By.xpath("//span[text()='" + cabinClass + "']/preceding-sibling::span")).click();
     }
 
 
     @And("^Choose the number of flights \"(.*)\"$")
-    public void chooseTheNumberOfFlights(int flightcount)  {
+    public void chooseTheNumberOfFlights(int flightcount) {
         for (int counter = 2; counter < flightcount; counter++) {
             driver.findElement(addMoreCities).click();
         }
@@ -246,18 +246,17 @@ public class HomeTest extends TestBase {
     public void addTheFollowingOriginDestinationsAndDatePeriods(DataTable multiCityData) throws InterruptedException {
         int i = 1;
 
-        for (Map<String, String> flightDetails : multiCityData.asMaps (String.class,String.class)){
+        for (Map<String, String> flightDetails : multiCityData.asMaps(String.class, String.class)) {
 
-            driver.findElement(By.xpath("//div[@class='search-form relative row justify-center']//form["+i+"]//input[@name='origin']")).sendKeys(flightDetails.get("Origin"));
+            driver.findElement(By.xpath("//div[@class='search-form relative row justify-center']//form[" + i + "]//input[@name='origin']")).sendKeys(flightDetails.get("Origin"));
             gmObject.selectFromAutoCompleteDDL(flightDetails.get("Origin"));
-            driver.findElement(By.xpath("//div[@class='search-form relative row justify-center']//form["+i+"]//input[@name='destination']")).sendKeys(flightDetails.get("Destination"));
+            driver.findElement(By.xpath("//div[@class='search-form relative row justify-center']//form[" + i + "]//input[@name='destination']")).sendKeys(flightDetails.get("Destination"));
             gmObject.selectFromAutoCompleteDDL(flightDetails.get("Destination"));
-            String returnDate = gmObject.addDateWithCertainPeriodAndFormat(Integer.parseInt(flightDetails.get("Date Period")),"dd MMM yyyy");
-            driver.findElement(By.xpath("//div[@class='search-form relative row justify-center']//form["+i+"]//input[@name='fromDate']")).sendKeys(returnDate);
+            String returnDate = gmObject.addDateWithCertainPeriodAndFormat(Integer.parseInt(flightDetails.get("Date Period")), "dd MMM yyyy");
+            driver.findElement(By.xpath("//div[@class='search-form relative row justify-center']//form[" + i + "]//input[@name='fromDate']")).sendKeys(returnDate);
             i++;
         }
     }
-
 
 
 }

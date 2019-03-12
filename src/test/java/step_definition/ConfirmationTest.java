@@ -25,10 +25,6 @@ public class ConfirmationTest extends TestBase {
     }
 
 
-
-
-
-
     public static void connectToEmail() {
         try {
             EmailUtililty emailUtililty = new EmailUtililty("john.smith.fly365@gmail.com", "@Fly12345", "smtp.gmail.com", EmailUtililty.EmailFolder.INBOX);
@@ -59,14 +55,10 @@ public class ConfirmationTest extends TestBase {
 //        System.out.println(email.getSubject());
 //        System.out.println("))))))))))))))))))))))");
 
-connectToEmail();
-
+        connectToEmail();
 
 
     }
-
-
-
 
 
 }
