@@ -1,5 +1,6 @@
 package step_definition;
 
+import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import helper.APIUtility;
@@ -8,6 +9,8 @@ import helper.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.Map;
 
 public class HomeTest extends TestBase {
 
@@ -29,6 +32,7 @@ public class HomeTest extends TestBase {
     By termsConditionsLINK = By.xpath("//a[text()='Terms and Conditions']");
     By privacyPolicyLINK = By.xpath("//a[text()='Privacy policy']");
     By oneWayTAB = By.id("tab-oneWay");
+    By roundTripTAB = By.id("tab-roundTrip");
     By multiCityTAB = By.id("tab-multiStop");
     By originTXT = By.xpath("//input[@name='origin']");
     By destinationTXT = By.xpath("//input[@name='destination']");
@@ -47,12 +51,12 @@ public class HomeTest extends TestBase {
     By findMyBookingEmailTXT = By.xpath("//div[@class='container p-8 retrieve-booking-form']//input[@placeholder='Email']");
     By findMyBookingAirlineFly365OrderTXT = By.xpath("//div[@class='container p-8 retrieve-booking-form']//input[@placeholder='Airline / Fly365 Reference']");
     By findMyBookingFindBookingBTN = By.xpath("//div[@class='container p-8 retrieve-booking-form']//button[text()='FIND BOOKING']");
+    By addMoreCities = By.xpath("//div[@class='flex items-center btn-add-more float-left text-white text-xs h-6 px-1 cursor-pointer leading-normal']");
 
 
     @Given("^Navigate to Fly365 \"(.*)\" site$")
     public void NavigateToFly365Site(String site) {
-
-        driver.navigate().to("https://nz.fly365"+site+".com/en");
+        driver.navigate().to("https://www.fly365"+site+".com/en");
     }
 
     @And("^Press on 'About us'$")
@@ -111,8 +115,15 @@ public class HomeTest extends TestBase {
         driver.findElement(oneWayTAB).click();
     }
 
+    @And("^Select Round Trip trip$")
+    public void selectRoundTripTrip() {
+        gmObject.clearLocalStorage();
+        driver.findElement(roundTripTAB).click();
+    }
+
     @And("^Select Multi City trip$")
     public void selectMultiCityTrip() {
+        gmObject.clearLocalStorage();
         driver.findElement(multiCityTAB).click();
     }
 
@@ -138,13 +149,13 @@ public class HomeTest extends TestBase {
     }
 
     @And("^Select the date of the departure for round trip, after \"(.*)\" day from today$")
-    public void selectTheDateOfTheDepartureForRoundTripAfterDayFromToday(int period) throws Throwable {
+    public void selectTheDateOfTheDepartureForRoundTripAfterDayFromToday(int period)  {
         String returnDate = gmObject.addDateWithCertainPeriodAndFormat(period,"dd MMM yyyy");
         driver.findElement(departureRoundCalenderDPK).sendKeys(returnDate);
     }
 
     @And("^Select the date of the return for round trip, after \"(.*)\" day from today$")
-    public void selectTheDateOfTheReturnForRoundTripAfterDayFromToday(int period) throws Throwable {
+    public void selectTheDateOfTheReturnForRoundTripAfterDayFromToday(int period)  {
         String returnDate = gmObject.addDateWithCertainPeriodAndFormat(period,"dd MMM yyyy");
         driver.findElement(returnRoundCalenderDPK).sendKeys(returnDate);
     }
@@ -199,7 +210,7 @@ public class HomeTest extends TestBase {
 
 
     @And("^Select Passengers: \"(.*)\" adult, \"(.*)\" child, \"(.*)\" infant$")
-    public void selectPassengersAdultChildInfant(int adultCount, int childCount, int infantCount) throws Throwable {
+    public void selectPassengersAdultChildInfant(int adultCount, int childCount, int infantCount)  {
         driver.findElement(passengerCabinBOX).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(passengerCabinPOPUP));
 
@@ -218,9 +229,33 @@ public class HomeTest extends TestBase {
     }
 
     @And("^Select \"(.*)\" Class$")
-    public void selectClass(String cabinClass) throws Throwable {
+    public void selectClass(String cabinClass)  {
 
         driver.findElement(By.xpath("//span[text()='"+cabinClass+"']/preceding-sibling::span")).click();
+    }
+
+
+    @And("^Choose the number of flights \"(.*)\"$")
+    public void chooseTheNumberOfFlights(int flightcount)  {
+        for (int counter = 2; counter < flightcount; counter++) {
+            driver.findElement(addMoreCities).click();
+        }
+    }
+
+    @And("^Add the following origin, destinations and date periods$")
+    public void addTheFollowingOriginDestinationsAndDatePeriods(DataTable multiCityData) throws InterruptedException {
+        int i = 1;
+
+        for (Map<String, String> flightDetails : multiCityData.asMaps (String.class,String.class)){
+
+            driver.findElement(By.xpath("//div[@class='search-form relative row justify-center']//form["+i+"]//input[@name='origin']")).sendKeys(flightDetails.get("Origin"));
+            gmObject.selectFromAutoCompleteDDL(flightDetails.get("Origin"));
+            driver.findElement(By.xpath("//div[@class='search-form relative row justify-center']//form["+i+"]//input[@name='destination']")).sendKeys(flightDetails.get("Destination"));
+            gmObject.selectFromAutoCompleteDDL(flightDetails.get("Destination"));
+            String returnDate = gmObject.addDateWithCertainPeriodAndFormat(Integer.parseInt(flightDetails.get("Date Period")),"dd MMM yyyy");
+            driver.findElement(By.xpath("//div[@class='search-form relative row justify-center']//form["+i+"]//input[@name='fromDate']")).sendKeys(returnDate);
+            i++;
+        }
     }
 
 

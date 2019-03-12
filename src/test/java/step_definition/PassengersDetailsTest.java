@@ -14,7 +14,7 @@ public class PassengersDetailsTest extends TestBase {
     WebDriverWait wait = new WebDriverWait(driver, 20);
 
     GeneralMethods gmObject = new GeneralMethods();
-    
+
 
     By contactTitleField = By.id("contact-fullname");
     By contactFirstNameTXT = By.xpath("//div[@class='el-form-item col-sm-8 col-lg-6']//input[@placeholder='First Name']");
@@ -33,13 +33,13 @@ public class PassengersDetailsTest extends TestBase {
 
         for (Map<String, String> passengerDetails : passengerData.asMaps (String.class,String.class)){
 
-            gmObject.selectFromAutoCompleteDDL(By.id("title-"+i+""), passengerDetails.get("Title"));
+            gmObject.selectFromDDL(By.id("title-"+i+""), passengerDetails.get("Title"));
             driver.findElement(By.id("firstname-"+i+"")).sendKeys(passengerDetails.get("First Name"));
             driver.findElement(By.id("middlename-"+i+"")).sendKeys(passengerDetails.get("Middle Name"));
             driver.findElement(By.id("lastName-"+i+"")).sendKeys(passengerDetails.get("Last Name"));
-            gmObject.selectFromAutoCompleteDDL(By.xpath("//*[@id='birthdate-"+i+"']//input[@placeholder='Day']"), passengerDetails.get("Day"));
-            gmObject.selectFromAutoCompleteDDL(By.xpath("//*[@id='birthdate-"+i+"']//input[@placeholder='Month']"), passengerDetails.get("Month"));
-            gmObject.selectFromAutoCompleteDDL(By.xpath("//*[@id='birthdate-"+i+"']//input[@placeholder='Year']"), passengerDetails.get("Year"));
+            gmObject.selectFromDDL(By.xpath("//*[@id='birthdate-"+i+"']//input[@placeholder='Day']"), passengerDetails.get("Day"));
+            gmObject.selectFromDDL(By.xpath("//*[@id='birthdate-"+i+"']//input[@placeholder='Month']"), passengerDetails.get("Month"));
+            gmObject.selectFromDDL(By.xpath("//*[@id='birthdate-"+i+"']//input[@placeholder='Year']"), passengerDetails.get("Year"));
             i++;
         }
 
@@ -50,7 +50,7 @@ public class PassengersDetailsTest extends TestBase {
 
         for (Map<String, String> contactDetails : contactData.asMaps (String.class,String.class)){
 
-            gmObject.selectFromAutoCompleteDDL(contactTitleField, contactDetails.get("Title"));
+            gmObject.selectFromDDL(contactTitleField, contactDetails.get("Title"));
             driver.findElement(contactFirstNameTXT).sendKeys(contactDetails.get("First Name"));
             driver.findElement(contactLastNameTXT).sendKeys(contactDetails.get("Last Name"));
             driver.findElement(contactEmailAddressTXT).sendKeys(contactDetails.get("Email"));
@@ -58,9 +58,8 @@ public class PassengersDetailsTest extends TestBase {
     }
 
     @And("^Click on Next Step$")
-    public void clickOnNextStep() throws InterruptedException {
+    public void clickOnNextStep() {
         driver.findElement(nextStepBTN).click();
-        Thread.sleep(8000);
     }
 
 
