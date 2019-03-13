@@ -23,7 +23,7 @@ public class DataBase {
             Connection con = DriverManager.getConnection(url, USER, PASS);
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            if (rs.next() == false) {
+            if (!rs.next()) {
                 System.out.println("ResultSet is empty");
             } else {
                 do {

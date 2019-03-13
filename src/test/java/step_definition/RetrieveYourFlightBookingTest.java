@@ -11,9 +11,9 @@ public class RetrieveYourFlightBookingTest extends TestBase {
 
     WebDriverWait wait = new WebDriverWait(driver, 10);
 
-    By retrieveYourFlightBookingHDR = By.xpath("//div[text()='Retrieve your flight booking']");
-    By fly365RefHDR = By.xpath("//strong[@class='txt-primary-second font-semibold ml-1']");
-    By airlineRefHDR = By.xpath("//strong[@class='text-primary-first font-semibold ml-1']");
+    private By retrieveYourFlightBookingHDR = By.xpath("//div[text()='Retrieve your flight booking']");
+    private By fly365RefHDR = By.xpath("//strong[@class='txt-primary-second font-semibold ml-1']");
+    private By airlineRefHDR = By.xpath("//strong[@class='text-primary-first font-semibold ml-1']");
 
     @Then("^The system will retrieve the details of the Booking for this \"(.*)\"$")
     public void theSystemWillRetrieveTheDetailsOfTheBookingForThis(String reference) {

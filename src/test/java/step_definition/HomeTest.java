@@ -15,43 +15,43 @@ import java.util.Map;
 public class HomeTest extends TestBase {
 
     WebDriverWait wait = new WebDriverWait(driver, 10);
-    GeneralMethods gmObject = new GeneralMethods();
-    APIUtility apiObject = new APIUtility();
-    public static String orderNumber = null;
-    public static String pnrNumber = null;
+    private GeneralMethods gmObject = new GeneralMethods();
+    private APIUtility apiObject = new APIUtility();
+    static String orderNumber = null;
+    static String pnrNumber = null;
 
 
-    By aboutUsLINK = By.xpath("//a[text()='About us']");
-    By firstContactUsLINK = By.xpath("//footer/div[1]//a[text()='Contact us']");
-    By secondContactUsLINK = By.xpath("//footer/div[2]//a[text()='Contact Us']");
-    By signInLINK = By.xpath("//a[text()='Sign in']");
-    By signUpLINK = By.xpath("//a[text()='Sign up']");
-    By fristSupportCenterLINK = By.xpath("//footer/div[1]//a[text()='Support Center']");
-    By secondSupportCenterLINK = By.xpath("//footer/div[2]//a[text()='Support Center']");
-    By faqsLINK = By.xpath("//a[text()='FAQs']");
-    By termsConditionsLINK = By.xpath("//a[text()='Terms and Conditions']");
-    By privacyPolicyLINK = By.xpath("//a[text()='Privacy policy']");
-    By oneWayTAB = By.id("tab-oneWay");
-    By roundTripTAB = By.id("tab-roundTrip");
-    By multiCityTAB = By.id("tab-multiStop");
-    By originTXT = By.xpath("//input[@name='origin']");
-    By destinationTXT = By.xpath("//input[@name='destination']");
-    By airportSearchResultOrigin = By.xpath("//li[contains(@id, '-0')]");
-    By airportSearchResultDestination = By.xpath("//li[contains(@id, '-0')]");
-    By departureCalenderDPK = By.xpath("//input[@name='fromDate']");
-    By departureRoundCalenderDPK = By.xpath("//input[@name='d']");
-    By returnRoundCalenderDPK = By.xpath("//input[@name='a']");
-    By passengerCabinBOX = By.xpath("//div[@class='bg-white text-sm h-50 px-3 rounded flex items-center text-primary-third font-medium el-popover__reference']");
-    By passengerCabinPOPUP = By.xpath("//body/div[contains(@id,'el-popover')][1]");
-    By plusAdultICON = By.xpath("//*[contains(@id,'el-popover')]//div[1]/div/span[2]");
-    By plusChildICON = By.xpath("//*[contains(@id,'el-popover')]//div[2]/div/span[2]");
-    By plusInfantICON = By.xpath("//*[contains(@id,'el-popover')]//div[3]/div/span[2]");
-    By searchNowBTN = By.xpath("//button[@class='btn uppercase btn-search-form font-bold lg:w-full w-2/5 m-auto btn-primary-second h-full']");
-    By findMyBookingLINK = By.xpath("//button[text()='Find My Booking']");
-    By findMyBookingEmailTXT = By.xpath("//div[@class='container p-8 retrieve-booking-form']//input[@placeholder='Email']");
-    By findMyBookingAirlineFly365OrderTXT = By.xpath("//div[@class='container p-8 retrieve-booking-form']//input[@placeholder='Airline / Fly365 Reference']");
-    By findMyBookingFindBookingBTN = By.xpath("//div[@class='container p-8 retrieve-booking-form']//button[text()='FIND BOOKING']");
-    By addMoreCities = By.xpath("//div[@class='flex items-center btn-add-more float-left text-white text-xs h-6 px-1 cursor-pointer leading-normal']");
+    private By aboutUsLINK = By.xpath("//a[text()='About us']");
+    private By firstContactUsLINK = By.xpath("//footer/div[1]//a[text()='Contact us']");
+    private By secondContactUsLINK = By.xpath("//footer/div[2]//a[text()='Contact Us']");
+    private By signInLINK = By.xpath("//a[text()='Sign in']");
+    private By signUpLINK = By.xpath("//a[text()='Sign up']");
+    private By firstSupportCenterLINK = By.xpath("//footer/div[1]//a[text()='Support Center']");
+    private By secondSupportCenterLINK = By.xpath("//footer/div[2]//a[text()='Support Center']");
+    private By faqsLINK = By.xpath("//a[text()='FAQs']");
+    private By termsConditionsLINK = By.xpath("//a[text()='Terms and Conditions']");
+    private By privacyPolicyLINK = By.xpath("//a[text()='Privacy policy']");
+    private By oneWayTAB = By.id("tab-oneWay");
+    private By roundTripTAB = By.id("tab-roundTrip");
+    private By multiCityTAB = By.id("tab-multiStop");
+    private By originTXT = By.xpath("//input[@name='origin']");
+    private By destinationTXT = By.xpath("//input[@name='destination']");
+    private By airportSearchResultOrigin = By.xpath("//li[contains(@id, '-0')]");
+    private By airportSearchResultDestination = By.xpath("//li[contains(@id, '-0')]");
+    private By departureCalenderDPK = By.xpath("//input[@name='fromDate']");
+    private By departureRoundCalenderDPK = By.xpath("//input[@name='d']");
+    private By returnRoundCalenderDPK = By.xpath("//input[@name='a']");
+    private By passengerCabinBOX = By.xpath("//div[@class='bg-white text-sm h-50 px-3 rounded flex items-center text-primary-third font-medium el-popover__reference']");
+    private By passengerCabinPOPUP = By.xpath("//body/div[contains(@id,'el-popover')][1]");
+    private By plusAdultICON = By.xpath("//*[contains(@id,'el-popover')]//div[1]/div/span[2]");
+    private By plusChildICON = By.xpath("//*[contains(@id,'el-popover')]//div[2]/div/span[2]");
+    private By plusInfantICON = By.xpath("//*[contains(@id,'el-popover')]//div[3]/div/span[2]");
+    private By searchNowBTN = By.xpath("//button[@class='btn uppercase btn-search-form font-bold lg:w-full w-2/5 m-auto btn-primary-second h-full']");
+    private By findMyBookingLINK = By.xpath("//button[text()='Find My Booking']");
+    private By findMyBookingEmailTXT = By.xpath("//div[@class='container p-8 retrieve-booking-form']//input[@placeholder='Email']");
+    private By findMyBookingAirlineFly365OrderTXT = By.xpath("//div[@class='container p-8 retrieve-booking-form']//input[@placeholder='Airline / Fly365 Reference']");
+    private By findMyBookingFindBookingBTN = By.xpath("//div[@class='container p-8 retrieve-booking-form']//button[text()='FIND BOOKING']");
+    private By addMoreCities = By.xpath("//div[@class='flex items-center btn-add-more float-left text-white text-xs h-6 px-1 cursor-pointer leading-normal']");
 
 
     @Given("^Navigate to Fly365 \"(.*)\" site$")
@@ -86,7 +86,7 @@ public class HomeTest extends TestBase {
 
     @And("^Press on first 'Support Center'$")
     public void pressOnFirstSupportCenter() {
-        driver.findElement(fristSupportCenterLINK).click();
+        driver.findElement(firstSupportCenterLINK).click();
     }
 
     @And("^Press on second 'Support Center'$")

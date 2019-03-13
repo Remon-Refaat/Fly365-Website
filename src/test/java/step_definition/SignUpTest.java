@@ -2,12 +2,10 @@ package step_definition;
 
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import helper.DataBase;
 import helper.TestBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -18,28 +16,26 @@ public class SignUpTest extends TestBase {
 
     WebDriverWait wait = new WebDriverWait(driver, 50);
 
-    String hostName = "k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432";
-    String dbs = "user_api";
 
-    By signUpHDR = By.xpath("//div[@class='text-xs mb-8 text-primary-fourth']");
-    By signUpBTN = By.xpath("//li/a[text()='Sign up']");
-    By firstNameTXT = By.xpath("//input[@placeholder='John']");
-    By lastNameTXT = By.xpath("//input[@placeholder='Smith']");
-    By emailTXT = By.xpath("//input[@placeholder='john@example.com']");
-    By passwordTXT = By.xpath("//input[@placeholder='******************']");
-    By creatAccountBTN = By.xpath("//button[text()='CREATE ACCOUNT']");
-    By validationNameErrorMSG = By.xpath("//span[text()='Name must be letters only']");
-    By validationEmailErrorMSG = By.xpath("//span[text()='Please enter a valid email']");
-    By validationPasswordErrorMSG = By.xpath("//span[text()='Password length must be between 8 to 50 characters']");
-    By firstNameRequiredErrorMSG = By.xpath("//span[text()='Please enter first name']");
-    By lastNameRequiredErrorMSG = By.xpath("//span[text()='Please enter last name']");
-    By emailRequiredErrorMSG = By.xpath("//span[text()='Please enter email']");
-    By passwordRequiredErrorMSG = By.xpath("//span[text()='Please enter password']");
-    By emailExitErrorMSG = By.xpath("//span[text()='email already existed']");
-    By showPasswordBTN = By.xpath("//span[text()='Show']");
-    By hidePasswordBTN = By.xpath("//span[text()='Hide']");
-    By passwordDisplayedLBL = By.xpath("//div[@class='password-input el-input']/input[@type='text']");
-    By passwordNotDisplayedLBL = By.xpath("//div[@class='password-input el-input']/input[@type='password']");
+    private By signUpHDR = By.xpath("//div[@class='text-xs mb-8 text-primary-fourth']");
+    private By signUpBTN = By.xpath("//li/a[text()='Sign up']");
+    private By firstNameTXT = By.xpath("//input[@placeholder='John']");
+    private By lastNameTXT = By.xpath("//input[@placeholder='Smith']");
+    private By emailTXT = By.xpath("//input[@placeholder='john@example.com']");
+    private By passwordTXT = By.xpath("//input[@placeholder='******************']");
+    private By creatAccountBTN = By.xpath("//button[text()='CREATE ACCOUNT']");
+    private By validationNameErrorMSG = By.xpath("//span[text()='Name must be letters only']");
+    private By validationEmailErrorMSG = By.xpath("//span[text()='Please enter a valid email']");
+    private By validationPasswordErrorMSG = By.xpath("//span[text()='Password length must be between 8 to 50 characters']");
+    private By firstNameRequiredErrorMSG = By.xpath("//span[text()='Please enter first name']");
+    private By lastNameRequiredErrorMSG = By.xpath("//span[text()='Please enter last name']");
+    private By emailRequiredErrorMSG = By.xpath("//span[text()='Please enter email']");
+    private By passwordRequiredErrorMSG = By.xpath("//span[text()='Please enter password']");
+    private By emailExitErrorMSG = By.xpath("//span[text()='email already existed']");
+    private By showPasswordBTN = By.xpath("//span[text()='Show']");
+    private By hidePasswordBTN = By.xpath("//span[text()='Hide']");
+    private By passwordDisplayedLBL = By.xpath("//div[@class='password-input el-input']/input[@type='text']");
+    private By passwordNotDisplayedLBL = By.xpath("//div[@class='password-input el-input']/input[@type='password']");
 
 
     @And("Open Sign up page")
@@ -77,6 +73,8 @@ public class SignUpTest extends TestBase {
 
     @And("The new record set on database")
     public void theNewRecordSetOnDatabase() {
+        String hostName = "k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432";
+        String dbs = "user_api";
         DataBase.execute_query_dbs(hostName, dbs, "select email from users where email='john.smith.fly365@gmail.com'");
         Assert.assertEquals(DataBase.data, "john.smith.fly365@gmail.com");
         DataBase.execute_query_dbs(hostName, dbs, "delete from users where email='john.smith.fly365@gmail.com'");

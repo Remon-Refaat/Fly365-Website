@@ -12,7 +12,7 @@ public class ContactUsTest extends TestBase {
 
     WebDriverWait wait = new WebDriverWait(driver, 10);
 
-    By contactUsHDR = By.xpath("//div[2]/h1");
+    private By contactUsHDR = By.xpath("//div[2]/h1");
 
     @Then("^'Contact Us' page is opened$")
     public void contactUsPageIsOpened() {

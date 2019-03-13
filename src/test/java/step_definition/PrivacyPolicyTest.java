@@ -13,7 +13,7 @@ public class PrivacyPolicyTest extends TestBase {
     WebDriverWait wait = new WebDriverWait(driver, 10);
 
 
-    By privacyPolicyLINK = By.xpath("//a[@class='text-sm font-normal link router-link-exact-active router-link-active']");
+    private By privacyPolicyLINK = By.xpath("//a[@class='text-sm font-normal link router-link-exact-active router-link-active']");
 
     @Then("^'Privacy Policy' page is opened$")
     public void privacyPolicyPageIsOpened() {

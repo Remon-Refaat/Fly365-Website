@@ -8,8 +8,8 @@ import helper.TestBase;
 
 public class AFTATest extends TestBase {
 
-    By aftaLINK = By.xpath("//a[@title='Afta']");
-    By aftaHDR = By.xpath("//div[@id='page_content']/h3");
+    private By aftaLINK = By.xpath("//a[@title='Afta']");
+    private By aftaHDR = By.xpath("//div[@id='page_content']/h3");
 
     @And("^Press on 'afta' and verify that page is opened$")
     public void pressOnAftaAndVerifyThatPageIsOpened() throws InterruptedException {

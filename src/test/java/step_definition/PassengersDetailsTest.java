@@ -13,14 +13,14 @@ public class PassengersDetailsTest extends TestBase {
 
     WebDriverWait wait = new WebDriverWait(driver, 20);
 
-    GeneralMethods gmObject = new GeneralMethods();
+    private GeneralMethods gmObject = new GeneralMethods();
 
 
-    By contactTitleField = By.id("contact-fullname");
-    By contactFirstNameTXT = By.xpath("//div[@class='el-form-item col-sm-8 col-lg-6']//input[@placeholder='First Name']");
-    By contactLastNameTXT = By.xpath("//div[@class='el-form-item col-sm-8 col-lg-6']//input[@placeholder='Family Name']");
-    By contactEmailAddressTXT = By.id("contact-email");
-    By nextStepBTN = By.xpath("//button[text()='Next Step']");
+    private By contactTitleField = By.id("contact-fullname");
+    private By contactFirstNameTXT = By.xpath("//div[@class='el-form-item col-sm-8 col-lg-6']//input[@placeholder='First Name']");
+    private By contactLastNameTXT = By.xpath("//div[@class='el-form-item col-sm-8 col-lg-6']//input[@placeholder='Family Name']");
+    private By contactEmailAddressTXT = By.id("contact-email");
+    private By nextStepBTN = By.xpath("//button[text()='Next Step']");
 
 
     @And("^Add the following data in the passenger Details$")

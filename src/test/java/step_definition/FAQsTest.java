@@ -12,7 +12,7 @@ public class FAQsTest extends TestBase {
 
     WebDriverWait wait = new WebDriverWait(driver, 10);
 
-    By faqsLINK = By.xpath("//a[@class='link text-sm font-normal mr-5 router-link-exact-active router-link-active']");
+    private By faqsLINK = By.xpath("//a[@class='link text-sm font-normal mr-5 router-link-exact-active router-link-active']");
 
     @Then("^'FAQs' page is opened$")
     public void faqsPageIsOpened() {

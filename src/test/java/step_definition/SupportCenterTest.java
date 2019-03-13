@@ -13,7 +13,7 @@ public class SupportCenterTest extends TestBase {
     WebDriverWait wait = new WebDriverWait(driver, 10);
 
 
-    By supportCenterLINK = By.xpath("//a[@class='link text-sm font-normal mr-5 router-link-exact-active router-link-active']");
+    private By supportCenterLINK = By.xpath("//a[@class='link text-sm font-normal mr-5 router-link-exact-active router-link-active']");
 
     @Then("^'Support Center' page is opened$")
     public void supportCenterPageIsOpened() {

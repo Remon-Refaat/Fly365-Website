@@ -12,7 +12,7 @@ public class AboutUsTest extends TestBase {
 
     WebDriverWait wait = new WebDriverWait(driver, 10);
 
-    By aboutUsHDR = By.xpath("//header/span[1]");
+    private By aboutUsHDR = By.xpath("//header/span[1]");
 
     @Then("^'About Us' page is opened$")
     public void aboutUsPageIsOpened() {

@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class SearchResultTest extends TestBase {
     WebDriverWait wait = new WebDriverWait(driver, 10);
 
-    By bookThisTripBTN = By.xpath("//div[@class='search-container']/div[2]//button[contains(text(),'Book this flight')]");
+    private By bookThisTripBTN = By.xpath("//div[@class='search-container']/div[2]//button[contains(text(),'Book this flight')]");
 
     @And("^Choose a trip$")
     public void chooseATrip() throws InterruptedException {
