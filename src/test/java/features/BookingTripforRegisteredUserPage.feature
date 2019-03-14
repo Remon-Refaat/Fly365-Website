@@ -1,10 +1,15 @@
-Feature: Booking a Trip
+Feature: Booking a Trip for Registered User
 
   Background:
     Given Navigate to Fly365 "stage" site
 
-  @Remon
-  Scenario: Verify that the user can book a One-Way trip
+  Scenario: Verify that the registered user can book a One-Way trip
+    And open login page
+    And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
+    And user enter email "john.smith.fly365@gmail.com"
+    And user enter password "@Test123"
+    When the user click on login button
+    And Navigate to Fly365 "stage" site
     And Select One Way trip
     And Add airport to the Origin "Cairo International Airport (CAI), Egypt"
     And Add airport to the Destination "Dublin International (DUB), Ireland"
@@ -18,12 +23,7 @@ Feature: Booking a Trip
       | Mr    | John       | William     | Smith     | 15  | February | 1985 |
       | Mr    | William    | Smith       | Frank     | 15  | March    | 1982 |
       | Mr    | Frank      | William     | Smith     | 15  | February | 2013 |
-      | Mr    | Paul       | Peter       | Frank     | 15  | March    | 2018 |
-
-    And Add the following data in the Contact Details
-      | Title | First Name | Last Name | Email                |
-      | Mr    | Remon      | Refaat    | remon@mailinator.com |
-
+      | Mr    | Paul       | Peter       | Frank     | 15  | January  | 2019 |
     And Click on Next Step
     And Add a valid data for the credit card
       | Card Holder Number | Card Number         | Card Expire Date | Card CVV |
@@ -32,10 +32,16 @@ Feature: Booking a Trip
     And Select the Fare Rules and Terms and Conditions
     And Press on Pay button
     Then 'Thank you for booking with Fly365' message is displayed
+    And delete new user at database "john.smith.fly365@gmail.com"
+    And Close current tab
 
-
-  @Remon
-  Scenario: Verify that the user can book a Round-Trip trip
+  Scenario: Verify that the anonymous user can book a Round-Trip trip
+    And open login page
+    And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
+    And user enter email "john.smith.fly365@gmail.com"
+    And user enter password "@Test123"
+    When the user click on login button
+    And Navigate to Fly365 "stage" site
     And Select Round Trip trip
     And Add airport to the Origin "Cape Town International (CPT), South Africa"
     And Add airport to the Destination "Canberra (CBR), Australia"
@@ -50,11 +56,7 @@ Feature: Booking a Trip
       | Mr    | John       | William     | Smith     | 15  | February | 1985 |
       | Mr    | William    | Smith       | Frank     | 15  | March    | 1982 |
       | Mr    | Frank      | William     | Smith     | 15  | February | 2012 |
-      | Mr    | Paul       | Peter       | Frank     | 15  | March    | 2018 |
-
-    And Add the following data in the Contact Details
-      | Title | First Name | Last Name | Email                |
-      | Mr    | Remon      | Refaat    | remon@mailinator.com |
+      | Mr    | Paul       | Peter       | Frank     | 15  | January  | 2019 |
 
     And Click on Next Step
     And Add a valid data for the credit card
@@ -64,10 +66,16 @@ Feature: Booking a Trip
     And Select the Fare Rules and Terms and Conditions
     And Press on Pay button
     Then 'Thank you for booking with Fly365' message is displayed
+    And delete new user at database "john.smith.fly365@gmail.com"
+    And Close current tab
 
-
-  @Remon
-  Scenario: Verify that the user can book a Round-Trip trip
+  Scenario: Verify that the anonymous user can book a Round-Trip trip
+    And open login page
+    And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
+    And user enter email "john.smith.fly365@gmail.com"
+    And user enter password "@Test123"
+    When the user click on login button
+    And Navigate to Fly365 "stage" site
     And Select Multi City trip
     And Choose the number of flights "3"
     And Add the following origin, destinations and date periods
@@ -84,11 +92,7 @@ Feature: Booking a Trip
       | Mr    | John       | William     | Smith     | 15  | February | 1985 |
       | Mr    | William    | Smith       | Frank     | 15  | March    | 1982 |
       | Mr    | Frank      | William     | Smith     | 15  | February | 2012 |
-      | Mr    | Paul       | Peter       | Frank     | 15  | March    | 2018 |
-
-    And Add the following data in the Contact Details
-      | Title | First Name | Last Name | Email                |
-      | Mr    | Remon      | Refaat    | remon@mailinator.com |
+      | Mr    | Paul       | Peter       | Frank     | 15  | January  | 2019 |
 
     And Click on Next Step
     And Add a valid data for the credit card
@@ -98,14 +102,5 @@ Feature: Booking a Trip
     And Select the Fare Rules and Terms and Conditions
     And Press on Pay button
     Then 'Thank you for booking with Fly365' message is displayed
-
-
-
-
-    #    And Add a valid data for the Billing Address
-#      | Addres Line 1            | Addres Line 2                | State      | Zip Code |
-#      | 8287 Lincoln Rd. Fontana | 64 West Evergreen Lane Tracy | California | 90001    |
-
-
-#  Scenario: Email
-#    And get data from database
+    And delete new user at database "john.smith.fly365@gmail.com"
+    And Close current tab

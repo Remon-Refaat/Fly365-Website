@@ -1,3 +1,4 @@
+@Smoke
 Feature: Home page
 
   Background:
@@ -18,19 +19,19 @@ Feature: Home page
 
   Scenario: Verify that "Sign in" link in the footer open on the correct link
     And Press on 'Sign in'
-    Then 'Sign In' page is opened
+    Then 'Sign In' page will be opened
 
   Scenario: Verify that "Sign up" link in the footer open on the correct link
     And Press on 'Sign up'
-    Then Sign Up page is opened
+    Then 'Sign Up' page will be opened
 
   Scenario: Verify that first "Support Center" link in the footer open on the correct link
-    And Press on first 'Support Center'
-    Then 'Support Center' page is opened
+    And Press on first 'Support Centre'
+    Then 'Support Centre' page is opened
 
   Scenario: Verify that second "Support Center" link in the footer open on the correct link
-    And Press on second 'Support Center'
-    Then 'Support Center' page is opened
+    And Press on second 'Support Centre'
+    Then 'Support Centre' page is opened
 
   Scenario: Verify that "FAQs" link in the footer open on the correct link
     And Press on 'FAQs'
@@ -45,4 +46,5 @@ Feature: Home page
     Then 'Privacy Policy' page is opened
 
   Scenario: Verify that "afta" link in the footer open on the correct link
-    And Press on 'afta' and verify that page is opened
+    And Press on 'afta'
+    And 'afta' page is opened

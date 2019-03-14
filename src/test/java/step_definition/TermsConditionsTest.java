@@ -1,25 +1,30 @@
 package step_definition;
 
 import cucumber.api.java.en.Then;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import helper.TestBase;
+import org.openqa.selenium.By;
+import org.testng.Assert;
 
 
 public class TermsConditionsTest extends TestBase {
 
-    WebDriverWait wait = new WebDriverWait(driver, 10);
 
 
-    private By termsConditionsLINK = By.xpath("//a[@class='link text-sm font-normal mr-5 router-link-exact-active router-link-active']");
+    By termsConditionsHDRLINK = By.xpath("//a[@class='link text-sm font-normal mr-5 router-link-exact-active router-link-active']");
 
     @Then("^'Terms and Conditions' page is opened$")
     public void termsAndConditionsPageIsOpened() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(termsConditionsLINK));
-        String headerText = driver.findElement(termsConditionsLINK).getText();
-        Assert.assertEquals(headerText, "Terms and Conditions");
+        for (String windowID : driver.getWindowHandles()) {
+            String title = driver.switchTo().window(windowID).getTitle();
+            if (title.equals("Fly365")) {
+                String headerText = driver.findElement(termsConditionsHDRLINK).getText();
+                    Assert.assertEquals(headerText, "Terms and Conditions");
+                driver.close();
+                break;
+            }
+        }
+        driver.switchTo().window(HomeTest.currentWindow);
+
     }
 
 

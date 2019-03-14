@@ -32,7 +32,7 @@ public class SignInTest extends TestBase {
     private By InvalidLogInMSG = By.xpath("//div[@class='tooltip error error']//span[@class='tooltiptext']");
     private By PassWordErrorMSG = By.xpath("//span[@class='tooltiptext with-arrow']");
     private By EmailErrorMSG = By.xpath("//span[@class='tooltiptext with-arrow']");
-    private By HomePageTitle = By.xpath("//span[@class='text-primary-second']");
+    private By HomePageTitle = By.xpath("//a[text()='SIGN IN']");
     private By SignInHeader = By.xpath("//div[@class='text-xs mb-8 text-primary-fourth']");
 
 
@@ -43,13 +43,34 @@ public class SignInTest extends TestBase {
         Assert.assertEquals(headerText, "Good to see you again");
     }
 
+    @Then("^'Sign In' page will be opened$")
+    public void signInPageWillBeOpened() {
+
+        for (String windowID : driver.getWindowHandles()) {
+            String title = driver.switchTo().window(windowID).getTitle();
+            if (title.equals("Fly365 - Login")) {
+                String headerText = driver.findElement(SignInHeader).getText();
+                Assert.assertEquals(headerText, "Good to see you again");
+                driver.close();
+                break;
+            }
+        }
+        driver.switchTo().window(HomeTest.currentWindow);
+    }
+
     @And("^open login page$")
     public void openLoginPage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(LoginHeaderBTN));
         driver.findElement(LoginHeaderBTN).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(LoginBTN));
-        WebElement LoginPassWordTXT = driver.findElement(LoginBTN);
-        Assert.assertTrue(LoginPassWordTXT.isDisplayed());
+        for (String windowID : driver.getWindowHandles()) {
+            String title = driver.switchTo().window(windowID).getTitle();
+            if (title.equals("Fly365 - Login")) {
+                break;
+            }
+        }
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(LoginBTN));
+//        WebElement LoginPassWordTXT = driver.findElement(LoginBTN);
+//        Assert.assertTrue(LoginPassWordTXT.isDisplayed());
     }
 
     @And("^user enter email \"(.*)\"$")
@@ -60,11 +81,11 @@ public class SignInTest extends TestBase {
     @When("^the user click on login button$")
     public void theUserClickOnLoginButton() {
         driver.findElement(LoginBTN).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AccountSettingBTN));
     }
 
     @Then("^the user shall be redirect to my booking page$")
     public void theUserShallBeRedirectToMyBookingPage() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AccountSettingBTN));
         WebElement MyProfile = driver.findElement(AccountSettingBTN);
         Assert.assertTrue(MyProfile.isDisplayed());
     }
@@ -80,7 +101,7 @@ public class SignInTest extends TestBase {
         WebElement ErrorMessage = driver.findElement(InvalidLogInMSG);
         Assert.assertTrue(ErrorMessage.isDisplayed());
         String InValidLoginMSGText = driver.findElement(InvalidLogInMSG).getText();
-        Assert.assertEquals(InValidLoginMSGText, "!Invalid Email or password");
+        Assert.assertEquals(InValidLoginMSGText, "!Invalid login information, please check and try again.");
 
     }
 
@@ -142,12 +163,12 @@ public class SignInTest extends TestBase {
         driver.findElement(LogoutBTN).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(LoginHeaderBTN));
         String homeText = driver.findElement(HomePageTitle).getText();
-        Assert.assertEquals(homeText, "Low Fares");
+        Assert.assertEquals(homeText, "SIGN IN");
     }
 
     @And("^insert new user at database \"(.*)\" \"(.*)\"$")
     public void insertNewUserAtDataBase(String userEmail, String userHashPassWord) {
-        DataBase.execute_update(hostName, dbsName, "insert into users (email, \"lastName\",\"firstName\",password,\"storeId\", \"groupId\",\"isActive\",\"isLocked\")values('" + userEmail + "','Sayed','Mahmoud','" + userHashPassWord + "','fly365_com','fly365',True,False)");
+        DataBase.execute_update(hostName, dbsName, "insert into users (email, \"lastName\",\"firstName\",password,\"storeId\", \"groupId\",\"isActive\",\"isLocked\")values('" + userEmail + "','Smith','John','" + userHashPassWord + "','fly365_com','fly365',True,False)");
     }
 
     @And("^delete new user at database \"(.*)\"$")
