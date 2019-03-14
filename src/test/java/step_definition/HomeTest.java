@@ -14,6 +14,8 @@ public class HomeTest extends TestBase {
 
     WebDriverWait wait = new WebDriverWait(driver, 10);
 
+    public static String currentWindow = driver.getWindowHandle();
+
     By aboutUsLink = By.xpath("//a[text()='About us']");
     By contactUsLink = By.xpath("//a[text()='Contact Us']");
     By signInLink = By.xpath("//a[text()='Sign in']");

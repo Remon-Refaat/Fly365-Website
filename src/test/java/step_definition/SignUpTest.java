@@ -7,11 +7,13 @@ import cucumber.api.java.en.Then;
 import helper.DataBase;
 import helper.TestBase;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class SignUpTest extends TestBase {
@@ -23,8 +25,8 @@ public class SignUpTest extends TestBase {
 
     By signUpHDR = By.xpath("//div[@class='text-xs mb-8 text-primary-fourth']");
     By signUpBTN = By.xpath("//li/a[text()='Sign up']");
-    By firstNameTXT = By.xpath("//input[@placeholder='John']");
-    By lastNameTXT = By.xpath("//input[@placeholder='Smith']");
+    By firstNameTXT = By.xpath("//input[@placeholder='First Name']");
+    By lastNameTXT = By.xpath("//input[@placeholder='Family Name']");
     By emailTXT = By.xpath("//input[@placeholder='john@example.com']");
     By passwordTXT = By.xpath("//input[@placeholder='******************']");
     By creatAccountBTN = By.xpath("//button[text()='CREATE ACCOUNT']");
@@ -32,7 +34,7 @@ public class SignUpTest extends TestBase {
     By validationEmailErrorMSG = By.xpath("//span[text()='Please enter a valid email']");
     By validationPasswordErrorMSG = By.xpath("//span[text()='Password length must be between 8 to 50 characters']");
     By firstNameRequiredErrorMSG = By.xpath("//span[text()='Please enter first name']");
-    By lastNameRequiredErrorMSG = By.xpath("//span[text()='Please enter last name']");
+    By lastNameRequiredErrorMSG = By.xpath("//span[text()='Please enter family name']");
     By emailRequiredErrorMSG = By.xpath("//span[text()='Please enter email']");
     By passwordRequiredErrorMSG = By.xpath("//span[text()='Please enter password']");
     By emailExitErrorMSG = By.xpath("//span[text()='email already existed']");
@@ -43,10 +45,15 @@ public class SignUpTest extends TestBase {
 
 
     @And("Open Sign up page")
-    public void openSignUpPage()
-    {
+    public void openSignUpPage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(signUpBTN));
         driver.findElement(signUpBTN).click();
+        for (String windowID : driver.getWindowHandles()) {
+            String title = driver.switchTo().window(windowID).getTitle();
+            if (title.equals("Fly365 - Register")) {
+                break;
+            }
+        }
     }
 
 
@@ -101,6 +108,7 @@ public class SignUpTest extends TestBase {
         driver.findElement(hidePasswordBTN).click();
     }
 
+
     @Then("The user created successfully")
     public void theUserCreatedSuccessfully()
     {
@@ -113,7 +121,7 @@ public class SignUpTest extends TestBase {
     {
         wait.until(ExpectedConditions.visibilityOfElementLocated(signUpHDR));
         String headerText = driver.findElement(signUpHDR).getText();
-        Assert.assertEquals(headerText,"Sign in or sign up");
+        Assert.assertEquals(headerText,"Sign up");
     }
 
     @Then("The system display validation messages for all mandatory fields")
@@ -121,10 +129,10 @@ public class SignUpTest extends TestBase {
     {
         wait.until(ExpectedConditions.visibilityOfElementLocated(firstNameRequiredErrorMSG));
         String fErrorMSG = driver.findElement(firstNameRequiredErrorMSG).getText();
-        Assert.assertEquals(fErrorMSG,"Please enter first name");
+        Assert.assertEquals(fErrorMSG,"Please Enter First Name");
 
         String lErrorMSG = driver.findElement(lastNameRequiredErrorMSG).getText();
-        Assert.assertEquals(lErrorMSG,"Please enter last name");
+        Assert.assertEquals(lErrorMSG,"Please Enter Family Name");
 
         String eErrorMSG = driver.findElement(emailRequiredErrorMSG).getText();
         Assert.assertEquals(eErrorMSG,"Please enter email");
@@ -138,7 +146,7 @@ public class SignUpTest extends TestBase {
     {
         wait.until(ExpectedConditions.visibilityOfElementLocated(validationNameErrorMSG));
         String error_message = driver.findElement(validationNameErrorMSG).getText();
-        Assert.assertEquals(error_message,"Name must be letters only");
+        Assert.assertEquals(error_message,"Name Must Be Letters Only");
     }
 
     @Then("^The system should display validation message for invalid email$")
@@ -178,5 +186,13 @@ public class SignUpTest extends TestBase {
     public void thePasswordShouldHide()
     {
         Assert.assertTrue(true,String.valueOf(driver.findElement(passwordNotDisplayedLBL).isDisplayed()));
+    }
+
+    @Then("^Close current tab$")
+    public void closeCurrentTab()
+    {
+        driver.close();
+        driver.switchTo().window(HomeTest.currentWindow);
+        //driver.findElement(By.cssSelector("Body")).sendKeys(Keys.CONTROL + "W");
     }
 }

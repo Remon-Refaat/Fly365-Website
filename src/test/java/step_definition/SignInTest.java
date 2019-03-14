@@ -33,7 +33,7 @@ public class SignInTest extends TestBase {
     private By InvalidLogInMSG = By.xpath("//div[@class='tooltip error error']//span[@class='tooltiptext']");
     private By PassWordErrorMSG = By.xpath("//span[@class='tooltiptext with-arrow']");
     private By EmailErrorMSG = By.xpath("//span[@class='tooltiptext with-arrow']");
-    private By HomePageTitle = By.xpath("//span[@class='text-primary-second']");
+    private By HomePageTitle = By.xpath("//a[text()='SIGN IN']");
     private By SignInHeader = By.xpath("//div[@class='text-xs mb-8 text-primary-fourth']");
 
 
@@ -48,6 +48,12 @@ public class SignInTest extends TestBase {
     public void openLoginPage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(LoginHeaderBTN));
         driver.findElement(LoginHeaderBTN).click();
+        for (String windowID : driver.getWindowHandles()) {
+            String title = driver.switchTo().window(windowID).getTitle();
+            if (title.equals("Fly365 - Login")) {
+                break;
+            }
+        }
         wait.until(ExpectedConditions.visibilityOfElementLocated(LoginBTN));
         WebElement LoginPassWordTXT = driver.findElement(LoginBTN);
         Assert.assertTrue(LoginPassWordTXT.isDisplayed());
@@ -81,7 +87,7 @@ public class SignInTest extends TestBase {
         WebElement ErrorMessage = driver.findElement(InvalidLogInMSG);
         Assert.assertTrue(ErrorMessage.isDisplayed());
         String InValidLoginMSGText = driver.findElement(InvalidLogInMSG).getText();
-        Assert.assertEquals(InValidLoginMSGText, "!Invalid Email or password");
+        Assert.assertEquals(InValidLoginMSGText, "!Invalid login information, please check and try again.");
 
     }
 
@@ -143,7 +149,7 @@ public class SignInTest extends TestBase {
         driver.findElement(LogoutBTN).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(LoginHeaderBTN));
         String homeText = driver.findElement(HomePageTitle).getText();
-        Assert.assertEquals(homeText, "Low Fares");
+        Assert.assertEquals(homeText, "SIGN IN");
     }
 
     @And("^insert new user at database \"(.*)\" \"(.*)\"$")
