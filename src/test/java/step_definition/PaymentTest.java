@@ -14,21 +14,22 @@ public class PaymentTest extends TestBase {
     WebDriverWait wait = new WebDriverWait(driver, 10);
 
 
-    By cardHolderNameTXT = By.xpath("//input[@placeholder='John Smith']");
-    By cardNumberTXT = By.xpath("//input[@placeholder='xxxx xxxx xxxx xxxx']");
-    By cardExpireDateTXT = By.xpath("//input[@placeholder='MM/YY']");
-    By cardCVVTXT = By.xpath("//input[@placeholder='123']");
-    By addressLine1TXT = By.xpath("//input[@placeholder='Address Line 1']");
-    By addressLine2TXT = By.xpath("//input[@placeholder='Address Line 2']");
-    By stateTXT = By.xpath("//input[@placeholder='State']");
-    By zipTXT = By.xpath("//input[@placeholder='Zip Code']");
-    By fareRulesBOX = By.xpath("//span[@class='el-checkbox__inner']");
-    By payNowBTN = By.xpath("//button[contains(text(),'PAY')]");
+    private By cardHolderNameTXT = By.id("card-holder-name");
+    private By cardNumberTXT = By.id("card-number");
+    private By cardExpireDateTXT = By.id("card-expiry-date");
+    private By cardCVVTXT = By.id("card-cvv");
+    private By addressLine1TXT = By.xpath("//input[@placeholder='Address Line 1']");
+    private By addressLine2TXT = By.xpath("//input[@placeholder='Address Line 2']");
+    private By stateTXT = By.xpath("//input[@placeholder='State']");
+    private By zipTXT = By.xpath("//input[@placeholder='Zip Code']");
+    private By acknowledgeBOX = By.xpath("//form/div[1]//span[@class='el-checkbox__inner']");
+    private By fareRulesBOX = By.xpath("//form/div[2]//span[@class='el-checkbox__inner']");
+    private By payNowBTN = By.xpath("//button[contains(text(),'PAY')]");
 
     @And("^Add a valid data for the credit card$")
     public void addAValidDataForTheCreditCard(DataTable paymentCardData) {
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(zipTXT));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(cardHolderNameTXT));
 
         for (Map<String, String> paymentCardDetails : paymentCardData.asMaps(String.class, String.class)) {
             driver.findElement(cardHolderNameTXT).sendKeys(paymentCardDetails.get("Card Holder Number"));
@@ -43,7 +44,7 @@ public class PaymentTest extends TestBase {
     @And("^Add a valid data for the Billing Address$")
     public void addAValidDataForTheBillingAddress(DataTable billingAddressData) {
 
-        for (Map<String,String> billingAddressDetails : billingAddressData.asMaps(String.class,String.class)){
+        for (Map<String, String> billingAddressDetails : billingAddressData.asMaps(String.class, String.class)) {
             driver.findElement(addressLine1TXT).sendKeys(billingAddressDetails.get("Addres Line 1"));
             driver.findElement(addressLine2TXT).sendKeys(billingAddressDetails.get("Addres Line 2"));
             driver.findElement(stateTXT).sendKeys(billingAddressDetails.get("State"));
@@ -61,5 +62,10 @@ public class PaymentTest extends TestBase {
     public void pressOnPayButton() {
         driver.findElement(payNowBTN).click();
 
+    }
+
+    @And("^Select the passenger name as passport acknowledgment$")
+    public void selectThePassengerNameAsPassportAcknowledgment() {
+        driver.findElement(acknowledgeBOX).click();
     }
 }

@@ -1,7 +1,7 @@
 # Automation Site Guidelines
 Please keep the following format among the whole project
 
-- Elements: Any elements should be written with combination of two phrases {Description}+{FieldType} where Description start with lowercase and FieldTypes as follows TXT: Text, DDL: Drop Down List, BTN: Button, BOX: Check Box, LINK: Link, TAB: Tab, MSG: Message, DPK: Date Picker, HDR: Header
+- Elements: Any elements should be written with combination of two phrases {Description}+{FieldType} where Description start with lowercase and FieldTypes as follows TXT: Text, DDL: Drop Down List, BTN: Button, BOX: Check Box, LINK: Link, TAB: Tab, MSG: Message, DPK: Date Picker, HDR: Header, LBL: Label
 For example, selectDepartureDateFromDPK
 In case of validation messages it should contains 3 phrases {Description}+{FieldName}+{Successful or Warning or Error} 
 For example, emptyIDNumberErrorMSG

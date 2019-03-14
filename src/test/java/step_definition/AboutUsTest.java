@@ -12,13 +12,13 @@ public class AboutUsTest extends TestBase {
 
     WebDriverWait wait = new WebDriverWait(driver, 10);
 
-    By aboutUsHeader = By.xpath("//header/span[1]");
+    private By aboutUsHDR = By.xpath("//header/span[1]");
 
     @Then("^'About Us' page is opened$")
     public void aboutUsPageIsOpened() {
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(aboutUsHeader));
-        String headerText = driver.findElement(aboutUsHeader).getText();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(aboutUsHDR));
+        String headerText = driver.findElement(aboutUsHDR).getText();
         Assert.assertEquals(headerText, "About Fly365");
 
     }
