@@ -2,18 +2,14 @@ package step_definition;
 
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import helper.DataBase;
 import helper.TestBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 public class SignUpTest extends TestBase {
@@ -115,6 +111,22 @@ public class SignUpTest extends TestBase {
         driver.getTitle().contains("Fly365");
     }
 
+    @Then("^'Sign Up' page will be opened$")
+    public void signUpPageWillBeOpened()
+    {
+
+        for (String windowID : driver.getWindowHandles()) {
+            String title = driver.switchTo().window(windowID).getTitle();
+            if (title.equals("Fly365 - Register")) {
+                String headerText = driver.findElement(signUpHDR).getText();
+                Assert.assertEquals(headerText, "Sign up");
+                driver.close();
+                break;
+            }
+        }
+        driver.switchTo().window(HomeTest.currentWindow);
+
+    }
 
     @Then("^Sign Up page is opened$")
     public void signUpPageIsOpened()

@@ -43,6 +43,21 @@ public class SignInTest extends TestBase {
         Assert.assertEquals(headerText, "Good to see you again");
     }
 
+    @Then("^'Sign In' page will be opened$")
+    public void signInPageWillBeOpened() {
+
+        for (String windowID : driver.getWindowHandles()) {
+            String title = driver.switchTo().window(windowID).getTitle();
+            if (title.equals("Fly365 - Login")) {
+                String headerText = driver.findElement(SignInHeader).getText();
+                Assert.assertEquals(headerText, "Good to see you again");
+                driver.close();
+                break;
+            }
+        }
+        driver.switchTo().window(HomeTest.currentWindow);
+    }
+
     @And("^open login page$")
     public void openLoginPage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(LoginHeaderBTN));
@@ -53,9 +68,9 @@ public class SignInTest extends TestBase {
                 break;
             }
         }
-        wait.until(ExpectedConditions.visibilityOfElementLocated(LoginBTN));
-        WebElement LoginPassWordTXT = driver.findElement(LoginBTN);
-        Assert.assertTrue(LoginPassWordTXT.isDisplayed());
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(LoginBTN));
+//        WebElement LoginPassWordTXT = driver.findElement(LoginBTN);
+//        Assert.assertTrue(LoginPassWordTXT.isDisplayed());
     }
 
     @And("^user enter email \"(.*)\"$")
@@ -66,11 +81,11 @@ public class SignInTest extends TestBase {
     @When("^the user click on login button$")
     public void theUserClickOnLoginButton() {
         driver.findElement(LoginBTN).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AccountSettingBTN));
     }
 
     @Then("^the user shall be redirect to my booking page$")
     public void theUserShallBeRedirectToMyBookingPage() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AccountSettingBTN));
         WebElement MyProfile = driver.findElement(AccountSettingBTN);
         Assert.assertTrue(MyProfile.isDisplayed());
     }
@@ -153,7 +168,7 @@ public class SignInTest extends TestBase {
 
     @And("^insert new user at database \"(.*)\" \"(.*)\"$")
     public void insertNewUserAtDataBase(String userEmail, String userHashPassWord) {
-        DataBase.execute_update(hostName, dbsName, "insert into users (email, \"lastName\",\"firstName\",password,\"storeId\", \"groupId\",\"isActive\",\"isLocked\")values('" + userEmail + "','Sayed','Mahmoud','" + userHashPassWord + "','fly365_com','fly365',True,False)");
+        DataBase.execute_update(hostName, dbsName, "insert into users (email, \"lastName\",\"firstName\",password,\"storeId\", \"groupId\",\"isActive\",\"isLocked\")values('" + userEmail + "','Smith','John','" + userHashPassWord + "','fly365_com','fly365',True,False)");
     }
 
     @And("^delete new user at database \"(.*)\"$")

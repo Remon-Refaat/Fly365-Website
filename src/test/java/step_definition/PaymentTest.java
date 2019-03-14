@@ -59,9 +59,9 @@ public class PaymentTest extends TestBase {
     }
 
     @And("^Press on Pay button$")
-    public void pressOnPayButton() {
+    public void pressOnPayButton() throws InterruptedException {
         driver.findElement(payNowBTN).click();
-
+Thread.sleep(8000);
     }
 
     @And("^Select the passenger name as passport acknowledgment$")
