@@ -1,7 +1,6 @@
 package helper;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -32,11 +31,6 @@ public class GeneralMethods extends TestBase {
 
     }
 
-    public void clearLocalStorage() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.localStorage.clear();");
-        driver.navigate().refresh();
-    }
 
     public String addDateWithCertainPeriodAndFormat(int period, String pattern) {
         Calendar cal = Calendar.getInstance();

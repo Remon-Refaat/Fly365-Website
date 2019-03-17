@@ -1,5 +1,6 @@
-@Remon
-Feature: forget password
+@New_Tab
+Feature: login to account
+  login to a created account
 
   Background:
     Given Navigate to Fly365 "stage" site
@@ -10,7 +11,6 @@ Feature: forget password
     And user enter password "@test123"
     When the user click on login button
     Then user shall see InValid Login Error Message
-    Then Close current tab
 
   Scenario: login into account with wrong password
     And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
@@ -19,7 +19,6 @@ Feature: forget password
     When the user click on login button
     Then user shall see InValid Login Error Message
     And delete new user at database "john.smith.fly365@gmail.com"
-    Then Close current tab
 
 
     ## covered in sign up form ##
@@ -28,7 +27,6 @@ Feature: forget password
     And user enter password "111"
     When the user click on login button
     Then user shall see password error message
-    Then Close current tab
 
 
         ## covered in sign up form ##
@@ -37,7 +35,6 @@ Feature: forget password
     And user enter password "1111111111111111111111111111111111111111111111111111111111111"
     When the user click on login button
     Then user shall see password error message
-    Then Close current tab
 
 
   Scenario: login into account with empty password
@@ -45,7 +42,6 @@ Feature: forget password
     And user enter empty password
     When the user click on login button
     Then user shall see empty password error message
-    Then Close current tab
 
 
   Scenario: Login into account with empty email
@@ -53,7 +49,6 @@ Feature: forget password
     And user enter password "@Test123"
     When the user click on login button
     Then user shall see email empty error message
-    Then Close current tab
 
 
         ## covered in sign up form ##
@@ -62,7 +57,6 @@ Feature: forget password
     And user enter password "@Test123"
     When the user click on login button
     Then user shall see email error message
-    Then Close current tab
 
   Scenario: Login into account with correct details
     And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
@@ -72,7 +66,6 @@ Feature: forget password
     Then the user shall be redirect to my booking page
     And user logout
     And delete new user at database "john.smith.fly365@gmail.com"
-    Then Close current tab
 
   Scenario: Login into account with correct Upper case email
     And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
@@ -82,5 +75,4 @@ Feature: forget password
     Then the user shall be redirect to my booking page
     And user logout
     And delete new user at database "john.smith.fly365@gmail.com"
-    Then Close current tab
 

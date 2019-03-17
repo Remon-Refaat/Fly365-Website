@@ -80,33 +80,32 @@ public class APIUtility extends TestBase {
         return itineraryId;
     }
 
-    public static String createCart(String itineraryId) {
+    public static String createCart(String itineraryId, String domain) {
 
         String createCartAPI = "{\"itineraryId\": \"" + itineraryId + "\"}";
-        String returnedJsonString = sendPostRequest("https://api.fly365stage.com/flight/cart", createCartAPI);
+        String returnedJsonString = sendPostRequest("https://api.fly365"+domain+".com/flight/cart", createCartAPI);
         JSONObject jObject = new JSONObject(returnedJsonString);
         return jObject.getString("id");
 
     }
 
-    public static void addPassenger(String cartID) {
+    public static void addPassenger(String cartID, String domain) {
 
-        String addPassengerDetailsAPI = "{\"passengers\": [{\"firstName\": \"John\",\"middleName\": \"William\",\"lastName\": \"Smith\",\n" +
-                "\"title\": \"Mr\",\"dateOfBirth\": \"1991-06-04\",\"reference\": \"123\",\"passengerType\": \"ADT\",\n" +
-                "\"frequentFlyerOptions\": {\"airlineCode\": \"code\",\"number\": \"num\"},\n" +
-                "\"identificationDetail\": {\"idType\": \"passport\",\"idNumber\": \"12342341234123421342134234\",\n" +
-                "\"idExpiryDate\": \"1991-06-04\",\"country\": \"EG\"}}],\n" +
-                "\"customer\": {\"title\": \"mr\",\"firstName\": \"John\",\"lastName\": \"Smith\",\"email\": \"john.smith.fly365@gmail.com\"}}";
-        sendPostRequest("https://api.fly365stage.com/flight/cart/" + cartID + "/passenger", addPassengerDetailsAPI);
+        String addPassengerDetailsAPI = "{\"passengers\": [" +
+                "{\"firstName\": \"John\",\"middleName\": \"William\",\"lastName\": \"Smith\",\"title\": \"Mr\",\"dateOfBirth\": \"1991-06-04\"," +
+                "\"reference\": \"123\",\"passengerType\": \"ADT\",\"frequentFlyerOptions\": {\"airlineCode\": \"code\",\"number\": \"num\"" +
+                "}}],\"customer\": {\"title\": \"mr\",\"firstName\": \"John\",\"lastName\": \"William\",\"email\": \"john.smith.fly365@gmail.com\"" +
+                "}}";
+        sendPostRequest("https://api.fly365"+domain+".com/flight/cart/" + cartID + "/passenger", addPassengerDetailsAPI);
 
     }
 
-    public static String[] checkoutTrip(String cartID) {
+    public static String[] checkoutTrip(String cartID, String domain) {
 
         String addCardDetailsAPI = "{\"method\":\"cc\",\"type\":\"direct\",\"card\":{\"number\":\"4242424242424242\",\"cvv\":\"123\",\n" +
                 "\"expiryDate\":\"1120\",\"type\":\"visa\",\"holderName\": \"Alaa Attya\"},\n" +
                 " \"billingAddress\":{\"address\":\"Something\",\"country\":\"DO\",\"city\":\"AZS\",\"zipCode\":\"5678\",\"state\":\"NY\"}}";
-        String returnedJsonString = sendPostRequest("https://api.fly365stage.com/flight/cart/" + cartID + "/checkout", addCardDetailsAPI);
+        String returnedJsonString = sendPostRequest("https://api.fly365"+domain+".com/flight/cart/" + cartID + "/checkout", addCardDetailsAPI);
 
 //To validate that the order no./pnr number is displayed correctly in retrieve my booking
         JSONObject jObject = new JSONObject(returnedJsonString);

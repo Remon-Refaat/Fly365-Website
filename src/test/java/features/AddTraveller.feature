@@ -1,3 +1,4 @@
+@New_Tab
 Feature: Add Traveller to Login user
 
   Background:
@@ -18,5 +19,4 @@ Feature: Add Traveller to Login user
     And user logout
     And Delete new traveller from database
     And delete new user at database "john.smith.fly365@gmail.com"
-    And Close current tab
 

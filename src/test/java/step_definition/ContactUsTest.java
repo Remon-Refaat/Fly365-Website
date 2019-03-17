@@ -18,12 +18,9 @@ public class ContactUsTest extends TestBase {
             if (title.equals("Fly365 - ContactUs")) {
                 String headerText = driver.findElement(contactUsHDR).getText();
                 Assert.assertEquals(headerText, "Contact Us");
-                driver.close();
                 break;
             }
         }
-        driver.switchTo().window(HomeTest.currentWindow);
-
     }
 
 

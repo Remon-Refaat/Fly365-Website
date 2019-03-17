@@ -1,3 +1,4 @@
+@New_Tab
 Feature: Booking a Trip for Registered User
 
   Background:
@@ -34,7 +35,6 @@ Feature: Booking a Trip for Registered User
     And Press on Pay button
     Then 'Thank you for booking with Fly365' message is displayed
     And delete new user at database "john.smith.fly365@gmail.com"
-    And Close current tab
 
   Scenario: Verify that the anonymous user can book a Round-Trip trip
     And open login page
@@ -69,7 +69,6 @@ Feature: Booking a Trip for Registered User
     And Press on Pay button
     Then 'Thank you for booking with Fly365' message is displayed
     And delete new user at database "john.smith.fly365@gmail.com"
-    And Close current tab
 
   Scenario: Verify that the anonymous user can book a Round-Trip trip
     And open login page
@@ -106,4 +105,3 @@ Feature: Booking a Trip for Registered User
     And Press on Pay button
     Then 'Thank you for booking with Fly365' message is displayed
     And delete new user at database "john.smith.fly365@gmail.com"
-    And Close current tab

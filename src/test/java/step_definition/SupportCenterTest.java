@@ -19,12 +19,9 @@ public class SupportCenterTest extends TestBase {
             if (title.equals("Fly365")) {
                 String headerText = driver.findElement(supportCenterHDRLINK).getText();
                 Assert.assertEquals(headerText, "Support Centre");
-                driver.close();
                 break;
             }
         }
-        driver.switchTo().window(HomeTest.currentWindow);
-
     }
 
 
