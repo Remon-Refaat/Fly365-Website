@@ -3,7 +3,6 @@ package step_definition;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import helper.APIUtility;
-import helper.EmailUtililty;
 import helper.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -25,22 +24,22 @@ public class ConfirmationTest extends TestBase {
     }
 
 
-    public static void connectToEmail() {
-        try {
-            EmailUtililty emailUtililty = new EmailUtililty("john.smith.fly365@gmail.com", "@Fly12345", "smtp.gmail.com", EmailUtililty.EmailFolder.INBOX);
-            System.out.println("(((((((((((((((((");
-            System.out.println("(((((((((((((((((");
-            Message message = emailUtililty.getMessagesBySubject("Verify your email", false, 1)[0];
-            System.out.println(emailUtililty.getMessageContent(message));
-
-            System.out.println("(((((((((((((((((");
-            System.out.println("(((((((((((((((((");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail(e.getMessage());
-        }
-    }
+//    public static void connectToEmail() {
+//        try {
+//            EmailUtililty emailUtililty = new EmailUtililty("john.smith.fly365@gmail.com", "@Fly12345", "smtp.gmail.com", EmailUtililty.EmailFolder.INBOX);
+//            System.out.println("(((((((((((((((((");
+//            System.out.println("(((((((((((((((((");
+//            Message message = emailUtililty.getMessagesBySubject("Verify your email", false, 1)[0];
+//            System.out.println(emailUtililty.getMessageContent(message));
+//
+//            System.out.println("(((((((((((((((((");
+//            System.out.println("(((((((((((((((((");
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            Assert.fail(e.getMessage());
+//        }
+//    }
 
     @And("^get data from database$")
     public void getDataFromDatabase() throws Exception {
@@ -55,7 +54,7 @@ public class ConfirmationTest extends TestBase {
 //        System.out.println(email.getSubject());
 //        System.out.println("))))))))))))))))))))))");
 
-        connectToEmail();
+//        connectToEmail();
 
 
     }
