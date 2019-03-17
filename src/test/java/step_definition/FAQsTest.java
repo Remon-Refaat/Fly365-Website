@@ -18,12 +18,9 @@ public class FAQsTest extends TestBase {
             if (title.equals("Fly365")) {
                 String headerText = driver.findElement(faqsHDRLINK).getText();
                 Assert.assertEquals(headerText, "FAQs");
-                driver.close();
                 break;
             }
         }
-        driver.switchTo().window(HomeTest.currentWindow);
-
     }
 
 

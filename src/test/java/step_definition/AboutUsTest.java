@@ -18,22 +18,10 @@ public class AboutUsTest extends TestBase {
             String title = driver.switchTo().window(windowID).getTitle();
             if (title.equals("Fly365 - AboutUs")) {
                 String headerText = driver.findElement(aboutUsHDR).getText();
-                try{
-                    Assert.assertEquals(headerText, "About Fly365");
-                }
-                catch (AssertionError e)
-                {
-                    driver.close();
-                    driver.switchTo().window(HomeTest.currentWindow);
-                    Assert.assertTrue(e.getMessage().isEmpty());
-                }
-
-                driver.close();
+                Assert.assertEquals(headerText, "About Fly365");
                 break;
             }
         }
-        driver.switchTo().window(HomeTest.currentWindow);
-
     }
 
 

@@ -51,11 +51,9 @@ public class SignInTest extends TestBase {
             if (title.equals("Fly365 - Login")) {
                 String headerText = driver.findElement(SignInHeader).getText();
                 Assert.assertEquals(headerText, "Good to see you again");
-                driver.close();
                 break;
             }
         }
-        driver.switchTo().window(HomeTest.currentWindow);
     }
 
     @And("^open login page$")

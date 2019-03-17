@@ -20,12 +20,9 @@ public class AFTATest extends TestBase {
             if (title.equals("Australian Federation of Travel Agents")) {
                 String headerText = driver.findElement(aftaHDR).getText();
                 Assert.assertEquals(headerText, "WELCOME TO AFTA");
-                driver.close();
                 break;
             }
         }
-        driver.switchTo().window(HomeTest.currentWindow);
-
     }
 
 }
