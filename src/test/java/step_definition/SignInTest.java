@@ -170,7 +170,7 @@ public class SignInTest extends TestBase {
 
     @And("^insert new user at database \"(.*)\" \"(.*)\"$")
     public void insertNewUserAtDataBase(String userEmail, String userHashPassWord) {
-        DataBase.execute_query_dbs(hostName, dbsName, "Select email from users where email = '" + userEmail +"'");
+        DataBase.execute_query_dbs(hostName, dbsName, "Select email from users where email = '" + userEmail + "'");
         if (DataBase.data == userEmail) {
             DataBase.execute_query_dbs(hostName, dbsName, "delete from users where email='" + userEmail + "'");
         }
