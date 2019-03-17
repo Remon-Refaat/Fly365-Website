@@ -1,4 +1,3 @@
-@Smoke
 Feature: Sign Up
 
   Background: Open Fly365 Site

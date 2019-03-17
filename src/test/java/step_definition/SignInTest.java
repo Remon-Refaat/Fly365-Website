@@ -16,14 +16,14 @@ import org.testng.Assert;
 
 public class SignInTest extends TestBase {
 
-    WebDriverWait wait = new WebDriverWait(driver, 60);
+    WebDriverWait wait = new WebDriverWait(driver, 20);
     private Faker fakerLogin = new Faker();
 
     private String hostName = "k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432";
     private String dbsName = "user_api";
 
     private By LoginBTN = By.xpath("//button[contains(text(),'Login')]");
-    private By LoginHeaderBTN = By.xpath("//a[@class='text-black md:w-24 text-center w-full block float-right hover:text-white bg-white btn hover:bg-primary-second font-normal py-2 px-5 rounded-sm text-sm no-underline']");
+    private By LoginHeaderBTN = By.xpath("//a[text()='SIGN IN']");
     private By LoginEmailTXT = By.xpath("//input[@placeholder='john@example.com']");
     private By LoginPassWordTXT = By.xpath("//input[@placeholder='******************']");
     private By ProfileNameBTN = By.xpath("//span[@class='el-dropdown-link capitalize text-xs text-white el-dropdown-selfdefine']");
@@ -68,9 +68,7 @@ public class SignInTest extends TestBase {
                 break;
             }
         }
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(LoginBTN));
-//        WebElement LoginPassWordTXT = driver.findElement(LoginBTN);
-//        Assert.assertTrue(LoginPassWordTXT.isDisplayed());
+
     }
 
     @And("^user enter email \"(.*)\"$")
@@ -81,6 +79,10 @@ public class SignInTest extends TestBase {
     @When("^the user click on login button$")
     public void theUserClickOnLoginButton() {
         driver.findElement(LoginBTN).click();
+    }
+
+    @And("^Wait until My Booking Page is opened$")
+    public void waitUntilMyBookingPageIsOpened() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(AccountSettingBTN));
     }
 
@@ -168,6 +170,10 @@ public class SignInTest extends TestBase {
 
     @And("^insert new user at database \"(.*)\" \"(.*)\"$")
     public void insertNewUserAtDataBase(String userEmail, String userHashPassWord) {
+        DataBase.execute_query_dbs(hostName, dbsName, "Select email from users where email = '" + userEmail +"'");
+        if (DataBase.data == userEmail) {
+            DataBase.execute_query_dbs(hostName, dbsName, "delete from users where email='" + userEmail + "'");
+        }
         DataBase.execute_update(hostName, dbsName, "insert into users (email, \"lastName\",\"firstName\",password,\"storeId\", \"groupId\",\"isActive\",\"isLocked\")values('" + userEmail + "','Smith','John','" + userHashPassWord + "','fly365_com','fly365',True,False)");
     }
 
@@ -175,5 +181,6 @@ public class SignInTest extends TestBase {
     public void deleteTheNewUserAtDataBase(String userEmail) {
         DataBase.execute_query_dbs(hostName, dbsName, "delete from users where email='" + userEmail + "'");
     }
+
 
 }

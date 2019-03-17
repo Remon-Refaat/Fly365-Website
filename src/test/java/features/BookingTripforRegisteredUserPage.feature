@@ -9,6 +9,7 @@ Feature: Booking a Trip for Registered User
     And user enter email "john.smith.fly365@gmail.com"
     And user enter password "@Test123"
     When the user click on login button
+    And Wait until My Booking Page is opened
     And Navigate to Fly365 "stage" site
     And Select One Way trip
     And Add airport to the Origin "Cairo International Airport (CAI), Egypt"
@@ -41,6 +42,7 @@ Feature: Booking a Trip for Registered User
     And user enter email "john.smith.fly365@gmail.com"
     And user enter password "@Test123"
     When the user click on login button
+    And Wait until My Booking Page is opened
     And Navigate to Fly365 "stage" site
     And Select Round Trip trip
     And Add airport to the Origin "Cape Town International (CPT), South Africa"
@@ -75,14 +77,15 @@ Feature: Booking a Trip for Registered User
     And user enter email "john.smith.fly365@gmail.com"
     And user enter password "@Test123"
     When the user click on login button
+    And Wait until My Booking Page is opened
     And Navigate to Fly365 "stage" site
     And Select Multi City trip
     And Choose the number of flights "3"
     And Add the following origin, destinations and date periods
-      | Origin                                   | Destination                               | Date Period |
-      | Cairo International Airport (CAI), Egypt | Dublin International (DUB), Ireland       | 10          |
-      | Dublin International (DUB), Ireland      | Cairo International Airport (CAI), Egypt  | 20          |
-      | Cairo International Airport (CAI), Egypt | Auckland International (AKL), New Zealand | 30          |
+      | Origin                                    | Destination                               | Date Period |
+      | Cairo International Airport (CAI), Egypt  | Dublin International (DUB), Ireland       | 10          |
+      | Auckland International (AKL), New Zealand | Cairo International Airport (CAI), Egypt  | 20          |
+      | Cairo International Airport (CAI), Egypt  | Auckland International (AKL), New Zealand | 30          |
     And Select Passengers: "2" adult, "1" child, "1" infant
     And Select "Economy" Class
     And Press on Search Now
