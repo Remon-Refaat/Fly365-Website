@@ -19,46 +19,46 @@ public class HomeTest extends TestBase {
     APIUtility apiObject = new APIUtility();
     public static String orderNumber = null;
     public static String pnrNumber = null;
-    public static String currentWindow = driver.getWindowHandle();;
+    public static String currentWindow = driver.getWindowHandle();
 
 
-    By aboutUsLINK = By.xpath("//a[text()='About us']");
-    By firstContactUsLINK = By.xpath("//footer/div[1]//a[text()='Contact us']");
-    By secondContactUsLINK = By.xpath("//footer/div[2]//a[text()='Contact Us']");
-    By signInLINK = By.xpath("//a[text()='Sign in']");
-    By signUpLINK = By.xpath("//a[text()='Sign up']");
-    By fristSupportCentreLINK = By.xpath("//footer/div[1]//a[text()='Support Centre']");
-    By secondSupportCentreLINK = By.xpath("//footer/div[2]//a[text()='Support Centre']");
-    By faqsLINK = By.xpath("//a[text()='FAQs']");
-    By termsConditionsLINK = By.xpath("//a[text()='Terms and Conditions']");
-    By privacyPolicyLINK = By.xpath("//a[text()='Privacy policy']");
-    By aftaLINK = By.xpath("//a[@title='Afta']");
-    By oneWayTAB = By.id("tab-oneWay");
-    By roundTripTAB = By.id("tab-roundTrip");
-    By multiCityTAB = By.id("tab-multiStop");
-    By originTXT = By.xpath("//input[@name='origin']");
-    By destinationTXT = By.xpath("//input[@name='destination']");
-    By airportSearchResultOrigin = By.xpath("//li[contains(@id, '-0')]");
-    By airportSearchResultDestination = By.xpath("//li[contains(@id, '-0')]");
-    By departureCalenderDPK = By.xpath("//input[@name='fromDate']");
-    By departureRoundCalenderDPK = By.xpath("//input[@name='d']");
-    By returnRoundCalenderDPK = By.xpath("//input[@name='a']");
-    By passengerCabinTXT = By.xpath("//div[@class='bg-white text-sm h-50 px-3 rounded flex items-center text-primary-third font-medium el-popover__reference']");
-    By passengerCabinPOPOVER = By.xpath("//body/div[contains(@id,'el-popover')][1]");
-    By plusAdultBTN = By.xpath("//*[contains(@id,'el-popover')]//div[1]/div/span[2]");
-    By plusChildBTN = By.xpath("//*[contains(@id,'el-popover')]//div[2]/div/span[2]");
-    By plusInfantBTN = By.xpath("//*[contains(@id,'el-popover')]//div[3]/div/span[2]");
-    By searchNowBTN = By.xpath("//button[@class='btn uppercase btn-search-form font-bold lg:w-full w-2/5 m-auto btn-primary-second h-full']");
-    By findMyBookingLINK = By.xpath("//button[text()='Find My Booking']");
-    By findMyBookingEmailTXT = By.xpath("//div[@class='container p-8 retrieve-booking-form']//input[@placeholder='Email']");
-    By findMyBookingAirlineFly365OrderTXT = By.xpath("//div[@class='container p-8 retrieve-booking-form']//input[@placeholder='Airline / Fly365 Reference']");
-    By findMyBookingFindBookingBTN = By.xpath("//div[@class='container p-8 retrieve-booking-form']//button[text()='FIND BOOKING']");
-    By addMoreCitiesLINK = By.xpath("//div[@class='flex items-center btn-add-more float-left text-white text-xs h-6 px-1 cursor-pointer leading-normal']");
+    private By aboutUsLINK = By.xpath("//a[text()='About us']");
+    private By firstContactUsLINK = By.xpath("//footer/div[1]//a[text()='Contact us']");
+    private By secondContactUsLINK = By.xpath("//footer/div[2]//a[text()='Contact Us']");
+    private By signInLINK = By.xpath("//a[text()='Sign in']");
+    private By signUpLINK = By.xpath("//a[text()='Sign up']");
+    private By fristSupportCentreLINK = By.xpath("//footer/div[1]//a[text()='Support Centre']");
+    private By secondSupportCentreLINK = By.xpath("//footer/div[2]//a[text()='Support Centre']");
+    private By faqsLINK = By.xpath("//a[text()='FAQs']");
+    private By termsConditionsLINK = By.xpath("//a[text()='Terms and Conditions']");
+    private By privacyPolicyLINK = By.xpath("//a[text()='Privacy policy']");
+    private By aftaLINK = By.xpath("//a[@title='Afta']");
+    private By oneWayTAB = By.id("tab-oneWay");
+    private By roundTripTAB = By.id("tab-roundTrip");
+    private By multiCityTAB = By.id("tab-multiStop");
+    private By originTXT = By.xpath("//input[@name='origin']");
+    private By destinationTXT = By.xpath("//input[@name='destination']");
+    private By airportSearchResultOrigin = By.xpath("//li[contains(@id, '-0')]");
+    private By airportSearchResultDestination = By.xpath("//li[contains(@id, '-0')]");
+    private By departureCalenderDPK = By.xpath("//input[@name='fromDate']");
+    private By departureRoundCalenderDPK = By.xpath("//input[@name='d']");
+    private By returnRoundCalenderDPK = By.xpath("//input[@name='a']");
+    private By passengerCabinTXT = By.xpath("//div[@class='bg-white text-sm h-50 px-3 rounded flex items-center text-primary-third font-medium el-popover__reference']");
+    private By passengerCabinPOPOVER = By.xpath("//body/div[contains(@id,'el-popover')][1]");
+    private By plusAdultBTN = By.xpath("//*[contains(@id,'el-popover')]//div[1]/div/span[2]");
+    private By plusChildBTN = By.xpath("//*[contains(@id,'el-popover')]//div[2]/div/span[2]");
+    private By plusInfantBTN = By.xpath("//*[contains(@id,'el-popover')]//div[3]/div/span[2]");
+    private By searchNowBTN = By.xpath("//button[@class='btn uppercase btn-search-form font-bold lg:w-full w-2/5 m-auto btn-primary-second h-full']");
+    private By findMyBookingLINK = By.xpath("//button[text()='Find My Booking']");
+    private By findMyBookingEmailTXT = By.xpath("//div[@class='container p-8 retrieve-booking-form']//input[@placeholder='Email']");
+    private By findMyBookingAirlineFly365OrderTXT = By.xpath("//div[@class='container p-8 retrieve-booking-form']//input[@placeholder='Airline / Fly365 Reference']");
+    private By findMyBookingFindBookingBTN = By.xpath("//div[@class='container p-8 retrieve-booking-form']//button[text()='FIND BOOKING']");
+    private By addMoreCitiesLINK = By.xpath("//div[@class='flex items-center btn-add-more float-left text-white text-xs h-6 px-1 cursor-pointer leading-normal']");
 
 
     @Given("^Navigate to Fly365 \"(.*)\" site$")
     public void NavigateToFly365Site(String site) {
-        driver.navigate().to("https://nz.fly365"+site+".com/en");
+        driver.navigate().to("https://nz.fly365" + site + ".com/en");
     }
 
     @And("^Press on 'About us'$")
@@ -150,20 +150,20 @@ public class HomeTest extends TestBase {
 
 
     @And("^Select the date of the departure, after \"(.*)\" day from today$")
-    public void selectTheDateOfTheDepartureAfterDayFromToday(int period)  {
-        String departureDate = gmObject.addDateWithCertainPeriodAndFormat(period,"dd MMM yyyy");
+    public void selectTheDateOfTheDepartureAfterDayFromToday(int period) {
+        String departureDate = gmObject.addDateWithCertainPeriodAndFormat(period, "dd MMM yyyy");
         driver.findElement(departureCalenderDPK).sendKeys(departureDate);
     }
 
     @And("^Select the date of the departure for round trip, after \"(.*)\" day from today$")
-    public void selectTheDateOfTheDepartureForRoundTripAfterDayFromToday(int period)  {
-        String returnDate = gmObject.addDateWithCertainPeriodAndFormat(period,"dd MMM yyyy");
+    public void selectTheDateOfTheDepartureForRoundTripAfterDayFromToday(int period) {
+        String returnDate = gmObject.addDateWithCertainPeriodAndFormat(period, "dd MMM yyyy");
         driver.findElement(departureRoundCalenderDPK).sendKeys(returnDate);
     }
 
     @And("^Select the date of the return for round trip, after \"(.*)\" day from today$")
-    public void selectTheDateOfTheReturnForRoundTripAfterDayFromToday(int period)  {
-        String returnDate = gmObject.addDateWithCertainPeriodAndFormat(period,"dd MMM yyyy");
+    public void selectTheDateOfTheReturnForRoundTripAfterDayFromToday(int period) {
+        String returnDate = gmObject.addDateWithCertainPeriodAndFormat(period, "dd MMM yyyy");
         driver.findElement(returnRoundCalenderDPK).sendKeys(returnDate);
     }
 
@@ -175,15 +175,15 @@ public class HomeTest extends TestBase {
 
     @And("^Book a trip from API for \"(.*)\" and get \"(.*)\"$")
     public void bookATripFromAPIForAndGet(String domain, String reference) {
-        String requestUrl="https://api.fly365"+domain+".com/flight/search";
-        String allAvailableTrips = apiObject.sendPostRequest(requestUrl,apiObject.oneWayAPI());
+        String requestUrl = "https://api.fly365" + domain + ".com/flight/search";
+        String allAvailableTrips = apiObject.sendPostRequest(requestUrl, apiObject.oneWayAPI());
         String itinaryID = apiObject.getItineraryId(allAvailableTrips, 2);
         String cardID = apiObject.createCart(itinaryID);
         apiObject.addPassenger(cardID);
-        if (reference.equals("Fly365 Reference")){
+        if (reference.equals("Fly365 Reference")) {
             orderNumber = apiObject.checkoutTrip(cardID)[0];
         }
-        if (reference.equals("Airline Reference")){
+        if (reference.equals("Airline Reference")) {
             pnrNumber = apiObject.checkoutTrip(cardID)[1];
         }
     }
@@ -202,10 +202,10 @@ public class HomeTest extends TestBase {
     @And("^Add a valid \"(.*)\"$")
     public void addAValidReference(String reference) {
 
-        if (reference.equals("Fly365 Reference")){
+        if (reference.equals("Fly365 Reference")) {
             driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(orderNumber);
         }
-        if (reference.equals("Airline Reference")){
+        if (reference.equals("Airline Reference")) {
             driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(pnrNumber);
         }
     }
@@ -217,7 +217,7 @@ public class HomeTest extends TestBase {
 
 
     @And("^Select Passengers: \"(.*)\" adult, \"(.*)\" child, \"(.*)\" infant$")
-    public void selectPassengersAdultChildInfant(int adultCount, int childCount, int infantCount)  {
+    public void selectPassengersAdultChildInfant(int adultCount, int childCount, int infantCount) {
         driver.findElement(passengerCabinTXT).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(passengerCabinPOPOVER));
 
@@ -236,14 +236,14 @@ public class HomeTest extends TestBase {
     }
 
     @And("^Select \"(.*)\" Class$")
-    public void selectClass(String cabinClass)  {
+    public void selectClass(String cabinClass) {
 
-        driver.findElement(By.xpath("//span[text()='"+cabinClass+"']/preceding-sibling::span")).click();
+        driver.findElement(By.xpath("//span[text()='" + cabinClass + "']/preceding-sibling::span")).click();
     }
 
 
     @And("^Choose the number of flights \"(.*)\"$")
-    public void chooseTheNumberOfFlights(int flightcount)  {
+    public void chooseTheNumberOfFlights(int flightcount) {
         for (int counter = 2; counter < flightcount; counter++) {
             driver.findElement(addMoreCitiesLINK).click();
         }
@@ -253,14 +253,14 @@ public class HomeTest extends TestBase {
     public void addTheFollowingOriginDestinationsAndDatePeriods(DataTable multiCityData) throws InterruptedException {
         int i = 1;
 
-        for (Map<String, String> flightDetails : multiCityData.asMaps (String.class,String.class)){
+        for (Map<String, String> flightDetails : multiCityData.asMaps(String.class, String.class)) {
 
-            driver.findElement(By.xpath("//div[@class='search-form relative row justify-center']//form["+i+"]//input[@name='origin']")).sendKeys(flightDetails.get("Origin"));
+            driver.findElement(By.xpath("//div[@class='search-form relative row justify-center']//form[" + i + "]//input[@name='origin']")).sendKeys(flightDetails.get("Origin"));
             gmObject.selectFromAutoCompleteDDL(flightDetails.get("Origin"));
-            driver.findElement(By.xpath("//div[@class='search-form relative row justify-center']//form["+i+"]//input[@name='destination']")).sendKeys(flightDetails.get("Destination"));
+            driver.findElement(By.xpath("//div[@class='search-form relative row justify-center']//form[" + i + "]//input[@name='destination']")).sendKeys(flightDetails.get("Destination"));
             gmObject.selectFromAutoCompleteDDL(flightDetails.get("Destination"));
-            String returnDate = gmObject.addDateWithCertainPeriodAndFormat(Integer.parseInt(flightDetails.get("Date Period")),"dd MMM yyyy");
-            driver.findElement(By.xpath("//div[@class='search-form relative row justify-center']//form["+i+"]//input[@name='fromDate']")).sendKeys(returnDate);
+            String returnDate = gmObject.addDateWithCertainPeriodAndFormat(Integer.parseInt(flightDetails.get("Date Period")), "dd MMM yyyy");
+            driver.findElement(By.xpath("//div[@class='search-form relative row justify-center']//form[" + i + "]//input[@name='fromDate']")).sendKeys(returnDate);
             i++;
         }
     }

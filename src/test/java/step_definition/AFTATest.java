@@ -9,7 +9,7 @@ import org.testng.Assert;
 public class AFTATest extends TestBase {
 
 
-    By aftaHDR = By.xpath("//div[@id='page_content']/h3");
+    private By aftaHDR = By.xpath("//div[@id='page_content']/h3");
 
 
     @And("^'afta' page is opened$")
@@ -19,7 +19,7 @@ public class AFTATest extends TestBase {
             String title = driver.switchTo().window(windowID).getTitle();
             if (title.equals("Australian Federation of Travel Agents")) {
                 String headerText = driver.findElement(aftaHDR).getText();
-                    Assert.assertEquals(headerText, "WELCOME TO AFTA");
+                Assert.assertEquals(headerText, "WELCOME TO AFTA");
                 driver.close();
                 break;
             }

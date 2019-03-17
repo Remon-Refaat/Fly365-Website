@@ -9,7 +9,7 @@ import org.testng.Assert;
 public class FAQsTest extends TestBase {
 
 
-    By faqsHDRLINK = By.xpath("//a[@class='link text-sm font-normal mr-5 router-link-exact-active router-link-active']");
+    private By faqsHDRLINK = By.xpath("//a[@class='link text-sm font-normal mr-5 router-link-exact-active router-link-active']");
 
     @Then("^'FAQs' page is opened$")
     public void faqsPageIsOpened() {
@@ -17,7 +17,7 @@ public class FAQsTest extends TestBase {
             String title = driver.switchTo().window(windowID).getTitle();
             if (title.equals("Fly365")) {
                 String headerText = driver.findElement(faqsHDRLINK).getText();
-                    Assert.assertEquals(headerText, "FAQs");
+                Assert.assertEquals(headerText, "FAQs");
                 driver.close();
                 break;
             }

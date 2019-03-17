@@ -2,11 +2,14 @@ package step_definition;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import helper.APIUtility;
 import helper.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import javax.mail.Message;
 
 public class ConfirmationTest extends TestBase {
 
@@ -19,10 +22,6 @@ public class ConfirmationTest extends TestBase {
         wait.until(ExpectedConditions.visibilityOfElementLocated(bookingConfirmationSuccessfulMSG));
         Assert.assertTrue(driver.findElement(bookingConfirmationSuccessfulMSG).isDisplayed());
     }
-
-
-
-
 
 
 //    public static void connectToEmail() {
@@ -55,14 +54,10 @@ public class ConfirmationTest extends TestBase {
 //        System.out.println(email.getSubject());
 //        System.out.println("))))))))))))))))))))))");
 
-//connectToEmail();
-
+//        connectToEmail();
 
 
     }
-
-
-
 
 
 }
