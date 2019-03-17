@@ -2,7 +2,8 @@ Feature: Home page
 
   Background:
     Given Navigate to Fly365 "stage" site
-    
+
+
   Scenario: Verify that "About Us" link in the footer open on the correct link
     And Press on 'About us'
     Then 'About Us' page is opened
