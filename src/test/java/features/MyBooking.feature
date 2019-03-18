@@ -1,3 +1,4 @@
+@New_Tab
 Feature: Go to MyBooking page
 
   Background: Open Fly365 site
@@ -13,7 +14,6 @@ Feature: Go to MyBooking page
     Then Check My Booking page opened
     And user logout
     And delete new user at database "john.smith.fly365@gmail.com"
-    Then Close current tab
 
   Scenario: Verify that the new registered user view empty booking history
     And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
@@ -24,7 +24,6 @@ Feature: Go to MyBooking page
     Then No Booking History displayed
     And user logout
     And delete new user at database "john.smith.fly365@gmail.com"
-    Then Close current tab
 
   Scenario: Verify that the new registered user back to Home Page when click Back button
     And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
@@ -35,5 +34,4 @@ Feature: Go to MyBooking page
     Then Back to Home Page when click on Back button
     And user logout
     And delete new user at database "john.smith.fly365@gmail.com"
-    Then Close current tab
 

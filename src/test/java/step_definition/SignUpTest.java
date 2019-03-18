@@ -2,6 +2,7 @@ package step_definition;
 
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import helper.DataBase;
 import helper.TestBase;
@@ -179,5 +180,4 @@ public class SignUpTest extends TestBase {
     public void thePasswordShouldHide() {
         Assert.assertTrue(true, String.valueOf(driver.findElement(passwordNotDisplayedLBL).isDisplayed()));
     }
-
 }
