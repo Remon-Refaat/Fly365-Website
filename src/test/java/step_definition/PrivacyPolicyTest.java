@@ -18,11 +18,8 @@ public class PrivacyPolicyTest extends TestBase {
             if (title.equals("Fly365")) {
                 String headerText = driver.findElement(privacyPolicyHDRLINK).getText();
                 Assert.assertEquals(headerText, "Privacy Policy");
-                driver.close();
                 break;
             }
         }
-        driver.switchTo().window(HomeTest.currentWindow);
-
     }
 }

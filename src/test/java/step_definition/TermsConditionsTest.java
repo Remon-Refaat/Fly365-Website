@@ -18,12 +18,9 @@ public class TermsConditionsTest extends TestBase {
             if (title.equals("Fly365")) {
                 String headerText = driver.findElement(termsConditionsHDRLINK).getText();
                 Assert.assertEquals(headerText, "Terms and Conditions");
-                driver.close();
                 break;
             }
         }
-        driver.switchTo().window(HomeTest.currentWindow);
-
     }
 
 

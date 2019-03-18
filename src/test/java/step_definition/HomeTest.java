@@ -51,7 +51,7 @@ public class HomeTest extends TestBase {
     private By searchNowBTN = By.xpath("//button[@class='btn uppercase btn-search-form font-bold lg:w-full w-2/5 m-auto btn-primary-second h-full']");
     private By findMyBookingLINK = By.xpath("//button[text()='Find My Booking']");
     private By findMyBookingEmailTXT = By.xpath("//div[@class='container p-8 retrieve-booking-form']//input[@placeholder='Email']");
-    private By findMyBookingAirlineFly365OrderTXT = By.xpath("//div[@class='container p-8 retrieve-booking-form']//input[@placeholder='Airline / Fly365 Reference']");
+    private By findMyBookingAirlineFly365OrderTXT = By.xpath("//div[@class='container p-8 retrieve-booking-form']//input[@placeholder='Fly365 Reference']");
     private By findMyBookingFindBookingBTN = By.xpath("//div[@class='container p-8 retrieve-booking-form']//button[text()='FIND BOOKING']");
     private By addMoreCitiesLINK = By.xpath("//div[@class='flex items-center btn-add-more float-left text-white text-xs h-6 px-1 cursor-pointer leading-normal']");
 
@@ -118,19 +118,19 @@ public class HomeTest extends TestBase {
 
     @And("^Select One Way trip$")
     public void selectOneWayTrip() {
-        gmObject.clearLocalStorage();
+//        gmObject.clearLocalStorage();
         driver.findElement(oneWayTAB).click();
     }
 
     @And("^Select Round Trip trip$")
     public void selectRoundTripTrip() {
-        gmObject.clearLocalStorage();
+//        gmObject.clearLocalStorage();
         driver.findElement(roundTripTAB).click();
     }
 
     @And("^Select Multi City trip$")
     public void selectMultiCityTrip() {
-        gmObject.clearLocalStorage();
+//        gmObject.clearLocalStorage();
         driver.findElement(multiCityTAB).click();
     }
 
@@ -175,16 +175,16 @@ public class HomeTest extends TestBase {
 
     @And("^Book a trip from API for \"(.*)\" and get \"(.*)\"$")
     public void bookATripFromAPIForAndGet(String domain, String reference) {
-        String requestUrl = "https://api.fly365" + domain + ".com/flight/search";
+        String requestUrl = "https://api.fly365" + domain + ".com/flight-search/search";
         String allAvailableTrips = apiObject.sendPostRequest(requestUrl, apiObject.oneWayAPI());
         String itinaryID = apiObject.getItineraryId(allAvailableTrips, 2);
-        String cardID = apiObject.createCart(itinaryID);
-        apiObject.addPassenger(cardID);
+        String cardID = apiObject.createCart(itinaryID, domain);
+        apiObject.addPassenger(cardID, domain);
         if (reference.equals("Fly365 Reference")) {
-            orderNumber = apiObject.checkoutTrip(cardID)[0];
+            orderNumber = apiObject.checkoutTrip(cardID,domain)[0];
         }
         if (reference.equals("Airline Reference")) {
-            pnrNumber = apiObject.checkoutTrip(cardID)[1];
+            pnrNumber = apiObject.checkoutTrip(cardID,domain)[1];
         }
     }
 

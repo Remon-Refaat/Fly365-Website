@@ -111,12 +111,9 @@ public class SignUpTest extends TestBase {
             if (title.equals("Fly365 - Register")) {
                 String headerText = driver.findElement(signUpHDR).getText();
                 Assert.assertEquals(headerText, "Sign up");
-                driver.close();
                 break;
             }
         }
-        driver.switchTo().window(HomeTest.currentWindow);
-
     }
 
     @Then("^Sign Up page is opened$")
@@ -183,10 +180,4 @@ public class SignUpTest extends TestBase {
         Assert.assertTrue(true, String.valueOf(driver.findElement(passwordNotDisplayedLBL).isDisplayed()));
     }
 
-    @Then("^Close current tab$")
-    public void closeCurrentTab() {
-        driver.close();
-        driver.switchTo().window(HomeTest.currentWindow);
-        //driver.findElement(By.cssSelector("Body")).sendKeys(Keys.CONTROL + "W");
-    }
 }

@@ -1,3 +1,4 @@
+@New_Tab
 Feature: Sign Up
 
   Background: Open Fly365 Site
@@ -6,7 +7,6 @@ Feature: Sign Up
 
   Scenario: Verify that the user can open sign up page
     And   Sign Up page is opened
-    Then  Close current tab
 
   Scenario: Verify that the user can sign up
     And   Fill the following required data
@@ -15,19 +15,16 @@ Feature: Sign Up
     And   Click on Create Account
     Then  The user created successfully
     And   The new record set on database
-    Then Close current tab
 
   Scenario: Verify that the user can't sign up without the mandatory fields
     And   Click on Create Account
     Then  The system display validation messages for all mandatory fields
-    Then  Close current tab
 
 
   Scenario Outline: Verify that the user can't sign up with invalid first name
     And  Fill required data "<First Name>", "<Last Name>", "<Email Address>", "<Password>"
     And  Click on Create Account
     Then The system should display validation message for invalid name
-    Then  Close current tab
     Examples:
       | First Name | Last Name | Email Address               | Password |
       | 1234       | Smith     | john.smith.fly365@gmail.com | 12345678 |
@@ -39,7 +36,6 @@ Feature: Sign Up
     And  Fill required data "<First Name>", "<Last Name>", "<Email Address>", "<Password>"
     And  Click on Create Account
     Then The system should display validation message for invalid name
-    Then  Close current tab
     Examples:
       | First Name | Last Name | Email Address               | Password |
       | John       | 1234      | john.smith.fly365@gmail.com | 12345678 |
@@ -51,7 +47,6 @@ Feature: Sign Up
     And  Fill required data "<First Name>", "<Last Name>", "<Email Address>", "<Password>"
     And  Click on Create Account
     Then The system should display validation message for invalid email
-    Then  Close current tab
     Examples:
       | First Name | Last Name | Email Address        | Password |
       | John       | Smith     | plainttext           | 12345678 |
@@ -65,7 +60,6 @@ Feature: Sign Up
   Scenario Outline: Verify that the user can't sign up with password less than 8 or more than 50 characters
     And  Fill required data "<First Name>", "<Last Name>", "<Email Address>", "<Password>"
     Then The system should display validation message for invalid password
-    Then  Close current tab
     Examples:
       | First Name | Last Name | Email Address               | Password |
       | John       | Smith     | john.smith.fly365@gmail.com | 123      |
@@ -80,7 +74,6 @@ Feature: Sign Up
       | John       | Smith     | john.smith.fly365@gmail.com | 12345678 |
     And Click on Create Account
     Then The system display validation message for email already exist
-    Then  Close current tab
 
 
   Scenario: Verify that the user can show and hide the entered password
@@ -89,7 +82,6 @@ Feature: Sign Up
       | John       | Smith     | john.smith.fly365@gmail.com | 12345678 |
     And Click on Show beside password
     Then The password should display
-    Then  Close current tab
 
 
   Scenario: Verify that the user can hide the entered password after show it
@@ -99,5 +91,4 @@ Feature: Sign Up
     And Click on Show beside password
     And Click on Hide beside password
     Then The password should hide
-    Then  Close current tab
 

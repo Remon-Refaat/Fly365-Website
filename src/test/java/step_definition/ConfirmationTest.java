@@ -2,7 +2,6 @@ package step_definition;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
-import helper.APIUtility;
 import helper.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;

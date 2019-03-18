@@ -51,11 +51,9 @@ public class SignInTest extends TestBase {
             if (title.equals("Fly365 - Login")) {
                 String headerText = driver.findElement(SignInHeader).getText();
                 Assert.assertEquals(headerText, "Good to see you again");
-                driver.close();
                 break;
             }
         }
-        driver.switchTo().window(HomeTest.currentWindow);
     }
 
     @And("^open login page$")
@@ -170,7 +168,7 @@ public class SignInTest extends TestBase {
 
     @And("^insert new user at database \"(.*)\" \"(.*)\"$")
     public void insertNewUserAtDataBase(String userEmail, String userHashPassWord) {
-        DataBase.execute_query_dbs(hostName, dbsName, "Select email from users where email = '" + userEmail +"'");
+        DataBase.execute_query_dbs(hostName, dbsName, "Select email from users where email = '" + userEmail + "'");
         if (DataBase.data == userEmail) {
             DataBase.execute_query_dbs(hostName, dbsName, "delete from users where email='" + userEmail + "'");
         }
