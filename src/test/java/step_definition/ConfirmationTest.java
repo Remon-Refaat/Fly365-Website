@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import javax.mail.Message;
+//import javax.mail.Message;
 
 public class ConfirmationTest extends TestBase {
 
