@@ -13,14 +13,8 @@ public class TermsConditionsTest extends TestBase {
 
     @Then("^'Terms and Conditions' page is opened$")
     public void termsAndConditionsPageIsOpened() {
-        for (String windowID : driver.getWindowHandles()) {
-            String title = driver.switchTo().window(windowID).getTitle();
-            if (title.equals("Fly365")) {
                 String headerText = driver.findElement(termsConditionsHDRLINK).getText();
                 Assert.assertEquals(headerText, "Terms and Conditions");
-                break;
-            }
-        }
     }
 
 

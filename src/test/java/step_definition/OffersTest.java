@@ -12,14 +12,8 @@ public class OffersTest extends TestBase {
 
     @Then("^Offers page is opened$")
     public void offersPageIsOpened() {
-        for (String windowID : driver.getWindowHandles()) {
-            String title = driver.switchTo().window(windowID).getTitle();
-            if (title.equals("Fly365 - Our Offers")) {
                 String headerText = driver.findElement(offersHDR).getText();
                 Assert.assertEquals(headerText, "Offers");
-                break;
-            }
-        }
     }
 
 

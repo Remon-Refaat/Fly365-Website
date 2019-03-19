@@ -1,4 +1,3 @@
-@New_Tab
 Feature: Go to MyBooking page
 
   Background: Open Fly365 site

@@ -1,4 +1,3 @@
-@New_Tab
 Feature: login to account
   login to a created account
 

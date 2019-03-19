@@ -14,7 +14,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 public class HomeTest extends TestBase {
@@ -38,8 +37,8 @@ public class HomeTest extends TestBase {
     private By termsConditionsLINK = By.xpath("//a[text()='Terms and Conditions']");
     private By privacyPolicyLINK = By.xpath("//a[text()='Privacy policy']");
     private By aftaLINK = By.xpath("//a[@title='Afta']");
-    private By logoFooterLink = By.xpath("//a[@class='router-link-exact-active router-link-active']");
-    private By logoHeaderLink = By.xpath("//a[@class='text-white inline-block router-link-exact-active router-link-active']");
+    private By logoFooterLink = By.xpath("//footer/div[2]/div/div/div[1]/div/div[1]/div/a");
+    private By logoHeaderLink = By.xpath("/html/body/div[1]/div[1]/div/div/div[1]/div/a");
     private By flightsLink = By.xpath("//div[1]/div[1]/div/div/div[1]/div/div/a[1]");
     private By offersLink = By.xpath("//div[1]/div[1]/div/div/div[1]/div/div/a[2]");
     private By signInBTN = By.xpath("//a[text()='SIGN IN']");
@@ -131,16 +130,19 @@ public class HomeTest extends TestBase {
 
     @And("^Press on Logo in footer$")
     public void pressOnLogoInFooter() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(logoFooterLink));
         driver.findElement(logoFooterLink).click();
     }
 
     @And("^Press on Logo in header$")
     public void pressOnLogoInHeader() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(logoHeaderLink));
         driver.findElement(logoHeaderLink).click();
     }
 
     @And("^Press on flights in header$")
     public void pressOnFlightsInHeader() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(flightsLink));
         driver.findElement(flightsLink).click();
     }
 
@@ -156,8 +158,6 @@ public class HomeTest extends TestBase {
 
     @Then("^Home page is opened$")
     public void homePageIsOpened() {
-        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(1));
         String headerText = driver.findElement(homePageHDR).getText();
         Assert.assertEquals(headerText, "Low Fares");
     }

@@ -2,7 +2,6 @@ package step_definition;
 
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import helper.DataBase;
 import helper.TestBase;
@@ -42,12 +41,6 @@ public class SignUpTest extends TestBase {
     public void openSignUpPage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(signUpBTN));
         driver.findElement(signUpBTN).click();
-        for (String windowID : driver.getWindowHandles()) {
-            String title = driver.switchTo().window(windowID).getTitle();
-            if (title.equals("Fly365 - Register")) {
-                break;
-            }
-        }
     }
 
 
@@ -103,15 +96,8 @@ public class SignUpTest extends TestBase {
 
     @Then("^'Sign Up' page will be opened$")
     public void signUpPageWillBeOpened() {
-
-        for (String windowID : driver.getWindowHandles()) {
-            String title = driver.switchTo().window(windowID).getTitle();
-            if (title.equals("Fly365 - Register")) {
                 String headerText = driver.findElement(signUpHDR).getText();
                 Assert.assertEquals(headerText, "Sign up");
-                break;
-            }
-        }
     }
 
     @Then("^Sign Up page is opened$")

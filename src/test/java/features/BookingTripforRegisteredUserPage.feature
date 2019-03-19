@@ -1,11 +1,10 @@
-@New_Tab
 Feature: Booking a Trip for Registered User
 
   Background:
     Given Navigate to Fly365 "stage" site
+    And open login page
 
   Scenario: Verify that the registered user can book a One-Way trip
-    And open login page
     And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
     And user enter email "john.smith.fly365@gmail.com"
     And user enter password "@Test123"
@@ -36,7 +35,6 @@ Feature: Booking a Trip for Registered User
     And delete new user at database "john.smith.fly365@gmail.com"
 
   Scenario: Verify that the anonymous user can book a Round-Trip trip
-    And open login page
     And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
     And user enter email "john.smith.fly365@gmail.com"
     And user enter password "@Test123"
@@ -69,7 +67,6 @@ Feature: Booking a Trip for Registered User
     And delete new user at database "john.smith.fly365@gmail.com"
 
   Scenario: Verify that the anonymous user can book a Multi City trip
-    And open login page
     And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
     And user enter email "john.smith.fly365@gmail.com"
     And user enter password "@Test123"

@@ -42,28 +42,15 @@ public class SignInTest extends TestBase {
 
     @Then("^'Sign In' page will be opened$")
     public void signInPageWillBeOpened() {
-
-        for (String windowID : driver.getWindowHandles()) {
-            String title = driver.switchTo().window(windowID).getTitle();
-            if (title.equals("Fly365 - Login")) {
                 String headerText = driver.findElement(SignInHeader).getText();
                 Assert.assertEquals(headerText, "Good to see you again");
-                break;
-            }
-        }
+
     }
 
     @And("^open login page$")
     public void openLoginPage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(LoginHeaderBTN));
         driver.findElement(LoginHeaderBTN).click();
-        for (String windowID : driver.getWindowHandles()) {
-            String title = driver.switchTo().window(windowID).getTitle();
-            if (title.equals("Fly365 - Login")) {
-                break;
-            }
-        }
-
     }
 
     @And("^user enter email \"(.*)\"$")

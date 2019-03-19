@@ -13,14 +13,8 @@ public class FAQsTest extends TestBase {
 
     @Then("^'FAQs' page is opened$")
     public void faqsPageIsOpened() {
-        for (String windowID : driver.getWindowHandles()) {
-            String title = driver.switchTo().window(windowID).getTitle();
-            if (title.equals("Fly365")) {
                 String headerText = driver.findElement(faqsHDRLINK).getText();
                 Assert.assertEquals(headerText, "FAQs");
-                break;
-            }
-        }
     }
 
 

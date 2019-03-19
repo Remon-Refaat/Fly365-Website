@@ -1,4 +1,3 @@
-@New_Tab
 Feature: Add Traveller to Login user
 
   Background:

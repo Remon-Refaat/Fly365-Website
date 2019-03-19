@@ -13,15 +13,8 @@ public class AboutUsTest extends TestBase {
 
     @Then("^'About Us' page is opened$")
     public void aboutUsPageIsOpened() {
-
-        for (String windowID : driver.getWindowHandles()) {
-            String title = driver.switchTo().window(windowID).getTitle();
-            if (title.equals("Fly365 - AboutUs")) {
                 String headerText = driver.findElement(aboutUsHDR).getText();
                 Assert.assertEquals(headerText, "About Fly365");
-                break;
-            }
-        }
     }
 
 

@@ -1,4 +1,3 @@
-@New_Tab
 Feature: Home page
 
   Background:
@@ -44,19 +43,23 @@ Feature: Home page
     And Press on 'Privacy policy'
     Then 'Privacy Policy' page is opened
 
+  @New_Tab
   Scenario: Verify that "afta" link in the footer open on the correct link
     And Press on 'afta'
     Then 'afta' page is opened
 
   Scenario: Verify that the Logo link in the footer open on the correct link
+    And Press on 'About us'
     And Press on Logo in footer
     Then Home page is opened
 
   Scenario: Verify that the Logo link in the header open on the correct link
+    And Press on 'About us'
     And Press on Logo in header
     Then Home page is opened
 
   Scenario: Verify that the Flights link in the header open on the correct link
+    And Press on 'About us'
     And Press on flights in header
     Then Home page is opened
 

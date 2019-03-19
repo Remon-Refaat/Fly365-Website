@@ -13,13 +13,7 @@ public class PrivacyPolicyTest extends TestBase {
 
     @Then("^'Privacy Policy' page is opened$")
     public void privacyPolicyPageIsOpened() {
-        for (String windowID : driver.getWindowHandles()) {
-            String title = driver.switchTo().window(windowID).getTitle();
-            if (title.equals("Fly365")) {
                 String headerText = driver.findElement(privacyPolicyHDRLINK).getText();
                 Assert.assertEquals(headerText, "Privacy Policy");
-                break;
-            }
-        }
     }
 }
