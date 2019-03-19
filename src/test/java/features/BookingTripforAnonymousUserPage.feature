@@ -9,14 +9,13 @@ Feature: Booking a Trip for Anonymous User
     And Add airport to the Origin "Cairo International Airport (CAI), Egypt"
     And Add airport to the Destination "Dublin International (DUB), Ireland"
     And Select the date of the departure, after "5" day from today
-    And Select Passengers: "2" adult, "1" child, "1" infant
+    And Select Passengers: "1" adult, "1" child, "1" infant
     And Select "Economy" Class
     And Press on Search Now
     And Choose a trip
     And Add the following data in the passenger Details
       | Title | First Name | Middle Name | Last Name | Day | Month    | Year |
       | Mr    | John       | William     | Smith     | 15  | February | 1985 |
-      | Mr    | William    | Smith       | Frank     | 15  | March    | 1982 |
       | Mr    | Frank      | William     | Smith     | 15  | February | 2013 |
       | Mr    | Paul       | Peter       | Frank     | 15  | January  | 2019 |
 
@@ -40,14 +39,13 @@ Feature: Booking a Trip for Anonymous User
     And Add airport to the Destination "Canberra (CBR), Australia"
     And Select the date of the departure for round trip, after "5" day from today
     And Select the date of the return for round trip, after "15" day from today
-    And Select Passengers: "2" adult, "1" child, "1" infant
+    And Select Passengers: "1" adult, "1" child, "1" infant
     And Select "Economy" Class
     And Press on Search Now
     And Choose a trip
     And Add the following data in the passenger Details
       | Title | First Name | Middle Name | Last Name | Day | Month    | Year |
       | Mr    | John       | William     | Smith     | 15  | February | 1985 |
-      | Mr    | William    | Smith       | Frank     | 15  | March    | 1982 |
       | Mr    | Frank      | William     | Smith     | 15  | February | 2012 |
       | Mr    | Paul       | Peter       | Frank     | 15  | January  | 2019 |
 
@@ -64,8 +62,7 @@ Feature: Booking a Trip for Anonymous User
     And Press on Pay button
     Then 'Thank you for booking with Fly365' message is displayed
 
-
-  Scenario: Verify that the anonymous user can book a Round-Trip trip
+  Scenario: Verify that the anonymous user can book a Multi City trip
     And Select Multi City trip
     And Choose the number of flights "3"
     And Add the following origin, destinations and date periods
@@ -73,14 +70,13 @@ Feature: Booking a Trip for Anonymous User
       | Cairo International Airport (CAI), Egypt | Dublin International (DUB), Ireland       | 10          |
       | Dublin International (DUB), Ireland      | Cairo International Airport (CAI), Egypt  | 20          |
       | Cairo International Airport (CAI), Egypt | Auckland International (AKL), New Zealand | 30          |
-    And Select Passengers: "2" adult, "1" child, "1" infant
+    And Select Passengers: "1" adult, "1" child, "1" infant
     And Select "Economy" Class
     And Press on Search Now
     And Choose a trip
     And Add the following data in the passenger Details
       | Title | First Name | Middle Name | Last Name | Day | Month    | Year |
       | Mr    | John       | William     | Smith     | 15  | February | 1985 |
-      | Mr    | William    | Smith       | Frank     | 15  | March    | 1982 |
       | Mr    | Frank      | William     | Smith     | 15  | February | 2012 |
       | Mr    | Paul       | Peter       | Frank     | 15  | January  | 2019 |
 

@@ -3,13 +3,18 @@ package step_definition;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import helper.APIUtility;
+import helper.DataBase;
 import helper.GeneralMethods;
 import helper.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class HomeTest extends TestBase {
@@ -33,6 +38,12 @@ public class HomeTest extends TestBase {
     private By termsConditionsLINK = By.xpath("//a[text()='Terms and Conditions']");
     private By privacyPolicyLINK = By.xpath("//a[text()='Privacy policy']");
     private By aftaLINK = By.xpath("//a[@title='Afta']");
+    private By logoFooterLink = By.xpath("//a[@class='router-link-exact-active router-link-active']");
+    private By logoHeaderLink = By.xpath("//a[@class='text-white inline-block router-link-exact-active router-link-active']");
+    private By flightsLink = By.xpath("//div[1]/div[1]/div/div/div[1]/div/div/a[1]");
+    private By offersLink = By.xpath("//div[1]/div[1]/div/div/div[1]/div/div/a[2]");
+    private By signInBTN = By.xpath("//a[text()='SIGN IN']");
+    private By homePageHDR = By.xpath("//h2/span");
     private By oneWayTAB = By.id("tab-oneWay");
     private By roundTripTAB = By.id("tab-roundTrip");
     private By multiCityTAB = By.id("tab-multiStop");
@@ -54,7 +65,9 @@ public class HomeTest extends TestBase {
     private By findMyBookingAirlineFly365OrderTXT = By.xpath("//div[@class='container p-8 retrieve-booking-form']//input[@placeholder='Fly365 Reference']");
     private By findMyBookingFindBookingBTN = By.xpath("//div[@class='container p-8 retrieve-booking-form']//button[text()='FIND BOOKING']");
     private By addMoreCitiesLINK = By.xpath("//div[@class='flex items-center btn-add-more float-left text-white text-xs h-6 px-1 cursor-pointer leading-normal']");
-
+    private By subscriptionTXT = By.xpath("//input[@placeholder='Your Email']");
+    private By subscribeBTN = By.xpath("//button[text()='subscribe']");
+    private By subscriptionSuccessfullyMSG = By.xpath("/html/body/div[4]/div/div[1]/p");
 
     @Given("^Navigate to Fly365 \"(.*)\" site$")
     public void NavigateToFly365Site(String site) {
@@ -116,21 +129,51 @@ public class HomeTest extends TestBase {
         driver.findElement(aftaLINK).click();
     }
 
+    @And("^Press on Logo in footer$")
+    public void pressOnLogoInFooter() {
+        driver.findElement(logoFooterLink).click();
+    }
+
+    @And("^Press on Logo in header$")
+    public void pressOnLogoInHeader() {
+        driver.findElement(logoHeaderLink).click();
+    }
+
+    @And("^Press on flights in header$")
+    public void pressOnFlightsInHeader() {
+        driver.findElement(flightsLink).click();
+    }
+
+    @And("^Press on offers in header$")
+    public void pressOnOffersInHeader() {
+        driver.findElement(offersLink).click();
+    }
+
+    @And("^Press on Sign In button$")
+    public void pressOnSignInButton() {
+        driver.findElement(signInBTN).click();
+    }
+
+    @Then("^Home page is opened$")
+    public void homePageIsOpened() {
+        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(1));
+        String headerText = driver.findElement(homePageHDR).getText();
+        Assert.assertEquals(headerText, "Low Fares");
+    }
+
     @And("^Select One Way trip$")
     public void selectOneWayTrip() {
-//        gmObject.clearLocalStorage();
         driver.findElement(oneWayTAB).click();
     }
 
     @And("^Select Round Trip trip$")
     public void selectRoundTripTrip() {
-//        gmObject.clearLocalStorage();
         driver.findElement(roundTripTAB).click();
     }
 
     @And("^Select Multi City trip$")
     public void selectMultiCityTrip() {
-//        gmObject.clearLocalStorage();
         driver.findElement(multiCityTAB).click();
     }
 
@@ -181,10 +224,10 @@ public class HomeTest extends TestBase {
         String cardID = apiObject.createCart(itinaryID, domain);
         apiObject.addPassenger(cardID, domain);
         if (reference.equals("Fly365 Reference")) {
-            orderNumber = apiObject.checkoutTrip(cardID,domain)[0];
+            orderNumber = apiObject.checkoutTrip(cardID, domain)[0];
         }
         if (reference.equals("Airline Reference")) {
-            pnrNumber = apiObject.checkoutTrip(cardID,domain)[1];
+            pnrNumber = apiObject.checkoutTrip(cardID, domain)[1];
         }
     }
 
@@ -265,5 +308,29 @@ public class HomeTest extends TestBase {
         }
     }
 
+
+    // Subscription Email
+
+    @And("^Add the email address \"(.*)\" to Subscription Email field$")
+    public void addTheEmailAddressToSubscriptionEmailField(String emailAddress)   {
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "Select email from newsletter_users where email = '" + emailAddress +"'");
+        if (DataBase.data != null) {
+            DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "delete from newsletter_users where email='" + emailAddress + "'");
+        }
+            driver.findElement(subscriptionTXT).sendKeys(emailAddress);
+    }
+
+
+    @When("^Press on SUBSCRIBE$")
+    public void pressOnSUBSCRIBE() throws InterruptedException {
+        driver.findElement(subscribeBTN).click();
+        Thread.sleep(2000);
+
+    }
+
+    @Then("^Successfully validation message is displayed$")
+    public void successfullyValidationMessageIsDisplayed() {
+        Assert.assertEquals(driver.findElement(subscriptionSuccessfullyMSG).getText(),"You've subscribed successfully. Tune in for our updates and special offers");
+    }
 
 }

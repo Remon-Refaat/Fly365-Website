@@ -17,9 +17,6 @@ public class SignUpTest extends TestBase {
 
     WebDriverWait wait = new WebDriverWait(driver, 50);
 
-    String hostName = "k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432";
-    String dbs = "user_api";
-
     private By signUpHDR = By.xpath("//div[@class='text-xs mb-8 text-primary-fourth']");
     private By signUpBTN = By.xpath("//li/a[text()='Sign up']");
     private By firstNameTXT = By.xpath("//input[@placeholder='First Name']");
@@ -82,9 +79,9 @@ public class SignUpTest extends TestBase {
 
     @And("The new record set on database")
     public void theNewRecordSetOnDatabase() {
-        DataBase.execute_query_dbs(hostName, dbs, "select email from users where email='john.smith.fly365@gmail.com'");
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "select email from users where email='john.smith.fly365@gmail.com'");
         Assert.assertEquals(DataBase.data, "john.smith.fly365@gmail.com");
-        DataBase.execute_query_dbs(hostName, dbs, "delete from users where email='john.smith.fly365@gmail.com'");
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "delete from users where email='john.smith.fly365@gmail.com'");
     }
 
     @And("^Click on Show beside password$")

@@ -5,6 +5,7 @@ import cucumber.api.java.en.And;
 import helper.GeneralMethods;
 import helper.TestBase;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Map;
@@ -25,7 +26,7 @@ public class PassengersDetailsTest extends TestBase {
 
     @And("^Add the following data in the passenger Details$")
     public void addTheFollowingDataInThePassengerDetails(DataTable passengerData) throws InterruptedException {
-
+        wait.until(ExpectedConditions.visibilityOfElementLocated(nextStepBTN));
         int i = 0;
 
         for (Map<String, String> passengerDetails : passengerData.asMaps(String.class, String.class)) {

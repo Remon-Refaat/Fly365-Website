@@ -19,9 +19,6 @@ public class SignInTest extends TestBase {
     WebDriverWait wait = new WebDriverWait(driver, 20);
     private Faker fakerLogin = new Faker();
 
-    private String hostName = "k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432";
-    private String dbsName = "user_api";
-
     private By LoginBTN = By.xpath("//button[contains(text(),'Login')]");
     private By LoginHeaderBTN = By.xpath("//a[text()='SIGN IN']");
     private By LoginEmailTXT = By.xpath("//input[@placeholder='john@example.com']");
@@ -168,16 +165,16 @@ public class SignInTest extends TestBase {
 
     @And("^insert new user at database \"(.*)\" \"(.*)\"$")
     public void insertNewUserAtDataBase(String userEmail, String userHashPassWord) {
-        DataBase.execute_query_dbs(hostName, dbsName, "Select email from users where email = '" + userEmail + "'");
-        if (DataBase.data == userEmail) {
-            DataBase.execute_query_dbs(hostName, dbsName, "delete from users where email='" + userEmail + "'");
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "Select email from users where email = '" + userEmail +"'");
+        if (DataBase.data != null) {
+            DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "delete from users where email='" + userEmail + "'");
         }
-        DataBase.execute_update(hostName, dbsName, "insert into users (email, \"lastName\",\"firstName\",password,\"storeId\", \"groupId\",\"isActive\",\"isLocked\")values('" + userEmail + "','Smith','John','" + userHashPassWord + "','fly365_com','fly365',True,False)");
+        DataBase.execute_update("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "insert into users (email, \"lastName\",\"firstName\",password,\"storeId\", \"groupId\",\"isActive\",\"isLocked\")values('" + userEmail + "','Smith','John','" + userHashPassWord + "','fly365_com','fly365',True,False)");
     }
 
     @And("^delete new user at database \"(.*)\"$")
     public void deleteTheNewUserAtDataBase(String userEmail) {
-        DataBase.execute_query_dbs(hostName, dbsName, "delete from users where email='" + userEmail + "'");
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "delete from users where email='" + userEmail + "'");
     }
 
 

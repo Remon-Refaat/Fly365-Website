@@ -15,6 +15,7 @@ public class DataBase {
     static String PASS = "fly12345";
     public static String data;
 
+
     public static void execute_query_dbs(String hostName, String dbsName, String query) {
         try {
             String url = "jdbc:postgresql://" + hostName + "/" + dbsName;

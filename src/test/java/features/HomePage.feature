@@ -1,3 +1,4 @@
+@New_Tab
 Feature: Home page
 
   Background:
@@ -45,4 +46,24 @@ Feature: Home page
 
   Scenario: Verify that "afta" link in the footer open on the correct link
     And Press on 'afta'
-    And 'afta' page is opened
+    Then 'afta' page is opened
+
+  Scenario: Verify that the Logo link in the footer open on the correct link
+    And Press on Logo in footer
+    Then Home page is opened
+
+  Scenario: Verify that the Logo link in the header open on the correct link
+    And Press on Logo in header
+    Then Home page is opened
+
+  Scenario: Verify that the Flights link in the header open on the correct link
+    And Press on flights in header
+    Then Home page is opened
+
+  Scenario: Verify that the Offers link in the header open on the correct link
+    And Press on offers in header
+    Then Offers page is opened
+
+  Scenario: Verify that the Sign In button in the header open on the correct link
+    And Press on Sign In button
+    Then 'Sign In' page will be opened
