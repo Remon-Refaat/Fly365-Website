@@ -19,7 +19,7 @@ public class TestBase extends AbstractTestNGCucumberTests {
 
     @BeforeSuite
     @Parameters({"browser"})
-    public void startDriver(@Optional("chrome") String browserName) {
+    public void startDriver(@Optional("chrome-headless") String browserName) {
         if (browserName.equalsIgnoreCase("chrome")) {
             Reporter.log("=====Chrome Browser Session Started=====", true);
             String chromePath = System.getProperty("user.dir") + "/Resources/chromedriver";
@@ -33,6 +33,13 @@ public class TestBase extends AbstractTestNGCucumberTests {
         } else if (browserName.equalsIgnoreCase("safari")) {
             Reporter.log("=====Safari Browser Session Started=====", true);
             driver = new SafariDriver();
+        } else if(browserName.equals("chrome-headless"))
+        {
+            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/Resources/chromedriver");
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--headless");
+            options.addArguments("--window-size=1920,1080");
+            driver = new ChromeDriver(options);
         }
 
         driver.manage().window().maximize();
