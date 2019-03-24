@@ -2,7 +2,7 @@ version: 2 # use CircleCI 2.0
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
     
-    working_directory: ~/automation_site # directory where steps will run
+   # working_directory: ~/automation_site # directory where steps will run
 
     docker: # run the steps with Docker
       - image: circleci/openjdk:8-jdk-browsers # ...with this image as the primary container; this is where all `steps` will run
@@ -11,22 +11,22 @@ jobs: # a collection of steps
 
       - checkout # check out source code to working directory
 
-      - restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
+      #- restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
           # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-          key: automation_site-{{ checksum "pom.xml" }}
+       #   key: automation_site-{{ checksum "pom.xml" }}
       
-      - run: mvn dependency:go-offline # gets the project dependencies
+     # - run: mvn dependency:go-offline # gets the project dependencies
       
-      - save_cache: # saves the project dependencies
-          paths:
-            - ~/.m2
-          key: automation_site-{{ checksum "pom.xml" }}
+     #3 - save_cache: # saves the project dependencies
+        #  paths:
+        #    - ~/.m2
+        #  key: automation_site-{{ checksum "pom.xml" }}
       
       - run: mvn clean test –Pfull # run the actual tests
       
-      - store_test_results: # uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard. 
+     # - store_test_results: # uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard. 
       # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
-          path: target/surefire-reports
+         # path: target/surefire-reports
       
       # store_artifacts: # store the uberjar as an artifact
       # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
