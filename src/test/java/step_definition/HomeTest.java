@@ -67,6 +67,13 @@ public class HomeTest extends TestBase {
     private By subscriptionTXT = By.xpath("//input[@placeholder='Your Email']");
     private By subscribeBTN = By.xpath("//button[text()='subscribe']");
     private By subscriptionSuccessfullyMSG = By.xpath("/html/body/div[4]/div/div[1]/p");
+    private By originEmptyErrorMSG = By.xpath("//div[@class='el-form-item origin-field lg:w-1/2 w-full is-error']//span[@class='tooltiptext with-arrow']");
+    private By destinationEmptyErrorMSG = By.xpath("//div[@class='el-form-item origin-field lg:w-1/2 w-full is-error']//span[@class='tooltiptext with-arrow']");
+    private By departureDateEmptyErrorMSG = By.xpath("//div[@class='el-form-item w-full is-error']//span[@class='tooltiptext with-arrow']");
+    private By findMyBookingEmptyEmailErrorMSG = By.xpath("//div[@class='el-form-item mb-4 is-error']//span[@class='tooltiptext with-arrow']");
+    private By findMyBookingEmptyRefErrorMSG = By.xpath("//div[@class='el-form-item is-error']//span[@class='tooltiptext with-arrow']");
+    private By emptyEmailAtSubscribe = By.xpath("//div[@class='form-group']//span[@class='tooltiptext with-arrow']");
+
 
     @Given("^Navigate to Fly365 \"(.*)\" site$")
     public void NavigateToFly365Site(String site) {
@@ -312,12 +319,12 @@ public class HomeTest extends TestBase {
     // Subscription Email
 
     @And("^Add the email address \"(.*)\" to Subscription Email field$")
-    public void addTheEmailAddressToSubscriptionEmailField(String emailAddress)   {
-        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "Select email from newsletter_users where email = '" + emailAddress +"'");
+    public void addTheEmailAddressToSubscriptionEmailField(String emailAddress) {
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "Select email from newsletter_users where email = '" + emailAddress + "'");
         if (DataBase.data != null) {
             DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "delete from newsletter_users where email='" + emailAddress + "'");
         }
-            driver.findElement(subscriptionTXT).sendKeys(emailAddress);
+        driver.findElement(subscriptionTXT).sendKeys(emailAddress);
     }
 
 
@@ -330,7 +337,33 @@ public class HomeTest extends TestBase {
 
     @Then("^Successfully validation message is displayed$")
     public void successfullyValidationMessageIsDisplayed() {
-        Assert.assertEquals(driver.findElement(subscriptionSuccessfullyMSG).getText(),"You've subscribed successfully. Tune in for our updates and special offers");
+        Assert.assertEquals(driver.findElement(subscriptionSuccessfullyMSG).getText(), "You've subscribed successfully. Tune in for our updates and special offers");
     }
 
+    @Then("^error message appear for each field$")
+    public void errorMessageAppearForEachField() {
+        String originerrormessage = driver.findElement(originEmptyErrorMSG).getText();
+        Assert.assertEquals(originerrormessage, "Please choose origin from the list");
+
+        String destinationerrormessage = driver.findElement(destinationEmptyErrorMSG).getText();
+        Assert.assertEquals(destinationerrormessage, "Please choose destination from the list");
+
+        String departureerrormessage = driver.findElement(departureDateEmptyErrorMSG).getText();
+        Assert.assertEquals(departureerrormessage, "Please enter required date");
+    }
+
+    @Then("^error message appear appear over the two fields$")
+    public void errorMessageAppearAppearOverTheTwoFields() {
+        String emailfinderrormessage = driver.findElement(findMyBookingEmptyEmailErrorMSG).getText();
+        Assert.assertEquals(emailfinderrormessage, "Please enter email");
+
+        String referrormessage = driver.findElement(findMyBookingEmptyRefErrorMSG).getText();
+        Assert.assertEquals(referrormessage, "Please enter Fly365 Ref.");
+    }
+
+    @Then("^empty subscribe error message appear$")
+    public void emptySubscribeErrorMessageAppear() {
+        String emptysubscriber = driver.findElement(emptyEmailAtSubscribe).getText();
+        Assert.assertEquals(emptysubscriber, "Please enter email");
+    }
 }

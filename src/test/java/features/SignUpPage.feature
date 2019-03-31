@@ -8,6 +8,12 @@ Feature: Sign Up
     And   Sign Up page is opened
 
   Scenario: Verify that the user can sign up
+    And   Click on Create Account
+    Then  error message appear over the required fields
+
+
+
+  Scenario: Verify that the user can sign up
     And   Fill the following required data
       | First Name | Last Name | Email Address               | Password |
       | John       | Smith     | john.smith.fly365@gmail.com | 12345678 |
