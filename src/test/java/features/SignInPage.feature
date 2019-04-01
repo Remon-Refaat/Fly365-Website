@@ -57,6 +57,7 @@ Feature: login to account
     When the user click on login button
     Then user shall see email error message
 
+
   Scenario: Login into account with correct details
     And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
     And user enter email "john.smith.fly365@gmail.com"
@@ -65,6 +66,7 @@ Feature: login to account
     Then the user shall be redirect to my booking page
     And user logout
     And delete new user at database "john.smith.fly365@gmail.com"
+
 
   Scenario: Login into account with correct Upper case email
     And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."

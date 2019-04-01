@@ -4,6 +4,7 @@ Feature: Booking a Trip for Registered User
     Given Navigate to Fly365 "stage" site
     And open login page
 
+
   Scenario: Verify that the registered user can book a One-Way trip
     And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
     And user enter email "john.smith.fly365@gmail.com"
@@ -33,6 +34,7 @@ Feature: Booking a Trip for Registered User
     And Press on Pay button
     Then 'Thank you for booking with Fly365' message is displayed
     And delete new user at database "john.smith.fly365@gmail.com"
+
 
   Scenario: Verify that the anonymous user can book a Round-Trip trip
     And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
@@ -65,6 +67,7 @@ Feature: Booking a Trip for Registered User
     And Press on Pay button
     Then 'Thank you for booking with Fly365' message is displayed
     And delete new user at database "john.smith.fly365@gmail.com"
+
 
   Scenario: Verify that the anonymous user can book a Multi City trip
     And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."

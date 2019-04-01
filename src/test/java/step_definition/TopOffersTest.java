@@ -24,6 +24,6 @@ public class TopOffersTest extends TestBase {
 
     @Then("^Check the selected offer page open$")
     public void checkTheSelectedOfferPageOpen() {
-        Assert.assertEquals(driver.findElement(firstOfferHDR).getText(),"NZ Offers 60");
+        Assert.assertEquals(driver.findElement(firstOfferHDR).getText(), "NZ Offers 60");
     }
 }

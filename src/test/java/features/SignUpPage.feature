@@ -4,13 +4,14 @@ Feature: Sign Up
     Given Navigate to Fly365 "stage" site
     And   Open Sign up page
 
+
   Scenario: Verify that the user can open sign up page
     And   Sign Up page is opened
+
 
   Scenario: Verify that the user can sign up
     And   Click on Create Account
     Then  error message appear over the required fields
-
 
 
   Scenario: Verify that the user can sign up
@@ -20,6 +21,7 @@ Feature: Sign Up
     And   Click on Create Account
     Then  The user created successfully
     And   The new record set on database
+
 
   Scenario: Verify that the user can't sign up without the mandatory fields
     And   Click on Create Account

@@ -13,8 +13,8 @@ public class AboutUsTest extends TestBase {
 
     @Then("^'About Us' page is opened$")
     public void aboutUsPageIsOpened() {
-                String headerText = driver.findElement(aboutUsHDR).getText();
-                Assert.assertEquals(headerText, "About Fly365");
+        String headerText = driver.findElement(aboutUsHDR).getText();
+        Assert.assertEquals(headerText, "About Fly365");
     }
 
 

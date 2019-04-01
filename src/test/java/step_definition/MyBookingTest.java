@@ -28,18 +28,18 @@ public class MyBookingTest extends TestBase {
 
     @Then("^Check My Booking page opened$")
     public void checkMyBookingPageOpened() {
-        Assert.assertEquals(driver.findElement(recentBookingHDR).getText(),"Your most recent bookings will show up here.");
+        Assert.assertEquals(driver.findElement(recentBookingHDR).getText(), "Your most recent bookings will show up here.");
 
     }
 
     @Then("^No Booking History displayed$")
     public void noBookingHistoryDisplayed() {
-        Assert.assertEquals(driver.findElement(noBookingHistoryMSG).getText(),"Sorry there is no booking history");
+        Assert.assertEquals(driver.findElement(noBookingHistoryMSG).getText(), "Sorry there is no booking history");
     }
 
     @Then("^Back to Home Page when click on Back button$")
     public void backToHomePageWhenClickOnBackButton() {
         driver.findElement(backToHomeBTN).click();
-        Assert.assertEquals(driver.findElement(homePageHDR).getText(),"Low Fares");
+        Assert.assertEquals(driver.findElement(homePageHDR).getText(), "Low Fares");
     }
 }

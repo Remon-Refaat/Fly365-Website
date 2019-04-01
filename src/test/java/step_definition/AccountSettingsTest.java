@@ -28,7 +28,7 @@ public class AccountSettingsTest extends TestBase {
 
     @Then("^Account Settings page opened$")
     public void accountSettingsPageOpened() {
-        Assert.assertEquals(driver.findElement(accountSettingsHDR).getText(),"Account information details, Add or edit");
+        Assert.assertEquals(driver.findElement(accountSettingsHDR).getText(), "Account information details, Add or edit");
     }
 
     @Then("^Update First Name$")

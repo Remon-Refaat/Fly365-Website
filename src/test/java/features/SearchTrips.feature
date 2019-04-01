@@ -3,6 +3,7 @@ Feature: Search for trips and assert on search results
   Background: Open Fly365 site
     Given Navigate to Fly365 "stage" site
 
+
   Scenario: Verify that the system display the the correct search results counts for one-way trips
     And Select One Way trip
     And Add airport to the Origin "Auckland International (AKL), New Zealand"
@@ -13,6 +14,7 @@ Feature: Search for trips and assert on search results
     And Press on Search Now
     And Scroll to the end of the page
     Then Check count of search results
+
 
   Scenario: Verify that the system display the the correct search results data for one-way trips
     And Select One Way trip
@@ -25,6 +27,7 @@ Feature: Search for trips and assert on search results
     And Scroll to the end of the page
     Then The system display results as per search criteria
 
+
   Scenario: Verify that the system display the the correct search results counts for round-trips
     And Select Round Trip trip
     And Add airport to the Origin "Auckland International (AKL), New Zealand"
@@ -36,6 +39,7 @@ Feature: Search for trips and assert on search results
     And Press on Search Now
     And Scroll to the end of the page
     Then Check count of search results
+
 
   Scenario: Verify that the system display the the correct search results data for round-trips
     And Select Round Trip trip
@@ -63,6 +67,7 @@ Feature: Search for trips and assert on search results
     And Press on Search Now
     And Scroll to the end of the page
     Then Check count of search results
+
 
   Scenario: Verify that the system display the the correct search results data for multi-city trips
     And Select Multi City trip

@@ -13,8 +13,8 @@ public class TermsConditionsTest extends TestBase {
 
     @Then("^'Terms and Conditions' page is opened$")
     public void termsAndConditionsPageIsOpened() {
-                String headerText = driver.findElement(termsConditionsHDRLINK).getText();
-                Assert.assertEquals(headerText, "Terms and Conditions");
+        String headerText = driver.findElement(termsConditionsHDRLINK).getText();
+        Assert.assertEquals(headerText, "Terms and Conditions");
     }
 
 

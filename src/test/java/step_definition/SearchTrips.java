@@ -15,8 +15,7 @@ import java.util.List;
 
 import static java.lang.Thread.*;
 
-public class SearchTrips extends TestBase
-{
+public class SearchTrips extends TestBase {
     WebDriverWait wait = new WebDriverWait(driver, 10);
 
     private By flightOptionsHDR = By.xpath("//span[text()='FLY365 MIX AND MATCH FLIGHT OPTIONS']");
@@ -25,26 +24,25 @@ public class SearchTrips extends TestBase
     private By flightDetailsDHR = By.xpath("//p[contains(normalize-space(text()),'Your flights from')]");
 
     @And("^Scroll to the end of the page$")
-        public void scrollToTheEndOfThePage() throws InterruptedException {
+    public void scrollToTheEndOfThePage() throws InterruptedException {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(flightOptionsHDR));
-        JavascriptExecutor js = (JavascriptExecutor)driver;
-        for (int i = 0; i < 18; i++)
-        {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        for (int i = 0; i < 18; i++) {
             js.executeScript("scrollBy(0,2500)");
         }
     }
 
 
     @Then("^Check count of search results$")
-    public void checkCountOfSearchResults() throws InterruptedException{
+    public void checkCountOfSearchResults() throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOfElementLocated(flightOptionsHDR));
         String count = driver.findElement(By.xpath("//span[@class='ml-2 text-black text-sm font-medium']")).getText();
         System.out.println(count);
         List result = driver.findElements(flightOptionsHDR);
         String displayedCount = String.valueOf(result.size());
         System.out.println(displayedCount);
-        Assert.assertEquals(displayedCount,count);
+        Assert.assertEquals(displayedCount, count);
     }
 
     @Then("^The system display results as per search criteria$")
@@ -56,6 +54,6 @@ public class SearchTrips extends TestBase
         List destinationResult = driver.findElements(destinationAirportCode);
         int displayedDestination = destinationResult.size();
         System.out.println(displayedDestination);
-        Assert.assertEquals(displayedOrigin,displayedDestination);
+        Assert.assertEquals(displayedOrigin, displayedDestination);
     }
 }

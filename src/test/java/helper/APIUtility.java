@@ -83,7 +83,7 @@ public class APIUtility extends TestBase {
     public static String createCart(String itineraryId, String domain) {
 
         String createCartAPI = "{\"itineraryId\": \"" + itineraryId + "\"}";
-        String returnedJsonString = sendPostRequest("https://api.fly365"+domain+".com/flight/cart", createCartAPI);
+        String returnedJsonString = sendPostRequest("https://api.fly365" + domain + ".com/flight/cart", createCartAPI);
         JSONObject jObject = new JSONObject(returnedJsonString);
         return jObject.getString("id");
 
@@ -96,7 +96,7 @@ public class APIUtility extends TestBase {
                 "\"reference\": \"123\",\"passengerType\": \"ADT\",\"frequentFlyerOptions\": {\"airlineCode\": \"code\",\"number\": \"num\"" +
                 "}}],\"customer\": {\"title\": \"mr\",\"firstName\": \"John\",\"lastName\": \"William\",\"email\": \"john.smith.fly365@gmail.com\"," +
                 "\"mobileNumber\": \"0121234567\"}}";
-        sendPostRequest("https://api.fly365"+domain+".com/flight/cart/" + cartID + "/passenger", addPassengerDetailsAPI);
+        sendPostRequest("https://api.fly365" + domain + ".com/flight/cart/" + cartID + "/passenger", addPassengerDetailsAPI);
 
     }
 
@@ -105,7 +105,7 @@ public class APIUtility extends TestBase {
         String addCardDetailsAPI = "{\"method\":\"cc\",\"type\":\"direct\",\"card\":{\"number\":\"4242424242424242\",\"cvv\":\"123\",\n" +
                 "\"expiryDate\":\"1120\",\"type\":\"visa\",\"holderName\": \"Alaa Attya\"},\n" +
                 " \"billingAddress\":{\"address\":\"Something\",\"country\":\"DO\",\"city\":\"AZS\",\"zipCode\":\"5678\",\"state\":\"NY\"}}";
-        String returnedJsonString = sendPostRequest("https://api.fly365"+domain+".com/flight/cart/" + cartID + "/checkout", addCardDetailsAPI);
+        String returnedJsonString = sendPostRequest("https://api.fly365" + domain + ".com/flight/cart/" + cartID + "/checkout", addCardDetailsAPI);
 
 //To validate that the order no./pnr number is displayed correctly in retrieve my booking
         JSONObject jObject = new JSONObject(returnedJsonString);
