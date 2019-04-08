@@ -8,7 +8,7 @@ Feature: Subscription Email
     And  Add the email address "john.smith.fly365@gmail.com" to Subscription Email field
     When Press on SUBSCRIBE
     Then Successfully validation message is displayed
-  @Remon
+
   Scenario: Verify that the user can unsubscribe his/her email
     And Delete all messages in the Inbox
     And  Add the email address "john.smith.fly365@gmail.com" to Subscription Email field
@@ -20,13 +20,13 @@ Feature: Subscription Email
     And  Add the email address "john.smith.fly365@gmail.com" to Subscription Email field
     When Press on SUBSCRIBE
     Then Successfully validation message is displayed
-  @Remon
+
   Scenario: Verify that the Subscription Email is sent successfully
       And Delete all messages in the Inbox
       And  Add the email address "john.smith.fly365@gmail.com" to Subscription Email field
       And Press on SUBSCRIBE
     Then The Subscription Email is sent successfully
-  @Remon
+
   Scenario: Verify that the user can not subscribe with subscribed email
     And  Add previously subscribed email address "john.smith.fly365@gmail.com" to Subscription Email field
     And Press on SUBSCRIBE

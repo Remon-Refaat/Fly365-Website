@@ -233,7 +233,7 @@ Feature: Booking a Trip for Registered User
     And Download the booking confirmation pdf
     Then The booking confirmation pdf contains the correct data for One Way
     And delete new user at database "john.smith.fly365@gmail.com"
-  @Remon
+
   @Sign_Out
   Scenario: Verify that the Booking Confirmation email is sent successfully (One-Way trip)
     And Delete all messages in the Inbox
@@ -537,7 +537,6 @@ Feature: Booking a Trip for Registered User
 
 
 
-  @Remon
   @Sign_Out
   Scenario: Verify that the anonymous user can book a Multi City trip
     And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
@@ -697,7 +696,7 @@ Feature: Booking a Trip for Registered User
     And Go to My Booking
     Then The user can see his booking in my Booking
     And delete new user at database "john.smith.fly365@gmail.com"
-  @Remon
+
   @delete_pdf
   @Sign_Out
   Scenario: Verify that the the Tax Invoice pdf contains the correct data (Multi City)

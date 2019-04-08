@@ -14,7 +14,7 @@ Feature: Forget Password
     Then page shall be redirect to login page
     And 'Sign In' page is opened
     And delete new user at database "john.smith.fly365@gmail.com"
-  @Remon
+
     @Go_Tab_Again
   @New_Tab
   @Email_Logout
