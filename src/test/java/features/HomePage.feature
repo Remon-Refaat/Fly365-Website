@@ -91,3 +91,8 @@ Feature: Home page
   Scenario: Verify that the Sign In button in the header open on the correct link
     And Press on Sign In button
     Then 'Sign In' page will be opened
+
+  Scenario: Verify that the Passenger Rules link in the Passenger/Cabin pop over open on the correct link
+    And Press on Passenger/Cabin pop over
+    And Press on Passenger Rules link
+    Then 'Passenger Rules' pop up will be opened

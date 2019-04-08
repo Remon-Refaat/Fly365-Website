@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class PassengersDetailsTest extends TestBase {
 
-    WebDriverWait wait = new WebDriverWait(driver, 20);
+    WebDriverWait wait = new WebDriverWait(driver, 40);
 
     private GeneralMethods gmObject = new GeneralMethods();
 
@@ -23,7 +23,14 @@ public class PassengersDetailsTest extends TestBase {
     private By contactFirstNameTXT = By.xpath("//div[@class='el-form-item col-sm-8 col-lg-6']//input[@placeholder='First Name']");
     private By contactLastNameTXT = By.xpath("//div[@class='el-form-item col-sm-8 col-lg-6']//input[@placeholder='Family Name']");
     private By contactEmailAddressTXT = By.id("contact-email");
+    private By phoneNumbereTXT = By.xpath("//input[@type='tel']");
     private By nextStepBTN = By.xpath("//button[text()='Next Step']");
+    private By firstReadMoreLINK = By.xpath("//p/a[1]");
+    private By secondReadMoreLINK = By.xpath("//p/a[2]");
+    private By flightDetailsLink = By.xpath("//li/div/div/div[1]/div[3]");
+    private By firstReadMoreHDR = By.xpath("//div[@class='el-dialog__wrapper'][1]/div[1]/div[1]/span");
+    private By secondReadMoreHDR = By.xpath("//div[@class='el-dialog__wrapper'][2]/div[1]/div[1]/span");
+    private By totalTravelTimeHDR = By.xpath("//div[3]//div[2]/div/div/div[1]/div/div[1]");
     private By passengerTitleEmptyErrorMSG = By.xpath("//div[@class='el-form-item title-form is-error']//span[@class='tooltiptext with-arrow']");
     private By passenegerFirstNameEmptyErrorMSG = By.xpath("//body/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first']/div[@class='passengers bg-secondary-fourth']/div[@class='content-passengers container md:px-0 px-8']/div[@class='row']/div[@class='col-lg-16 col-sm-24']/div[@id='passenger-form-0']/div/div[@class='bg-white lg:px-12 px-3 pt-10 pb-5']/div[@class='col-md-24 passenger-form']/form[@class='el-form passenger-form__content']/div[@class='first-name-container mb-4']/div[@class='flex flex-col']/div[@class='form-items flex flex-col md:flex-row justify-between items-center']/div[@class='row']/div[2]/div[1]/div[1]/div[2]/span[1]");
     private By passenegerLastNameEmptyErrorMSG = By.xpath("//body/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first']/div[@class='passengers bg-secondary-fourth']/div[@class='content-passengers container md:px-0 px-8']/div[@class='row']/div[@class='col-lg-16 col-sm-24']/div[@id='passenger-form-0']/div/div[@class='bg-white lg:px-12 px-3 pt-10 pb-5']/div[@class='col-md-24 passenger-form']/form[@class='el-form passenger-form__content']/div[@class='first-name-container mb-4']/div[@class='flex flex-col']/div[@class='form-items flex flex-col md:flex-row justify-between items-center']/div[@class='row']/div[4]/div[1]/div[1]/div[2]/span[1]");
@@ -64,6 +71,7 @@ public class PassengersDetailsTest extends TestBase {
             driver.findElement(contactFirstNameTXT).sendKeys(contactDetails.get("First Name"));
             driver.findElement(contactLastNameTXT).sendKeys(contactDetails.get("Last Name"));
             driver.findElement(contactEmailAddressTXT).sendKeys(contactDetails.get("Email"));
+            driver.findElement(phoneNumbereTXT).sendKeys(contactDetails.get("Phone Number"));
         }
     }
 
@@ -73,6 +81,43 @@ public class PassengersDetailsTest extends TestBase {
     }
 
 
+    @Then("^'Passenger' page will be opened$")
+    public void passengerPageWillBeOpened() {
+        Assert.assertEquals(driver.getTitle(),"Fly365 - passengers");
+    }
+
+    @And("^Press on first 'Read more'$")
+    public void pressOnFirstReadMore() {
+        driver.findElement(firstReadMoreLINK).click();
+    }
+
+    @And("^Press on second 'Read more'$")
+    public void pressOnSecondReadMore() {
+        driver.findElement(secondReadMoreLINK).click();
+    }
+
+    @And("^Press on 'Flights Details'$")
+    public void pressOnFlightsDetails() {
+        driver.findElement(flightDetailsLink).click();
+    }
+
+    @Then("^'If you have one name' pop up will be opened$")
+    public void ifYouHaveOneNamePopUpWillBeOpened() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(firstReadMoreHDR));
+        Assert.assertEquals("If you have one name", driver.findElement(firstReadMoreHDR).getText());
+    }
+
+    @Then("^'Correct name format' pop up will be opened$")
+    public void correctNameFormatPopUpWillBeOpened() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(secondReadMoreHDR));
+        Assert.assertEquals("Correct name format", driver.findElement(secondReadMoreHDR).getText());
+    }
+
+    @Then("^'Flights Details' is displayed$")
+    public void flightsDetailsIsDisplayed() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(totalTravelTimeHDR));
+        Assert.assertTrue(driver.findElement(totalTravelTimeHDR).isDisplayed());
+    }
     @Then("^error message appear for each field at fill passenger details$")
     public void errorMessageAppearForEachFieldAtFillPassengerDetails() {
         String passnegerEmptyTitle = driver.findElement(passengerTitleEmptyErrorMSG).getText();

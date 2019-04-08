@@ -50,8 +50,8 @@ public class APIUtility extends TestBase {
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json");
             connection.setRequestProperty("x-store-id", "fly365_com");
-            connection.setRequestProperty("authorization", "XXu5WbKbM6XHbU5VKNETr6AMnNaVNd9E");
-            connection.setRequestProperty("x-store-user", "fly365_com_www");
+            connection.setRequestProperty("authorization", "guMRjevTJNNgv49LRTNCTzfp9cWnW6Sj");
+            connection.setRequestProperty("x-store-user", "fly365_com_nz");
             OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream(), "UTF-8");
             writer.write(tripType);
             writer.close();

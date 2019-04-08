@@ -8,7 +8,7 @@ import org.testng.Assert;
 
 public class AFTATest extends TestBase {
 
-
+    boolean result;
     private By aftaHDR = By.xpath("//div[@id='page_content']/h3");
 
 
@@ -18,11 +18,13 @@ public class AFTATest extends TestBase {
         for (String windowID : driver.getWindowHandles()) {
             String title = driver.switchTo().window(windowID).getTitle();
             if (title.equals("Australian Federation of Travel Agents")) {
-                String headerText = driver.findElement(aftaHDR).getText();
-                Assert.assertEquals(headerText, "WELCOME TO AFTA");
+                String headerText = driver.findElement(aftaHDR).getText().trim();
+                result = (headerText.equals("WELCOME TO AFTA"));
                 break;
             }
         }
+
+        Assert.assertEquals(result, true);
     }
 
 }

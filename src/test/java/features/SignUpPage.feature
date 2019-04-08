@@ -14,14 +14,46 @@ Feature: Sign Up
     Then  error message appear over the required fields
 
 
-  Scenario: Verify that the user can sign up
+  @Go_Tab_Again
+  @New_Tab
+  @Email_Logout
+  @Sign_Out
+  Scenario: Verify that the Account Verification Success email is sent successfully
+    And Delete all messages in the Inbox
+    And Delete the user "john.smith.fly365@gmail.com" if he exists in the database
     And   Fill the following required data
       | First Name | Last Name | Email Address               | Password |
       | John       | Smith     | john.smith.fly365@gmail.com | 12345678 |
     And   Click on Create Account
-    Then  The user created successfully
-    And   The new record set on database
+    And Go to the email account
+    And Open the new message
+    And Press on Verify Button in the email
+    Then The Account Verification Success email is sent successfully
 
+  @Sign_Out
+  Scenario: Verify that Verify your email is sent successfully
+    And Delete all messages in the Inbox
+    And Delete the user "john.smith.fly365@gmail.com" if he exists in the database
+    And   Fill the following required data
+      | First Name | Last Name | Email Address               | Password |
+      | John       | Smith     | john.smith.fly365@gmail.com | 12345678 |
+    And   Click on Create Account
+    Then Verify your email is sent successfully
+
+  @New_Tab
+  @Email_Logout
+  @Sign_Out
+  Scenario: Verify that the account is verified successfully
+    And Delete all messages in the Inbox
+    And Delete the user "john.smith.fly365@gmail.com" if he exists in the database
+    And   Fill the following required data
+      | First Name | Last Name | Email Address               | Password |
+      | John       | Smith     | john.smith.fly365@gmail.com | 12345678 |
+    And   Click on Create Account
+    And Go to the email account
+    And Open the new message
+    And Press on Verify Button in the email
+    Then The account is verified successfully
 
   Scenario: Verify that the user can't sign up without the mandatory fields
     And   Click on Create Account
@@ -48,6 +80,16 @@ Feature: Sign Up
       | John       | 1234      | john.smith.fly365@gmail.com | 12345678 |
       | John       | !@#$%^&   | john.smith.fly365@gmail.com | 12345678 |
       | John       | حرف عربي  | john.smith.fly365@gmail.com | 12345678 |
+
+  @Sign_Out
+  Scenario: Verify that the user can sign up
+    And Delete the user "john.smith.fly365@gmail.com" if he exists in the database
+    And   Fill the following required data
+      | First Name | Last Name | Email Address               | Password |
+      | John       | Smith     | john.smith.fly365@gmail.com | 12345678 |
+    And   Click on Create Account
+    Then  The user created successfully
+    And   The new record set on database
 
 
   Scenario Outline: Verify that the user can't sign up with invalid email

@@ -156,7 +156,7 @@ public class SignInTest extends TestBase {
         if (DataBase.data != null) {
             DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "delete from users where email='" + userEmail + "'");
         }
-        DataBase.execute_update("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "insert into users (email, \"lastName\",\"firstName\",password,\"storeId\", \"groupId\",\"isActive\",\"isLocked\")values('" + userEmail + "','Smith','John','" + userHashPassWord + "','fly365_com','fly365',True,False)");
+        DataBase.execute_update("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "insert into users (email, \"lastName\",\"firstName\",password,\"storeId\", \"groupId\",\"title\",\"phoneNumber\",\"isActive\",\"isLocked\")values('" + userEmail + "','Smith','John','" + userHashPassWord + "','fly365_com','fly365','Mr','+20 136253637474',True,False)");
     }
 
     @And("^delete new user at database \"(.*)\"$")

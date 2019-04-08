@@ -21,6 +21,7 @@ public class HomeTest extends TestBase {
     WebDriverWait wait = new WebDriverWait(driver, 10);
     GeneralMethods gmObject = new GeneralMethods();
     APIUtility apiObject = new APIUtility();
+    ConfirmationTest ctobject = new ConfirmationTest();
     public static String orderNumber = null;
     public static String pnrNumber = null;
     public static String currentWindow = driver.getWindowHandle();
@@ -66,7 +67,10 @@ public class HomeTest extends TestBase {
     private By addMoreCitiesLINK = By.xpath("//div[@class='flex items-center btn-add-more float-left text-white text-xs h-6 px-1 cursor-pointer leading-normal']");
     private By subscriptionTXT = By.xpath("//input[@placeholder='Your Email']");
     private By subscribeBTN = By.xpath("//button[text()='subscribe']");
-    private By subscriptionSuccessfullyMSG = By.xpath("/html/body/div[4]/div/div[1]/p");
+    private By subscriptionSuccessfullyMSG = By.xpath("/html/body/div[3]/div/div[1]/p");
+    private By alreadySubscribedErrorMSG = By.xpath("//div[3]/div/div[1]/p");
+    private By passengerRulesLINK = By.xpath("//*[contains(@id, 'el-popover-')]/div[2]/a");
+    private By passengerRulesHDR = By.xpath("//div[@class='el-dialog__wrapper']//div[1]/span");
     private By originEmptyErrorMSG = By.xpath("//div[@class='el-form-item origin-field lg:w-1/2 w-full is-error']//span[@class='tooltiptext with-arrow']");
     private By destinationEmptyErrorMSG = By.xpath("//div[@class='el-form-item origin-field lg:w-1/2 w-full is-error']//span[@class='tooltiptext with-arrow']");
     private By departureDateEmptyErrorMSG = By.xpath("//div[@class='el-form-item w-full is-error']//span[@class='tooltiptext with-arrow']");
@@ -207,14 +211,17 @@ public class HomeTest extends TestBase {
 
     @And("^Select the date of the departure for round trip, after \"(.*)\" day from today$")
     public void selectTheDateOfTheDepartureForRoundTripAfterDayFromToday(int period) {
+        driver.findElement(roundTripTAB).click();
         String returnDate = gmObject.addDateWithCertainPeriodAndFormat(period, "dd MMM yyyy");
         driver.findElement(departureRoundCalenderDPK).sendKeys(returnDate);
     }
 
     @And("^Select the date of the return for round trip, after \"(.*)\" day from today$")
-    public void selectTheDateOfTheReturnForRoundTripAfterDayFromToday(int period) {
+    public void selectTheDateOfTheReturnForRoundTripAfterDayFromToday(int period) throws InterruptedException {
         String returnDate = gmObject.addDateWithCertainPeriodAndFormat(period, "dd MMM yyyy");
         driver.findElement(returnRoundCalenderDPK).sendKeys(returnDate);
+        driver.findElement(roundTripTAB).click();
+        Thread.sleep(500);
     }
 
     @And("^Press on Search Now$")
@@ -230,10 +237,10 @@ public class HomeTest extends TestBase {
         String itinaryID = apiObject.getItineraryId(allAvailableTrips, 2);
         String cardID = apiObject.createCart(itinaryID, domain);
         apiObject.addPassenger(cardID, domain);
-        if (reference.equals("Fly365 Reference")) {
+        if (reference.equals("Airline Reference")) {
             orderNumber = apiObject.checkoutTrip(cardID, domain)[0];
         }
-        if (reference.equals("Airline Reference")) {
+        if (reference.equals("Fly365 Reference")) {
             pnrNumber = apiObject.checkoutTrip(cardID, domain)[1];
         }
     }
@@ -250,14 +257,20 @@ public class HomeTest extends TestBase {
     }
 
     @And("^Add a valid \"(.*)\"$")
-    public void addAValidReference(String reference) {
+    public void addAValid(String reference) {
 
         if (reference.equals("Fly365 Reference")) {
-            driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(orderNumber);
-        }
-        if (reference.equals("Airline Reference")) {
             driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(pnrNumber);
         }
+        if (reference.equals("Airline Reference")) {
+            driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(orderNumber);
+        }
+    }
+
+    @And("^Add a valid Reference 'Fly365 Ref'$")
+    public void addAValidReferenceFly365Ref()  {
+        driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(ctobject.fly356Refernce);
+
     }
 
     @And("^Press Find Booking$")
@@ -339,6 +352,41 @@ public class HomeTest extends TestBase {
     public void successfullyValidationMessageIsDisplayed() {
         Assert.assertEquals(driver.findElement(subscriptionSuccessfullyMSG).getText(), "You've subscribed successfully. Tune in for our updates and special offers");
     }
+
+
+    @And("^Add previously subscribed email address \"(.*)\" to Subscription Email field$")
+    public void addPreviouslySubscribedEmailAddressToSubscriptionEmailField(String emailAddress) throws Throwable {
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "Select email from newsletter_users where email = '" + emailAddress +"'");
+        if (DataBase.data == null) {
+            DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "insert into newsletter_users (email, \"isSubscribed\",\"storeId\",\"groupId\", \"isRegistered\")values('" + emailAddress + "',True,'fly365_nz','fly365',False)");
+        }
+        driver.findElement(subscriptionTXT).sendKeys(emailAddress);
+    }
+
+    @Then("^Error validation message is displayed$")
+    public void errorValidationMessageIsDisplayed() {
+        Assert.assertEquals(driver.findElement(alreadySubscribedErrorMSG).getText(),"You have already subscribed fly365");
+
+    }
+
+    @And("^Press on Passenger/Cabin pop over$")
+    public void pressOnPassengerCabinPopOver() {
+        driver.findElement(passengerCabinTXT).click();
+    }
+
+    @And("^Press on Passenger Rules link$")
+    public void pressOnPassengerRulesLink() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(passengerRulesLINK));
+        driver.findElement(passengerRulesLINK).click();
+    }
+
+    @Then("^'Passenger Rules' pop up will be opened$")
+    public void passengerRulesPopUpWillBeOpened() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(passengerRulesHDR));
+        Assert.assertEquals(driver.findElement(passengerRulesHDR).getText(),"Passenger Rules");
+
+    }
+
 
     @Then("^error message appear for each field$")
     public void errorMessageAppearForEachField() {

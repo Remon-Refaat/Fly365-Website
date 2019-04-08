@@ -5,8 +5,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class GeneralMethods extends TestBase {
@@ -39,4 +42,51 @@ public class GeneralMethods extends TestBase {
         String date = simpleFormat.format(cal.getTime());
         return date;
     }
+
+
+    // Methods for dynamic pdf
+    public String changeFaretoDecimalFormat(By element){
+        String numberAsStringValue = driver.findElement(element).getText().trim().replaceAll("[a-zA-Z\\s\\,]","");
+        Float numberAsFloatValue=Float.parseFloat(numberAsStringValue);
+        DecimalFormat df = new DecimalFormat("0.00");
+        df.setMaximumFractionDigits(2);
+        String numberAsStringWithTwoDecimals = df.format(numberAsFloatValue);
+        return numberAsStringWithTwoDecimals;
+    }
+
+    public String getFarePerPassenger(String fare, String tax){
+        Double totalFareperPassenger = Double.valueOf(fare) + Double.valueOf(tax);
+        Float numberAsFloatValue=Float.parseFloat(totalFareperPassenger.toString());
+        DecimalFormat df = new DecimalFormat("0.00");
+        df.setMaximumFractionDigits(2);
+        String numberAsStringWithTwoDecimals = df.format(numberAsFloatValue);
+        return numberAsStringWithTwoDecimals;
+    }
+
+    public String getTotalBaseTaxFare(String value1, String value2, String value3, int passengerNumber){
+        Double totalFareperPassenger = Double.valueOf(value1) * passengerNumber + Double.valueOf(value2) * passengerNumber+ Double.valueOf(value3) * passengerNumber;
+        Float numberAsFloatValue=Float.parseFloat(totalFareperPassenger.toString());
+        DecimalFormat df = new DecimalFormat("0.00");
+        df.setMaximumFractionDigits(2);
+        String numberAsStringWithTwoDecimals = df.format(numberAsFloatValue);
+        return numberAsStringWithTwoDecimals;
+    }
+
+    public String getTotalFare(String value1, String value2, String value3){
+        Double totalFareperPassenger = Double.valueOf(value1) + Double.valueOf(value2) + Double.valueOf(value3);
+        Float numberAsFloatValue=Float.parseFloat(totalFareperPassenger.toString());
+        DecimalFormat df = new DecimalFormat("0.00");
+        df.setMaximumFractionDigits(2);
+        String numberAsStringWithTwoDecimals = df.format(numberAsFloatValue);
+        return numberAsStringWithTwoDecimals;
+    }
+
+    public String getTheCorrectFormatForTheDate(By dateElement) throws ParseException {
+        String date = driver.findElement(dateElement).getText().trim();
+        Date date1 = new SimpleDateFormat("dd MMM yyyy").parse(date);
+        SimpleDateFormat simpleFormat = new SimpleDateFormat("dd MMM yyyy");
+        String correctDate = simpleFormat.format(date1);
+        return correctDate;
+    }
+
 }

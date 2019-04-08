@@ -27,6 +27,11 @@ public class PaymentTest extends TestBase {
     private By acknowledgeBOX = By.xpath("//form/div[1]//span[@class='el-checkbox__inner']");
     private By fareRulesBOX = By.xpath("//form/div[2]//span[@class='el-checkbox__inner']");
     private By payNowBTN = By.xpath("//button[contains(text(),'PAY')]");
+    private By editPassengerLINK = By.xpath("//div[4]/div/div/div[1]/div");
+    private By fareRulesLINK = By.xpath("//p/a[1]");
+    private By termsAndConditionsLINK = By.xpath("//p/a[2]");
+    private By backLINK = By.xpath("//div[6]/div");
+
     private By HolderEmptyErrorMSg = By.xpath("//body/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first']/div[@class='checkout bg-secondary-fourth']/div[@class='container']/div[@class='row']/div[@class='col-lg-16']/div[@class='payment-options bg-white rounded overflow-hidden']/div[@class='lg:px-10 px-3']/div[@id='payment-form']/div[@class='el-tabs__content']/div[@id='pane-cc']/div[@class='lg:pt-8 pt-2 bg-secondary-fifth lg:px-12 px-3 pb-8 border border-secondary-third rounded-b-lg']/form[@class='el-form']/div[@class='card-form']/div[1]/div[2]/div[1]/div[1]/div[2]/span[1]");
     private By CardEmptyErrorMSG = By.xpath("//body/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first']/div[@class='checkout bg-secondary-fourth']/div[@class='container']/div[@class='row']/div[@class='col-lg-16']/div[@class='payment-options bg-white rounded overflow-hidden']/div[@class='lg:px-10 px-3']/div[@id='payment-form']/div[@class='el-tabs__content']/div[@id='pane-cc']/div[@class='lg:pt-8 pt-2 bg-secondary-fifth lg:px-12 px-3 pb-8 border border-secondary-third rounded-b-lg']/form[@class='el-form']/div[@class='card-form']/div[2]/div[2]/div[1]/div[1]/div[2]/span[1]");
     private By ExpiryEmptyErrorMSG = By.xpath("//div[@class='col-lg-10 col-md-18 md:mb-0 mb-4']//span[@class='tooltiptext with-arrow']");
@@ -75,6 +80,30 @@ public class PaymentTest extends TestBase {
     @And("^Select the passenger name as passport acknowledgment$")
     public void selectThePassengerNameAsPassportAcknowledgment() {
         driver.findElement(acknowledgeBOX).click();
+    }
+
+    @And("^Press on 'Edit Passenger details'$")
+    public void pressOnEditPassengerDetails() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(editPassengerLINK));
+        driver.findElement(editPassengerLINK).click();
+    }
+
+    @And("^Press on 'Back'$")
+    public void pressOnBack() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(backLINK));
+        driver.findElement(backLINK).click();
+    }
+
+    @And("^Press on 'Fare Rules'$")
+    public void pressOnFareRules() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(fareRulesLINK).click();
+    }
+
+    @And("^Press on 'Terms and conditions'$")
+    public void pressOnTermsAndConditions() throws InterruptedException{
+        Thread.sleep(3000);
+        driver.findElement(termsAndConditionsLINK).click();
     }
 
     @Then("^error message appear for each field at fill passenger details on payment page$")

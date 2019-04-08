@@ -4,7 +4,7 @@ Feature: Go to MyBooking page
     Given Navigate to Fly365 "stage" site
     And open login page
 
-
+  @Sign_Out
   Scenario: Verify that the registered user can go to My Booking page
     And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
     And user enter email "john.smith.fly365@gmail.com"
@@ -15,7 +15,7 @@ Feature: Go to MyBooking page
     And user logout
     And delete new user at database "john.smith.fly365@gmail.com"
 
-
+  @Sign_Out
   Scenario: Verify that the new registered user view empty booking history
     And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
     And user enter email "john.smith.fly365@gmail.com"
@@ -26,7 +26,7 @@ Feature: Go to MyBooking page
     And user logout
     And delete new user at database "john.smith.fly365@gmail.com"
 
-
+  @Sign_Out
   Scenario: Verify that the new registered user back to Home Page when click Back button
     And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
     And user enter email "john.smith.fly365@gmail.com"

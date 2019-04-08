@@ -182,4 +182,14 @@ public class SignUpTest extends TestBase {
         String EmptyPWError = driver.findElement(EmptyPasswordErrorMSG).getText();
         Assert.assertEquals(EmptyPWError, "Please enter password");
     }
+
+    @And("^Delete the user \"(.*)\" if he exists in the database$")
+    public void deleteTheUserIfHeExistsInTheDatabase(String userEmail) throws Throwable {
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "Select email from users where email = '"+userEmail+"'");
+        if (DataBase.data != null) {
+            DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "delete from users where email='"+userEmail+"'");
+        }
+    }
+
+
 }

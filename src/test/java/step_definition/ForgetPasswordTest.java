@@ -21,6 +21,9 @@ public class ForgetPasswordTest extends TestBase {
     private By SendEmailBTN = By.xpath("//button[contains(text(),'Send')]");
     private By EmailErrorMSG = By.xpath("//span[@class='tooltiptext with-arrow']");
     private By LoginBTN = By.xpath("//button[contains(text(),'Login')]");
+    private By passwordTXT = By.xpath("//form/div/div[1]//div[2]//div[1]//input");
+    private By confirmPasswordTXT = By.xpath("//form/div/div[2]//div[2]//div[1]//input");
+    private By resetPasswordBTN = By.xpath("//button[text()='Reset password']");
 
 
     @And("^press on forget password link$")
@@ -87,4 +90,22 @@ public class ForgetPasswordTest extends TestBase {
         Assert.assertEquals(EmptyEmailMSGText, "!we can't find any account with this email");
     }
 
+    @And("^Press on Reset Password Button$")
+    public void pressOnResetPasswordButton() {
+        driver.findElement(resetPasswordBTN).click();
+    }
+
+    @And("^Go to the Reset Password page and add new password \"(.*)\"$")
+    public void goToTheResetPasswordPageAndAddNewPassword(String newPassword) throws Throwable {
+        Thread.sleep(5000);
+        for (String windowID : driver.getWindowHandles()) {
+            String title = driver.switchTo().window(windowID).getTitle();
+            if (title.equals("Fly365 - reset-password")) {
+                wait.until(ExpectedConditions.visibilityOfElementLocated(passwordTXT));
+                driver.findElement(passwordTXT).sendKeys(newPassword);
+                driver.findElement(confirmPasswordTXT).sendKeys(newPassword);
+                break;
+            }
+        }
+    }
 }
