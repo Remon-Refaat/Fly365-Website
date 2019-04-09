@@ -205,13 +205,15 @@ public class HomeTest extends TestBase {
     }
 
     @And("^Select the date of the return for round trip, after \"(.*)\" day from today$")
-    public void selectTheDateOfTheReturnForRoundTripAfterDayFromToday(int period) {
+    public void selectTheDateOfTheReturnForRoundTripAfterDayFromToday(int period) throws InterruptedException {
         String returnDate = gmObject.addDateWithCertainPeriodAndFormat(period, "dd MMM yyyy");
         driver.findElement(returnRoundCalenderDPK).sendKeys(returnDate);
+        Thread.sleep(8000);
     }
 
     @And("^Press on Search Now$")
-    public void pressOnSearchNow() {
+    public void pressOnSearchNow() throws InterruptedException {
+        Thread.sleep(8000);
         driver.findElement(searchNowBTN).click();
     }
 
@@ -261,6 +263,7 @@ public class HomeTest extends TestBase {
 
     @And("^Select Passengers: \"(.*)\" adult, \"(.*)\" child, \"(.*)\" infant$")
     public void selectPassengersAdultChildInfant(int adultCount, int childCount, int infantCount) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(passengerCabinTXT));
         driver.findElement(passengerCabinTXT).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(passengerCabinPOPOVER));
 

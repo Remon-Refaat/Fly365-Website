@@ -6,8 +6,11 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class APIUtility extends TestBase {
 
@@ -50,8 +53,8 @@ public class APIUtility extends TestBase {
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json");
             connection.setRequestProperty("x-store-id", "fly365_com");
-            connection.setRequestProperty("authorization", "XXu5WbKbM6XHbU5VKNETr6AMnNaVNd9E");
-            connection.setRequestProperty("x-store-user", "fly365_com_www");
+            connection.setRequestProperty("authorization", "guMRjevTJNNgv49LRTNCTzfp9cWnW6Sj");
+            connection.setRequestProperty("x-store-user", "fly365_com_nz");
             OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream(), "UTF-8");
             writer.write(tripType);
             writer.close();
@@ -79,6 +82,7 @@ public class APIUtility extends TestBase {
         }
         return itineraryId;
     }
+
 
     public static String createCart(String itineraryId, String domain) {
 

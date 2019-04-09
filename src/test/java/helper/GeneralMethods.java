@@ -5,9 +5,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class GeneralMethods extends TestBase {
 
@@ -39,4 +43,41 @@ public class GeneralMethods extends TestBase {
         String date = simpleFormat.format(cal.getTime());
         return date;
     }
+
+    public String changeFaretoDecimalFormat(By element){
+        String numberAsStringValue = driver.findElement(element).getText().trim().replaceAll("[a-zA-Z\\s\\,]","");
+        Float numberAsFloatValue=Float.parseFloat(numberAsStringValue);
+        DecimalFormat df = new DecimalFormat("0.00");
+        df.setMaximumFractionDigits(2);
+        String numberAsStringWithTwoDecimals = df.format(numberAsFloatValue);
+        return numberAsStringWithTwoDecimals;
+    }
+
+    public String changeFaretoDecimalFormatAPI(String element){
+        Float numberAsFloatValue=Float.parseFloat(element);
+        DecimalFormat df = new DecimalFormat("0.00");
+        df.setMaximumFractionDigits(2);
+        String numberAsStringWithTwoDecimals = df.format(numberAsFloatValue);
+        return numberAsStringWithTwoDecimals;
+    }
+
+    public long changeTimeFormatInMinutes(String time){
+        String[] split = time.split("  ");
+        long minutes = 0;
+        if(split.length == 2) {
+             minutes = TimeUnit.HOURS.toMinutes(Integer.parseInt(split[0])) +
+                    Integer.parseInt(split[1]);
+        }
+        return minutes;
+    }
+
+    public String changeDateFormat(String deliverydate) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
+
+        Date date = sdf.parse(deliverydate);
+
+        sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(date);
+    }
+
 }
