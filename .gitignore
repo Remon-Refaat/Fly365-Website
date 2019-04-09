@@ -1,6 +1,7 @@
 # Comment
 
 /target/*
+/Screenshots/*
 *.jar
 .idea/
 fly365.iml
