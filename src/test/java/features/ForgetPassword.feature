@@ -94,5 +94,5 @@ Feature: Forget Password
     And press on forget password link
     And enter unregistered email at forget password page
     When click on send email button
-    Then user shall see email not registered error message at forget password page
+    Then user shall see successfully message
 

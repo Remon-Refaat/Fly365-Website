@@ -32,12 +32,12 @@ public class PaymentTest extends TestBase {
     private By termsAndConditionsLINK = By.xpath("//p/a[2]");
     private By backLINK = By.xpath("//div[6]/div");
 
-    private By HolderEmptyErrorMSg = By.xpath("//body/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first']/div[@class='checkout bg-secondary-fourth']/div[@class='container']/div[@class='row']/div[@class='col-lg-16']/div[@class='payment-options bg-white rounded overflow-hidden']/div[@class='lg:px-10 px-3']/div[@id='payment-form']/div[@class='el-tabs__content']/div[@id='pane-cc']/div[@class='lg:pt-8 pt-2 bg-secondary-fifth lg:px-12 px-3 pb-8 border border-secondary-third rounded-b-lg']/form[@class='el-form']/div[@class='card-form']/div[1]/div[2]/div[1]/div[1]/div[2]/span[1]");
-    private By CardEmptyErrorMSG = By.xpath("//body/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first']/div[@class='checkout bg-secondary-fourth']/div[@class='container']/div[@class='row']/div[@class='col-lg-16']/div[@class='payment-options bg-white rounded overflow-hidden']/div[@class='lg:px-10 px-3']/div[@id='payment-form']/div[@class='el-tabs__content']/div[@id='pane-cc']/div[@class='lg:pt-8 pt-2 bg-secondary-fifth lg:px-12 px-3 pb-8 border border-secondary-third rounded-b-lg']/form[@class='el-form']/div[@class='card-form']/div[2]/div[2]/div[1]/div[1]/div[2]/span[1]");
-    private By ExpiryEmptyErrorMSG = By.xpath("//div[@class='col-lg-10 col-md-18 md:mb-0 mb-4']//span[@class='tooltiptext with-arrow']");
-    private By CVVEmptyErrorMSG = By.xpath("//div[@class='col-md-6']//span[@class='tooltiptext with-arrow']");
-    private By Yes1EmptyErrorMSG = By.xpath("//body/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first']/div[@class='checkout bg-secondary-fourth']/div[@class='container']/div[@class='row']/div[@class='col-lg-16']/div[@class='rules-policy bg-white rounded overflow-hidden mt-5']/div[@class='row lg:px-10 px-3']/div[@class='col-md-24']/form[@class='el-form']/div[1]/div[1]/div[1]/span[1]");
-    private By Yes2EmptyErrorMSG = By.xpath("//body/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first']/div[@class='checkout bg-secondary-fourth']/div[@class='container']/div[@class='row']/div[@class='col-lg-16']/div[@class='rules-policy bg-white rounded overflow-hidden mt-5']/div[@class='row lg:px-10 px-3']/div[@class='col-md-24']/form[@class='el-form']/div[2]/div[1]/div[1]/span[1]");
+    private By HolderEmptyErrorMSg = By.xpath("//*[@id='pane-cc']//form/div[2]/div[1]/div[2]//div[2]/span");
+    private By CardEmptyErrorMSG = By.xpath("//*[@id='pane-cc']//form/div[2]/div[2]/div[2]//div[2]/span");
+    private By ExpiryEmptyErrorMSG = By.xpath("//*[@id='pane-cc']//form/div[2]/div[3]/div[2]//div[2]/span");
+    private By CVVEmptyErrorMSG = By.xpath("//*[@id='pane-cc']//form/div[2]/div[3]/div[3]//div[2]/span");
+    private By Yes1EmptyErrorMSG = By.xpath("//div[2]//div[1]//form/div[1]/div/div/span");
+    private By Yes2EmptyErrorMSG = By.xpath("//div[2]//div[1]//form/div[2]/div/div/span");
 
     @And("^Add a valid data for the credit card$")
     public void addAValidDataForTheCreditCard(DataTable paymentCardData) {
@@ -108,23 +108,22 @@ public class PaymentTest extends TestBase {
 
     @Then("^error message appear for each field at fill passenger details on payment page$")
     public void errorMessageAppearForEachFieldAtFillPassengerDetailsOnPaymentPage() {
-
         String Holderempty = driver.findElement(HolderEmptyErrorMSg).getText();
-        Assert.assertEquals(Holderempty, "Please enter name");
+        Assert.assertEquals(Holderempty, "!Please enter name");
 
         String CardEmpty = driver.findElement(CardEmptyErrorMSG).getText();
-        Assert.assertEquals(CardEmpty, "Please input a card number");
+        Assert.assertEquals(CardEmpty, "!Please input a card number");
 
         String Expirtempty = driver.findElement(ExpiryEmptyErrorMSG).getText();
-        Assert.assertEquals(Expirtempty, "Please enter an expiry date");
+        Assert.assertEquals(Expirtempty, "!Please enter an expiry date");
 
         String CVVEmpty = driver.findElement(CVVEmptyErrorMSG).getText();
-        Assert.assertEquals(CVVEmpty, "Please enter CVV");
+        Assert.assertEquals(CVVEmpty, "!Please enter CVV");
 
         String yes1error = driver.findElement(Yes1EmptyErrorMSG).getText();
-        Assert.assertEquals(yes1error, "Please acknowledge risk to continue");
+        Assert.assertEquals(yes1error, "!Please acknowledge risk to continue");
 
         String yes2empty = driver.findElement(Yes2EmptyErrorMSG).getText();
-        Assert.assertEquals(yes2empty, "Please accept terms and conditions to continue");
+        Assert.assertEquals(yes2empty, "!Please accept terms and conditions to continue");
     }
 }

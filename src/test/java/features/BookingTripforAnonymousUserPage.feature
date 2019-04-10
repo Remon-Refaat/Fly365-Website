@@ -3,28 +3,6 @@ Feature: Booking a Trip for Anonymous User
   Background:
     Given Navigate to Fly365 "stage" site
 
-  Scenario: Verify that the mandatory fields are required at one way
-    And Select One Way trip
-    And Press on Search Now
-    Then error message appear for each field at fill passenger details
-
-  Scenario: Verify that the anonymous user can book a One-Way trip
-    And Select One Way trip
-    And Add airport to the Origin "Cairo International Airport (CAI), Egypt"
-    And Add airport to the Destination "Dublin International (DUB), Ireland"
-    And Select the date of the departure, after "5" day from today
-    And Press on Search Now
-    And Choose a trip
-    And Add the following data in the passenger Details
-      | Title | First Name | Middle Name | Last Name | Day | Month    | Year |
-      | Mr    | John       | William     | Smith     | 15  | February | 1985 |
-    And Add the following data in the Contact Details
-      | Title | First Name | Last Name | Email                        | Phone Number|
-      | Mr    | John      | Smith      | john.smith.fly365@gmail.com  |0136253637474|
-    And Click on Next Step
-    And Press on Pay button
-    Then error message appear for each field at fill passenger details on payment page
-
   Scenario: Verify that the anonymous user can book a One-Way trip
     And Select One Way trip
     And Add airport to the Origin "Cairo International Airport (CAI), Egypt"

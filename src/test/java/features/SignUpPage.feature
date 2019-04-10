@@ -9,11 +9,6 @@ Feature: Sign Up
     And   Sign Up page is opened
 
 
-  Scenario: Verify that the user can sign up
-    And   Click on Create Account
-    Then  error message appear over the required fields
-
-
   @Go_Tab_Again
   @New_Tab
   @Email_Logout

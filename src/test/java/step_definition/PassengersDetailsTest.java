@@ -121,31 +121,31 @@ public class PassengersDetailsTest extends TestBase {
     @Then("^error message appear for each field at fill passenger details$")
     public void errorMessageAppearForEachFieldAtFillPassengerDetails() {
         String passnegerEmptyTitle = driver.findElement(passengerTitleEmptyErrorMSG).getText();
-        Assert.assertEquals(passnegerEmptyTitle, "Please enter title");
+        Assert.assertEquals(passnegerEmptyTitle, "!Please enter title");
 
         String passenegeremptyfirstname = driver.findElement(passenegerFirstNameEmptyErrorMSG).getText();
-        Assert.assertEquals(passenegeremptyfirstname, "Please enter first name");
+        Assert.assertEquals(passenegeremptyfirstname, "!Please enter first name");
 
         String passenegeremptylastname = driver.findElement(passenegerLastNameEmptyErrorMSG).getText();
-        Assert.assertEquals(passenegeremptylastname, "Please enter family name");
+        Assert.assertEquals(passenegeremptylastname, "!Please enter family name");
 
         String passenegeremptybirthdate = driver.findElement(PassengerBirthDateEmptyErrorMSG).getText();
-        Assert.assertEquals(passenegeremptybirthdate, "Please enter birth date");
+        Assert.assertEquals(passenegeremptybirthdate, "!Please enter birth date");
 
         String ContactEmptyTitle = driver.findElement(ContactDetialsTitleEmptyErroeMSG).getText();
-        Assert.assertEquals(ContactEmptyTitle, "Please enter title");
+        Assert.assertEquals(ContactEmptyTitle, "!Please enter title");
 
         String ContactemptyFirstname = driver.findElement(ContactdetailsFirstNameEmptyErrorMSG).getText();
-        Assert.assertEquals(ContactemptyFirstname, "Please enter first name");
+        Assert.assertEquals(ContactemptyFirstname, "!Please enter first name");
 
         String ContactemptyLastName = driver.findElement(ContactDetailsLastNameEmptyErrorMSG).getText();
-        Assert.assertEquals(ContactemptyLastName, "Please enter family name");
+        Assert.assertEquals(ContactemptyLastName, "!Please enter family name");
 
         String Contactemptyemail = driver.findElement(ContactDetailsEmailEmptyErrorMSg).getText();
-        Assert.assertEquals(Contactemptyemail, "Please enter email");
+        Assert.assertEquals(Contactemptyemail, "!Please enter email");
 
         String ContactemptyPhone = driver.findElement(ContactDetailsPhoneEmptyErrorMSG).getText();
-        Assert.assertEquals(ContactemptyPhone, "Please enter Phone Number");
+        Assert.assertEquals(ContactemptyPhone, "!Please enter Phone Number");
 
     }
 }

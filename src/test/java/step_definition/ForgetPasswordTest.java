@@ -20,6 +20,7 @@ public class ForgetPasswordTest extends TestBase {
     private By ForgeEmailTXT = By.xpath("//input[@placeholder='john@example.com']");
     private By SendEmailBTN = By.xpath("//button[contains(text(),'Send')]");
     private By EmailErrorMSG = By.xpath("//span[@class='tooltiptext with-arrow']");
+    private By unregisteredEmailSuccessfulMSG = By.xpath("//div[3]//div[1]/p");
     private By LoginBTN = By.xpath("//button[contains(text(),'Login')]");
     private By passwordTXT = By.xpath("//form/div/div[1]//div[2]//div[1]//input");
     private By confirmPasswordTXT = By.xpath("//form/div/div[2]//div[2]//div[1]//input");
@@ -81,14 +82,6 @@ public class ForgetPasswordTest extends TestBase {
         Assert.assertEquals(EmptyEmailMSGText, "!Please enter a valid email");
     }
 
-    @Then("^user shall see email not registered error message at forget password page$")
-    public void userShallSeeEmailNotRegisteredErrorMessageAtForgetPasswordPage() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(EmailErrorMSG));
-        WebElement ErrorMessage = driver.findElement(EmailErrorMSG);
-        Assert.assertTrue(ErrorMessage.isDisplayed());
-        String EmptyEmailMSGText = driver.findElement(EmailErrorMSG).getText();
-        Assert.assertEquals(EmptyEmailMSGText, "!we can't find any account with this email");
-    }
 
     @And("^Press on Reset Password Button$")
     public void pressOnResetPasswordButton() {
@@ -107,5 +100,12 @@ public class ForgetPasswordTest extends TestBase {
                 break;
             }
         }
+    }
+
+    @Then("^user shall see successfully message$")
+    public void userShallSeeSuccessfullyMessage() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(unregisteredEmailSuccessfulMSG));
+        String EmptyEmailMSGText = driver.findElement(unregisteredEmailSuccessfulMSG).getText();
+        Assert.assertEquals(EmptyEmailMSGText, "An email with instructions on how to reset your password will be sent your email shortly");
     }
 }

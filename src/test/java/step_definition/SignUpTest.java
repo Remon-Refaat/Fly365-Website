@@ -35,10 +35,6 @@ public class SignUpTest extends TestBase {
     private By hidePasswordBTN = By.xpath("//span[text()='Hide']");
     private By passwordDisplayedLBL = By.xpath("//div[@class='password-input el-input']/input[@type='text']");
     private By passwordNotDisplayedLBL = By.xpath("//div[@class='password-input el-input']/input[@type='password']");
-    private By EmptyFirstNameErrorMSG = By.xpath("//body/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first']/div[@class='form-container py-10']/div[@class='form-layout mx-auto bg-white rounded text-white relative']/div[@class='flex flex-col text-white']/div[@class='flex flex-col text-white']/form[@class='el-form']/div[@class='form-container']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/span[1]");
-    private By EmptyLastNameErrorMSG = By.xpath("//body/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first']/div[@class='form-container py-10']/div[@class='form-layout mx-auto bg-white rounded text-white relative']/div[@class='flex flex-col text-white']/div[@class='flex flex-col text-white']/form[@class='el-form']/div[@class='form-container']/div[@class='row']/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/span[1]");
-    private By EmptyEmailErrorMSG = By.xpath("//body/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first']/div[@class='form-container py-10']/div[@class='form-layout mx-auto bg-white rounded text-white relative']/div[@class='flex flex-col text-white']/div[@class='flex flex-col text-white']/form[@class='el-form']/div[@class='form-container']/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/span[1]");
-    private By EmptyPasswordErrorMSG = By.xpath("//body/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first']/div[@class='form-container py-10']/div[@class='form-layout mx-auto bg-white rounded text-white relative']/div[@class='flex flex-col text-white']/div[@class='flex flex-col text-white']/form[@class='el-form']/div[@class='form-container']/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/span[1]");
 
 
     @And("Open Sign up page")
@@ -166,21 +162,6 @@ public class SignUpTest extends TestBase {
     @Then("^The password should hide$")
     public void thePasswordShouldHide() {
         Assert.assertTrue(true, String.valueOf(driver.findElement(passwordNotDisplayedLBL).isDisplayed()));
-    }
-
-    @Then("^error message appear over the required fields$")
-    public void errorMessageAppearOverTheRequiredFields() {
-        String emptyFNerror = driver.findElement(EmptyFirstNameErrorMSG).getText();
-        Assert.assertEquals(emptyFNerror, "Please Enter First Name");
-
-        String EmptyLNError = driver.findElement(EmptyLastNameErrorMSG).getText();
-        Assert.assertEquals(EmptyLNError, "Please Enter Family Name");
-
-        String EmptyEMError = driver.findElement(EmptyEmailErrorMSG).getText();
-        Assert.assertEquals(EmptyEMError, "Please enter email");
-
-        String EmptyPWError = driver.findElement(EmptyPasswordErrorMSG).getText();
-        Assert.assertEquals(EmptyPWError, "Please enter password");
     }
 
     @And("^Delete the user \"(.*)\" if he exists in the database$")

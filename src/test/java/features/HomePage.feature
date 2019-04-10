@@ -4,11 +4,6 @@ Feature: Home page
     Given Navigate to Fly365 "stage" site
 
 
-  Scenario: Verify that mandatory field at subscribe email is required
-    When Press on SUBSCRIBE
-    Then empty subscribe error message appear
-
-
   Scenario: Verify that "About Us" link in the footer open on the correct link
     And Press on 'About us'
     Then 'About Us' page is opened
@@ -96,3 +91,7 @@ Feature: Home page
     And Press on Passenger/Cabin pop over
     And Press on Passenger Rules link
     Then 'Passenger Rules' pop up will be opened
+
+    Scenario: Validation messages will be displayed for empty origin, destination, date
+      And Press on Search Now
+      Then error message appear for each field

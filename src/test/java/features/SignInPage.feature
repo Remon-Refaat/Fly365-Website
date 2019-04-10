@@ -20,7 +20,6 @@ Feature: login to account
     And delete new user at database "john.smith.fly365@gmail.com"
 
 
-    ## covered in sign up form ##
   Scenario: login into account with password less than 8 chars
     And user enter email "john.smith.fly365@gmail.com"
     And user enter password "111"
@@ -28,13 +27,11 @@ Feature: login to account
     Then user shall see password error message
 
 
-        ## covered in sign up form ##
   Scenario: login into account with password more than 60 chars
     And user enter email "john.smith.fly365@gmail.com"
     And user enter password "1111111111111111111111111111111111111111111111111111111111111"
     When the user click on login button
     Then user shall see password error message
-
 
   Scenario: login into account with empty password
     And user enter email "john.smith.fly365@gmail.com"
