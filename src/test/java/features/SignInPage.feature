@@ -31,7 +31,6 @@ Feature: login to account
     When the user click on login button
     Then user shall see password error message
 
-
   Scenario: login into account with empty password
     And user enter email "john.smith.fly365@gmail.com"
     And user enter empty password

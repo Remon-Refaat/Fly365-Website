@@ -4,8 +4,10 @@ Feature: Sign Up
     Given Navigate to Fly365 "stage" site
     And   Open Sign up page
 
+
   Scenario: Verify that the user can open sign up page
     And   Sign Up page is opened
+
 
   @Go_Tab_Again
   @New_Tab
@@ -133,9 +135,4 @@ Feature: Sign Up
     And Click on Show beside password
     And Click on Hide beside password
     Then The password should hide
-
-  Scenario: Verify that the system display validation on mandatory fields
-    And   Click on Create Account
-    Then  error message appear over the required fields
-
 

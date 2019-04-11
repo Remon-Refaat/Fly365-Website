@@ -31,3 +31,7 @@ Feature: Subscription Email
     And  Add previously subscribed email address "john.smith.fly365@gmail.com" to Subscription Email field
     And Press on SUBSCRIBE
     Then Error validation message is displayed
+
+  Scenario: Verify that mandatory field at subscribe email is required
+    When Press on SUBSCRIBE
+    Then empty subscribe error message appear

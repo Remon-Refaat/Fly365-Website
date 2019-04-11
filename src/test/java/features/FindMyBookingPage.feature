@@ -19,8 +19,7 @@ Feature: Find my Booking
 #    And Press Find Booking
 #    Then The system will retrieve the details of the Booking for this "Airline Reference"
 
-
-  Scenario: Verify that the anonymous user can retrieve his/her booking via Airline Reference
+  Scenario: Verify that error message appear over the two fields
     And Click on Find My Booking
     And Press Find Booking
     Then error message appear appear over the two fields

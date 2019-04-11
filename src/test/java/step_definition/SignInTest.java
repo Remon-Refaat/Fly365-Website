@@ -28,6 +28,7 @@ public class SignInTest extends TestBase {
     private By AccountSettingBTN = By.xpath("//a[@class='account-links__link text-sm flex font-medium items-center link link-with-icon']");
     private By InvalidLogInMSG = By.xpath("//div[@class='tooltip error error']//span[@class='tooltiptext']");
     private By PassWordErrorMSG = By.xpath("//span[@class='tooltiptext with-arrow']");
+    private By emptyPassWordErrorMSG = By.xpath("//div[2]/div[2]//div[2]/span");
     private By EmailErrorMSG = By.xpath("//span[@class='tooltiptext with-arrow']");
     private By HomePageTitle = By.xpath("//a[text()='SIGN IN']");
     private By SignInHeader = By.xpath("//div[@class='text-xs mb-8 text-primary-fourth']");
@@ -101,9 +102,7 @@ public class SignInTest extends TestBase {
     @Then("^user shall see empty password error message$")
     public void userShallSeeEmptyPasswordErrorMessage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(PassWordErrorMSG));
-        WebElement passWordErrorMessage = driver.findElement(PassWordErrorMSG);
-        Assert.assertTrue(passWordErrorMessage.isDisplayed());
-        String PassWordErrorMSGText = driver.findElement(PassWordErrorMSG).getText();
+        String PassWordErrorMSGText = driver.findElement(emptyPassWordErrorMSG).getText();
         Assert.assertEquals(PassWordErrorMSGText, "!Please enter password");
     }
 
