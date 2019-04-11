@@ -1,3 +1,4 @@
+@Sign_Out
 Feature: Open Account Settings page
 
   Background: Open Fly365 site

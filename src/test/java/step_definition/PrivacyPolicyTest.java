@@ -13,7 +13,7 @@ public class PrivacyPolicyTest extends TestBase {
 
     @Then("^'Privacy Policy' page is opened$")
     public void privacyPolicyPageIsOpened() {
-                String headerText = driver.findElement(privacyPolicyHDRLINK).getText();
-                Assert.assertEquals(headerText, "Privacy Policy");
+        String headerText = driver.findElement(privacyPolicyHDRLINK).getText();
+        Assert.assertEquals(headerText, "Privacy Policy");
     }
 }

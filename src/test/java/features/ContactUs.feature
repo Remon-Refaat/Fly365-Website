@@ -17,3 +17,12 @@ Feature: Use Contact Us Page
     And Write the message
     And Click Send
     Then Success message displayed
+
+  Scenario: Verify that the user received email when send message through contact us page
+    Given Press on first 'Contact Us'
+    And Enter Full Name
+    And Enter Email
+    And Choose Category
+    And Write the message
+    And Click Send
+    Then Contact us email is sent successfully

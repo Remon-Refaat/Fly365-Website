@@ -29,8 +29,8 @@ public class ContactUsTest extends TestBase {
 
     @Then("^'Contact Us' page is opened$")
     public void contactUsPageIsOpened() {
-                String headerText = driver.findElement(contactUsHDR).getText();
-                Assert.assertEquals(headerText, "Contact Us");
+        String headerText = driver.findElement(contactUsHDR).getText();
+        Assert.assertEquals(headerText, "Contact Us");
     }
 
 

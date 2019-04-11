@@ -1,5 +1,5 @@
 @Sign_Out
-Feature: Add Traveller to Login user
+Feature: Add Payment to Login user
 
   Background:
     Given Navigate to Fly365 "stage" site

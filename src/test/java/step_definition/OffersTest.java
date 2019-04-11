@@ -12,8 +12,8 @@ public class OffersTest extends TestBase {
 
     @Then("^Offers page is opened$")
     public void offersPageIsOpened() {
-                String headerText = driver.findElement(offersHDR).getText();
-                Assert.assertEquals(headerText, "Offers");
+        String headerText = driver.findElement(offersHDR).getText();
+        Assert.assertEquals(headerText, "Offers");
     }
 
 

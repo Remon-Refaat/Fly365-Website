@@ -13,8 +13,8 @@ public class SupportCenterTest extends TestBase {
 
     @Then("^'Support Centre' page is opened$")
     public void supportCentrePageIsOpened() {
-                String headerText = driver.findElement(supportCenterHDRLINK).getText();
-                Assert.assertEquals(headerText, "Support Centre");
+        String headerText = driver.findElement(supportCenterHDRLINK).getText();
+        Assert.assertEquals(headerText, "Support Centre");
     }
 
 

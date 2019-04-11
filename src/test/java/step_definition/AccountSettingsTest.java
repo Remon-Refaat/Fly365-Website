@@ -42,7 +42,7 @@ public class AccountSettingsTest extends TestBase {
 
     @Then("^Account Settings page opened$")
     public void accountSettingsPageOpened() {
-        Assert.assertEquals(driver.findElement(accountSettingsHDR).getText(),"Account information details, Add or edit");
+        Assert.assertEquals(driver.findElement(accountSettingsHDR).getText(), "Account information details, Add or edit");
     }
 
     @Then("^Update First Name with (.*)$")
@@ -57,7 +57,7 @@ public class AccountSettingsTest extends TestBase {
     public void checkUpdatedFirstName() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(updateSuccMSG));
         System.out.println(updatedNameHDR);
-        Assert.assertEquals(driver.findElement(updatedNameHDR).getText(),"David");
+        Assert.assertEquals(driver.findElement(updatedNameHDR).getText(),"JohnDavid");
     }
 
     @And("^Click on Billing Address tab$")

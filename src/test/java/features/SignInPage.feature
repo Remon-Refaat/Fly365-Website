@@ -19,16 +19,12 @@ Feature: login to account
     Then user shall see InValid Login Error Message
     And delete new user at database "john.smith.fly365@gmail.com"
 
-
-    ## covered in sign up form ##
   Scenario: login into account with password less than 8 chars
     And user enter email "john.smith.fly365@gmail.com"
     And user enter password "111"
     When the user click on login button
     Then user shall see password error message
 
-
-        ## covered in sign up form ##
   Scenario: login into account with password more than 60 chars
     And user enter email "john.smith.fly365@gmail.com"
     And user enter password "1111111111111111111111111111111111111111111111111111111111111"
@@ -49,14 +45,13 @@ Feature: login to account
     When the user click on login button
     Then user shall see email empty error message
 
-
-        ## covered in sign up form ##
   Scenario: Login into account with invalid email formation
     And user enter email "john.smith.fly365gmail.com"
     And user enter password "@Test123"
     When the user click on login button
     Then user shall see email error message
 
+  @Sign_Out
   Scenario: Login into account with correct details
     And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
     And user enter email "john.smith.fly365@gmail.com"
@@ -66,6 +61,7 @@ Feature: login to account
     And user logout
     And delete new user at database "john.smith.fly365@gmail.com"
 
+  @Sign_Out
   Scenario: Login into account with correct Upper case email
     And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
     And user enter email "john.smith.fly365@gmail.com"
