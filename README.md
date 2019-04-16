@@ -36,3 +36,10 @@ For example, SignUp.feature
 - Scenario Outline should be written for using invalid paramters to the same field having the same expected result
 - Scenario with Data table should be written for scenarios required mutliaple data to fill
 - Scenarios should be separate if the expected results are different
+
+# How to Run Project from Terminal
+
+mvn clean test –Pfull
+mvn -Dbrowser=safari clean test –Pfull
+mvn install -Dcucumber.options="--tags @Smoke"
+mvn -Dbrowser=safari install -Dcucumber.options="--tags @Smoke"
