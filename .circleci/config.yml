@@ -5,7 +5,6 @@ jobs:
     working_directory: ~/circleci-demo-java-spring
 
     docker:
-    - image: circleci/node:jessie-browsers
     - image: circleci/openjdk:8-jdk-browsers
 
     steps:
