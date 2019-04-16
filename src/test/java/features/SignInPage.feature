@@ -1,3 +1,7 @@
+@Smoke
+
+
+@Sign_In
 Feature: login to account
   login to a created account
 

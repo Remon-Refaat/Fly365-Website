@@ -220,11 +220,11 @@ public class SearchTrips extends TestBase
                 firstSegmentOriginCodeAPI = arr.getJSONObject(i).getJSONObject("origin").get("code").toString();
                 firstSegmentOriginDepDateAPI = arr.getJSONObject(i).getJSONObject("origin").getJSONObject("departureTime").get("date").toString();
                 firstSegmentOriginDepTimeAPI = arr.getJSONObject(i).getJSONObject("origin").getJSONObject("departureTime").get("time").toString();
-                firstSegmentOriginTerminalAPI = arr.getJSONObject(i).getJSONObject("origin").get("terminal").toString();
+                firstSegmentOriginTerminalAPI = "Terminal" + arr.getJSONObject(i).getJSONObject("origin").get("terminal").toString();
                 firstSegmentDestinationCodeAPI = arr.getJSONObject(i).getJSONObject("destination").get("code").toString();
                 firstSegmentDestinationDepDateAPI = arr.getJSONObject(i).getJSONObject("destination").getJSONObject("arrivalTime").get("date").toString();
                 firstSegmentDestinationDepTimeAPI= arr.getJSONObject(i).getJSONObject("destination").getJSONObject("arrivalTime").get("time").toString();
-                firstSegmentDestinationTerminalAPI = arr.getJSONObject(i).getJSONObject("destination").get("terminal").toString();
+                firstSegmentDestinationTerminalAPI = "Terminal" + arr.getJSONObject(i).getJSONObject("destination").get("terminal").toString();
                 firstSegmentFuellingStopsAPI = arr.getJSONObject(i).getJSONArray("fuellingStops").toString();
                 firstSegmentFlightTimeAPI = arr.getJSONObject(i).getJSONObject("flightInfo").get("flightTime").toString();
                 firstSegmentCabinClassAPI = arr.getJSONObject(i).getString("cabinClass");
@@ -236,11 +236,11 @@ public class SearchTrips extends TestBase
                 secondSegmentOriginCodeAPI = arr.getJSONObject(i).getJSONObject("origin").get("code").toString();
                 secondSegmentOriginDepDateAPI = arr.getJSONObject(i).getJSONObject("origin").getJSONObject("departureTime").get("date").toString();
                 secondSegmentOriginDepTimeAPI = arr.getJSONObject(i).getJSONObject("origin").getJSONObject("departureTime").get("time").toString();
-                secondSegmentOriginTerminalAPI = arr.getJSONObject(i).getJSONObject("origin").get("terminal").toString();
+                secondSegmentOriginTerminalAPI = "Terminal" + arr.getJSONObject(i).getJSONObject("origin").get("terminal").toString();
                 secondSegmentDestinationCodeAPI = arr.getJSONObject(i).getJSONObject("destination").get("code").toString();
                 secondSegmentDestinationDepDateAPI = arr.getJSONObject(i).getJSONObject("destination").getJSONObject("arrivalTime").get("date").toString();
                 secondSegmentDestinationDepTimeAPI= arr.getJSONObject(i).getJSONObject("destination").getJSONObject("arrivalTime").get("time").toString();
-                secondSegmentDestinationTerminalAPI = arr.getJSONObject(i).getJSONObject("destination").get("terminal").toString();
+                secondSegmentDestinationTerminalAPI = "Terminal" + arr.getJSONObject(i).getJSONObject("destination").get("terminal").toString();
                 secondSegmentFuellingStopsAPI = arr.getJSONObject(i).getJSONArray("fuellingStops").toString();
                 secondSegmentFlightTimeAPI = arr.getJSONObject(i).getJSONObject("flightInfo").get("flightTime").toString();
                 secondSegmentCabinClassAPI = arr.getJSONObject(i).getString("cabinClass");
@@ -304,6 +304,7 @@ public class SearchTrips extends TestBase
         return stopsCountAPI;
     }
 
+
     @And("^Compare the two results$")
     public void compareTheTwoResults() throws ParseException {
         Assert.assertEquals(gmObj.changeFaretoDecimalFormatAPI(displayedPriceAPI),gmObj.changeFaretoDecimalFormat(displayedPriceWEB));
@@ -318,8 +319,8 @@ public class SearchTrips extends TestBase
         Assert.assertEquals(firstSegmentBaggageAPI,driver.findElement(firstSegmentBaggageWEB).getText());
         Assert.assertEquals(firstSegmentOriginCodeAPI,driver.findElement(firstSegmentOriginCodeWEB).getText().replaceAll(".*\\(|\\).*",""));
         Assert.assertEquals(firstSegmentDestinationCodeAPI,driver.findElement(firstSegmentDestinationCodeWEB).getText().replaceAll(".*\\(|\\).*",""));
-        Assert.assertEquals(firstSegmentOriginTerminalAPI,driver.findElement(firstSegmentOriginTerminalWEB).getText().replaceAll(".+[\\s]",""));
-        Assert.assertEquals(firstSegmentDestinationTerminalAPI,driver.findElement(firstSegmentDestinationTerminalWEB).getText().replaceAll(".+[\\s]",""));
+        Assert.assertEquals(firstSegmentOriginTerminalAPI,driver.findElement(firstSegmentOriginTerminalWEB).getText().replaceAll("[\\s]",""));
+        Assert.assertEquals(firstSegmentDestinationTerminalAPI,driver.findElement(firstSegmentDestinationTerminalWEB).getText().replaceAll("[\\s]",""));
         Assert.assertEquals(firstSegmentOriginDepTimeAPI,driver.findElement(firstSegmentOriginDepTimeWEB).getText().replaceAll("\\s\\-",""));
         Assert.assertEquals(firstSegmentDestinationDepTimeAPI,driver.findElement(firstSegmentDestinationDepTimeWEB).getText().replaceAll("\\s\\-",""));
         Assert.assertEquals(firstSegmentOriginDepDateAPI,gmObj.changeDateFormat(driver.findElement(firstSegmentOriginDepDateWEB).getText()));
@@ -333,8 +334,8 @@ public class SearchTrips extends TestBase
         Assert.assertEquals(secondSegmentBaggageAPI,driver.findElement(secondSegmentBaggageWEB).getText());
         Assert.assertEquals(secondSegmentOriginCodeAPI,driver.findElement(secondSegmentOriginCodeWEB).getText().replaceAll(".*\\(|\\).*",""));
         Assert.assertEquals(secondSegmentDestinationCodeAPI,driver.findElement(secondSegmentDestinationCodeWEB).getText().replaceAll(".*\\(|\\).*",""));
-        Assert.assertEquals(secondSegmentOriginTerminalAPI,driver.findElement(secondSegmentOriginTerminalWEB).getText().replaceAll(".+[\\s]",""));
-        Assert.assertEquals(secondSegmentDestinationTerminalAPI,driver.findElement(secondSegmentDestinationTerminalWEB).getText().replaceAll(".+[\\s]",""));
+        Assert.assertEquals(secondSegmentOriginTerminalAPI,driver.findElement(secondSegmentOriginTerminalWEB).getText().replaceAll("[\\s]",""));
+        Assert.assertEquals(secondSegmentDestinationTerminalAPI,driver.findElement(secondSegmentDestinationTerminalWEB).getText().replaceAll("[\\s]",""));
         Assert.assertEquals(secondSegmentOriginDepTimeAPI,driver.findElement(secondSegmentOriginDepTimeWEB).getText().replaceAll("\\s\\-",""));
         Assert.assertEquals(secondSegmentDestinationDepTimeAPI,driver.findElement(secondSegmentDestinationDepTimeWEB).getText().replaceAll("\\s\\-",""));
         Assert.assertEquals(secondSegmentOriginDepDateAPI,gmObj.changeDateFormat(driver.findElement(secondSegmentOriginDepDateWEB).getText()));

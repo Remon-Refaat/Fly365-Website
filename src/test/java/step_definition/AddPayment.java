@@ -118,8 +118,9 @@ public class AddPayment extends TestBase {
     }
 
     @Then("^Success message is displayed$")
-    public void successMessageIsDisplayed() {
+    public void successMessageIsDisplayed() throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOfElementLocated(cardAddSuccMSG));
+        Thread.sleep(2000);
         Assert.assertTrue(driver.findElement(cardAddSuccMSG).isDisplayed());
     }
 }

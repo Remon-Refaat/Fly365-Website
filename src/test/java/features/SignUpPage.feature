@@ -1,9 +1,13 @@
+@Smoke
+
+
+@Subscription_Email
+@Sign_Up
 Feature: Sign Up
 
   Background: Open Fly365 Site
     Given Navigate to Fly365 "stage" site
     And   Open Sign up page
-
 
   Scenario: Verify that the user can open sign up page
     And   Sign Up page is opened

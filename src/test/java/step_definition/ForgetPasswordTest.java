@@ -85,12 +85,13 @@ public class ForgetPasswordTest extends TestBase {
 
     @And("^Press on Reset Password Button$")
     public void pressOnResetPasswordButton() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(resetPasswordBTN));
         driver.findElement(resetPasswordBTN).click();
     }
 
     @And("^Go to the Reset Password page and add new password \"(.*)\"$")
     public void goToTheResetPasswordPageAndAddNewPassword(String newPassword) throws Throwable {
-        Thread.sleep(5000);
+        Thread.sleep(7000);
         for (String windowID : driver.getWindowHandles()) {
             String title = driver.switchTo().window(windowID).getTitle();
             if (title.equals("Fly365 - reset-password")) {

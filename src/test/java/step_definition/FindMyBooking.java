@@ -375,19 +375,19 @@ public class FindMyBooking extends TestBase {
         Assert.assertEquals(TestText,"Fly365 Pty Ltd\n" +
                 "ABN : 606 601 521\n" +
                 "TAX INVOICE\n" +
-                "Fly365 Reference Airlines Reference Invoice Date\n" +
+                "Fly365 Reference Airlines Reference Date Issued\n" +
                 fly365Ref+" "+airlineRef+" "+dateIssued+"\n" +
                 "Flights Details\n" +
                 "From Cairo (CAI) to Dublin (DUB) on the "+firstTripDepartureDate+"\n" +
                 "Trip Details\n" +
                 "Fare Details\n" +
-                "Family Name/First Name Title Type Frequent Flyer Base Fare Taxes and Fees Total\n" +
-                "Smith/John Mr Adult N/A "+adultFare+" "+currency+" "+adultTax+" "+currency+" "+totalFareperAdult+" "+currency+"\n" +
-                "Smith/Michael Mr Adult N/A "+adultFare+" "+currency+" "+adultTax+" "+currency+" "+totalFareperAdult+" "+currency+"\n" +
-                "Smith/Frank Mr Child N/A "+childFare+" "+currency+" "+childTax+" "+currency+" "+totalFareperChild+" "+currency+"\n" +
-                "Smith/Peter Mr Child N/A "+childFare+" "+currency+" "+childTax+" "+currency+" "+totalFareperChild+" "+currency+"\n" +
-                "Frank/Paul Mr Infant N/A "+infantFare+" "+currency+" "+infantTax+" "+currency+" "+totalFareperInfant+" "+currency+"\n" +
-                "Frank/John Mr Infant N/A "+infantFare+" "+currency+" "+infantTax+" "+currency+" "+totalFareperInfant+" "+currency+"\n" +
+                "Family Name/First Middle Names Title Type Frequent Flyer Base Fare Taxes and Fees Total\n" +
+                "Smith/John William Mr Adult N/A "+adultFare+" "+currency+" "+adultTax+" "+currency+" "+totalFareperAdult+" "+currency+"\n" +
+                "Smith/Michael William Mr Adult N/A "+adultFare+" "+currency+" "+adultTax+" "+currency+" "+totalFareperAdult+" "+currency+"\n" +
+                "Smith/Frank William Mr Child N/A "+childFare+" "+currency+" "+childTax+" "+currency+" "+totalFareperChild+" "+currency+"\n" +
+                "Smith/Peter William Mr Child N/A "+childFare+" "+currency+" "+childTax+" "+currency+" "+totalFareperChild+" "+currency+"\n" +
+                "Frank/Paul Peter Mr Infant N/A "+infantFare+" "+currency+" "+infantTax+" "+currency+" "+totalFareperInfant+" "+currency+"\n" +
+                "Frank/John Peter Mr Infant N/A "+infantFare+" "+currency+" "+infantTax+" "+currency+" "+totalFareperInfant+" "+currency+"\n" +
                 "Payment Summary Total\n" +
                 "Total Base Fare "+totalBaseFare+" "+currency+"\n" +
                 "Total Taxes and Fees "+totalTaxesAndFees+" "+currency+"\n" +
@@ -406,7 +406,6 @@ public class FindMyBooking extends TestBase {
                 firstTripTotalTravelTime+"\n" +
                 "1 Stop\n");
     }
-
 
     @And("^Download the booking confirmation pdf$")
     public void downloadTheBookingConfirmationPdf() throws InterruptedException {
@@ -454,10 +453,10 @@ public class FindMyBooking extends TestBase {
                 "Name Email Phone\n" +
                 "John Smith john.smith.fly365@gmail.com +20 136253637474\n" +
                 "Passengers Details\n" +
-                "Family Name/First Names Title Birth Date Type Frequent Flyer\n" +
-                "Smith/John Mr 15 Feb 1985 Adult N/A\n" +
-                "Smith/Frank Mr 15 Feb 2012 Child N/A\n" +
-                "Frank/Paul Mr 15 Jan 2019 Infant N/A\n" +
+                "Family Name/First Middle Names Title Birth Date Type Frequent Flyer\n" +
+                "Smith/John William Mr 15 Feb 1985 Adult N/A\n" +
+                "Smith/Frank William Mr 15 Feb 2012 Child N/A\n" +
+                "Frank/Paul Peter Mr 15 Jan 2019 Infant N/A\n" +
                 "Flights Details\n" +
                 "From Auckland (AKL) to Canberra (CBR) on the "+firstTripDepartureDate+"\n" +
                 firstTripCarrierCode+"\n" +
@@ -527,7 +526,7 @@ public class FindMyBooking extends TestBase {
                 "Fly365 will always try and pre-seat you prior to travel. If you have been\n" +
                 "pre-seated, you will notice this on your Itinerary/Confirmation above.\n" +
                 "Some airlines will charge for us to pre-seat prior to departure and this can\n" +
-                "start from $25.00 NZD per seat per \uF002ight sector.\n" +
+                "start from 25.00 NZD per seat per \uF002ight sector.\n" +
                 "If you are unhappy with the seat selection or would like to choose your\n" +
                 "own seat prior to departure, please visit your corresponding airlines\n" +
                 "website to change your seat selection. We always suggest you check in\n" +
@@ -576,12 +575,12 @@ public class FindMyBooking extends TestBase {
                 "Your Ticket is non-refundable.\n" +
                 "Date and time changes are permitted 72 hours prior to\n" +
                 "departure.\n" +
-                "Your airline change fee starts from $225 NZD per\n" +
-                "person plus any fare of tax difference.\n" +
-                "Fly365 will also charge a rebooking fee of $135 NZD\n" +
-                "per person in addition to the airline charges.\n" +
+                "Your airline change fee starts from 225 NZD per person\n" +
+                "plus any fare of tax difference.\n" +
+                "Fly365 will also charge a rebooking fee of 135 NZD per\n" +
+                "person in addition to the airline charges.\n" +
                 "If your ticket is deemed refundable by the airline,\n" +
-                "Fly365 will charge Refund and Cancellation fee of $300\n" +
+                "Fly365 will charge Refund and Cancellation fee of 300\n" +
                 "NZD per person in addition to any airline refund funds.\n" +
                 "Please ensure you recon1firm your flights 48 hours\n" +
                 "prior to departure.\n" +
@@ -613,7 +612,7 @@ public class FindMyBooking extends TestBase {
         Assert.assertEquals(TestText,"Fly365 Pty Ltd\n" +
                 "ABN : 606 601 521\n" +
                 "TAX INVOICE\n" +
-                "Fly365 Reference Airlines Reference Invoice Date\n" +
+                "Fly365 Reference Airlines Reference Date Issued\n" +
                 fly365Ref+" "+airlineRef+" "+dateIssued+"\n" +
                 "Flights Details\n" +
                 "From Cairo (CAI) to Dublin (DUB) on the "+firstTripDepartureDate+"\n" +
@@ -621,13 +620,13 @@ public class FindMyBooking extends TestBase {
                 "From Dublin (DUB) to Cairo (CAI) on the "+secondTripDepartureDate+"\n" +
                 "Trip Details\n" +
                 "Fare Details\n" +
-                "Family Name/First Name Title Type Frequent Flyer Base Fare Taxes and Fees Total\n" +
-                "Smith/John Mr Adult N/A "+adultFare+" "+currency+" "+adultTax+" "+currency+" "+totalFareperAdult+" "+currency+"\n" +
-                "Smith/Michael Mr Adult N/A "+adultFare+" "+currency+" "+adultTax+" "+currency+" "+totalFareperAdult+" "+currency+"\n" +
-                "Smith/Frank Mr Child N/A "+childFare+" "+currency+" "+childTax+" "+currency+" "+totalFareperChild+" "+currency+"\n" +
-                "Smith/Peter Mr Child N/A "+childFare+" "+currency+" "+childTax+" "+currency+" "+totalFareperChild+" "+currency+"\n" +
-                "Frank/Paul Mr Infant N/A "+infantFare+" "+currency+" "+infantTax+" "+currency+" "+totalFareperInfant+" "+currency+"\n" +
-                "Frank/John Mr Infant N/A "+infantFare+" "+currency+" "+infantTax+" "+currency+" "+totalFareperInfant+" "+currency+"\n" +
+                "Family Name/First Middle Names Title Type Frequent Flyer Base Fare Taxes and Fees Total\n" +
+                "Smith/John William Mr Adult N/A "+adultFare+" "+currency+" "+adultTax+" "+currency+" "+totalFareperAdult+" "+currency+"\n" +
+                "Smith/Michael William Mr Adult N/A "+adultFare+" "+currency+" "+adultTax+" "+currency+" "+totalFareperAdult+" "+currency+"\n" +
+                "Smith/Frank William Mr Child N/A "+childFare+" "+currency+" "+childTax+" "+currency+" "+totalFareperChild+" "+currency+"\n" +
+                "Smith/Peter William Mr Child N/A "+childFare+" "+currency+" "+childTax+" "+currency+" "+totalFareperChild+" "+currency+"\n" +
+                "Frank/Paul Peter Mr Infant N/A "+infantFare+" "+currency+" "+infantTax+" "+currency+" "+totalFareperInfant+" "+currency+"\n" +
+                "Frank/John Peter Mr Infant N/A "+infantFare+" "+currency+" "+infantTax+" "+currency+" "+totalFareperInfant+" "+currency+"\n" +
                 "Payment Summary Total\n" +
                 "Total Base Fare "+totalBaseFare+" "+currency+"\n" +
                 "Total Taxes and Fees "+totalTaxesAndFees+" "+currency+"\n" +
@@ -658,7 +657,6 @@ public class FindMyBooking extends TestBase {
                 "1 Stop\n");
     }
 
-
     @Then("^The tax invoice pdf contains the correct data for Multi City$")
     public void theTaxInvoicePdfContainsTheCorrectDataForMultiCity() throws IOException {
         URL TestURL = new URL("file://" + System.getProperty("user.dir") + "/Downloads/Tax Invoice.pdf");
@@ -672,7 +670,7 @@ public class FindMyBooking extends TestBase {
         Assert.assertEquals(TestText,"Fly365 Pty Ltd\n" +
                 "ABN : 606 601 521\n" +
                 "TAX INVOICE\n" +
-                "Fly365 Reference Airlines Reference Invoice Date\n" +
+                "Fly365 Reference Airlines Reference Date Issued\n" +
                 fly365Ref+" "+airlineRef+" "+dateIssued+"\n" +
                 "Flights Details\n" +
                 "From Cairo (CAI) to Dublin (DUB) on the "+firstTripDepartureDate+"\n" +
@@ -682,13 +680,13 @@ public class FindMyBooking extends TestBase {
                 "From Cairo (CAI) to Auckland (AKL) on the "+thirdTripDepartureDate+"\n" +
                 "Trip Details\n" +
                 "Fare Details\n" +
-                "Family Name/First Name Title Type Frequent Flyer Base Fare Taxes and Fees Total\n" +
-                "Smith/John Mr Adult N/A "+adultFare+" "+currency+" "+adultTax+" "+currency+" "+totalFareperAdult+" "+currency+"\n" +
-                "Smith/Michael Mr Adult N/A "+adultFare+" "+currency+" "+adultTax+" "+currency+" "+totalFareperAdult+" "+currency+"\n" +
-                "Smith/Frank Mr Child N/A "+childFare+" "+currency+" "+childTax+" "+currency+" "+totalFareperChild+" "+currency+"\n" +
-                "Smith/Peter Mr Child N/A "+childFare+" "+currency+" "+childTax+" "+currency+" "+totalFareperChild+" "+currency+"\n" +
-                "Frank/Paul Mr Infant N/A "+infantFare+" "+currency+" "+infantTax+" "+currency+" "+totalFareperInfant+" "+currency+"\n" +
-                "Frank/John Mr Infant N/A "+infantFare+" "+currency+" "+infantTax+" "+currency+" "+totalFareperInfant+" "+currency+"\n" +
+                "Family Name/First Middle Names Title Type Frequent Flyer Base Fare Taxes and Fees Total\n" +
+                "Smith/John William Mr Adult N/A "+adultFare+" "+currency+" "+adultTax+" "+currency+" "+totalFareperAdult+" "+currency+"\n" +
+                "Smith/Michael William Mr Adult N/A "+adultFare+" "+currency+" "+adultTax+" "+currency+" "+totalFareperAdult+" "+currency+"\n" +
+                "Smith/Frank William Mr Child N/A "+childFare+" "+currency+" "+childTax+" "+currency+" "+totalFareperChild+" "+currency+"\n" +
+                "Smith/Peter William Mr Child N/A "+childFare+" "+currency+" "+childTax+" "+currency+" "+totalFareperChild+" "+currency+"\n" +
+                "Frank/Paul Peter Mr Infant N/A "+infantFare+" "+currency+" "+infantTax+" "+currency+" "+totalFareperInfant+" "+currency+"\n" +
+                "Frank/John Peter Mr Infant N/A "+infantFare+" "+currency+" "+infantTax+" "+currency+" "+totalFareperInfant+" "+currency+"\n" +
                 "Payment Summary Total\n" +
                 "Total Base Fare "+totalBaseFare+" "+currency+"\n" +
                 firstTripCarrierCode+"\n" +
@@ -730,7 +728,6 @@ public class FindMyBooking extends TestBase {
                 "This is an electronically generated invoice and does not require a physical signature. Total amount charged "+totalCharges+" "+currency+"\n");
     }
 
-
     @Then("^The booking confirmation pdf contains the correct data for Round Trip$")
     public void theBookingConfirmationPdfContainsTheCorrectDataForRoundTrip() throws IOException {
         URL TestURL = new URL("file://" + System.getProperty("user.dir") + "/Downloads/Booking Confirmation.pdf");
@@ -742,211 +739,211 @@ public class FindMyBooking extends TestBase {
         System.out.println(TestText);
         System.out.println("****************");
 
-                Assert.assertEquals(TestText,"Email : nz.support@fly365.com - monitored 24 hours a day\n" +
-                        "BOOKING CONFIRMATION\n" +
-                        "You are ready to fly\n" +
-                        "Thank you for booking with Fly365! Please print this confirmation and present at check-in . Ensure you have checked that all information is correct\n" +
-                        "Check in online, or\n" +
-                        "Online check via the airlines website is\n" +
-                        "available from 24-48hrs prior to departure.\n" +
-                        "If checking in at the airport, arrive up to 3\n" +
-                        "hours prior to departure.\n" +
-                        "120 Minutes\n" +
-                        "If you’re checking in bags, go to the airline\n" +
-                        "check in counters at least 120 minutes\n" +
-                        "before your flight.\n" +
-                        "60 Minutes\n" +
-                        "Once you have checked in, go through\n" +
-                        "security. You should do this at least 60\n" +
-                        "minutes before your flight.\n" +
-                        "45 Minutes\n" +
-                        "Arrive at the boarding gate 45 minutes\n" +
-                        "before departure. The gates close 20\n" +
-                        "minutes before the flight leaves.\n" +
-                        "Booking Information\n" +
-                        "Fly365 Reference Airlines Reference Date Issued Booking Status\n" +
-                        fly365Ref+" "+airlineRef+" "+dateIssued+" Confirmed\n" +
-                        "Contact Details\n" +
-                        "Name Email Phone\n" +
-                        "John Smith john.smith.fly365@gmail.com +20 136253637474\n" +
-                        "Passengers Details\n" +
-                        "Family Name/First Names Title Birth Date Type Frequent Flyer\n" +
-                        "Smith/John Mr 15 Feb 1985 Adult N/A\n" +
-                        "Smith/Frank Mr 15 Feb 2012 Child N/A\n" +
-                        "Frank/Paul Mr 15 Jan 2019 Infant N/A\n" +
-                        "Flights Details\n" +
-                        "From Auckland (AKL) to Canberra (CBR) on the "+firstTripDepartureDate+"\n" +
-                        "From Canberra (CBR) to Auckland (AKL) on the "+secondTripDepartureDate+"\n" +
-                        firstTripCarrierCode+"\n" +
-                        firstTripbaggageNumber+" Baggage\n" +
-                        firstTripdepartureTime+" - "+firstTripDepartureDate+"\n" +
-                        "Auckland (AKL) - New\n" +
-                        "Zealand\n" +
-                        "Auckland International -\n" +
-                        firstTripdepartureTerminal+"\n" +
-                        firstTriparrivalTime+" - "+firstTriparrivalDate+"\n" +
-                        "Canberra (CBR) - Australia\n" +
-                        "Canberra - "+firstTriparrivalTerminal+"\n" +
-                        firstTripTotalTravelTime+"\n" +
-                        "1 Stop\n" +
-                        firstTripFirstDepartureAirline+"\n" +
-                        firstTripFirstAirlineNumber+"\n" +
-                        firstTripbaggageNumber+" Baggage\n" +
-                        "Economy\n" +
-                        firstTripdepartureTime+" - "+firstTripDepartureDate+"\n" +
-                        "Auckland (AKL) - New\n" +
-                        "Zealand\n" +
-                        "Auckland International -\n" +
-                        firstTripdepartureTerminal+"\n" +
-                        firstStopArrivalTime+" - "+firstStopArrivalDate+"\n" +
-                        firstStopArrivalStopCityCountry+"\n" +
-                        firstStopArrivalAirport+" - "+firstStopArrivalTerminal+"\n" +
-                        firstTripFirstSegmentDuration+" "+firstTripbaggageNumberUC+"\n" +
-                        "Baggage\n" +
-                        firstTripSecondDepartureAirline+"\n" +
-                        firstTripSecondAirlineNumber+"\n" +
-                        firstTripbaggageNumber+" Baggage\n" +
-                        "Economy\n" +
-                        firstStopDepartureTime+" - "+firstStopDepartureDate+"\n" +
-                        firstStopDepartureStopCityCountry+"\n" +
-                        firstStopDepartureAirport+" - "+firstStopDepartureTerminal+"\n" +
-                        firstTriparrivalTime+" - "+firstTriparrivalDate+"\n" +
-                        "Canberra (CBR) - Australia\n" +
-                        "Canberra - "+firstTriparrivalTerminal+"\n" +
-                        firstTripSecondSegmentDuration+" "+firstTripbaggageNumberUC+"\n" +
-                        "Baggage\n" +
-                        secondTripCarrierCode+"\n" +
-                        secondTripbaggageNumber+" Baggage\n" +
-                        secondTripdepartureTime+" - "+secondTripDepartureDate+"\n" +
-                        "Canberra (CBR) - Australia\n" +
-                        "Canberra - "+secondTripdepartureTerminal+"\n" +
-                        secondTriparrivalTime+" - "+secondTriparrivalDate+"\n" +
-                        "Auckland (AKL) - New\n" +
-                        "Zealand\n" +
-                        "Auckland International -\n" +
-                        secondTriparrivalTerminal+"\n" +
-                        secondTripTotalTravelTime+"\n" +
-                        "1 Stop\n" +
-                        secondTripFirstDepartureAirline+"\n" +
-                        secondTripFirstAirlineNumber+"\n" +
-                        secondTripbaggageNumber+" Baggage\n" +
-                        "Economy\n" +
-                        secondTripdepartureTime+" - "+secondTripDepartureDate+"\n" +
-                        "Canberra (CBR) - Australia\n" +
-                        "Canberra - "+secondTripdepartureTerminal+"\n" +
-                        secondStopArrivalTime+" - "+secondStopArrivalDate+"\n" +
-                        secondStopArrivalStopCityCountry+"\n" +
-                        secondStopArrivalAirport+" - "+secondStopArrivalTerminal+"\n" +
-                        secondTripFirstSegmentDuration+" "+secondTripbaggageNumberUC+"\n" +
-                        "Baggage\n" +
-                        secondTripSecondDepartureAirline+"\n" +
-                        secondTripSecondAirlineNumber+"\n" +
-                        secondTripbaggageNumber+" Baggage\n" +
-                        "Economy\n" +
-                        secondStopDepartureTime+" - "+secondStopDepartureDate+"\n" +
-                        secondStopDepartureStopCityCountry+"\n" +
-                        secondStopDepartureAirport+" - "+secondStopDepartureTerminal+"\n" +
-                        secondTriparrivalTime+" - "+secondTriparrivalDate+"\n" +
-                        "Auckland (AKL) - New\n" +
-                        "Zealand\n" +
-                        "Auckland International -\n" +
-                        secondTriparrivalTerminal+"\n" +
-                        secondTripSecondSegmentDuration+" "+secondTripbaggageNumberUC+"\n" +
-                        "Baggage\n" +
-                        "CONNECTING FLIGHT :  Stop Time : "+firstTripStopDuration+"\n" +
-                        "CONNECTING FLIGHT :  Stop Time : "+secondTripStopDuration+"\n" +
-                        "Notes\n" +
-                        "Online Itinerary Title\n" +
-                        "Please note that certain airlines consolidate passenger names and titles,\n" +
-                        "and some may show your name format similar to the examples below.\n" +
-                        "E.g. Mr John Smith will be shown as:\n" +
-                        "Smithmr John; or\n" +
-                        "Johnmr Smith\n" +
-                        "Passport / Visa\n" +
-                        "Please ensure your passport is valid for six months beyond your intended\n" +
-                        "return date. Some countries require you to obtain a visa prior to departure\n" +
-                        "or on arrival into certain countries. Please check your visa requirements\n" +
-                        "prior to travel.\n" +
-                        "Do I need to Confirm My Flights?\n" +
-                        "Yes - Important: Re-Con\uF001rming Flights Read carefully.\n" +
-                        "Fly365 strongly recommends recon\uF001rming all \uF002ights a minimum 48-24\n" +
-                        "hours prior to departure.\n" +
-                        "Failure to reconfirm flights may result in you missing your departure\n" +
-                        "times due to a sudden Airline Schedule Change or in the event your\n" +
-                        "flight has been cancelled.\n" +
-                        "It is important to note, that your booking is your responsibility and\n" +
-                        "you are required to be aware of any potential changes that may\n" +
-                        "occur in your itinerary.\n" +
-                        "You can also track your \uF002ight progress by going to google and typing\n" +
-                        "your \uF002ight number on day of departure.\n" +
-                        "Seating\n" +
-                        "Fly365 will always try and pre-seat you prior to travel. If you have been\n" +
-                        "pre-seated, you will notice this on your Itinerary/Confirmation above.\n" +
-                        "Some airlines will charge for us to pre-seat prior to departure and this can\n" +
-                        "start from $25.00 NZD per seat per \uF002ight sector.\n" +
-                        "If you are unhappy with the seat selection or would like to choose your\n" +
-                        "own seat prior to departure, please visit your corresponding airlines\n" +
-                        "website to change your seat selection. We always suggest you check in\n" +
-                        "online at least 48-24 hours prior to departure depending on your airline\n" +
-                        "conditions. If you are unable to select your seats prior to departure you\n" +
-                        "will be able to select your seats during online check in process.\n" +
-                        "Payment\n" +
-                        "We take your credit card security seriously\n" +
-                        "We may ask you to verify your payment after you have received your\n" +
-                        "receipt. Fly365 will never ask you to send credit card information over\n" +
-                        "email. Our snapshot verification process is the safest and quickest way to\n" +
-                        "instantly verify the payment to us. You can simply click the payment\n" +
-                        "charge to Fly365 from your device and send us an email or using the\n" +
-                        "snippet tool on your desktop or laptop. We will never request anything\n" +
-                        "further than this and we will never request bank details or credit card\n" +
-                        "numbers. Please ensure you look out for any follow-up emails or text\n" +
-                        "messages.\n" +
-                        "Baggage\n" +
-                        "We do understand baggage and check in baggage can be confusing and\n" +
-                        "not clear on most websites. Your baggage limit on your Confirmation\n" +
-                        "above is on a per person basis. Infants are allowed 10kgs of luggage.\n" +
-                        "Below is an example only and we do suggest you check with your airline\n" +
-                        "for further information.\n" +
-                        "Carry On:\n" +
-                        "As a standard across all airlines your carry-on luggage must not weigh\n" +
-                        "more than 7kgs (1 piece of cabin baggage weighing 7kg per person).\n" +
-                        "Checked Luggage:\n" +
-                        "There are two systems that the airlines use. One is the kilo system and\n" +
-                        "the other is the Piece System e.g.\n" +
-                        "1 piece = 1 checked baggage weighing a maximum 23kg per person.\n" +
-                        "2 pieces = 2 checked baggage each weighing a maximum 23kg per\n" +
-                        "person.\n" +
-                        "Kilo System e.g.\n" +
-                        "30kgs = 30 kilos of baggage can be checked from 1 or more pieces\n" +
-                        "totalling 30kgs per person.\n" +
-                        "Mixed Baggage Solutions:\n" +
-                        "More and more airlines are now offering a mixed baggage solution. Some\n" +
-                        "airlines will offer a cheaper fare for less baggage. This can happen on one\n" +
-                        "itinerary as your fare class maybe cheap on the leg to your destination\n" +
-                        "and more expensive on the way back. Don’t assume your baggage is the\n" +
-                        "same across all flights. Please ensure you check your baggage options on\n" +
-                        "your itinerary in great detail.\n" +
-                        "Fare Rules\n" +
-                        "Important Airline Terms and Conditions Fare\n" +
-                        "Rules\n" +
-                        "Your Ticket is non-refundable.\n" +
-                        "Date and time changes are permitted 72 hours prior to\n" +
-                        "departure.\n" +
-                        "Your airline change fee starts from $225 NZD per\n" +
-                        "person plus any fare of tax difference.\n" +
-                        "Fly365 will also charge a rebooking fee of $135 NZD\n" +
-                        "per person in addition to the airline charges.\n" +
-                        "If your ticket is deemed refundable by the airline,\n" +
-                        "Fly365 will charge Refund and Cancellation fee of $300\n" +
-                        "NZD per person in addition to any airline refund funds.\n" +
-                        "Please ensure you recon1firm your flights 48 hours\n" +
-                        "prior to departure.\n" +
-                        "Name changes are not permitted. Errors in names will\n" +
-                        "require purchase of another ticket.\n" +
-                        "No Shows are not permitted. Your ticket will be marked\n" +
-                        "as invalid and you will be unable to travel.\n" +
-                        "Some airlines will not permit changes after departure.\n" +
-                        "For more information kindly check our Support Centre\n");
+        Assert.assertEquals(TestText,"Email : nz.support@fly365.com - monitored 24 hours a day\n" +
+                "BOOKING CONFIRMATION\n" +
+                "You are ready to fly\n" +
+                "Thank you for booking with Fly365! Please print this confirmation and present at check-in . Ensure you have checked that all information is correct\n" +
+                "Check in online, or\n" +
+                "Online check via the airlines website is\n" +
+                "available from 24-48hrs prior to departure.\n" +
+                "If checking in at the airport, arrive up to 3\n" +
+                "hours prior to departure.\n" +
+                "120 Minutes\n" +
+                "If you’re checking in bags, go to the airline\n" +
+                "check in counters at least 120 minutes\n" +
+                "before your flight.\n" +
+                "60 Minutes\n" +
+                "Once you have checked in, go through\n" +
+                "security. You should do this at least 60\n" +
+                "minutes before your flight.\n" +
+                "45 Minutes\n" +
+                "Arrive at the boarding gate 45 minutes\n" +
+                "before departure. The gates close 20\n" +
+                "minutes before the flight leaves.\n" +
+                "Booking Information\n" +
+                "Fly365 Reference Airlines Reference Date Issued Booking Status\n" +
+                fly365Ref+" "+airlineRef+" "+dateIssued+" Confirmed\n" +
+                "Contact Details\n" +
+                "Name Email Phone\n" +
+                "John Smith john.smith.fly365@gmail.com +20 136253637474\n" +
+                "Passengers Details\n" +
+                "Family Name/First Middle Names Title Birth Date Type Frequent Flyer\n" +
+                "Smith/John William Mr 15 Feb 1985 Adult N/A\n" +
+                "Smith/Frank William Mr 15 Feb 2012 Child N/A\n" +
+                "Frank/Paul Peter Mr 15 Jan 2019 Infant N/A\n" +
+                "Flights Details\n" +
+                "From Auckland (AKL) to Canberra (CBR) on the "+firstTripDepartureDate+"\n" +
+                "From Canberra (CBR) to Auckland (AKL) on the "+secondTripDepartureDate+"\n" +
+                firstTripCarrierCode+"\n" +
+                firstTripbaggageNumber+" Baggage\n" +
+                firstTripdepartureTime+" - "+firstTripDepartureDate+"\n" +
+                "Auckland (AKL) - New\n" +
+                "Zealand\n" +
+                "Auckland International -\n" +
+                firstTripdepartureTerminal+"\n" +
+                firstTriparrivalTime+" - "+firstTriparrivalDate+"\n" +
+                "Canberra (CBR) - Australia\n" +
+                "Canberra - "+firstTriparrivalTerminal+"\n" +
+                firstTripTotalTravelTime+"\n" +
+                "1 Stop\n" +
+                firstTripFirstDepartureAirline+"\n" +
+                firstTripFirstAirlineNumber+"\n" +
+                firstTripbaggageNumber+" Baggage\n" +
+                "Economy\n" +
+                firstTripdepartureTime+" - "+firstTripDepartureDate+"\n" +
+                "Auckland (AKL) - New\n" +
+                "Zealand\n" +
+                "Auckland International -\n" +
+                firstTripdepartureTerminal+"\n" +
+                firstStopArrivalTime+" - "+firstStopArrivalDate+"\n" +
+                firstStopArrivalStopCityCountry+"\n" +
+                firstStopArrivalAirport+" - "+firstStopArrivalTerminal+"\n" +
+                firstTripFirstSegmentDuration+" "+firstTripbaggageNumberUC+"\n" +
+                "Baggage\n" +
+                firstTripSecondDepartureAirline+"\n" +
+                firstTripSecondAirlineNumber+"\n" +
+                firstTripbaggageNumber+" Baggage\n" +
+                "Economy\n" +
+                firstStopDepartureTime+" - "+firstStopDepartureDate+"\n" +
+                firstStopDepartureStopCityCountry+"\n" +
+                firstStopDepartureAirport+" - "+firstStopDepartureTerminal+"\n" +
+                firstTriparrivalTime+" - "+firstTriparrivalDate+"\n" +
+                "Canberra (CBR) - Australia\n" +
+                "Canberra - "+firstTriparrivalTerminal+"\n" +
+                firstTripSecondSegmentDuration+" "+firstTripbaggageNumberUC+"\n" +
+                "Baggage\n" +
+                secondTripCarrierCode+"\n" +
+                secondTripbaggageNumber+" Baggage\n" +
+                secondTripdepartureTime+" - "+secondTripDepartureDate+"\n" +
+                "Canberra (CBR) - Australia\n" +
+                "Canberra - "+secondTripdepartureTerminal+"\n" +
+                secondTriparrivalTime+" - "+secondTriparrivalDate+"\n" +
+                "Auckland (AKL) - New\n" +
+                "Zealand\n" +
+                "Auckland International -\n" +
+                secondTriparrivalTerminal+"\n" +
+                secondTripTotalTravelTime+"\n" +
+                "1 Stop\n" +
+                secondTripFirstDepartureAirline+"\n" +
+                secondTripFirstAirlineNumber+"\n" +
+                secondTripbaggageNumber+" Baggage\n" +
+                "Economy\n" +
+                secondTripdepartureTime+" - "+secondTripDepartureDate+"\n" +
+                "Canberra (CBR) - Australia\n" +
+                "Canberra - "+secondTripdepartureTerminal+"\n" +
+                secondStopArrivalTime+" - "+secondStopArrivalDate+"\n" +
+                secondStopArrivalStopCityCountry+"\n" +
+                secondStopArrivalAirport+" - "+secondStopArrivalTerminal+"\n" +
+                secondTripFirstSegmentDuration+" "+secondTripbaggageNumberUC+"\n" +
+                "Baggage\n" +
+                secondTripSecondDepartureAirline+"\n" +
+                secondTripSecondAirlineNumber+"\n" +
+                secondTripbaggageNumber+" Baggage\n" +
+                "Economy\n" +
+                secondStopDepartureTime+" - "+secondStopDepartureDate+"\n" +
+                secondStopDepartureStopCityCountry+"\n" +
+                secondStopDepartureAirport+" - "+secondStopDepartureTerminal+"\n" +
+                secondTriparrivalTime+" - "+secondTriparrivalDate+"\n" +
+                "Auckland (AKL) - New\n" +
+                "Zealand\n" +
+                "Auckland International -\n" +
+                secondTriparrivalTerminal+"\n" +
+                secondTripSecondSegmentDuration+" "+secondTripbaggageNumberUC+"\n" +
+                "Baggage\n" +
+                "CONNECTING FLIGHT :  Stop Time : "+firstTripStopDuration+"\n" +
+                "CONNECTING FLIGHT :  Stop Time : "+secondTripStopDuration+"\n" +
+                "Notes\n" +
+                "Online Itinerary Title\n" +
+                "Please note that certain airlines consolidate passenger names and titles,\n" +
+                "and some may show your name format similar to the examples below.\n" +
+                "E.g. Mr John Smith will be shown as:\n" +
+                "Smithmr John; or\n" +
+                "Johnmr Smith\n" +
+                "Passport / Visa\n" +
+                "Please ensure your passport is valid for six months beyond your intended\n" +
+                "return date. Some countries require you to obtain a visa prior to departure\n" +
+                "or on arrival into certain countries. Please check your visa requirements\n" +
+                "prior to travel.\n" +
+                "Do I need to Confirm My Flights?\n" +
+                "Yes - Important: Re-Con\uF001rming Flights Read carefully.\n" +
+                "Fly365 strongly recommends recon\uF001rming all \uF002ights a minimum 48-24\n" +
+                "hours prior to departure.\n" +
+                "Failure to reconfirm flights may result in you missing your departure\n" +
+                "times due to a sudden Airline Schedule Change or in the event your\n" +
+                "flight has been cancelled.\n" +
+                "It is important to note, that your booking is your responsibility and\n" +
+                "you are required to be aware of any potential changes that may\n" +
+                "occur in your itinerary.\n" +
+                "You can also track your \uF002ight progress by going to google and typing\n" +
+                "your \uF002ight number on day of departure.\n" +
+                "Seating\n" +
+                "Fly365 will always try and pre-seat you prior to travel. If you have been\n" +
+                "pre-seated, you will notice this on your Itinerary/Confirmation above.\n" +
+                "Some airlines will charge for us to pre-seat prior to departure and this can\n" +
+                "start from 25.00 NZD per seat per \uF002ight sector.\n" +
+                "If you are unhappy with the seat selection or would like to choose your\n" +
+                "own seat prior to departure, please visit your corresponding airlines\n" +
+                "website to change your seat selection. We always suggest you check in\n" +
+                "online at least 48-24 hours prior to departure depending on your airline\n" +
+                "conditions. If you are unable to select your seats prior to departure you\n" +
+                "will be able to select your seats during online check in process.\n" +
+                "Payment\n" +
+                "We take your credit card security seriously\n" +
+                "We may ask you to verify your payment after you have received your\n" +
+                "receipt. Fly365 will never ask you to send credit card information over\n" +
+                "email. Our snapshot verification process is the safest and quickest way to\n" +
+                "instantly verify the payment to us. You can simply click the payment\n" +
+                "charge to Fly365 from your device and send us an email or using the\n" +
+                "snippet tool on your desktop or laptop. We will never request anything\n" +
+                "further than this and we will never request bank details or credit card\n" +
+                "numbers. Please ensure you look out for any follow-up emails or text\n" +
+                "messages.\n" +
+                "Baggage\n" +
+                "We do understand baggage and check in baggage can be confusing and\n" +
+                "not clear on most websites. Your baggage limit on your Confirmation\n" +
+                "above is on a per person basis. Infants are allowed 10kgs of luggage.\n" +
+                "Below is an example only and we do suggest you check with your airline\n" +
+                "for further information.\n" +
+                "Carry On:\n" +
+                "As a standard across all airlines your carry-on luggage must not weigh\n" +
+                "more than 7kgs (1 piece of cabin baggage weighing 7kg per person).\n" +
+                "Checked Luggage:\n" +
+                "There are two systems that the airlines use. One is the kilo system and\n" +
+                "the other is the Piece System e.g.\n" +
+                "1 piece = 1 checked baggage weighing a maximum 23kg per person.\n" +
+                "2 pieces = 2 checked baggage each weighing a maximum 23kg per\n" +
+                "person.\n" +
+                "Kilo System e.g.\n" +
+                "30kgs = 30 kilos of baggage can be checked from 1 or more pieces\n" +
+                "totalling 30kgs per person.\n" +
+                "Mixed Baggage Solutions:\n" +
+                "More and more airlines are now offering a mixed baggage solution. Some\n" +
+                "airlines will offer a cheaper fare for less baggage. This can happen on one\n" +
+                "itinerary as your fare class maybe cheap on the leg to your destination\n" +
+                "and more expensive on the way back. Don’t assume your baggage is the\n" +
+                "same across all flights. Please ensure you check your baggage options on\n" +
+                "your itinerary in great detail.\n" +
+                "Fare Rules\n" +
+                "Important Airline Terms and Conditions Fare\n" +
+                "Rules\n" +
+                "Your Ticket is non-refundable.\n" +
+                "Date and time changes are permitted 72 hours prior to\n" +
+                "departure.\n" +
+                "Your airline change fee starts from 225 NZD per person\n" +
+                "plus any fare of tax difference.\n" +
+                "Fly365 will also charge a rebooking fee of 135 NZD per\n" +
+                "person in addition to the airline charges.\n" +
+                "If your ticket is deemed refundable by the airline,\n" +
+                "Fly365 will charge Refund and Cancellation fee of 300\n" +
+                "NZD per person in addition to any airline refund funds.\n" +
+                "Please ensure you recon1firm your flights 48 hours\n" +
+                "prior to departure.\n" +
+                "Name changes are not permitted. Errors in names will\n" +
+                "require purchase of another ticket.\n" +
+                "No Shows are not permitted. Your ticket will be marked\n" +
+                "as invalid and you will be unable to travel.\n" +
+                "Some airlines will not permit changes after departure.\n" +
+                "For more information kindly check our Support Centre\n");
     }
 
     @Then("^The booking confirmation pdf contains the correct data for Multi City$")
@@ -988,10 +985,10 @@ public class FindMyBooking extends TestBase {
                 "Name Email Phone\n" +
                 "John Smith john.smith.fly365@gmail.com +20 136253637474\n" +
                 "Passengers Details\n" +
-                "Family Name/First Names Title Birth Date Type Frequent Flyer\n" +
-                "Smith/John Mr 15 Feb 1985 Adult N/A\n" +
-                "Smith/Frank Mr 15 Feb 2012 Child N/A\n" +
-                "Frank/Paul Mr 15 Jan 2019 Infant N/A\n" +
+                "Family Name/First Middle Names Title Birth Date Type Frequent Flyer\n" +
+                "Smith/John William Mr 15 Feb 1985 Adult N/A\n" +
+                "Smith/Frank William Mr 15 Feb 2012 Child N/A\n" +
+                "Frank/Paul Peter Mr 15 Jan 2019 Infant N/A\n" +
                 "Flights Details\n" +
                 "From Auckland (AKL) to Canberra (CBR) on the "+firstTripDepartureDate+"\n" +
                 "From Canberra (CBR) to Auckland (AKL) on the "+secondTripDepartureDate+"\n" +
@@ -1097,7 +1094,8 @@ public class FindMyBooking extends TestBase {
                 thirdTripdepartureTerminal+"\n" +
                 thirdStopArrivalTime+" - "+thirdStopArrivalDate+"\n" +
                 thirdStopArrivalStopCityCountry+"\n" +
-                thirdStopArrivalAirport+" - "+thirdStopArrivalTerminal+"\n" +
+                thirdStopArrivalAirport+" -\n" +
+                thirdStopArrivalTerminal+"\n" +
                 thirdTripFirstSegmentDuration+" "+thirdTripbaggageNumberUC+"\n" +
                 "Baggage\n" +
                 thirdTripSecondDepartureAirline+"\n" +
@@ -1106,7 +1104,8 @@ public class FindMyBooking extends TestBase {
                 "Economy\n" +
                 thirdStopDepartureTime+" - "+thirdStopDepartureDate+"\n" +
                 thirdStopDepartureStopCityCountry+"\n" +
-                thirdStopDepartureAirport+" - "+thirdStopDepartureTerminal+"\n" +
+                thirdStopDepartureAirport+" -\n" +
+                thirdStopDepartureTerminal+"\n" +
                 thirdTriparrivalTime+" - "+thirdTriparrivalDate+"\n" +
                 "Canberra (CBR) - Australia\n" +
                 "Canberra - "+thirdTriparrivalTerminal+"\n" +
@@ -1141,7 +1140,7 @@ public class FindMyBooking extends TestBase {
                 "Fly365 will always try and pre-seat you prior to travel. If you have been\n" +
                 "pre-seated, you will notice this on your Itinerary/Confirmation above.\n" +
                 "Some airlines will charge for us to pre-seat prior to departure and this can\n" +
-                "start from $25.00 NZD per seat per \uF002ight sector.\n" +
+                "start from 25.00 NZD per seat per \uF002ight sector.\n" +
                 "If you are unhappy with the seat selection or would like to choose your\n" +
                 "own seat prior to departure, please visit your corresponding airlines\n" +
                 "website to change your seat selection. We always suggest you check in\n" +
@@ -1190,12 +1189,12 @@ public class FindMyBooking extends TestBase {
                 "Your Ticket is non-refundable.\n" +
                 "Date and time changes are permitted 72 hours prior to\n" +
                 "departure.\n" +
-                "Your airline change fee starts from $225 NZD per\n" +
-                "person plus any fare of tax difference.\n" +
-                "Fly365 will also charge a rebooking fee of $135 NZD\n" +
-                "per person in addition to the airline charges.\n" +
+                "Your airline change fee starts from 225 NZD per person\n" +
+                "plus any fare of tax difference.\n" +
+                "Fly365 will also charge a rebooking fee of 135 NZD per\n" +
+                "person in addition to the airline charges.\n" +
                 "If your ticket is deemed refundable by the airline,\n" +
-                "Fly365 will charge Refund and Cancellation fee of $300\n" +
+                "Fly365 will charge Refund and Cancellation fee of 300\n" +
                 "NZD per person in addition to any airline refund funds.\n" +
                 "Please ensure you recon1firm your flights 48 hours\n" +
                 "prior to departure.\n" +
@@ -1206,7 +1205,6 @@ public class FindMyBooking extends TestBase {
                 "Some airlines will not permit changes after departure.\n" +
                 "For more information kindly check our Support Centre\n");
     }
-
 
 
 }

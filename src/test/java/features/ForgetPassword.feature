@@ -1,3 +1,6 @@
+@Smoke
+
+@Forget_Password
 Feature: Forget Password
   test forget password feature
 
@@ -15,7 +18,7 @@ Feature: Forget Password
     And 'Sign In' page is opened
     And delete new user at database "john.smith.fly365@gmail.com"
 
-    @Go_Tab_Again
+  @Go_Tab_Again
   @New_Tab
   @Email_Logout
   @Sign_Out
@@ -32,7 +35,7 @@ Feature: Forget Password
     And Press on Reset Password Button
     Then the user shall be redirect to my booking page
 
-    @Go_Tab_Again
+  @Go_Tab_Again
   @New_Tab
   @Email_Logout
   @Sign_Out

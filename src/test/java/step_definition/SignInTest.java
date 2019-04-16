@@ -101,7 +101,7 @@ public class SignInTest extends TestBase {
 
     @Then("^user shall see empty password error message$")
     public void userShallSeeEmptyPasswordErrorMessage() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(PassWordErrorMSG));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(emptyPassWordErrorMSG));
         String PassWordErrorMSGText = driver.findElement(emptyPassWordErrorMSG).getText();
         Assert.assertEquals(PassWordErrorMSGText, "!Please enter password");
     }

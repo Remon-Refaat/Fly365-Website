@@ -39,12 +39,14 @@ public class MyBookingTest extends TestBase {
     }
 
     @Then("^No Booking History displayed$")
-    public void noBookingHistoryDisplayed() {
+    public void noBookingHistoryDisplayed() throws InterruptedException {
+        Thread.sleep(3000);
         Assert.assertEquals(driver.findElement(noBookingHistoryMSG).getText(), "Sorry there is no booking history");
     }
 
     @Then("^Back to Home Page when click on Back button$")
-    public void backToHomePageWhenClickOnBackButton() {
+    public void backToHomePageWhenClickOnBackButton() throws InterruptedException {
+        Thread.sleep(3000);
         driver.findElement(backToHomeBTN).click();
         Assert.assertEquals(driver.findElement(homePageHDR).getText(), "Low Fares");
     }

@@ -1,3 +1,6 @@
+@Smoke
+
+@Home_Page
 Feature: Home page
 
   Background:
@@ -92,6 +95,6 @@ Feature: Home page
     And Press on Passenger Rules link
     Then 'Passenger Rules' pop up will be opened
 
-    Scenario: Validation messages will be displayed for empty origin, destination, date
+  Scenario: Validation messages will be displayed for empty origin, destination, date
       And Press on Search Now
       Then error message appear for each field

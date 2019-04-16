@@ -6,6 +6,7 @@ import helper.DataBase;
 import helper.GeneralMethods;
 import helper.TestBase;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -34,6 +35,7 @@ public class AddTraveller extends TestBase {
     private By deleteTravelerBTN = By.xpath("//span[text()='Delete']");
     private By confirmDeleteBTN = By.xpath("//button[text()='Confirm']");
     private By noTravelersFoundMSG = By.xpath("//h3[text()='Sorry you have not added a traveller']");
+    private By successMessageTXT = By.xpath("//div[@class='el-notification__group is-with-icon']");
     private By editTravelerBTN = By.xpath("//span[text()='Edit']");
     private By editSaveBTN = By.xpath("//button[text()='Edit']");
     private By cancelBTN = By.xpath("//button[text()='CANCEL']");
@@ -64,20 +66,13 @@ public class AddTraveller extends TestBase {
 
     @And("^user add traveller$")
     public void userEnterTravellerTitle() throws InterruptedException {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(TravellerFirstNameTXT));
         gmObject.selectFromDDL(TravellerTitleDrop,"Mr");
-        //driver.findElement(TravellerTitleDrop).click();
-        //driver.findElement(MRTitle).click();
         driver.findElement(TravellerFirstNameTXT).sendKeys("john");
         driver.findElement(TravellerFamileyNameTXT).sendKeys("smith");
         gmObject.selectFromDDL(TravellerBirthDateDayDrop,"7");
-        //driver.findElement(TravellerBirthDateDayDrop).click();
-        //driver.findElement(Day1).click();
         gmObject.selectFromDDL(TravellerBirthDateMonth,"June");
-        //driver.findElement(TravellerBirthDateMonth).click();
-        //driver.findElement(Month1).click();
         gmObject.selectFromDDL(TravellerBirthDateYear,"1988");
-        //driver.findElement(TravellerBirthDateYear).click();
-        //driver.findElement(Year1).click();
         driver.findElement(SaveTravellerInnerBTN).click();
         driver.findElement(cancelBTN).click();
         Assert.assertTrue(driver.findElement(AddedTraveller).isDisplayed());
@@ -97,9 +92,9 @@ public class AddTraveller extends TestBase {
     }
 
     @Then("^Success message is display$")
-    public void successMessageIsDisplayed() {
-        By successMessageTXT = By.xpath("//div[@class='el-notification__group is-with-icon']");
+    public void successMessageIsDisplayed() throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOfElementLocated(successMessageTXT));
+        Thread.sleep(2000);
         Assert.assertTrue(driver.findElement(successMessageTXT).isDisplayed());
     }
 
@@ -112,7 +107,7 @@ public class AddTraveller extends TestBase {
     public void userEditTheSavedTraveler() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(editTravelerBTN));
         driver.findElement(editTravelerBTN).click();
-        driver.findElement(TravellerFirstNameTXT).clear();
+        driver.findElement(TravellerFirstNameTXT).sendKeys(Keys.chord(Keys.BACK_SPACE,Keys.BACK_SPACE,Keys.BACK_SPACE,Keys.BACK_SPACE));
         driver.findElement(TravellerFirstNameTXT).sendKeys("david");
         driver.findElement(editSaveBTN).click();
     }

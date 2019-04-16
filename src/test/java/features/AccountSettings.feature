@@ -1,3 +1,6 @@
+@Smoke
+
+@Account_Settings
 @Sign_Out
 Feature: Open Account Settings page
 

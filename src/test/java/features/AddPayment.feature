@@ -1,3 +1,6 @@
+@Smoke
+
+@Add_Payment
 @Sign_Out
 Feature: Add Payment to Login user
 
@@ -20,7 +23,6 @@ Feature: Add Payment to Login user
     And Click Save button
     And Success message is displayed
     And Delete payment card from database
-    And user logout
     And delete new user at database "john.smith.fly365@gmail.com"
 
   Scenario: Check that Login user can delete payment card
@@ -39,7 +41,6 @@ Feature: Add Payment to Login user
     And Click Save button
     And Delete new payment from website
     And Success message is displayed
-    And user logout
     And delete new user at database "john.smith.fly365@gmail.com"
 
   Scenario: Check that Login user can default payment card
@@ -64,10 +65,5 @@ Feature: Add Payment to Login user
     And Change the default card
     And Success message is displayed
     And Delete payment card from database
-    And user logout
     And delete new user at database "john.smith.fly365@gmail.com"
-
-
-
-
 

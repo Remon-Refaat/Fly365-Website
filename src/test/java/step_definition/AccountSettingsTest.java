@@ -5,13 +5,13 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import helper.TestBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Sleeper;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.util.Map;
+import java.security.Key;
+import java.util.*;
 
 public class AccountSettingsTest extends TestBase {
 
@@ -46,9 +46,9 @@ public class AccountSettingsTest extends TestBase {
     }
 
     @Then("^Update First Name with (.*)$")
-    public void updateFirstName(String name) {
+    public void updateFirstName(String name) throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOfElementLocated(firstNameTXT));
-        driver.findElement(firstNameTXT).clear();
+        driver.findElement(firstNameTXT).sendKeys(Keys.chord(Keys.BACK_SPACE,Keys.BACK_SPACE,Keys.BACK_SPACE,Keys.BACK_SPACE,Keys.BACK_SPACE));
         driver.findElement(firstNameTXT).sendKeys(name);
         driver.findElement(save1BTN).click();
     }
@@ -56,8 +56,7 @@ public class AccountSettingsTest extends TestBase {
     @Then("^Check updated First Name$")
     public void checkUpdatedFirstName() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(updateSuccMSG));
-        System.out.println(updatedNameHDR);
-        Assert.assertEquals(driver.findElement(updatedNameHDR).getText(),"JohnDavid");
+        Assert.assertEquals(driver.findElement(updatedNameHDR).getText(),"David");
     }
 
     @And("^Click on Billing Address tab$")

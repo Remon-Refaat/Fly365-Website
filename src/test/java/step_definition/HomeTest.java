@@ -71,13 +71,13 @@ public class HomeTest extends TestBase {
     private By alreadySubscribedErrorMSG = By.xpath("//div[3]/div/div[1]/p");
     private By passengerRulesLINK = By.xpath("//*[contains(@id, 'el-popover-')]/div[2]/a");
     private By passengerRulesHDR = By.xpath("//div[@class='el-dialog__wrapper']//div[1]/span");
-    private By originEmptyErrorMSG = By.xpath("//form//div[1]/div/div[1]/div/div[2]/span");
-    private By destinationEmptyErrorMSG = By.xpath("//form//div[1]/div/div[2]/div/div[2]/span");
-    private By departureDateEmptyErrorMSG = By.xpath("//form//div[2]/div/div[1]/div/div[2]/span");
+    private By originEmptyErrorMSG = By.xpath("//span[contains(text(),'Please choose origin from the list')]");
+    private By destinationEmptyErrorMSG = By.xpath("//span[contains(text(),'Please choose destination from the list')]");
+    private By departureDateEmptyErrorMSG = By.xpath("//span[contains(text(),'Please enter required date')]");
     private By findMyBookingEmptyEmail1ErrorMSG = By.xpath("//div[@class='el-form-item mb-4 is-error']//span[@class='tooltiptext with-arrow']/span[1]");
-    private By findMyBookingEmptyEmail2ErrorMSG = By.xpath("//div[@class='el-form-item mb-4 is-error']//span[@class='tooltiptext with-arrow']/span[2]");
+    private By findMyBookingEmptyEmail2ErrorMSG = By.xpath("//span/span[contains(text(),'Please enter email')]");
     private By findMyBookingEmptyRef1ErrorMSG = By.xpath("//div[@class='el-form-item is-error']//span[@class='tooltiptext with-arrow']/span[1]");
-    private By findMyBookingEmptyRef2ErrorMSG = By.xpath("//div[@class='el-form-item is-error']//span[@class='tooltiptext with-arrow']/span[2]");
+    private By findMyBookingEmptyRef2ErrorMSG = By.xpath("//span[contains(text(),'Please enter Fly365 Ref.')]");
     private By emptyEmailAtSubscribe = By.xpath("//div[@class='form-group']//span[@class='tooltiptext with-arrow']");
 
 
@@ -392,27 +392,24 @@ public class HomeTest extends TestBase {
 
     @Then("^error message appear for each field$")
     public void errorMessageAppearForEachField() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(originEmptyErrorMSG));
         String originerrormessage = driver.findElement(originEmptyErrorMSG).getText();
-        Assert.assertEquals(originerrormessage, "!Please choose origin from the list");
+        Assert.assertEquals(originerrormessage, "Please choose origin from the list");
 
         String destinationerrormessage = driver.findElement(destinationEmptyErrorMSG).getText();
-        Assert.assertEquals(destinationerrormessage, "!Please choose destination from the list");
+        Assert.assertEquals(destinationerrormessage, "Please choose destination from the list");
 
         String departureerrormessage = driver.findElement(departureDateEmptyErrorMSG).getText();
-        Assert.assertEquals(departureerrormessage, "!Please enter required date");
+        Assert.assertEquals(departureerrormessage, "Please enter required date");
     }
 
     @Then("^error message appear appear over the two fields$")
     public void errorMessageAppearAppearOverTheTwoFields() {
-        String emailfinderrormessage1 = driver.findElement(findMyBookingEmptyEmail1ErrorMSG).getText();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(findMyBookingEmptyEmail2ErrorMSG));
         String emailfinderrormessage2 = driver.findElement(findMyBookingEmptyEmail2ErrorMSG).getText();
-
-        Assert.assertEquals(emailfinderrormessage1+emailfinderrormessage2, "!Please enter email");
-
-        String referrormessage1 = driver.findElement(findMyBookingEmptyRef1ErrorMSG).getText();
         String referrormessage2 = driver.findElement(findMyBookingEmptyRef2ErrorMSG).getText();
-
-        Assert.assertEquals(referrormessage1+referrormessage2, "!Please enter Fly365 Ref.");
+        Assert.assertEquals(emailfinderrormessage2, "Please enter email");
+        Assert.assertEquals(referrormessage2, "Please enter Fly365 Ref.");
     }
 
     @Then("^empty subscribe error message appear$")

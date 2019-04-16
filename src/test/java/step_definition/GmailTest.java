@@ -35,7 +35,8 @@ public class GmailTest extends TestBase {
     }
 
     @And("^Go to the email account$")
-    public void goToTheEmailAccountAndOpenTheNewMessage() throws InterruptedException {
+    public void goToTheEmailAccount() throws InterruptedException {
+        Thread.sleep(2000);
         driver.navigate().to("https://accounts.google.com");
         driver.findElement(emailTXT).sendKeys("john.smith.fly365@gmail.com");
         driver.findElement(emailNextBTN).click();

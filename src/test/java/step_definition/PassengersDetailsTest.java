@@ -31,7 +31,7 @@ public class PassengersDetailsTest extends TestBase {
     private By firstReadMoreHDR = By.xpath("//div[@class='el-dialog__wrapper'][1]/div[1]/div[1]/span");
     private By secondReadMoreHDR = By.xpath("//div[@class='el-dialog__wrapper'][2]/div[1]/div[1]/span");
     private By totalTravelTimeHDR = By.xpath("//div[3]//div[2]/div/div/div[1]/div/div[1]");
-    private By passengerTitleEmptyErrorMSG = By.xpath("//div[@class='el-form-item title-form is-error']//span[@class='tooltiptext with-arrow']");
+    private By passengerTitleEmptyErrorMSG = By.xpath("//span[contains(text(),'Please enter title')]");
     private By passenegerFirstNameEmptyErrorMSG = By.xpath("//body/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first']/div[@class='passengers bg-secondary-fourth']/div[@class='content-passengers container md:px-0 px-8']/div[@class='row']/div[@class='col-lg-16 col-sm-24']/div[@id='passenger-form-0']/div/div[@class='bg-white lg:px-12 px-3 pt-10 pb-5']/div[@class='col-md-24 passenger-form']/form[@class='el-form passenger-form__content']/div[@class='first-name-container mb-4']/div[@class='flex flex-col']/div[@class='form-items flex flex-col md:flex-row justify-between items-center']/div[@class='row']/div[2]/div[1]/div[1]/div[2]/span[1]");
     private By passenegerLastNameEmptyErrorMSG = By.xpath("//body/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first']/div[@class='passengers bg-secondary-fourth']/div[@class='content-passengers container md:px-0 px-8']/div[@class='row']/div[@class='col-lg-16 col-sm-24']/div[@id='passenger-form-0']/div/div[@class='bg-white lg:px-12 px-3 pt-10 pb-5']/div[@class='col-md-24 passenger-form']/form[@class='el-form passenger-form__content']/div[@class='first-name-container mb-4']/div[@class='flex flex-col']/div[@class='form-items flex flex-col md:flex-row justify-between items-center']/div[@class='row']/div[4]/div[1]/div[1]/div[2]/span[1]");
     private By PassengerBirthDateEmptyErrorMSG = By.xpath("//div[@class='col-md-14']//span[@class='tooltiptext with-arrow']");
@@ -119,9 +119,10 @@ public class PassengersDetailsTest extends TestBase {
         Assert.assertTrue(driver.findElement(totalTravelTimeHDR).isDisplayed());
     }
     @Then("^error message appear for each field at fill passenger details$")
-    public void errorMessageAppearForEachFieldAtFillPassengerDetails() {
+    public void errorMessageAppearForEachFieldAtFillPassengerDetails() throws InterruptedException {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(passengerTitleEmptyErrorMSG));
         String passnegerEmptyTitle = driver.findElement(passengerTitleEmptyErrorMSG).getText();
-        Assert.assertEquals(passnegerEmptyTitle, "!Please enter title");
+        Assert.assertEquals(passnegerEmptyTitle, "Please enter title");
 
         String passenegeremptyfirstname = driver.findElement(passenegerFirstNameEmptyErrorMSG).getText();
         Assert.assertEquals(passenegeremptyfirstname, "!Please enter first name");

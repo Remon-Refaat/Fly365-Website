@@ -1,3 +1,6 @@
+@Smoke
+
+@Search_Trips
 Feature: Search for trips and assert on search results
 
   Background: Open Fly365 site

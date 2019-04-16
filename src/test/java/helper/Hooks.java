@@ -65,9 +65,9 @@ public class Hooks extends TestBase{
     @After("@Email_Logout")
     public void emailLogout() throws InterruptedException {
         driver.findElement(By.xpath("//div[2]/div[3]//a/span")).click();
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='Sign out']")));
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         driver.findElement(By.xpath("//a[text()='Sign out']")).click();
     }
 

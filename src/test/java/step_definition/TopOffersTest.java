@@ -12,8 +12,8 @@ public class TopOffersTest extends TestBase {
     WebDriverWait wait = new WebDriverWait(driver, 10);
 
     private By bestOffersHDR = By.xpath("//h3[contains(text(),'Best Offers')]");
-    private By firstOfferLNK = By.xpath("//h4[contains(text(),'NZ Offers 60')]");
-    private By firstOfferHDR = By.xpath("//span[contains(text(),'NZ Offers 60')]");
+    private By firstOfferLNK = By.xpath("//h4[contains(text(),'upload offer')]");
+    private By firstOfferHDR = By.xpath("//span[contains(text(),'upload offer')]");
 
 
     @Given("^Click on one offer from top offers$")

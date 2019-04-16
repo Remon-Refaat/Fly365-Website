@@ -1,3 +1,6 @@
+@Smoke
+
+@Add_Traveller
 @Sign_Out
 Feature: Add Traveller to Login user
 
@@ -17,7 +20,6 @@ Feature: Add Traveller to Login user
     And user press on add traveller button
     And user add traveller
     Then Success message is display
-    And user logout
     And Delete new traveller from database
     And delete new user at database "john.smith.fly365@gmail.com"
 
@@ -35,7 +37,6 @@ Feature: Add Traveller to Login user
     And User delete the traveler
     Then Deleted user is removed from the list
     Then Success message is display
-    And user logout
     And Delete new traveller from database
     And delete new user at database "john.smith.fly365@gmail.com"
 
@@ -53,7 +54,6 @@ Feature: Add Traveller to Login user
     And User edit the saved traveler
     Then The traveler displayed updated
     Then Success message is display
-    And user logout
     And Delete new traveller from database
     And delete new user at database "john.smith.fly365@gmail.com"
 
