@@ -33,6 +33,7 @@ public class TestBase extends AbstractTestNGCucumberTests {
         options.setCapability(ChromeOptions.CAPABILITY, options);
         driver = new RemoteWebDriver(new URL("http://0.0.0.0:4444/wd/hub"),options);
 
+
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
