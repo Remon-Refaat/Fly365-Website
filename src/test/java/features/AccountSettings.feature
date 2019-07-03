@@ -8,7 +8,6 @@ Feature: Open Account Settings page
     Given Navigate to Fly365 "stage" site
     And open login page
 
-  @new
   Scenario: Verify that the logged in user can open account settings page
     And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
     And user enter email "john.smith.fly365@gmail.com"

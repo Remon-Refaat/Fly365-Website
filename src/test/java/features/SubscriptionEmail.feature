@@ -23,9 +23,9 @@ Feature: Subscription Email
     Then Successfully validation message is displayed
 
   Scenario: Verify that the Subscription Email is sent successfully
-      And Delete all messages in the Inbox
-      And  Add the email address "john.smith.fly365@gmail.com" to Subscription Email field
-      And Press on SUBSCRIBE
+    And Delete all messages in the Inbox
+    And  Add the email address "john.smith.fly365@gmail.com" to Subscription Email field
+    And Press on SUBSCRIBE
     Then The Subscription Email is sent successfully
 
   Scenario: Verify that the user can not subscribe with subscribed email

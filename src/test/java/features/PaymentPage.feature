@@ -17,8 +17,8 @@ Feature: Payment page
       | Title | First Name | Middle Name | Last Name | Day | Month    | Year |
       | Mr    | John       | William     | Smith     | 15  | February | 1985 |
     And Add the following data in the Contact Details
-      | Title | First Name | Last Name | Email                        | Phone Number|
-      | Mr    | John      | Smith      | john.smith.fly365@gmail.com  |0136253637474|
+      | Title | First Name | Last Name | Email                       | Phone Number  |
+      | Mr    | John       | Smith     | john.smith.fly365@gmail.com | 0136253637474 |
     And Click on Next Step
     And Press on Pay button
     And Press on Pay button
@@ -35,8 +35,8 @@ Feature: Payment page
       | Title | First Name | Middle Name | Last Name | Day | Month    | Year |
       | Mr    | John       | William     | Smith     | 15  | February | 1985 |
     And Add the following data in the Contact Details
-      | Title | First Name | Last Name | Email                | Phone Number|
-      | Mr    | Remon      | Refaat    | remon@mailinator.com  |0136253637474|
+      | Title | First Name | Last Name | Email                | Phone Number  |
+      | Mr    | Remon      | Refaat    | remon@mailinator.com | 0136253637474 |
     And Click on Next Step
     And Press on 'Edit Passenger details'
     Then 'Passenger' page will be opened
@@ -52,8 +52,8 @@ Feature: Payment page
       | Title | First Name | Middle Name | Last Name | Day | Month    | Year |
       | Mr    | John       | William     | Smith     | 15  | February | 1985 |
     And Add the following data in the Contact Details
-      | Title | First Name | Last Name | Email                | Phone Number|
-      | Mr    | Remon      | Refaat    | remon@mailinator.com  |0136253637474|
+      | Title | First Name | Last Name | Email                | Phone Number  |
+      | Mr    | Remon      | Refaat    | remon@mailinator.com | 0136253637474 |
     And Click on Next Step
     And Press on 'Back'
     Then 'Passenger' page will be opened
@@ -70,8 +70,8 @@ Feature: Payment page
       | Title | First Name | Middle Name | Last Name | Day | Month    | Year |
       | Mr    | John       | William     | Smith     | 15  | February | 1985 |
     And Add the following data in the Contact Details
-      | Title | First Name | Last Name | Email                | Phone Number|
-      | Mr    | Remon      | Refaat    | remon@mailinator.com  |0136253637474|
+      | Title | First Name | Last Name | Email                | Phone Number  |
+      | Mr    | Remon      | Refaat    | remon@mailinator.com | 0136253637474 |
     And Click on Next Step
     And Press on 'Fare Rules'
     Then 'Fare Rules' page will be opened
@@ -88,8 +88,8 @@ Feature: Payment page
       | Title | First Name | Middle Name | Last Name | Day | Month    | Year |
       | Mr    | John       | William     | Smith     | 15  | February | 1985 |
     And Add the following data in the Contact Details
-      | Title | First Name | Last Name | Email                | Phone Number|
-      | Mr    | Remon      | Refaat    | remon@mailinator.com  |0136253637474|
+      | Title | First Name | Last Name | Email                | Phone Number  |
+      | Mr    | Remon      | Refaat    | remon@mailinator.com | 0136253637474 |
     And Click on Next Step
     And Press on 'Terms and conditions'
     Then 'Terms and conditions' page will be opened

@@ -83,7 +83,7 @@ public class PassengersDetailsTest extends TestBase {
 
     @Then("^'Passenger' page will be opened$")
     public void passengerPageWillBeOpened() {
-        Assert.assertEquals(driver.getTitle(),"Fly365 - passengers");
+        Assert.assertEquals(driver.getTitle(), "Fly365 - passengers");
     }
 
     @And("^Press on first 'Read more'$")
@@ -118,6 +118,7 @@ public class PassengersDetailsTest extends TestBase {
         wait.until(ExpectedConditions.visibilityOfElementLocated(totalTravelTimeHDR));
         Assert.assertTrue(driver.findElement(totalTravelTimeHDR).isDisplayed());
     }
+
     @Then("^error message appear for each field at fill passenger details$")
     public void errorMessageAppearForEachFieldAtFillPassengerDetails() throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOfElementLocated(passengerTitleEmptyErrorMSG));

@@ -32,7 +32,6 @@ public class GeneralMethods extends TestBase {
         List<WebElement> allDDL = driver.findElements(By.xpath("//div[@class='el-autocomplete-suggestion el-popper search-autocomplete']"));
         WebElement lastDDL = allDDL.get(allDDL.size() - 1);
         lastDDL.findElement(By.xpath("./div[1]/div[1]/ul[1]/li[div[contains(text(), '" + value + "')]]")).click();
-
     }
 
 
@@ -45,36 +44,36 @@ public class GeneralMethods extends TestBase {
     }
 
     // Methods for dynamic pdf
-    public String changeFaretoDecimalFormat(By element){
-        String numberAsStringValue = driver.findElement(element).getText().trim().replaceAll("[a-zA-Z\\s\\,]","");
-        Float numberAsFloatValue=Float.parseFloat(numberAsStringValue);
+    public String changeFaretoDecimalFormat(By element) {
+        String numberAsStringValue = driver.findElement(element).getText().trim().replaceAll("[a-zA-Z\\s\\,]", "");
+        Float numberAsFloatValue = Float.parseFloat(numberAsStringValue);
         DecimalFormat df = new DecimalFormat("0.00");
         df.setMaximumFractionDigits(2);
         String numberAsStringWithTwoDecimals = df.format(numberAsFloatValue);
         return numberAsStringWithTwoDecimals;
     }
 
-    public String getFarePerPassenger(String fare, String tax){
+    public String getFarePerPassenger(String fare, String tax) {
         Double totalFareperPassenger = Double.valueOf(fare) + Double.valueOf(tax);
-        Float numberAsFloatValue=Float.parseFloat(totalFareperPassenger.toString());
+        Float numberAsFloatValue = Float.parseFloat(totalFareperPassenger.toString());
         DecimalFormat df = new DecimalFormat("0.00");
         df.setMaximumFractionDigits(2);
         String numberAsStringWithTwoDecimals = df.format(numberAsFloatValue);
         return numberAsStringWithTwoDecimals;
     }
 
-    public String getTotalBaseTaxFare(String value1, String value2, String value3, int passengerNumber){
-        Double totalFareperPassenger = Double.valueOf(value1) * passengerNumber + Double.valueOf(value2) * passengerNumber+ Double.valueOf(value3) * passengerNumber;
-        Float numberAsFloatValue=Float.parseFloat(totalFareperPassenger.toString());
+    public String getTotalBaseTaxFare(String value1, String value2, String value3, int passengerNumber) {
+        Double totalFareperPassenger = Double.valueOf(value1) * passengerNumber + Double.valueOf(value2) * passengerNumber + Double.valueOf(value3) * passengerNumber;
+        Float numberAsFloatValue = Float.parseFloat(totalFareperPassenger.toString());
         DecimalFormat df = new DecimalFormat("0.00");
         df.setMaximumFractionDigits(2);
         String numberAsStringWithTwoDecimals = df.format(numberAsFloatValue);
         return numberAsStringWithTwoDecimals;
     }
 
-    public String getTotalFare(String value1, String value2, String value3){
+    public String getTotalFare(String value1, String value2, String value3) {
         Double totalFareperPassenger = Double.valueOf(value1) + Double.valueOf(value2) + Double.valueOf(value3);
-        Float numberAsFloatValue=Float.parseFloat(totalFareperPassenger.toString());
+        Float numberAsFloatValue = Float.parseFloat(totalFareperPassenger.toString());
         DecimalFormat df = new DecimalFormat("0.00");
         df.setMaximumFractionDigits(2);
         String numberAsStringWithTwoDecimals = df.format(numberAsFloatValue);
@@ -89,18 +88,18 @@ public class GeneralMethods extends TestBase {
         return correctDate;
     }
 
-    public String changeFaretoDecimalFormatAPI(String element){
-        Float numberAsFloatValue=Float.parseFloat(element);
+    public String changeFaretoDecimalFormatAPI(String element) {
+        Float numberAsFloatValue = Float.parseFloat(element);
         DecimalFormat df = new DecimalFormat("0.00");
         df.setMaximumFractionDigits(2);
         String numberAsStringWithTwoDecimals = df.format(numberAsFloatValue);
         return numberAsStringWithTwoDecimals;
     }
 
-    public long changeTimeFormatInMinutes(String time){
+    public long changeTimeFormatInMinutes(String time) {
         String[] split = time.split("  ");
         long minutes = 0;
-        if(split.length == 2) {
+        if (split.length == 2) {
             minutes = TimeUnit.HOURS.toMinutes(Integer.parseInt(split[0])) +
                     Integer.parseInt(split[1]);
         }

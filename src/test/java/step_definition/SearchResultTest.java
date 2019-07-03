@@ -18,7 +18,6 @@ public class SearchResultTest extends TestBase {
     public static String tripPrice;
 
 
-
     @And("^Choose a trip$")
     public void chooseATrip() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(bookThisTripBTN));
@@ -35,7 +34,7 @@ public class SearchResultTest extends TestBase {
 
     @And("^Select 'One Stop' trips$")
     public void selectOneStopTrips() {
-        Actions action=new Actions(driver);
+        Actions action = new Actions(driver);
         action.moveToElement(driver.findElement(onlyOneStopsLINK)).moveToElement(driver.findElement(onlyOneStopsLINK)).click().build().perform();
     }
 

@@ -18,18 +18,18 @@ import java.util.ArrayList;
 public class GmailTest extends TestBase {
 
     WebDriverWait wait = new WebDriverWait(driver, 10);
-    EmailUtililty emailUtililty = new EmailUtililty("john.smith.fly365@gmail.com", "@Fly12345", "smtp.gmail.com", EmailUtililty.EmailFolder.INBOX);
+    private EmailUtililty emailUtililty = new EmailUtililty("john.smith.fly365@gmail.com", "@Fly365@Fly365", "smtp.gmail.com", EmailUtililty.EmailFolder.INBOX);
 
-   By emailTXT = By.id("identifierId");
-   By emailNextBTN = By.id("identifierNext");
-    By passwordTXT = By.xpath("//input[@name='password']");
-    By passwordNextBTN = By.id("passwordNext");
-    By menuLINK = By.xpath("//*[@id='gbwa']/div/a");
-    By gmailLink = By.xpath("//*[@id='gb23']");
-    By firstMessageLINK = By.xpath("//div[2]/span//span[text()='Fly365']");
-    By cllickHereLINK = By.xpath("//p[contains(text(),'Unsubscribe please')]/child::a");
-    By verifyBTN = By.xpath("//table//table//table//td/a");
-    By resetPasswordBTN = By.xpath("//table//table//table//td/a");
+    private By emailTXT = By.id("identifierId");
+    private By emailNextBTN = By.id("identifierNext");
+    private By passwordTXT = By.xpath("//input[@name='password']");
+    private By passwordNextBTN = By.id("passwordNext");
+    private By menuLINK = By.xpath("//*[@id='gbwa']/div/a");
+    private By gmailLink = By.xpath("//*[@id='gb23']");
+    private By firstMessageLINK = By.xpath("//div[2]/span//span[text()='Fly365']");
+    private By cllickHereLINK = By.xpath("//p[contains(text(),'Unsubscribe please')]/child::a");
+    private By verifyBTN = By.xpath("//table//table//table//td/a");
+    private By resetPasswordBTN = By.xpath("//table//table//table//td/a");
 
     public GmailTest() throws MessagingException {
     }
@@ -41,7 +41,7 @@ public class GmailTest extends TestBase {
         driver.findElement(emailTXT).sendKeys("john.smith.fly365@gmail.com");
         driver.findElement(emailNextBTN).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(passwordTXT));
-        driver.findElement(passwordTXT).sendKeys("@Fly12345");
+        driver.findElement(passwordTXT).sendKeys("@Fly365@Fly365");
         driver.findElement(passwordNextBTN).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(menuLINK));
         driver.findElement(menuLINK).click();
@@ -62,7 +62,7 @@ public class GmailTest extends TestBase {
     }
 
     @And("^Press on 'Click Here' link$")
-    public void pressOnClickHereLink() throws InterruptedException{
+    public void pressOnClickHereLink() throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOfElementLocated(cllickHereLINK));
         driver.findElement(cllickHereLINK).click();
 
@@ -93,7 +93,7 @@ public class GmailTest extends TestBase {
     public void theAccountVerificationSuccessEmailIsSentSuccessfully() throws Exception {
         Thread.sleep(10000);
         boolean result = emailUtililty.isMessageInFolder("Account Verification Success", true);
-        Assert.assertEquals(result,true);
+        Assert.assertTrue(result);
     }
 
 
@@ -101,7 +101,7 @@ public class GmailTest extends TestBase {
     public void verifyYourEmailIsSentSuccessfully() throws Exception {
         Thread.sleep(8000);
         boolean result = emailUtililty.isMessageInFolder("Verify your email", true);
-        Assert.assertEquals(result,true);
+        Assert.assertTrue(result);
     }
 
 
@@ -109,7 +109,7 @@ public class GmailTest extends TestBase {
     public void contactUsEmailIsSentSuccessfully() throws Exception {
         Thread.sleep(8000);
         boolean result = emailUtililty.isMessageInFolder("Contact Us Email", true);
-        Assert.assertEquals(result,true);
+        Assert.assertTrue(result);
     }
 
 
@@ -117,14 +117,14 @@ public class GmailTest extends TestBase {
     public void theSubscriptionEmailIsSentSuccessfully() throws Exception {
         Thread.sleep(8000);
         boolean result = emailUtililty.isMessageInFolder("Subscription Email", true);
-        Assert.assertEquals(result,true);
+        Assert.assertTrue(result);
     }
 
     @Then("^The Password reset requested email is sent successfully$")
     public void thePasswordResetRequestedEmailIsSentSuccessfully() throws Exception {
         Thread.sleep(11000);
         boolean result = emailUtililty.isMessageInFolder("Password reset requested", true);
-        Assert.assertEquals(result,true);
+        Assert.assertTrue(result);
     }
 
     @And("^Press on Reset Password Button in the email$")
@@ -137,15 +137,15 @@ public class GmailTest extends TestBase {
     public void thePasswordResetSuccessfullyEmailIsSentSuccessfully() throws Exception {
         Thread.sleep(11000);
         boolean result = emailUtililty.isMessageInFolder("Password reset successfully", true);
-        Assert.assertEquals(result,true);
+        Assert.assertTrue(result);
     }
 
     @Then("^Booking Confirmation email is displayed$")
     public void bookingConfirmationEmailIsDisplayed() throws Exception {
         Thread.sleep(23000);
         Message message = emailUtililty.getMessagesBySubject("Booking Confirmation", true, 1)[0];
-        boolean result = emailUtililty.isTextInMessage(message,ConfirmationTest.fly356Refernce);
-        Assert.assertEquals(result, true);
+        boolean result = emailUtililty.isTextInMessage(message, ConfirmationTest.fly356Refernce);
+        Assert.assertTrue(result);
     }
 
     @Then("^Booking Confirmation email contains 'Tax Invoice' and 'Booking Confirmation' pdf$")

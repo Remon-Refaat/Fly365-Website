@@ -2,6 +2,7 @@ package step_definition;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import helper.GeneralMethods;
 import helper.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -11,11 +12,15 @@ import org.testng.Assert;
 public class HubLogin extends TestBase {
     WebDriverWait wait = new WebDriverWait(driver, 30);
 
+    private GeneralMethods gmObject = new GeneralMethods();
+
 
     private By HubLoginEmailTXT = By.xpath("//input[@id='inputEmail']");
     private By HubLoginPasswordTXT = By.xpath("//input[@id='inputPassword']");
     private By HubLoginBTN = By.xpath("//button[@class='btn btn-lg btn-primary btn-block']");
     private By HubDashWelcomeMSG = By.xpath("//h2[@class='d-flex justify-content-center align-items-center text-primary dashboard__title']");
+    //private By HubHamMenu = By.xpath("//li[@class='header__top__left__el-submenu el-submenu']//div[@class='el-submenu__title']");
+    //private By BackOffice = By.xpath("//input[@id='inputEmail']");
     private By Tickets = By.xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/ul[1]/li[2]");
     private By Firstinboxtitle = By.xpath("/html[1]/body[1]/div[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/h3[1]/a[1]");
 

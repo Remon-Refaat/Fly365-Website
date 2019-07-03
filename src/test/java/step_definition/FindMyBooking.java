@@ -20,209 +20,207 @@ import java.text.ParseException;
 public class FindMyBooking extends TestBase {
 
     WebDriverWait wait = new WebDriverWait(driver, 10);
-    GeneralMethods gmObject = new GeneralMethods();
+    private GeneralMethods gmObject = new GeneralMethods();
 
-    boolean pdfNameResult;
+    private boolean pdfNameResult;
 
-    By taxInvoiceBTN = By.xpath("//a[contains(text(),'Invoice PDF')]");
-    By bookingConfirmationBTN = By.xpath("//a[contains(text(),'Ticket PDF')]");
-    By fly365RefVAL = By.xpath("//div//div[2]/div/div[1]/div/strong");
-    By airlineRefVAL = By.xpath("//div//div[2]/div/div[2]/div/strong");
-    By dateIssuedVAL = By.xpath("//div//div[2]/div/div[3]/div/strong");
-    By firstTripDepartureDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-0-origin']//div[2]/span[2]");
-    By secondTripDepartureDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-0-origin']//div[2]/span[2]");
-    By firstTripArrivalDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-destination']/div[2]/span[2]");
-    By secondTripArrivalDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-1-destination']/div[2]/span[2]");
-    By adultFareVAL = By.xpath("//div[2]/div/div[1]/div[2]//div[2]/p[1]");
-    By adultTaxVAL = By.xpath("//div[2]/div/div[1]/div[2]//div[2]/p[2]");
-    By childFareVAL = By.xpath("//div[2]/div/div[2]/div[2]//div[2]/p[1]");
-    By childTaxVAL = By.xpath("//div[2]/div/div[2]/div[2]//div[2]/p[2]");
-    By infantFareVAL = By.xpath("//div[4]//div[2]//div[3]/div[2]//div[2]/p[1]");
-    By infantTaxVAL = By.xpath("//div[4]//div[2]//div[3]/div[2]//div[2]/p[2]");
-    By creditCardVAL = By.xpath("//div[4]/div[2]//p[2]");
-    By firstTripCarrierCodeVAL = By.xpath("//*[@id='itin-gp-undefined-optionset-0-option-0']/div/div[1]/div[1]//label");
-    By secondTripCarrierCodeVAL = By.xpath("//*[@id='itin-gp-undefined-optionset-1-option-0']/div/div[1]/div[1]//label");
-    By firstTripBaggageNumberVAL = By.xpath("//*[@id='itin-gp-undefined-optionset-0-option-0']//div[1]/div[3]//label[2]");
-    By secondTripBaggageNumberVAL = By.xpath("//*[@id='itin-gp-undefined-optionset-1-option-0']//div[2]//div[1]/div[1]/div[3]//label[2]");
-    By firstTripDepartureTimeVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-0-origin']//div[2]/span[1]");
-    By secondTripDepartureTimeVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-0-origin']//div[2]/span[1]");
-    By firstTriparrivalTimeVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-destination']/div[2]/span[1]");
-    By secondTriparrivalTimeVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-1-destination']/div[2]/span[1]");
-    By firstTripDepartureTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-0-origin']//div[1]/span[3]");
-    By secondTripDepartureTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-0-origin']//div[1]/span[3]");
-    By firstTripArrivalTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-destination']/div[1]/span[3]");
-    By secondTripArrivalTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-1-destination']/div[1]/span[3]");
-    By firstTripTotalTravelTimeVAL = By.xpath("//*[@id='itin-gp-undefined-optionset-0-option-0']/div/div[2]/div/div/div/div[3]//div[2]//div/div[1]/div/div[2]");
-    By secondTripTotalTravelTimeVAL = By.xpath("//*[@id='itin-gp-undefined-optionset-1-option-0']/div/div[2]/div/div/div/div[3]//div[2]//div/div[1]/div/div[2]");
-    By currencyVAL = By.xpath("//p[@class='text-lg font-bold uppercase']/span");
-    By firstTripFirstDepartureAirlineVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-0-carrier']//label[1]");
-    By firstTripSecondDepartureAirlineVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-carrier']//label[1]");
-    By firstTripFirstAirlineNumberVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-0-carrier']//label[2]");
-    By firstTripSecondAirlineNumberVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-carrier']//label[2]");
-    By firstTripFirstSegmentDurationVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-0-duration']/div");
-    By firstTripSecondSegmentDurationVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-duration']/div");
-    By firstTripStopDurationVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-conflight']");
-    By firstStopArrivalStopCityCountryVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-0-destination']/span[1]");
-    By firstStopArrivalAirportVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-0-destination']/div[1]/span[1]");
-    By firstStopArrivalTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-0-destination']/div[1]/span[3]");
-    By firstStopArrivalTimeVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-0-destination']/div[2]/span[1]");
-    By firstStopArrivalDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-0-destination']/div[2]/span[2]");
-    By firstStopDepartureStopCityCountryVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-origin']/div/span[1]");
-    By firstStopDepartureAirportVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-origin']/div/div[1]/span[1]");
-    By firstStopDepartureTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-origin']//div[1]/span[3]");
-    By firstStopDepartureTimeVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-origin']//div[2]/span[1]");
-    By firstStopDepartureDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-origin']//div[2]/span[2]");
-    By thirdTripDepartureDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-0-origin']//div[2]/span[2]");
-    By thirdTripArrivalDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-1-destination']/div[2]/span[2]");
-    By thirdTripCarrierCodeVAL = By.xpath("//*[@id='itin-gp-undefined-optionset-2-option-0']/div/div[1]/div[1]//label");
-    By thirdTripBaggageNumberVAL = By.xpath("//*[@id='itin-gp-undefined-optionset-2-option-0']//div[2]//div[1]/div[1]/div[3]//label[2]");
-    By thirdTripDepartureTimeVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-0-origin']//div[2]/span[1]");
-    By thirdTriparrivalTimeVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-1-destination']/div[2]/span[1]");
-    By thirdTripTotalTravelTimeVAL = By.xpath("//*[@id='itin-gp-undefined-optionset-2-option-0']/div/div[2]/div/div/div/div[3]//div[2]//div/div[1]/div/div[2]");
-    By thirdDepartureTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-0-origin']//div[1]/span[3]");
-    By thirdArrivalTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-1-destination']/div[1]/span[3]");
+    private By taxInvoiceBTN = By.xpath("//a[contains(text(),'Invoice PDF')]");
+    private By bookingConfirmationBTN = By.xpath("//a[contains(text(),'Ticket PDF')]");
+    private By fly365RefVAL = By.xpath("//div//div[2]/div/div[1]/div/strong");
+    private By airlineRefVAL = By.xpath("//div//div[2]/div/div[2]/div/strong");
+    private By dateIssuedVAL = By.xpath("//div//div[2]/div/div[3]/div/strong");
+    private By firstTripDepartureDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-0-origin']//div[2]/span[2]");
+    private By secondTripDepartureDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-0-origin']//div[2]/span[2]");
+    private By firstTripArrivalDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-destination']/div[2]/span[2]");
+    private By secondTripArrivalDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-1-destination']/div[2]/span[2]");
+    private By adultFareVAL = By.xpath("//div[2]/div/div[1]/div[2]//div[2]/p[1]");
+    private By adultTaxVAL = By.xpath("//div[2]/div/div[1]/div[2]//div[2]/p[2]");
+    private By childFareVAL = By.xpath("//div[2]/div/div[2]/div[2]//div[2]/p[1]");
+    private By childTaxVAL = By.xpath("//div[2]/div/div[2]/div[2]//div[2]/p[2]");
+    private By infantFareVAL = By.xpath("//div[4]//div[2]//div[3]/div[2]//div[2]/p[1]");
+    private By infantTaxVAL = By.xpath("//div[4]//div[2]//div[3]/div[2]//div[2]/p[2]");
+    private By creditCardVAL = By.xpath("//div[4]/div[2]//p[2]");
+    private By firstTripCarrierCodeVAL = By.xpath("//*[@id='itin-gp-undefined-optionset-0-option-0']/div/div[1]/div[1]//label");
+    private By secondTripCarrierCodeVAL = By.xpath("//*[@id='itin-gp-undefined-optionset-1-option-0']/div/div[1]/div[1]//label");
+    private By firstTripBaggageNumberVAL = By.xpath("//*[@id='itin-gp-undefined-optionset-0-option-0']//div[1]/div[3]//label[2]");
+    private By secondTripBaggageNumberVAL = By.xpath("//*[@id='itin-gp-undefined-optionset-1-option-0']//div[2]//div[1]/div[1]/div[3]//label[2]");
+    private By firstTripDepartureTimeVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-0-origin']//div[2]/span[1]");
+    private By secondTripDepartureTimeVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-0-origin']//div[2]/span[1]");
+    private By firstTriparrivalTimeVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-destination']/div[2]/span[1]");
+    private By secondTriparrivalTimeVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-1-destination']/div[2]/span[1]");
+    private By firstTripDepartureTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-0-origin']//div[1]/span[3]");
+    private By secondTripDepartureTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-0-origin']//div[1]/span[3]");
+    private By firstTripArrivalTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-destination']/div[1]/span[3]");
+    private By secondTripArrivalTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-1-destination']/div[1]/span[3]");
+    private By firstTripTotalTravelTimeVAL = By.xpath("//*[@id='itin-gp-undefined-optionset-0-option-0']/div/div[2]/div/div/div/div[3]//div[2]//div/div[1]/div/div[2]");
+    private By secondTripTotalTravelTimeVAL = By.xpath("//*[@id='itin-gp-undefined-optionset-1-option-0']/div/div[2]/div/div/div/div[3]//div[2]//div/div[1]/div/div[2]");
+    private By currencyVAL = By.xpath("//p[@class='text-lg font-bold uppercase']/span");
+    private By firstTripFirstDepartureAirlineVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-0-carrier']//label[1]");
+    private By firstTripSecondDepartureAirlineVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-carrier']//label[1]");
+    private By firstTripFirstAirlineNumberVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-0-carrier']//label[2]");
+    private By firstTripSecondAirlineNumberVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-carrier']//label[2]");
+    private By firstTripFirstSegmentDurationVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-0-duration']/div");
+    private By firstTripSecondSegmentDurationVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-duration']/div");
+    private By firstTripStopDurationVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-conflight']");
+    private By firstStopArrivalStopCityCountryVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-0-destination']/span[1]");
+    private By firstStopArrivalAirportVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-0-destination']/div[1]/span[1]");
+    private By firstStopArrivalTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-0-destination']/div[1]/span[3]");
+    private By firstStopArrivalTimeVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-0-destination']/div[2]/span[1]");
+    private By firstStopArrivalDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-0-destination']/div[2]/span[2]");
+    private By firstStopDepartureStopCityCountryVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-origin']/div/span[1]");
+    private By firstStopDepartureAirportVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-origin']/div/div[1]/span[1]");
+    private By firstStopDepartureTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-origin']//div[1]/span[3]");
+    private By firstStopDepartureTimeVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-origin']//div[2]/span[1]");
+    private By firstStopDepartureDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-origin']//div[2]/span[2]");
+    private By thirdTripDepartureDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-0-origin']//div[2]/span[2]");
+    private By thirdTripArrivalDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-1-destination']/div[2]/span[2]");
+    private By thirdTripCarrierCodeVAL = By.xpath("//*[@id='itin-gp-undefined-optionset-2-option-0']/div/div[1]/div[1]//label");
+    private By thirdTripBaggageNumberVAL = By.xpath("//*[@id='itin-gp-undefined-optionset-2-option-0']//div[2]//div[1]/div[1]/div[3]//label[2]");
+    private By thirdTripDepartureTimeVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-0-origin']//div[2]/span[1]");
+    private By thirdTriparrivalTimeVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-1-destination']/div[2]/span[1]");
+    private By thirdTripTotalTravelTimeVAL = By.xpath("//*[@id='itin-gp-undefined-optionset-2-option-0']/div/div[2]/div/div/div/div[3]//div[2]//div/div[1]/div/div[2]");
+    private By thirdDepartureTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-0-origin']//div[1]/span[3]");
+    private By thirdArrivalTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-1-destination']/div[1]/span[3]");
 
-    By secondTripSecondDepartureAirlineVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-1-carrier']//label[1]");;
-    By secondTripSecondAirlineNumberVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-1-carrier']//label[2]");
-    By secondStopArrivalTimeVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-0-destination']/div[2]/span[1]");
-    By secondStopArrivalDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-0-destination']/div[2]/span[2]");
-    By secondStopArrivalStopCityCountryVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-0-destination']/span[1]");
-    By secondStopArrivalAirportVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-0-destination']/div[1]/span[1]");
-    By secondStopArrivalTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-0-destination']/div[1]/span[3]");
-    By secondTripFirstSegmentDurationVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-0-duration']/div");
-    By secondTripSecondSegmentDurationVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-1-duration']/div");
-    By secondStopDepartureTimeVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-1-origin']//div[2]/span[1]");
-    By secondStopDepartureDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-1-origin']//div[2]/span[2]");
-    By secondStopDepartureStopCityCountryVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-1-origin']/div/span[1]");
-    By secondStopDepartureAirportVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-1-origin']/div/div[1]/span[1]");
-    By secondStopDepartureTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-1-origin']//div[1]/span[3]");
-    By secondTripFirstDepartureAirlineVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-0-carrier']//label[1]");
-    By secondTripFirstAirlineNumberVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-0-carrier']//label[2]");
-    By secondTripStopDurationVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-1-conflight']");
+    private By secondTripSecondDepartureAirlineVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-1-carrier']//label[1]");
+    ;
+    private By secondTripSecondAirlineNumberVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-1-carrier']//label[2]");
+    private By secondStopArrivalTimeVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-0-destination']/div[2]/span[1]");
+    private By secondStopArrivalDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-0-destination']/div[2]/span[2]");
+    private By secondStopArrivalStopCityCountryVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-0-destination']/span[1]");
+    private By secondStopArrivalAirportVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-0-destination']/div[1]/span[1]");
+    private By secondStopArrivalTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-0-destination']/div[1]/span[3]");
+    private By secondTripFirstSegmentDurationVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-0-duration']/div");
+    private By secondTripSecondSegmentDurationVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-1-duration']/div");
+    private By secondStopDepartureTimeVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-1-origin']//div[2]/span[1]");
+    private By secondStopDepartureDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-1-origin']//div[2]/span[2]");
+    private By secondStopDepartureStopCityCountryVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-1-origin']/div/span[1]");
+    private By secondStopDepartureAirportVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-1-origin']/div/div[1]/span[1]");
+    private By secondStopDepartureTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-1-origin']//div[1]/span[3]");
+    private By secondTripFirstDepartureAirlineVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-0-carrier']//label[1]");
+    private By secondTripFirstAirlineNumberVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-0-carrier']//label[2]");
+    private By secondTripStopDurationVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-1-conflight']");
 
-    By thirdTripSecondDepartureAirlineVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-1-carrier']//label[1]");;
-    By thirdTripSecondAirlineNumberVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-1-carrier']//label[2]");
-    By thirdStopArrivalTimeVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-0-destination']/div[2]/span[1]");
-    By thirdStopArrivalDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-0-destination']/div[2]/span[2]");
-    By thirdStopArrivalStopCityCountryVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-0-destination']/span[1]");
-    By thirdStopArrivalAirportVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-0-destination']/div[1]/span[1]");
-    By thirdStopArrivalTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-0-destination']/div[1]/span[3]");
-    By thirdTripFirstSegmentDurationVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-0-duration']/div");
-    By thirdTripSecondSegmentDurationVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-1-duration']/div");
-    By thirdStopDepartureTimeVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-1-origin']//div[2]/span[1]");
-    By thirdStopDepartureDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-1-origin']//div[2]/span[2]");
-    By thirdStopDepartureStopCityCountryVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-1-origin']/div/span[1]");
-    By thirdStopDepartureAirportVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-1-origin']/div/div[1]/span[1]");
-    By thirdStopDepartureTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-1-origin']//div[1]/span[3]");
-    By thirdTripFirstDepartureAirlineVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-0-carrier']//label[1]");
-    By thirdTripFirstAirlineNumberVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-0-carrier']//label[2]");
-    By thirdTripStopDurationVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-1-conflight']");
-
-
-
-
-    String fly365Ref;
-    String airlineRef;
-    String dateIssued;
-    String firstTripCarrierCode;
-    String secondTripCarrierCode;
-    String firstTripbaggageNumber;
-    String secondTripbaggageNumber;
-    String firstTripbaggageNumberUC;
-    String firstTripdepartureTime;
-    String secondTripdepartureTime;
-    String firstTriparrivalTime;
-    String secondTriparrivalTime;
-    String firstTripdepartureTerminal;
-    String secondTripdepartureTerminal;
-    String firstTriparrivalTerminal;
-    String secondTriparrivalTerminal;
-    String firstTripTotalTravelTime;
-    String secondTripTotalTravelTime;
-    String firstTripDepartureDate;
-    String secondTripDepartureDate;
-    String firstTriparrivalDate;
-    String secondTriparrivalDate;
-    String adultFare;
-    String adultTax;
-    String childFare;
-    String childTax;
-    String infantFare;
-    String infantTax;
-    String totalFareperAdult;
-    String totalFareperInfant;
-    String totalFareperChild;
-    String totalBaseFare;
-    String totalTaxesAndFees;
-    String creditCardFees;
-    String totalCharges;
-    String currency;
-    String firstTripFirstDepartureAirline;
-    String firstTripSecondDepartureAirline;
-    String firstTripFirstAirlineNumber;
-    String firstTripSecondAirlineNumber;
-    String firstTripFirstSegmentDuration;
-    String firstTripSecondSegmentDuration;
-    String firstTripStopDuration;
-    String firstStopArrivalStopCityCountry;
-    String firstStopArrivalAirport;
-    String firstStopArrivalTerminal;
-    String firstStopArrivalTime;
-    String firstStopArrivalDate;
-    String firstStopDepartureStopCityCountry;
-    String firstStopDepartureAirport;
-    String firstStopDepartureTerminal;
-    String firstStopDepartureTime;
-    String firstStopDepartureDate;
-    String thirdTripDepartureDate;
-    String thirdTripCarrierCode;
-    String thirdTripbaggageNumber;
-    String thirdTripdepartureTime;
-    String thirdTriparrivalTime;
-    String thirdTripdepartureTerminal;
-    String thirdTriparrivalTerminal;
-    String thirdTriparrivalDate;
-    String thirdTripTotalTravelTime;
-
-    String secondTripbaggageNumberUC;
-    String secondTripFirstDepartureAirline;
-    String secondTripFirstAirlineNumber;
-    String secondTripStopDuration;
-    String secondTripSecondDepartureAirline;
-    String secondTripSecondAirlineNumber;
-    String secondStopArrivalTime;
-    String secondStopArrivalDate;
-    String secondStopArrivalStopCityCountry;
-    String secondStopArrivalAirport;
-    String secondStopArrivalTerminal;
-    String secondTripFirstSegmentDuration;
-    String secondTripSecondSegmentDuration;
-    String secondStopDepartureTime;
-    String secondStopDepartureDate;
-    String secondStopDepartureStopCityCountry;
-    String secondStopDepartureAirport;
-    String secondStopDepartureTerminal;
-
-    String thirdTripbaggageNumberUC;
-    String thirdTripFirstDepartureAirline;
-    String thirdTripFirstAirlineNumber;
-    String thirdTripStopDuration;
-    String thirdTripSecondDepartureAirline;
-    String thirdTripSecondAirlineNumber;
-    String thirdStopArrivalTime;
-    String thirdStopArrivalDate;
-    String thirdStopArrivalStopCityCountry;
-    String thirdStopArrivalAirport;
-    String thirdStopArrivalTerminal;
-    String thirdTripFirstSegmentDuration;
-    String thirdTripSecondSegmentDuration;
-    String thirdStopDepartureTime;
-    String thirdStopDepartureDate;
-    String thirdStopDepartureStopCityCountry;
-    String thirdStopDepartureAirport;
-    String thirdStopDepartureTerminal;
+    private By thirdTripSecondDepartureAirlineVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-1-carrier']//label[1]");
+    ;
+    private By thirdTripSecondAirlineNumberVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-1-carrier']//label[2]");
+    private By thirdStopArrivalTimeVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-0-destination']/div[2]/span[1]");
+    private By thirdStopArrivalDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-0-destination']/div[2]/span[2]");
+    private By thirdStopArrivalStopCityCountryVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-0-destination']/span[1]");
+    private By thirdStopArrivalAirportVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-0-destination']/div[1]/span[1]");
+    private By thirdStopArrivalTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-0-destination']/div[1]/span[3]");
+    private By thirdTripFirstSegmentDurationVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-0-duration']/div");
+    private By thirdTripSecondSegmentDurationVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-1-duration']/div");
+    private By thirdStopDepartureTimeVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-1-origin']//div[2]/span[1]");
+    private By thirdStopDepartureDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-1-origin']//div[2]/span[2]");
+    private By thirdStopDepartureStopCityCountryVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-1-origin']/div/span[1]");
+    private By thirdStopDepartureAirportVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-1-origin']/div/div[1]/span[1]");
+    private By thirdStopDepartureTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-1-origin']//div[1]/span[3]");
+    private By thirdTripFirstDepartureAirlineVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-0-carrier']//label[1]");
+    private By thirdTripFirstAirlineNumberVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-0-carrier']//label[2]");
+    private By thirdTripStopDurationVAL = By.xpath("//*[@id='itin-gp-0-optionset-2-option-0-segment-1-conflight']");
 
 
+    private String fly365Ref;
+    private String airlineRef;
+    private String dateIssued;
+    private String firstTripCarrierCode;
+    private String secondTripCarrierCode;
+    private String firstTripbaggageNumber;
+    private String secondTripbaggageNumber;
+    private String firstTripbaggageNumberUC;
+    private String firstTripdepartureTime;
+    private String secondTripdepartureTime;
+    private String firstTriparrivalTime;
+    private String secondTriparrivalTime;
+    private String firstTripdepartureTerminal;
+    private String secondTripdepartureTerminal;
+    private String firstTriparrivalTerminal;
+    private String secondTriparrivalTerminal;
+    private String firstTripTotalTravelTime;
+    private String secondTripTotalTravelTime;
+    private String firstTripDepartureDate;
+    private String secondTripDepartureDate;
+    private String firstTriparrivalDate;
+    private String secondTriparrivalDate;
+    private String adultFare;
+    private String adultTax;
+    private String childFare;
+    private String childTax;
+    private String infantFare;
+    private String infantTax;
+    private String totalFareperAdult;
+    private String totalFareperInfant;
+    private String totalFareperChild;
+    private String totalBaseFare;
+    private String totalTaxesAndFees;
+    private String creditCardFees;
+    private String totalCharges;
+    private String currency;
+    private String firstTripFirstDepartureAirline;
+    private String firstTripSecondDepartureAirline;
+    private String firstTripFirstAirlineNumber;
+    private String firstTripSecondAirlineNumber;
+    private String firstTripFirstSegmentDuration;
+    private String firstTripSecondSegmentDuration;
+    private String firstTripStopDuration;
+    private String firstStopArrivalStopCityCountry;
+    private String firstStopArrivalAirport;
+    private String firstStopArrivalTerminal;
+    private String firstStopArrivalTime;
+    private String firstStopArrivalDate;
+    private String firstStopDepartureStopCityCountry;
+    private String firstStopDepartureAirport;
+    private String firstStopDepartureTerminal;
+    private String firstStopDepartureTime;
+    private String firstStopDepartureDate;
+    private String thirdTripDepartureDate;
+    private String thirdTripCarrierCode;
+    private String thirdTripbaggageNumber;
+    private String thirdTripdepartureTime;
+    private String thirdTriparrivalTime;
+    private String thirdTripdepartureTerminal;
+    private String thirdTriparrivalTerminal;
+    private String thirdTriparrivalDate;
+    private String thirdTripTotalTravelTime;
+
+    private String secondTripbaggageNumberUC;
+    private String secondTripFirstDepartureAirline;
+    private String secondTripFirstAirlineNumber;
+    private String secondTripStopDuration;
+    private String secondTripSecondDepartureAirline;
+    private String secondTripSecondAirlineNumber;
+    private String secondStopArrivalTime;
+    private String secondStopArrivalDate;
+    private String secondStopArrivalStopCityCountry;
+    private String secondStopArrivalAirport;
+    private String secondStopArrivalTerminal;
+    private String secondTripFirstSegmentDuration;
+    private String secondTripSecondSegmentDuration;
+    private String secondStopDepartureTime;
+    private String secondStopDepartureDate;
+    private String secondStopDepartureStopCityCountry;
+    private String secondStopDepartureAirport;
+    private String secondStopDepartureTerminal;
+
+    private String thirdTripbaggageNumberUC;
+    private String thirdTripFirstDepartureAirline;
+    private String thirdTripFirstAirlineNumber;
+    private String thirdTripStopDuration;
+    private String thirdTripSecondDepartureAirline;
+    private String thirdTripSecondAirlineNumber;
+    private String thirdStopArrivalTime;
+    private String thirdStopArrivalDate;
+    private String thirdStopArrivalStopCityCountry;
+    private String thirdStopArrivalAirport;
+    private String thirdStopArrivalTerminal;
+    private String thirdTripFirstSegmentDuration;
+    private String thirdTripSecondSegmentDuration;
+    private String thirdStopDepartureTime;
+    private String thirdStopDepartureDate;
+    private String thirdStopDepartureStopCityCountry;
+    private String thirdStopDepartureAirport;
+    private String thirdStopDepartureTerminal;
 
 
     @And("^Download the tax invoice pdf$")
@@ -244,8 +242,9 @@ public class FindMyBooking extends TestBase {
         firstTripCarrierCode = driver.findElement(firstTripCarrierCodeVAL).getText().trim();
         firstTripbaggageNumber = driver.findElement(firstTripBaggageNumberVAL).getText().trim();
         firstTripbaggageNumberUC = firstTripbaggageNumber.toUpperCase();
-        firstTripdepartureTime = driver.findElement(firstTripDepartureTimeVAL).getText().trim().replaceAll("[\\-\\s]","");;
-        firstTriparrivalTime = driver.findElement(firstTriparrivalTimeVAL).getText().trim().replaceAll("[\\-\\s]","");
+        firstTripdepartureTime = driver.findElement(firstTripDepartureTimeVAL).getText().trim().replaceAll("[\\-\\s]", "");
+        ;
+        firstTriparrivalTime = driver.findElement(firstTriparrivalTimeVAL).getText().trim().replaceAll("[\\-\\s]", "");
         firstTripdepartureTerminal = driver.findElement(firstTripDepartureTerminalVAL).getText().trim();
         firstTriparrivalTerminal = driver.findElement(firstTripArrivalTerminalVAL).getText().trim();
         firstTripTotalTravelTime = driver.findElement(firstTripTotalTravelTimeVAL).getText().trim();
@@ -255,16 +254,16 @@ public class FindMyBooking extends TestBase {
         childTax = gmObject.changeFaretoDecimalFormat(childTaxVAL);
         infantFare = gmObject.changeFaretoDecimalFormat(infantFareVAL);
         infantTax = gmObject.changeFaretoDecimalFormat(infantTaxVAL);
-        totalFareperAdult = gmObject.getFarePerPassenger(adultFare,adultTax);
-        totalFareperChild = gmObject.getFarePerPassenger(childFare,childTax);
-        totalFareperInfant = gmObject.getFarePerPassenger(infantFare,infantTax);
-        totalBaseFare = gmObject.getTotalBaseTaxFare(adultFare, childFare, infantFare,2);
+        totalFareperAdult = gmObject.getFarePerPassenger(adultFare, adultTax);
+        totalFareperChild = gmObject.getFarePerPassenger(childFare, childTax);
+        totalFareperInfant = gmObject.getFarePerPassenger(infantFare, infantTax);
+        totalBaseFare = gmObject.getTotalBaseTaxFare(adultFare, childFare, infantFare, 2);
         totalTaxesAndFees = gmObject.getTotalBaseTaxFare(adultTax, childTax, infantTax, 2);
         creditCardFees = gmObject.changeFaretoDecimalFormat(creditCardVAL);
         totalCharges = gmObject.getTotalFare(totalBaseFare, totalTaxesAndFees, creditCardFees);
         currency = driver.findElement(currencyVAL).getText().trim();
         firstTripFirstDepartureAirline = driver.findElement(firstTripFirstDepartureAirlineVAL).getText().trim();
-        firstTripSecondDepartureAirline= driver.findElement(firstTripSecondDepartureAirlineVAL).getText().trim();
+        firstTripSecondDepartureAirline = driver.findElement(firstTripSecondDepartureAirlineVAL).getText().trim();
         firstTripFirstAirlineNumber = driver.findElement(firstTripFirstAirlineNumberVAL).getText().trim();
         firstTripSecondAirlineNumber = driver.findElement(firstTripSecondAirlineNumberVAL).getText().trim();
         firstTripFirstSegmentDuration = driver.findElement(firstTripFirstSegmentDurationVAL).getText().trim();
@@ -273,12 +272,12 @@ public class FindMyBooking extends TestBase {
         firstStopArrivalStopCityCountry = driver.findElement(firstStopArrivalStopCityCountryVAL).getText().trim();
         firstStopArrivalAirport = driver.findElement(firstStopArrivalAirportVAL).getText().trim();
         firstStopArrivalTerminal = driver.findElement(firstStopArrivalTerminalVAL).getText().trim();
-        firstStopArrivalTime = driver.findElement(firstStopArrivalTimeVAL).getText().trim().replaceAll("[\\-\\s]","");
+        firstStopArrivalTime = driver.findElement(firstStopArrivalTimeVAL).getText().trim().replaceAll("[\\-\\s]", "");
         firstStopArrivalDate = gmObject.getTheCorrectFormatForTheDate(firstStopArrivalDateVAL);
         firstStopDepartureStopCityCountry = driver.findElement(firstStopDepartureStopCityCountryVAL).getText().trim();
         firstStopDepartureAirport = driver.findElement(firstStopDepartureAirportVAL).getText().trim();
         firstStopDepartureTerminal = driver.findElement(firstStopDepartureTerminalVAL).getText().trim();
-        firstStopDepartureTime = driver.findElement(firstStopDepartureTimeVAL).getText().trim().replaceAll("[\\-\\s]","");
+        firstStopDepartureTime = driver.findElement(firstStopDepartureTimeVAL).getText().trim().replaceAll("[\\-\\s]", "");
         firstStopDepartureDate = gmObject.getTheCorrectFormatForTheDate(firstStopDepartureDateVAL);
 //firstAirlineNumber, secondAirlineNumber, firstSegmentDuration, secondSegmentDuration, stopDuration
 
@@ -289,18 +288,18 @@ public class FindMyBooking extends TestBase {
         secondTripDepartureDate = gmObject.getTheCorrectFormatForTheDate(secondTripDepartureDateVAL);
         secondTripCarrierCode = driver.findElement(secondTripCarrierCodeVAL).getText().trim();
         secondTripbaggageNumber = driver.findElement(secondTripBaggageNumberVAL).getText().trim();
-        secondTripdepartureTime = driver.findElement(secondTripDepartureTimeVAL).getText().trim().replaceAll("[\\-\\s]","");;
-        secondTriparrivalTime = driver.findElement(secondTriparrivalTimeVAL).getText().trim().replaceAll("[\\-\\s]","");
+        secondTripdepartureTime = driver.findElement(secondTripDepartureTimeVAL).getText().trim().replaceAll("[\\-\\s]", "");
+        ;
+        secondTriparrivalTime = driver.findElement(secondTriparrivalTimeVAL).getText().trim().replaceAll("[\\-\\s]", "");
         secondTripdepartureTerminal = driver.findElement(secondTripDepartureTerminalVAL).getText().trim();
         secondTriparrivalTerminal = driver.findElement(secondTripArrivalTerminalVAL).getText().trim();
         secondTriparrivalDate = gmObject.getTheCorrectFormatForTheDate(secondTripArrivalDateVAL);
         secondTripTotalTravelTime = driver.findElement(secondTripTotalTravelTimeVAL).getText().trim();
 
 
-
-        secondTripSecondDepartureAirline= driver.findElement(secondTripSecondDepartureAirlineVAL).getText().trim();
+        secondTripSecondDepartureAirline = driver.findElement(secondTripSecondDepartureAirlineVAL).getText().trim();
         secondTripSecondAirlineNumber = driver.findElement(secondTripSecondAirlineNumberVAL).getText().trim();
-        secondStopArrivalTime = driver.findElement(secondStopArrivalTimeVAL).getText().trim().replaceAll("[\\-\\s]","");
+        secondStopArrivalTime = driver.findElement(secondStopArrivalTimeVAL).getText().trim().replaceAll("[\\-\\s]", "");
         secondStopArrivalDate = gmObject.getTheCorrectFormatForTheDate(secondStopArrivalDateVAL);
         secondStopArrivalStopCityCountry = driver.findElement(secondStopArrivalStopCityCountryVAL).getText().trim();
         secondStopArrivalAirport = driver.findElement(secondStopArrivalAirportVAL).getText().trim();
@@ -309,13 +308,16 @@ public class FindMyBooking extends TestBase {
         secondStopDepartureAirport = driver.findElement(secondStopDepartureAirportVAL).getText().trim();
         secondStopDepartureStopCityCountry = driver.findElement(secondStopDepartureStopCityCountryVAL).getText().trim();
         secondStopDepartureDate = gmObject.getTheCorrectFormatForTheDate(secondStopDepartureDateVAL);
-        secondStopDepartureTime = driver.findElement(secondStopDepartureTimeVAL).getText().trim().replaceAll("[\\-\\s]","");
+        secondStopDepartureTime = driver.findElement(secondStopDepartureTimeVAL).getText().trim().replaceAll("[\\-\\s]", "");
         secondTripFirstSegmentDuration = driver.findElement(secondTripFirstSegmentDurationVAL).getText().trim();
         secondTripSecondSegmentDuration = driver.findElement(secondTripSecondSegmentDurationVAL).getText().trim();
         secondTripbaggageNumberUC = secondTripbaggageNumber.toUpperCase();
-         secondTripFirstDepartureAirline = driver.findElement(secondTripFirstDepartureAirlineVAL).getText().trim();;
-         secondTripFirstAirlineNumber = driver.findElement(secondTripFirstAirlineNumberVAL).getText().trim();;
-         secondTripStopDuration = driver.findElement(secondTripStopDurationVAL).getText().trim();;
+        secondTripFirstDepartureAirline = driver.findElement(secondTripFirstDepartureAirlineVAL).getText().trim();
+        ;
+        secondTripFirstAirlineNumber = driver.findElement(secondTripFirstAirlineNumberVAL).getText().trim();
+        ;
+        secondTripStopDuration = driver.findElement(secondTripStopDurationVAL).getText().trim();
+        ;
 
     }
 
@@ -324,16 +326,17 @@ public class FindMyBooking extends TestBase {
         thirdTripDepartureDate = gmObject.getTheCorrectFormatForTheDate(thirdTripDepartureDateVAL);
         thirdTripCarrierCode = driver.findElement(thirdTripCarrierCodeVAL).getText().trim();
         thirdTripbaggageNumber = driver.findElement(thirdTripBaggageNumberVAL).getText().trim();
-        thirdTripdepartureTime = driver.findElement(thirdTripDepartureTimeVAL).getText().trim().replaceAll("[\\-\\s]","");;
-        thirdTriparrivalTime = driver.findElement(thirdTriparrivalTimeVAL).getText().trim().replaceAll("[\\-\\s]","");
+        thirdTripdepartureTime = driver.findElement(thirdTripDepartureTimeVAL).getText().trim().replaceAll("[\\-\\s]", "");
+        ;
+        thirdTriparrivalTime = driver.findElement(thirdTriparrivalTimeVAL).getText().trim().replaceAll("[\\-\\s]", "");
         thirdTripdepartureTerminal = driver.findElement(thirdDepartureTerminalVAL).getText().trim();
         thirdTriparrivalTerminal = driver.findElement(thirdArrivalTerminalVAL).getText().trim();
         thirdTriparrivalDate = gmObject.getTheCorrectFormatForTheDate(thirdTripArrivalDateVAL);
         thirdTripTotalTravelTime = driver.findElement(thirdTripTotalTravelTimeVAL).getText().trim();
 
-        thirdTripSecondDepartureAirline= driver.findElement(thirdTripSecondDepartureAirlineVAL).getText().trim();
+        thirdTripSecondDepartureAirline = driver.findElement(thirdTripSecondDepartureAirlineVAL).getText().trim();
         thirdTripSecondAirlineNumber = driver.findElement(thirdTripSecondAirlineNumberVAL).getText().trim();
-        thirdStopArrivalTime = driver.findElement(thirdStopArrivalTimeVAL).getText().trim().replaceAll("[\\-\\s]","");
+        thirdStopArrivalTime = driver.findElement(thirdStopArrivalTimeVAL).getText().trim().replaceAll("[\\-\\s]", "");
         thirdStopArrivalDate = gmObject.getTheCorrectFormatForTheDate(thirdStopArrivalDateVAL);
         thirdStopArrivalStopCityCountry = driver.findElement(thirdStopArrivalStopCityCountryVAL).getText().trim();
         thirdStopArrivalAirport = driver.findElement(thirdStopArrivalAirportVAL).getText().trim();
@@ -342,13 +345,16 @@ public class FindMyBooking extends TestBase {
         thirdStopDepartureAirport = driver.findElement(thirdStopDepartureAirportVAL).getText().trim();
         thirdStopDepartureStopCityCountry = driver.findElement(thirdStopDepartureStopCityCountryVAL).getText().trim();
         thirdStopDepartureDate = gmObject.getTheCorrectFormatForTheDate(thirdStopDepartureDateVAL);
-        thirdStopDepartureTime = driver.findElement(thirdStopDepartureTimeVAL).getText().trim().replaceAll("[\\-\\s]","");
+        thirdStopDepartureTime = driver.findElement(thirdStopDepartureTimeVAL).getText().trim().replaceAll("[\\-\\s]", "");
         thirdTripFirstSegmentDuration = driver.findElement(thirdTripFirstSegmentDurationVAL).getText().trim();
         thirdTripSecondSegmentDuration = driver.findElement(thirdTripSecondSegmentDurationVAL).getText().trim();
         thirdTripbaggageNumberUC = thirdTripbaggageNumber.toUpperCase();
-        thirdTripFirstDepartureAirline = driver.findElement(thirdTripFirstDepartureAirlineVAL).getText().trim();;
-        thirdTripFirstAirlineNumber = driver.findElement(thirdTripFirstAirlineNumberVAL).getText().trim();;
-        thirdTripStopDuration = driver.findElement(thirdTripStopDurationVAL).getText().trim();;
+        thirdTripFirstDepartureAirline = driver.findElement(thirdTripFirstDepartureAirlineVAL).getText().trim();
+        ;
+        thirdTripFirstAirlineNumber = driver.findElement(thirdTripFirstAirlineNumberVAL).getText().trim();
+        ;
+        thirdTripStopDuration = driver.findElement(thirdTripStopDurationVAL).getText().trim();
+        ;
     }
 
     @Then("^The tax invoice pdf is downloaded$")
@@ -372,38 +378,38 @@ public class FindMyBooking extends TestBase {
         System.out.println("****************");
         System.out.println(TestText);
         System.out.println("****************");
-        Assert.assertEquals(TestText,"Fly365 Pty Ltd\n" +
+        Assert.assertEquals(TestText, "Fly365 Pty Ltd\n" +
                 "ABN : 606 601 521\n" +
                 "TAX INVOICE\n" +
                 "Fly365 Reference Airlines Reference Date Issued\n" +
-                fly365Ref+" "+airlineRef+" "+dateIssued+"\n" +
+                fly365Ref + " " + airlineRef + " " + dateIssued + "\n" +
                 "Flights Details\n" +
-                "From Cairo (CAI) to Dublin (DUB) on the "+firstTripDepartureDate+"\n" +
+                "From Cairo (CAI) to Dublin (DUB) on the " + firstTripDepartureDate + "\n" +
                 "Trip Details\n" +
                 "Fare Details\n" +
                 "Family Name/First Middle Names Title Type Frequent Flyer Base Fare Taxes and Fees Total\n" +
-                "Smith/John William Mr Adult N/A "+adultFare+" "+currency+" "+adultTax+" "+currency+" "+totalFareperAdult+" "+currency+"\n" +
-                "Smith/Michael William Mr Adult N/A "+adultFare+" "+currency+" "+adultTax+" "+currency+" "+totalFareperAdult+" "+currency+"\n" +
-                "Smith/Frank William Mr Child N/A "+childFare+" "+currency+" "+childTax+" "+currency+" "+totalFareperChild+" "+currency+"\n" +
-                "Smith/Peter William Mr Child N/A "+childFare+" "+currency+" "+childTax+" "+currency+" "+totalFareperChild+" "+currency+"\n" +
-                "Frank/Paul Peter Mr Infant N/A "+infantFare+" "+currency+" "+infantTax+" "+currency+" "+totalFareperInfant+" "+currency+"\n" +
-                "Frank/John Peter Mr Infant N/A "+infantFare+" "+currency+" "+infantTax+" "+currency+" "+totalFareperInfant+" "+currency+"\n" +
+                "Smith/John William Mr Adult N/A " + adultFare + " " + currency + " " + adultTax + " " + currency + " " + totalFareperAdult + " " + currency + "\n" +
+                "Smith/Michael William Mr Adult N/A " + adultFare + " " + currency + " " + adultTax + " " + currency + " " + totalFareperAdult + " " + currency + "\n" +
+                "Smith/Frank William Mr Child N/A " + childFare + " " + currency + " " + childTax + " " + currency + " " + totalFareperChild + " " + currency + "\n" +
+                "Smith/Peter William Mr Child N/A " + childFare + " " + currency + " " + childTax + " " + currency + " " + totalFareperChild + " " + currency + "\n" +
+                "Frank/Paul Peter Mr Infant N/A " + infantFare + " " + currency + " " + infantTax + " " + currency + " " + totalFareperInfant + " " + currency + "\n" +
+                "Frank/John Peter Mr Infant N/A " + infantFare + " " + currency + " " + infantTax + " " + currency + " " + totalFareperInfant + " " + currency + "\n" +
                 "Payment Summary Total\n" +
-                "Total Base Fare "+totalBaseFare+" "+currency+"\n" +
-                "Total Taxes and Fees "+totalTaxesAndFees+" "+currency+"\n" +
-                "GST 0.00 "+currency+"\n" +
-                "Credit Card Fee "+creditCardFees+" "+currency+"\n" +
-                "This is an electronically generated invoice and does not require a physical signature. Total amount charged "+totalCharges+" "+currency+"\n" +
-                firstTripCarrierCode+"\n" +
-                firstTripbaggageNumber+" Baggage\n" +
-                firstTripdepartureTime+" - "+firstTripDepartureDate+"\n" +
+                "Total Base Fare " + totalBaseFare + " " + currency + "\n" +
+                "Total Taxes and Fees " + totalTaxesAndFees + " " + currency + "\n" +
+                "GST 0.00 " + currency + "\n" +
+                "Credit Card Fee " + creditCardFees + " " + currency + "\n" +
+                "This is an electronically generated invoice and does not require a physical signature. Total amount charged " + totalCharges + " " + currency + "\n" +
+                firstTripCarrierCode + "\n" +
+                firstTripbaggageNumber + " Baggage\n" +
+                firstTripdepartureTime + " - " + firstTripDepartureDate + "\n" +
                 "Cairo (CAI) - Egypt\n" +
                 "Cairo International Airport -\n" +
-                firstTripdepartureTerminal+"\n" +
-                firstTriparrivalTime+" - "+firstTriparrivalDate+"\n" +
+                firstTripdepartureTerminal + "\n" +
+                firstTriparrivalTime + " - " + firstTriparrivalDate + "\n" +
                 "Dublin (DUB) - Ireland\n" +
-                "Dublin International - "+firstTriparrivalTerminal+"\n" +
-                firstTripTotalTravelTime+"\n" +
+                "Dublin International - " + firstTriparrivalTerminal + "\n" +
+                firstTripTotalTravelTime + "\n" +
                 "1 Stop\n");
     }
 
@@ -425,7 +431,7 @@ public class FindMyBooking extends TestBase {
         System.out.println("****************");
         System.out.println(TestText);
         System.out.println("****************");
-        Assert.assertEquals(TestText,"Email : nz.support@fly365.com - monitored 24 hours a day\n" +
+        Assert.assertEquals(TestText, "Email : nz.support@fly365.com - monitored 24 hours a day\n" +
                 "BOOKING CONFIRMATION\n" +
                 "You are ready to fly\n" +
                 "Thank you for booking with Fly365! Please print this confirmation and present at check-in . Ensure you have checked that all information is correct\n" +
@@ -448,7 +454,7 @@ public class FindMyBooking extends TestBase {
                 "minutes before the flight leaves.\n" +
                 "Booking Information\n" +
                 "Fly365 Reference Airlines Reference Date Issued Booking Status\n" +
-                fly365Ref+" "+airlineRef+" "+dateIssued+" Confirmed\n" +
+                fly365Ref + " " + airlineRef + " " + dateIssued + " Confirmed\n" +
                 "Contact Details\n" +
                 "Name Email Phone\n" +
                 "John Smith john.smith.fly365@gmail.com +20 136253637474\n" +
@@ -458,46 +464,46 @@ public class FindMyBooking extends TestBase {
                 "Smith/Frank William Mr 15 Feb 2012 Child N/A\n" +
                 "Frank/Paul Peter Mr 15 Jan 2019 Infant N/A\n" +
                 "Flights Details\n" +
-                "From Auckland (AKL) to Canberra (CBR) on the "+firstTripDepartureDate+"\n" +
-                firstTripCarrierCode+"\n" +
-                firstTripbaggageNumber+" Baggage\n" +
-                firstTripdepartureTime+" - "+firstTripDepartureDate+"\n" +
+                "From Auckland (AKL) to Canberra (CBR) on the " + firstTripDepartureDate + "\n" +
+                firstTripCarrierCode + "\n" +
+                firstTripbaggageNumber + " Baggage\n" +
+                firstTripdepartureTime + " - " + firstTripDepartureDate + "\n" +
                 "Auckland (AKL) - New\n" +
                 "Zealand\n" +
                 "Auckland International -\n" +
-                firstTripdepartureTerminal+"\n" +
-                firstTriparrivalTime+" - "+firstTriparrivalDate+"\n" +
+                firstTripdepartureTerminal + "\n" +
+                firstTriparrivalTime + " - " + firstTriparrivalDate + "\n" +
                 "Canberra (CBR) - Australia\n" +
-                "Canberra - "+firstTriparrivalTerminal+"\n" +
-                firstTripTotalTravelTime+"\n" +
+                "Canberra - " + firstTriparrivalTerminal + "\n" +
+                firstTripTotalTravelTime + "\n" +
                 "1 Stop\n" +
-                firstTripFirstDepartureAirline+"\n" +
-                firstTripFirstAirlineNumber+"\n" +
-                firstTripbaggageNumber+" Baggage\n" +
+                firstTripFirstDepartureAirline + "\n" +
+                firstTripFirstAirlineNumber + "\n" +
+                firstTripbaggageNumber + " Baggage\n" +
                 "Economy\n" +
-                firstTripdepartureTime+" - "+firstTripDepartureDate+"\n" +
+                firstTripdepartureTime + " - " + firstTripDepartureDate + "\n" +
                 "Auckland (AKL) - New\n" +
                 "Zealand\n" +
                 "Auckland International -\n" +
-                firstTripdepartureTerminal+"\n" +
-                firstStopArrivalTime+" - "+firstStopArrivalDate+"\n" +
-                firstStopArrivalStopCityCountry+"\n" +
-                firstStopArrivalAirport+" - "+firstStopArrivalTerminal+"\n" +
-                firstTripFirstSegmentDuration+" "+firstTripbaggageNumberUC+"\n" +
+                firstTripdepartureTerminal + "\n" +
+                firstStopArrivalTime + " - " + firstStopArrivalDate + "\n" +
+                firstStopArrivalStopCityCountry + "\n" +
+                firstStopArrivalAirport + " - " + firstStopArrivalTerminal + "\n" +
+                firstTripFirstSegmentDuration + " " + firstTripbaggageNumberUC + "\n" +
                 "Baggage\n" +
-                firstTripSecondDepartureAirline+"\n" +
-                firstTripSecondAirlineNumber+"\n" +
-                firstTripbaggageNumber+" Baggage\n" +
+                firstTripSecondDepartureAirline + "\n" +
+                firstTripSecondAirlineNumber + "\n" +
+                firstTripbaggageNumber + " Baggage\n" +
                 "Economy\n" +
-                firstStopDepartureTime+" - "+firstStopDepartureDate+"\n" +
-                firstStopDepartureStopCityCountry+"\n" +
-                firstStopDepartureAirport+" - "+firstStopDepartureTerminal+"\n" +
-                firstTriparrivalTime+" - "+firstTriparrivalDate+"\n" +
+                firstStopDepartureTime + " - " + firstStopDepartureDate + "\n" +
+                firstStopDepartureStopCityCountry + "\n" +
+                firstStopDepartureAirport + " - " + firstStopDepartureTerminal + "\n" +
+                firstTriparrivalTime + " - " + firstTriparrivalDate + "\n" +
                 "Canberra (CBR) - Australia\n" +
-                "Canberra - "+firstTriparrivalTerminal+"\n" +
-                firstTripSecondSegmentDuration+" "+firstTripbaggageNumberUC+"\n" +
+                "Canberra - " + firstTriparrivalTerminal + "\n" +
+                firstTripSecondSegmentDuration + " " + firstTripbaggageNumberUC + "\n" +
                 "Baggage\n" +
-                "CONNECTING FLIGHT :  Stop Time : "+firstTripStopDuration+"\n" +
+                "CONNECTING FLIGHT :  Stop Time : " + firstTripStopDuration + "\n" +
                 "Notes\n" +
                 "Online Itinerary Title\n" +
                 "Please note that certain airlines consolidate passenger names and titles,\n" +
@@ -595,7 +601,7 @@ public class FindMyBooking extends TestBase {
     @Then("^The user can retrieve his booking from Find my Booking$")
     public void theUserCanRetrieveHisBookingFromFindMyBooking() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(fly365RefVAL));
-        Assert.assertEquals(driver.findElement(fly365RefVAL).getText(),ConfirmationTest.fly356Refernce);
+        Assert.assertEquals(driver.findElement(fly365RefVAL).getText(), ConfirmationTest.fly356Refernce);
     }
 
 
@@ -609,51 +615,51 @@ public class FindMyBooking extends TestBase {
         System.out.println("****************");
         System.out.println(TestText);
         System.out.println("****************");
-        Assert.assertEquals(TestText,"Fly365 Pty Ltd\n" +
+        Assert.assertEquals(TestText, "Fly365 Pty Ltd\n" +
                 "ABN : 606 601 521\n" +
                 "TAX INVOICE\n" +
                 "Fly365 Reference Airlines Reference Date Issued\n" +
-                fly365Ref+" "+airlineRef+" "+dateIssued+"\n" +
+                fly365Ref + " " + airlineRef + " " + dateIssued + "\n" +
                 "Flights Details\n" +
-                "From Cairo (CAI) to Dublin (DUB) on the "+firstTripDepartureDate+"\n" +
+                "From Cairo (CAI) to Dublin (DUB) on the " + firstTripDepartureDate + "\n" +
                 "Trip Details\n" +
-                "From Dublin (DUB) to Cairo (CAI) on the "+secondTripDepartureDate+"\n" +
+                "From Dublin (DUB) to Cairo (CAI) on the " + secondTripDepartureDate + "\n" +
                 "Trip Details\n" +
                 "Fare Details\n" +
                 "Family Name/First Middle Names Title Type Frequent Flyer Base Fare Taxes and Fees Total\n" +
-                "Smith/John William Mr Adult N/A "+adultFare+" "+currency+" "+adultTax+" "+currency+" "+totalFareperAdult+" "+currency+"\n" +
-                "Smith/Michael William Mr Adult N/A "+adultFare+" "+currency+" "+adultTax+" "+currency+" "+totalFareperAdult+" "+currency+"\n" +
-                "Smith/Frank William Mr Child N/A "+childFare+" "+currency+" "+childTax+" "+currency+" "+totalFareperChild+" "+currency+"\n" +
-                "Smith/Peter William Mr Child N/A "+childFare+" "+currency+" "+childTax+" "+currency+" "+totalFareperChild+" "+currency+"\n" +
-                "Frank/Paul Peter Mr Infant N/A "+infantFare+" "+currency+" "+infantTax+" "+currency+" "+totalFareperInfant+" "+currency+"\n" +
-                "Frank/John Peter Mr Infant N/A "+infantFare+" "+currency+" "+infantTax+" "+currency+" "+totalFareperInfant+" "+currency+"\n" +
+                "Smith/John William Mr Adult N/A " + adultFare + " " + currency + " " + adultTax + " " + currency + " " + totalFareperAdult + " " + currency + "\n" +
+                "Smith/Michael William Mr Adult N/A " + adultFare + " " + currency + " " + adultTax + " " + currency + " " + totalFareperAdult + " " + currency + "\n" +
+                "Smith/Frank William Mr Child N/A " + childFare + " " + currency + " " + childTax + " " + currency + " " + totalFareperChild + " " + currency + "\n" +
+                "Smith/Peter William Mr Child N/A " + childFare + " " + currency + " " + childTax + " " + currency + " " + totalFareperChild + " " + currency + "\n" +
+                "Frank/Paul Peter Mr Infant N/A " + infantFare + " " + currency + " " + infantTax + " " + currency + " " + totalFareperInfant + " " + currency + "\n" +
+                "Frank/John Peter Mr Infant N/A " + infantFare + " " + currency + " " + infantTax + " " + currency + " " + totalFareperInfant + " " + currency + "\n" +
                 "Payment Summary Total\n" +
-                "Total Base Fare "+totalBaseFare+" "+currency+"\n" +
-                "Total Taxes and Fees "+totalTaxesAndFees+" "+currency+"\n" +
-                "GST 0.00 "+currency+"\n" +
-                "Credit Card Fee "+creditCardFees+" "+currency+"\n" +
-                "This is an electronically generated invoice and does not require a physical signature. Total amount charged "+totalCharges+" "+currency+"\n" +
-                firstTripCarrierCode+"\n" +
-                firstTripbaggageNumber+" Baggage\n" +
-                firstTripdepartureTime+" - "+firstTripDepartureDate+"\n" +
+                "Total Base Fare " + totalBaseFare + " " + currency + "\n" +
+                "Total Taxes and Fees " + totalTaxesAndFees + " " + currency + "\n" +
+                "GST 0.00 " + currency + "\n" +
+                "Credit Card Fee " + creditCardFees + " " + currency + "\n" +
+                "This is an electronically generated invoice and does not require a physical signature. Total amount charged " + totalCharges + " " + currency + "\n" +
+                firstTripCarrierCode + "\n" +
+                firstTripbaggageNumber + " Baggage\n" +
+                firstTripdepartureTime + " - " + firstTripDepartureDate + "\n" +
                 "Cairo (CAI) - Egypt\n" +
                 "Cairo International Airport -\n" +
-                firstTripdepartureTerminal+"\n" +
-                firstTriparrivalTime+" - "+firstTriparrivalDate+"\n" +
+                firstTripdepartureTerminal + "\n" +
+                firstTriparrivalTime + " - " + firstTriparrivalDate + "\n" +
                 "Dublin (DUB) - Ireland\n" +
-                "Dublin International - "+firstTriparrivalTerminal+"\n" +
-                firstTripTotalTravelTime+"\n" +
+                "Dublin International - " + firstTriparrivalTerminal + "\n" +
+                firstTripTotalTravelTime + "\n" +
                 "1 Stop\n" +
-                secondTripCarrierCode+"\n" +
-                secondTripbaggageNumber+" Baggage\n" +
-                secondTripdepartureTime+" - "+secondTripDepartureDate+"\n" +
+                secondTripCarrierCode + "\n" +
+                secondTripbaggageNumber + " Baggage\n" +
+                secondTripdepartureTime + " - " + secondTripDepartureDate + "\n" +
                 "Dublin (DUB) - Ireland\n" +
-                "Dublin International - "+secondTripdepartureTerminal+"\n" +
-                secondTriparrivalTime+" - "+secondTriparrivalDate+"\n" +
+                "Dublin International - " + secondTripdepartureTerminal + "\n" +
+                secondTriparrivalTime + " - " + secondTriparrivalDate + "\n" +
                 "Cairo (CAI) - Egypt\n" +
                 "Cairo International Airport -\n" +
-                secondTriparrivalTerminal+"\n" +
-                secondTripTotalTravelTime+"\n" +
+                secondTriparrivalTerminal + "\n" +
+                secondTripTotalTravelTime + "\n" +
                 "1 Stop\n");
     }
 
@@ -667,65 +673,65 @@ public class FindMyBooking extends TestBase {
         System.out.println("****************");
         System.out.println(TestText);
         System.out.println("****************");
-        Assert.assertEquals(TestText,"Fly365 Pty Ltd\n" +
+        Assert.assertEquals(TestText, "Fly365 Pty Ltd\n" +
                 "ABN : 606 601 521\n" +
                 "TAX INVOICE\n" +
                 "Fly365 Reference Airlines Reference Date Issued\n" +
-                fly365Ref+" "+airlineRef+" "+dateIssued+"\n" +
+                fly365Ref + " " + airlineRef + " " + dateIssued + "\n" +
                 "Flights Details\n" +
-                "From Cairo (CAI) to Dublin (DUB) on the "+firstTripDepartureDate+"\n" +
+                "From Cairo (CAI) to Dublin (DUB) on the " + firstTripDepartureDate + "\n" +
                 "Trip Details\n" +
-                "From Dublin (DUB) to Cairo (CAI) on the "+secondTripDepartureDate+"\n" +
+                "From Dublin (DUB) to Cairo (CAI) on the " + secondTripDepartureDate + "\n" +
                 "Trip Details\n" +
-                "From Cairo (CAI) to Auckland (AKL) on the "+thirdTripDepartureDate+"\n" +
+                "From Cairo (CAI) to Auckland (AKL) on the " + thirdTripDepartureDate + "\n" +
                 "Trip Details\n" +
                 "Fare Details\n" +
                 "Family Name/First Middle Names Title Type Frequent Flyer Base Fare Taxes and Fees Total\n" +
-                "Smith/John William Mr Adult N/A "+adultFare+" "+currency+" "+adultTax+" "+currency+" "+totalFareperAdult+" "+currency+"\n" +
-                "Smith/Michael William Mr Adult N/A "+adultFare+" "+currency+" "+adultTax+" "+currency+" "+totalFareperAdult+" "+currency+"\n" +
-                "Smith/Frank William Mr Child N/A "+childFare+" "+currency+" "+childTax+" "+currency+" "+totalFareperChild+" "+currency+"\n" +
-                "Smith/Peter William Mr Child N/A "+childFare+" "+currency+" "+childTax+" "+currency+" "+totalFareperChild+" "+currency+"\n" +
-                "Frank/Paul Peter Mr Infant N/A "+infantFare+" "+currency+" "+infantTax+" "+currency+" "+totalFareperInfant+" "+currency+"\n" +
-                "Frank/John Peter Mr Infant N/A "+infantFare+" "+currency+" "+infantTax+" "+currency+" "+totalFareperInfant+" "+currency+"\n" +
+                "Smith/John William Mr Adult N/A " + adultFare + " " + currency + " " + adultTax + " " + currency + " " + totalFareperAdult + " " + currency + "\n" +
+                "Smith/Michael William Mr Adult N/A " + adultFare + " " + currency + " " + adultTax + " " + currency + " " + totalFareperAdult + " " + currency + "\n" +
+                "Smith/Frank William Mr Child N/A " + childFare + " " + currency + " " + childTax + " " + currency + " " + totalFareperChild + " " + currency + "\n" +
+                "Smith/Peter William Mr Child N/A " + childFare + " " + currency + " " + childTax + " " + currency + " " + totalFareperChild + " " + currency + "\n" +
+                "Frank/Paul Peter Mr Infant N/A " + infantFare + " " + currency + " " + infantTax + " " + currency + " " + totalFareperInfant + " " + currency + "\n" +
+                "Frank/John Peter Mr Infant N/A " + infantFare + " " + currency + " " + infantTax + " " + currency + " " + totalFareperInfant + " " + currency + "\n" +
                 "Payment Summary Total\n" +
-                "Total Base Fare "+totalBaseFare+" "+currency+"\n" +
-                firstTripCarrierCode+"\n" +
-                firstTripbaggageNumber+" Baggage\n" +
-                firstTripdepartureTime+" - "+firstTripDepartureDate+"\n" +
+                "Total Base Fare " + totalBaseFare + " " + currency + "\n" +
+                firstTripCarrierCode + "\n" +
+                firstTripbaggageNumber + " Baggage\n" +
+                firstTripdepartureTime + " - " + firstTripDepartureDate + "\n" +
                 "Cairo (CAI) - Egypt\n" +
                 "Cairo International Airport -\n" +
-                firstTripdepartureTerminal+"\n" +
-                firstTriparrivalTime+" - "+firstTriparrivalDate+"\n" +
+                firstTripdepartureTerminal + "\n" +
+                firstTriparrivalTime + " - " + firstTriparrivalDate + "\n" +
                 "Dublin (DUB) - Ireland\n" +
-                "Dublin International - "+firstTriparrivalTerminal+"\n" +
-                firstTripTotalTravelTime+"\n" +
+                "Dublin International - " + firstTriparrivalTerminal + "\n" +
+                firstTripTotalTravelTime + "\n" +
                 "1 Stop\n" +
-                secondTripCarrierCode+"\n" +
-                secondTripbaggageNumber+" Baggage\n" +
-                secondTripdepartureTime+" - "+secondTripDepartureDate+"\n" +
+                secondTripCarrierCode + "\n" +
+                secondTripbaggageNumber + " Baggage\n" +
+                secondTripdepartureTime + " - " + secondTripDepartureDate + "\n" +
                 "Dublin (DUB) - Ireland\n" +
-                "Dublin International - "+secondTripdepartureTerminal+"\n" +
-                secondTriparrivalTime+" - "+secondTriparrivalDate+"\n" +
+                "Dublin International - " + secondTripdepartureTerminal + "\n" +
+                secondTriparrivalTime + " - " + secondTriparrivalDate + "\n" +
                 "Cairo (CAI) - Egypt\n" +
                 "Cairo International Airport -\n" +
-                secondTriparrivalTerminal+"\n" +
-                secondTripTotalTravelTime+"\n" +
+                secondTriparrivalTerminal + "\n" +
+                secondTripTotalTravelTime + "\n" +
                 "1 Stop\n" +
-                thirdTripCarrierCode+"\n" +
-                thirdTripbaggageNumber+" Baggage\n" +
-                thirdTripdepartureTime+" - "+thirdTripDepartureDate+"\n" +
+                thirdTripCarrierCode + "\n" +
+                thirdTripbaggageNumber + " Baggage\n" +
+                thirdTripdepartureTime + " - " + thirdTripDepartureDate + "\n" +
                 "Cairo (CAI) - Egypt\n" +
-                "Cairo International Airport -\n"+
-                thirdTripdepartureTerminal+"\n" +
-                thirdTriparrivalTime+" - "+thirdTriparrivalDate+"\n" +
+                "Cairo International Airport -\n" +
+                thirdTripdepartureTerminal + "\n" +
+                thirdTriparrivalTime + " - " + thirdTriparrivalDate + "\n" +
                 "Auckland (AKL) - New Zealand\n" +
-                "Auckland International - "+thirdTriparrivalTerminal+"\n" +
-                thirdTripTotalTravelTime+"\n" +
+                "Auckland International - " + thirdTriparrivalTerminal + "\n" +
+                thirdTripTotalTravelTime + "\n" +
                 "1 Stop\n" +
-                "Total Taxes and Fees "+totalTaxesAndFees+" "+currency+"\n" +
-                "GST 0.00 "+currency+"\n" +
-                "Credit Card Fee "+creditCardFees+" "+currency+"\n" +
-                "This is an electronically generated invoice and does not require a physical signature. Total amount charged "+totalCharges+" "+currency+"\n");
+                "Total Taxes and Fees " + totalTaxesAndFees + " " + currency + "\n" +
+                "GST 0.00 " + currency + "\n" +
+                "Credit Card Fee " + creditCardFees + " " + currency + "\n" +
+                "This is an electronically generated invoice and does not require a physical signature. Total amount charged " + totalCharges + " " + currency + "\n");
     }
 
     @Then("^The booking confirmation pdf contains the correct data for Round Trip$")
@@ -739,7 +745,7 @@ public class FindMyBooking extends TestBase {
         System.out.println(TestText);
         System.out.println("****************");
 
-        Assert.assertEquals(TestText,"Email : nz.support@fly365.com - monitored 24 hours a day\n" +
+        Assert.assertEquals(TestText, "Email : nz.support@fly365.com - monitored 24 hours a day\n" +
                 "BOOKING CONFIRMATION\n" +
                 "You are ready to fly\n" +
                 "Thank you for booking with Fly365! Please print this confirmation and present at check-in . Ensure you have checked that all information is correct\n" +
@@ -762,7 +768,7 @@ public class FindMyBooking extends TestBase {
                 "minutes before the flight leaves.\n" +
                 "Booking Information\n" +
                 "Fly365 Reference Airlines Reference Date Issued Booking Status\n" +
-                fly365Ref+" "+airlineRef+" "+dateIssued+" Confirmed\n" +
+                fly365Ref + " " + airlineRef + " " + dateIssued + " Confirmed\n" +
                 "Contact Details\n" +
                 "Name Email Phone\n" +
                 "John Smith john.smith.fly365@gmail.com +20 136253637474\n" +
@@ -772,86 +778,86 @@ public class FindMyBooking extends TestBase {
                 "Smith/Frank William Mr 15 Feb 2012 Child N/A\n" +
                 "Frank/Paul Peter Mr 15 Jan 2019 Infant N/A\n" +
                 "Flights Details\n" +
-                "From Auckland (AKL) to Canberra (CBR) on the "+firstTripDepartureDate+"\n" +
-                "From Canberra (CBR) to Auckland (AKL) on the "+secondTripDepartureDate+"\n" +
-                firstTripCarrierCode+"\n" +
-                firstTripbaggageNumber+" Baggage\n" +
-                firstTripdepartureTime+" - "+firstTripDepartureDate+"\n" +
+                "From Auckland (AKL) to Canberra (CBR) on the " + firstTripDepartureDate + "\n" +
+                "From Canberra (CBR) to Auckland (AKL) on the " + secondTripDepartureDate + "\n" +
+                firstTripCarrierCode + "\n" +
+                firstTripbaggageNumber + " Baggage\n" +
+                firstTripdepartureTime + " - " + firstTripDepartureDate + "\n" +
                 "Auckland (AKL) - New\n" +
                 "Zealand\n" +
                 "Auckland International -\n" +
-                firstTripdepartureTerminal+"\n" +
-                firstTriparrivalTime+" - "+firstTriparrivalDate+"\n" +
+                firstTripdepartureTerminal + "\n" +
+                firstTriparrivalTime + " - " + firstTriparrivalDate + "\n" +
                 "Canberra (CBR) - Australia\n" +
-                "Canberra - "+firstTriparrivalTerminal+"\n" +
-                firstTripTotalTravelTime+"\n" +
+                "Canberra - " + firstTriparrivalTerminal + "\n" +
+                firstTripTotalTravelTime + "\n" +
                 "1 Stop\n" +
-                firstTripFirstDepartureAirline+"\n" +
-                firstTripFirstAirlineNumber+"\n" +
-                firstTripbaggageNumber+" Baggage\n" +
+                firstTripFirstDepartureAirline + "\n" +
+                firstTripFirstAirlineNumber + "\n" +
+                firstTripbaggageNumber + " Baggage\n" +
                 "Economy\n" +
-                firstTripdepartureTime+" - "+firstTripDepartureDate+"\n" +
+                firstTripdepartureTime + " - " + firstTripDepartureDate + "\n" +
                 "Auckland (AKL) - New\n" +
                 "Zealand\n" +
                 "Auckland International -\n" +
-                firstTripdepartureTerminal+"\n" +
-                firstStopArrivalTime+" - "+firstStopArrivalDate+"\n" +
-                firstStopArrivalStopCityCountry+"\n" +
-                firstStopArrivalAirport+" - "+firstStopArrivalTerminal+"\n" +
-                firstTripFirstSegmentDuration+" "+firstTripbaggageNumberUC+"\n" +
+                firstTripdepartureTerminal + "\n" +
+                firstStopArrivalTime + " - " + firstStopArrivalDate + "\n" +
+                firstStopArrivalStopCityCountry + "\n" +
+                firstStopArrivalAirport + " - " + firstStopArrivalTerminal + "\n" +
+                firstTripFirstSegmentDuration + " " + firstTripbaggageNumberUC + "\n" +
                 "Baggage\n" +
-                firstTripSecondDepartureAirline+"\n" +
-                firstTripSecondAirlineNumber+"\n" +
-                firstTripbaggageNumber+" Baggage\n" +
+                firstTripSecondDepartureAirline + "\n" +
+                firstTripSecondAirlineNumber + "\n" +
+                firstTripbaggageNumber + " Baggage\n" +
                 "Economy\n" +
-                firstStopDepartureTime+" - "+firstStopDepartureDate+"\n" +
-                firstStopDepartureStopCityCountry+"\n" +
-                firstStopDepartureAirport+" - "+firstStopDepartureTerminal+"\n" +
-                firstTriparrivalTime+" - "+firstTriparrivalDate+"\n" +
+                firstStopDepartureTime + " - " + firstStopDepartureDate + "\n" +
+                firstStopDepartureStopCityCountry + "\n" +
+                firstStopDepartureAirport + " - " + firstStopDepartureTerminal + "\n" +
+                firstTriparrivalTime + " - " + firstTriparrivalDate + "\n" +
                 "Canberra (CBR) - Australia\n" +
-                "Canberra - "+firstTriparrivalTerminal+"\n" +
-                firstTripSecondSegmentDuration+" "+firstTripbaggageNumberUC+"\n" +
+                "Canberra - " + firstTriparrivalTerminal + "\n" +
+                firstTripSecondSegmentDuration + " " + firstTripbaggageNumberUC + "\n" +
                 "Baggage\n" +
-                secondTripCarrierCode+"\n" +
-                secondTripbaggageNumber+" Baggage\n" +
-                secondTripdepartureTime+" - "+secondTripDepartureDate+"\n" +
+                secondTripCarrierCode + "\n" +
+                secondTripbaggageNumber + " Baggage\n" +
+                secondTripdepartureTime + " - " + secondTripDepartureDate + "\n" +
                 "Canberra (CBR) - Australia\n" +
-                "Canberra - "+secondTripdepartureTerminal+"\n" +
-                secondTriparrivalTime+" - "+secondTriparrivalDate+"\n" +
+                "Canberra - " + secondTripdepartureTerminal + "\n" +
+                secondTriparrivalTime + " - " + secondTriparrivalDate + "\n" +
                 "Auckland (AKL) - New\n" +
                 "Zealand\n" +
                 "Auckland International -\n" +
-                secondTriparrivalTerminal+"\n" +
-                secondTripTotalTravelTime+"\n" +
+                secondTriparrivalTerminal + "\n" +
+                secondTripTotalTravelTime + "\n" +
                 "1 Stop\n" +
-                secondTripFirstDepartureAirline+"\n" +
-                secondTripFirstAirlineNumber+"\n" +
-                secondTripbaggageNumber+" Baggage\n" +
+                secondTripFirstDepartureAirline + "\n" +
+                secondTripFirstAirlineNumber + "\n" +
+                secondTripbaggageNumber + " Baggage\n" +
                 "Economy\n" +
-                secondTripdepartureTime+" - "+secondTripDepartureDate+"\n" +
+                secondTripdepartureTime + " - " + secondTripDepartureDate + "\n" +
                 "Canberra (CBR) - Australia\n" +
-                "Canberra - "+secondTripdepartureTerminal+"\n" +
-                secondStopArrivalTime+" - "+secondStopArrivalDate+"\n" +
-                secondStopArrivalStopCityCountry+"\n" +
-                secondStopArrivalAirport+" - "+secondStopArrivalTerminal+"\n" +
-                secondTripFirstSegmentDuration+" "+secondTripbaggageNumberUC+"\n" +
+                "Canberra - " + secondTripdepartureTerminal + "\n" +
+                secondStopArrivalTime + " - " + secondStopArrivalDate + "\n" +
+                secondStopArrivalStopCityCountry + "\n" +
+                secondStopArrivalAirport + " - " + secondStopArrivalTerminal + "\n" +
+                secondTripFirstSegmentDuration + " " + secondTripbaggageNumberUC + "\n" +
                 "Baggage\n" +
-                secondTripSecondDepartureAirline+"\n" +
-                secondTripSecondAirlineNumber+"\n" +
-                secondTripbaggageNumber+" Baggage\n" +
+                secondTripSecondDepartureAirline + "\n" +
+                secondTripSecondAirlineNumber + "\n" +
+                secondTripbaggageNumber + " Baggage\n" +
                 "Economy\n" +
-                secondStopDepartureTime+" - "+secondStopDepartureDate+"\n" +
-                secondStopDepartureStopCityCountry+"\n" +
-                secondStopDepartureAirport+" - "+secondStopDepartureTerminal+"\n" +
-                secondTriparrivalTime+" - "+secondTriparrivalDate+"\n" +
+                secondStopDepartureTime + " - " + secondStopDepartureDate + "\n" +
+                secondStopDepartureStopCityCountry + "\n" +
+                secondStopDepartureAirport + " - " + secondStopDepartureTerminal + "\n" +
+                secondTriparrivalTime + " - " + secondTriparrivalDate + "\n" +
                 "Auckland (AKL) - New\n" +
                 "Zealand\n" +
                 "Auckland International -\n" +
-                secondTriparrivalTerminal+"\n" +
-                secondTripSecondSegmentDuration+" "+secondTripbaggageNumberUC+"\n" +
+                secondTriparrivalTerminal + "\n" +
+                secondTripSecondSegmentDuration + " " + secondTripbaggageNumberUC + "\n" +
                 "Baggage\n" +
-                "CONNECTING FLIGHT :  Stop Time : "+firstTripStopDuration+"\n" +
-                "CONNECTING FLIGHT :  Stop Time : "+secondTripStopDuration+"\n" +
+                "CONNECTING FLIGHT :  Stop Time : " + firstTripStopDuration + "\n" +
+                "CONNECTING FLIGHT :  Stop Time : " + secondTripStopDuration + "\n" +
                 "Notes\n" +
                 "Online Itinerary Title\n" +
                 "Please note that certain airlines consolidate passenger names and titles,\n" +
@@ -957,7 +963,7 @@ public class FindMyBooking extends TestBase {
         System.out.println(TestText);
         System.out.println("****************");
 
-        Assert.assertEquals(TestText,"Email : nz.support@fly365.com - monitored 24 hours a day\n" +
+        Assert.assertEquals(TestText, "Email : nz.support@fly365.com - monitored 24 hours a day\n" +
                 "BOOKING CONFIRMATION\n" +
                 "You are ready to fly\n" +
                 "Thank you for booking with Fly365! Please print this confirmation and present at check-in . Ensure you have checked that all information is correct\n" +
@@ -980,7 +986,7 @@ public class FindMyBooking extends TestBase {
                 "minutes before the flight leaves.\n" +
                 "Booking Information\n" +
                 "Fly365 Reference Airlines Reference Date Issued Booking Status\n" +
-                fly365Ref+" "+airlineRef+" "+dateIssued+" Confirmed\n" +
+                fly365Ref + " " + airlineRef + " " + dateIssued + " Confirmed\n" +
                 "Contact Details\n" +
                 "Name Email Phone\n" +
                 "John Smith john.smith.fly365@gmail.com +20 136253637474\n" +
@@ -990,128 +996,128 @@ public class FindMyBooking extends TestBase {
                 "Smith/Frank William Mr 15 Feb 2012 Child N/A\n" +
                 "Frank/Paul Peter Mr 15 Jan 2019 Infant N/A\n" +
                 "Flights Details\n" +
-                "From Auckland (AKL) to Canberra (CBR) on the "+firstTripDepartureDate+"\n" +
-                "From Canberra (CBR) to Auckland (AKL) on the "+secondTripDepartureDate+"\n" +
-                firstTripCarrierCode+"\n" +
-                firstTripbaggageNumber+" Baggage\n" +
-                firstTripdepartureTime+" - "+firstTripDepartureDate+"\n" +
+                "From Auckland (AKL) to Canberra (CBR) on the " + firstTripDepartureDate + "\n" +
+                "From Canberra (CBR) to Auckland (AKL) on the " + secondTripDepartureDate + "\n" +
+                firstTripCarrierCode + "\n" +
+                firstTripbaggageNumber + " Baggage\n" +
+                firstTripdepartureTime + " - " + firstTripDepartureDate + "\n" +
                 "Auckland (AKL) - New\n" +
                 "Zealand\n" +
                 "Auckland International -\n" +
-                firstTripdepartureTerminal+"\n" +
-                firstTriparrivalTime+" - "+firstTriparrivalDate+"\n" +
+                firstTripdepartureTerminal + "\n" +
+                firstTriparrivalTime + " - " + firstTriparrivalDate + "\n" +
                 "Canberra (CBR) - Australia\n" +
-                "Canberra - "+firstTriparrivalTerminal+"\n" +
-                firstTripTotalTravelTime+"\n" +
+                "Canberra - " + firstTriparrivalTerminal + "\n" +
+                firstTripTotalTravelTime + "\n" +
                 "1 Stop\n" +
-                firstTripFirstDepartureAirline+"\n" +
-                firstTripFirstAirlineNumber+"\n" +
-                firstTripbaggageNumber+" Baggage\n" +
+                firstTripFirstDepartureAirline + "\n" +
+                firstTripFirstAirlineNumber + "\n" +
+                firstTripbaggageNumber + " Baggage\n" +
                 "Economy\n" +
-                firstTripdepartureTime+" - "+firstTripDepartureDate+"\n" +
+                firstTripdepartureTime + " - " + firstTripDepartureDate + "\n" +
                 "Auckland (AKL) - New\n" +
                 "Zealand\n" +
                 "Auckland International -\n" +
-                firstTripdepartureTerminal+"\n" +
-                firstStopArrivalTime+" - "+firstStopArrivalDate+"\n" +
-                firstStopArrivalStopCityCountry+"\n" +
-                firstStopArrivalAirport+" - "+firstStopArrivalTerminal+"\n" +
-                firstTripFirstSegmentDuration+" "+firstTripbaggageNumberUC+"\n" +
+                firstTripdepartureTerminal + "\n" +
+                firstStopArrivalTime + " - " + firstStopArrivalDate + "\n" +
+                firstStopArrivalStopCityCountry + "\n" +
+                firstStopArrivalAirport + " - " + firstStopArrivalTerminal + "\n" +
+                firstTripFirstSegmentDuration + " " + firstTripbaggageNumberUC + "\n" +
                 "Baggage\n" +
-                firstTripSecondDepartureAirline+"\n" +
-                firstTripSecondAirlineNumber+"\n" +
-                firstTripbaggageNumber+" Baggage\n" +
+                firstTripSecondDepartureAirline + "\n" +
+                firstTripSecondAirlineNumber + "\n" +
+                firstTripbaggageNumber + " Baggage\n" +
                 "Economy\n" +
-                firstStopDepartureTime+" - "+firstStopDepartureDate+"\n" +
-                firstStopDepartureStopCityCountry+"\n" +
-                firstStopDepartureAirport+" - "+firstStopDepartureTerminal+"\n" +
-                firstTriparrivalTime+" - "+firstTriparrivalDate+"\n" +
+                firstStopDepartureTime + " - " + firstStopDepartureDate + "\n" +
+                firstStopDepartureStopCityCountry + "\n" +
+                firstStopDepartureAirport + " - " + firstStopDepartureTerminal + "\n" +
+                firstTriparrivalTime + " - " + firstTriparrivalDate + "\n" +
                 "Canberra (CBR) - Australia\n" +
-                "Canberra - "+firstTriparrivalTerminal+"\n" +
-                firstTripSecondSegmentDuration+" "+firstTripbaggageNumberUC+"\n" +
+                "Canberra - " + firstTriparrivalTerminal + "\n" +
+                firstTripSecondSegmentDuration + " " + firstTripbaggageNumberUC + "\n" +
                 "Baggage\n" +
-                secondTripCarrierCode+"\n" +
-                secondTripbaggageNumber+" Baggage\n" +
-                secondTripdepartureTime+" - "+secondTripDepartureDate+"\n" +
+                secondTripCarrierCode + "\n" +
+                secondTripbaggageNumber + " Baggage\n" +
+                secondTripdepartureTime + " - " + secondTripDepartureDate + "\n" +
                 "Canberra (CBR) - Australia\n" +
-                "Canberra - "+secondTripdepartureTerminal+"\n" +
-                secondTriparrivalTime+" - "+secondTriparrivalDate+"\n" +
+                "Canberra - " + secondTripdepartureTerminal + "\n" +
+                secondTriparrivalTime + " - " + secondTriparrivalDate + "\n" +
                 "Auckland (AKL) - New\n" +
                 "Zealand\n" +
                 "Auckland International -\n" +
-                secondTriparrivalTerminal+"\n" +
-                secondTripTotalTravelTime+"\n" +
+                secondTriparrivalTerminal + "\n" +
+                secondTripTotalTravelTime + "\n" +
                 "1 Stop\n" +
-                secondTripFirstDepartureAirline+"\n" +
-                secondTripFirstAirlineNumber+"\n" +
-                secondTripbaggageNumber+" Baggage\n" +
+                secondTripFirstDepartureAirline + "\n" +
+                secondTripFirstAirlineNumber + "\n" +
+                secondTripbaggageNumber + " Baggage\n" +
                 "Economy\n" +
-                secondTripdepartureTime+" - "+secondTripDepartureDate+"\n" +
+                secondTripdepartureTime + " - " + secondTripDepartureDate + "\n" +
                 "Canberra (CBR) - Australia\n" +
-                "Canberra - "+secondTripdepartureTerminal+"\n" +
-                secondStopArrivalTime+" - "+secondStopArrivalDate+"\n" +
-                secondStopArrivalStopCityCountry+"\n" +
-                secondStopArrivalAirport+" - "+secondStopArrivalTerminal+"\n" +
-                secondTripFirstSegmentDuration+" "+secondTripbaggageNumberUC+"\n" +
+                "Canberra - " + secondTripdepartureTerminal + "\n" +
+                secondStopArrivalTime + " - " + secondStopArrivalDate + "\n" +
+                secondStopArrivalStopCityCountry + "\n" +
+                secondStopArrivalAirport + " - " + secondStopArrivalTerminal + "\n" +
+                secondTripFirstSegmentDuration + " " + secondTripbaggageNumberUC + "\n" +
                 "Baggage\n" +
-                secondTripSecondDepartureAirline+"\n" +
-                secondTripSecondAirlineNumber+"\n" +
-                secondTripbaggageNumber+" Baggage\n" +
+                secondTripSecondDepartureAirline + "\n" +
+                secondTripSecondAirlineNumber + "\n" +
+                secondTripbaggageNumber + " Baggage\n" +
                 "Economy\n" +
-                secondStopDepartureTime+" - "+secondStopDepartureDate+"\n" +
-                secondStopDepartureStopCityCountry+"\n" +
-                secondStopDepartureAirport+" - "+secondStopDepartureTerminal+"\n" +
-                secondTriparrivalTime+" - "+secondTriparrivalDate+"\n" +
+                secondStopDepartureTime + " - " + secondStopDepartureDate + "\n" +
+                secondStopDepartureStopCityCountry + "\n" +
+                secondStopDepartureAirport + " - " + secondStopDepartureTerminal + "\n" +
+                secondTriparrivalTime + " - " + secondTriparrivalDate + "\n" +
                 "Auckland (AKL) - New\n" +
                 "Zealand\n" +
                 "Auckland International -\n" +
-                secondTriparrivalTerminal+"\n" +
-                secondTripSecondSegmentDuration+" "+secondTripbaggageNumberUC+"\n" +
+                secondTriparrivalTerminal + "\n" +
+                secondTripSecondSegmentDuration + " " + secondTripbaggageNumberUC + "\n" +
                 "Baggage\n" +
-                "CONNECTING FLIGHT :  Stop Time : "+firstTripStopDuration+"\n" +
-                "CONNECTING FLIGHT :  Stop Time : "+secondTripStopDuration+"\n" +
-                "From Auckland (AKL) to Canberra (CBR) on the "+thirdTripDepartureDate+"\n" +
-                thirdTripCarrierCode+"\n" +
-                thirdTripbaggageNumber+" Baggage\n" +
-                thirdTripdepartureTime+" - "+thirdTripDepartureDate+"\n" +
+                "CONNECTING FLIGHT :  Stop Time : " + firstTripStopDuration + "\n" +
+                "CONNECTING FLIGHT :  Stop Time : " + secondTripStopDuration + "\n" +
+                "From Auckland (AKL) to Canberra (CBR) on the " + thirdTripDepartureDate + "\n" +
+                thirdTripCarrierCode + "\n" +
+                thirdTripbaggageNumber + " Baggage\n" +
+                thirdTripdepartureTime + " - " + thirdTripDepartureDate + "\n" +
                 "Auckland (AKL) - New\n" +
                 "Zealand\n" +
                 "Auckland International -\n" +
-                thirdTripdepartureTerminal+"\n" +
-                thirdTriparrivalTime+" - "+thirdTriparrivalDate+"\n" +
+                thirdTripdepartureTerminal + "\n" +
+                thirdTriparrivalTime + " - " + thirdTriparrivalDate + "\n" +
                 "Canberra (CBR) - Australia\n" +
-                "Canberra - "+thirdTriparrivalTerminal+"\n" +
-                thirdTripTotalTravelTime+"\n" +
+                "Canberra - " + thirdTriparrivalTerminal + "\n" +
+                thirdTripTotalTravelTime + "\n" +
                 "1 Stop\n" +
-                thirdTripFirstDepartureAirline+"\n" +
-                thirdTripFirstAirlineNumber+"\n" +
-                thirdTripbaggageNumber+" Baggage\n" +
+                thirdTripFirstDepartureAirline + "\n" +
+                thirdTripFirstAirlineNumber + "\n" +
+                thirdTripbaggageNumber + " Baggage\n" +
                 "Economy\n" +
-                thirdTripdepartureTime+" - "+thirdTripDepartureDate+"\n" +
+                thirdTripdepartureTime + " - " + thirdTripDepartureDate + "\n" +
                 "Auckland (AKL) - New\n" +
                 "Zealand\n" +
                 "Auckland International -\n" +
-                thirdTripdepartureTerminal+"\n" +
-                thirdStopArrivalTime+" - "+thirdStopArrivalDate+"\n" +
-                thirdStopArrivalStopCityCountry+"\n" +
-                thirdStopArrivalAirport+" -\n" +
-                thirdStopArrivalTerminal+"\n" +
-                thirdTripFirstSegmentDuration+" "+thirdTripbaggageNumberUC+"\n" +
+                thirdTripdepartureTerminal + "\n" +
+                thirdStopArrivalTime + " - " + thirdStopArrivalDate + "\n" +
+                thirdStopArrivalStopCityCountry + "\n" +
+                thirdStopArrivalAirport + " -\n" +
+                thirdStopArrivalTerminal + "\n" +
+                thirdTripFirstSegmentDuration + " " + thirdTripbaggageNumberUC + "\n" +
                 "Baggage\n" +
-                thirdTripSecondDepartureAirline+"\n" +
-                thirdTripSecondAirlineNumber+"\n" +
-                thirdTripbaggageNumber+" Baggage\n" +
+                thirdTripSecondDepartureAirline + "\n" +
+                thirdTripSecondAirlineNumber + "\n" +
+                thirdTripbaggageNumber + " Baggage\n" +
                 "Economy\n" +
-                thirdStopDepartureTime+" - "+thirdStopDepartureDate+"\n" +
-                thirdStopDepartureStopCityCountry+"\n" +
-                thirdStopDepartureAirport+" -\n" +
-                thirdStopDepartureTerminal+"\n" +
-                thirdTriparrivalTime+" - "+thirdTriparrivalDate+"\n" +
+                thirdStopDepartureTime + " - " + thirdStopDepartureDate + "\n" +
+                thirdStopDepartureStopCityCountry + "\n" +
+                thirdStopDepartureAirport + " -\n" +
+                thirdStopDepartureTerminal + "\n" +
+                thirdTriparrivalTime + " - " + thirdTriparrivalDate + "\n" +
                 "Canberra (CBR) - Australia\n" +
-                "Canberra - "+thirdTriparrivalTerminal+"\n" +
-                thirdTripSecondSegmentDuration+" "+thirdTripbaggageNumberUC+"\n" +
+                "Canberra - " + thirdTriparrivalTerminal + "\n" +
+                thirdTripSecondSegmentDuration + " " + thirdTripbaggageNumberUC + "\n" +
                 "Baggage\n" +
-                "CONNECTING FLIGHT :  Stop Time : "+thirdTripStopDuration+"\n" +
+                "CONNECTING FLIGHT :  Stop Time : " + thirdTripStopDuration + "\n" +
                 "Notes\n" +
                 "Online Itinerary Title\n" +
                 "Please note that certain airlines consolidate passenger names and titles,\n" +

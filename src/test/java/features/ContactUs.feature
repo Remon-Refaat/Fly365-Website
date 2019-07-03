@@ -29,3 +29,17 @@ Feature: Use Contact Us Page
     And Write the message
     And Click Send
     Then Contact us email is sent successfully
+
+  Scenario: Verify that the contact us message open a ticket in back office
+    And Delete all messages in the Inbox
+    Given Press on first 'Contact Us'
+    And Enter Full Name
+    And Enter Email
+    And Choose Category
+    And Write the message
+    And Click Send
+    And Open hub login page
+    And login into hub with super admin
+    And open Back office
+    And open tickets
+    Then contact us message appear as ticket

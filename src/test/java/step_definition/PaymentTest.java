@@ -101,7 +101,7 @@ public class PaymentTest extends TestBase {
     }
 
     @And("^Press on 'Terms and conditions'$")
-    public void pressOnTermsAndConditions() throws InterruptedException{
+    public void pressOnTermsAndConditions() throws InterruptedException {
         Thread.sleep(3000);
         driver.findElement(termsAndConditionsLINK).click();
     }

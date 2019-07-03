@@ -96,5 +96,5 @@ Feature: Home page
     Then 'Passenger Rules' pop up will be opened
 
   Scenario: Validation messages will be displayed for empty origin, destination, date
-      And Press on Search Now
-      Then error message appear for each field
+    And Press on Search Now
+    Then error message appear for each field

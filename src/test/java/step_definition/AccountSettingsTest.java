@@ -10,7 +10,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.security.Key;
 import java.util.*;
 
 public class AccountSettingsTest extends TestBase {
@@ -48,7 +47,7 @@ public class AccountSettingsTest extends TestBase {
     @Then("^Update First Name with (.*)$")
     public void updateFirstName(String name) throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOfElementLocated(firstNameTXT));
-        driver.findElement(firstNameTXT).sendKeys(Keys.chord(Keys.BACK_SPACE,Keys.BACK_SPACE,Keys.BACK_SPACE,Keys.BACK_SPACE,Keys.BACK_SPACE));
+        driver.findElement(firstNameTXT).sendKeys(Keys.chord(Keys.BACK_SPACE, Keys.BACK_SPACE, Keys.BACK_SPACE, Keys.BACK_SPACE, Keys.BACK_SPACE));
         driver.findElement(firstNameTXT).sendKeys(name);
         driver.findElement(save1BTN).click();
     }
@@ -56,7 +55,7 @@ public class AccountSettingsTest extends TestBase {
     @Then("^Check updated First Name$")
     public void checkUpdatedFirstName() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(updateSuccMSG));
-        Assert.assertEquals(driver.findElement(updatedNameHDR).getText(),"David");
+        Assert.assertEquals(driver.findElement(updatedNameHDR).getText(), "David");
     }
 
     @And("^Click on Billing Address tab$")

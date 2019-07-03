@@ -64,8 +64,8 @@ Feature: Forget Password
     When click on send email button
     Then The Password reset requested email is sent successfully
 
-    @Go_Tab_Again
-    @Sign_Out
+  @Go_Tab_Again
+  @Sign_Out
   @New_Tab
   @Email_Logout
   Scenario: Verify that the Password reset successfully email is sent successfully

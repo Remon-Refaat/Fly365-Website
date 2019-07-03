@@ -14,23 +14,21 @@ import step_definition.HomeTest;
 import java.io.File;
 import java.io.IOException;
 
-public class Hooks extends TestBase{
+public class Hooks extends TestBase {
 
     WebDriverWait wait = new WebDriverWait(driver, 20);
 
 
-
     @After
     public void takeScreenShot(Scenario scenario) throws IOException {
-        if (scenario.isFailed())
-        {
-            File scrFile = ((TakesScreenshot)TestBase.driver).getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(scrFile, new File(System.getProperty("user.dir") + "/Screenshots/"+scenario.getName()+".jpg"));
+        if (scenario.isFailed()) {
+            File scrFile = ((TakesScreenshot) TestBase.driver).getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(scrFile, new File(System.getProperty("user.dir") + "/Screenshots/" + scenario.getName() + ".jpg"));
         }
     }
 
     @After("@Go_Tab_Again")
-    public void goToTheCurrentTab(){
+    public void goToTheCurrentTab() {
         for (String windowID : driver.getWindowHandles()) {
             String title = driver.switchTo().window(windowID).getTitle();
             if (title.equals("Fly365")) {
@@ -41,8 +39,7 @@ public class Hooks extends TestBase{
 
     @After("@Sign_Out")
     public void SignOut() {
-        if (driver.findElement(By.xpath("//div/div[2]/span")).getText().trim().equals("John"))
-        {
+        if (driver.findElement(By.xpath("//div/div[2]/span")).getText().trim().equals("John")) {
             driver.findElement(By.xpath("//span[contains(@class, 'el-dropdown-link capitalize text-xs text-white el-dropdown-selfdefine')]")).click();
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[contains(text(),'Sign Out')]")));
             driver.findElement(By.xpath("//li[contains(text(),'Sign Out')]")).click();
@@ -52,14 +49,12 @@ public class Hooks extends TestBase{
     }
 
     @After("@New_Tab")
-    public void closeTheNewTab(){
-            if (driver.getWindowHandles().size()>1) {
-                driver.close();
-            }
-        driver.switchTo().window(HomeTest.currentWindow);
+    public void closeTheNewTab() {
+        if (driver.getWindowHandles().size() > 1) {
+            driver.close();
         }
-
-
+        driver.switchTo().window(HomeTest.currentWindow);
+    }
 
 
     @After("@Email_Logout")
@@ -72,16 +67,15 @@ public class Hooks extends TestBase{
     }
 
 
-
     @After
-    public void clearTheCash(){
+    public void clearTheCash() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.localStorage.clear();");
         driver.manage().deleteAllCookies();
     }
 
     @After("@delete_pdf")
-    public void removeTheDownloadedPDF(){
+    public void removeTheDownloadedPDF() {
         File dir = new File(System.getProperty("user.dir") + "/Downloads/");
         File[] myFiles = dir.listFiles();
         for (File file : myFiles) {
