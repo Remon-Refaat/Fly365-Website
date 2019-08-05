@@ -1,6 +1,7 @@
 package step_definition;
 
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import helper.GeneralMethods;
 import helper.TestBase;
@@ -97,5 +98,44 @@ public class HubLogin extends TestBase {
     public void ticketCreated() {
         String Messagetitle = driver.findElement(Firstinboxtitle).getText();
         Assert.assertTrue(Messagetitle.contains("test001"));
+    }
+
+    @Given("^send direct mail to support mail$")
+    public void sendDirectMailToSupportMail() {
+
+        String userName = "john.smith.fly365@gmail.com";
+        String password = "@Fly365@Fly365";
+        String toAddress = "test@fly365.com";
+        String subject = "test001";
+        driver.get("https://accounts.google.com/ServiceLogin?service=mail&continue=https://mail.google.com/mail/&hl=en");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        driver.findElement(By.xpath("//input[@id='identifierId']")).sendKeys(userName);
+        driver.findElement(By.xpath("//span[@class='CwaK9']")).click();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        driver.findElement(By.xpath("//input[@name='password']")).sendKeys(password);
+        driver.findElement(By.xpath("//span[contains(text(),'Next')]")).click();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        driver.findElement(By.xpath("//div[@class='T-I J-J5-Ji T-I-KE L3']")).click();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        driver.findElement(By.id(":ms")).sendKeys(toAddress);
+        driver.findElement(By.name("subjectbox")).sendKeys(subject);
+        driver.findElement(By.xpath("//div[@id=':pa']")).click();
+
     }
 }
