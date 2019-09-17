@@ -3,7 +3,7 @@
 2. Install HomeBrew on your mac through this commandline from terminal
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 3. Install Maven with Homebrew (e.g., brew install maven)
-4. Open anew command-prompt and run mvn-version to confirm that it’s working. If it is, it will list the application and its version information. If it’s not working, it will display an error that should help you debug what’s wrong
+4. Open anew command-prompt and run mvn -version to confirm that it’s working. If it is, it will list the application and its version information. If it’s not working, it will display an error that should help you debug what’s wrong
 5. Download and unzip aninitial Maven project directory structure (withpre-loaded dependency file) from (https://github.com/selenium-guidebook/init-java/archive/master.zip).
 
 # How to Setup IntelliJ
@@ -41,7 +41,7 @@ For example, SignUp.feature
 
 # How to Run Project from Terminal
 
-mvn clean test –Pfull
-mvn -Dbrowser=safari clean test –Pfull
-mvn install -Dcucumber.options="--tags @Smoke"
-mvn -Dbrowser=safari install -Dcucumber.options="--tags @Smoke"
+- mvn clean test –Pfull
+- mvn -Dbrowser=safari clean test –Pfull
+- mvn install -Dcucumber.options="--tags @Smoke"
+- mvn -Dbrowser=safari install -Dcucumber.options="--tags @Smoke"
