@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class GmailTest extends TestBase {
 
     WebDriverWait wait = new WebDriverWait(driver, 10);
-    EmailUtililty emailUtililty = new EmailUtililty("john.smith.fly365@gmail.com", "@Fly12345", "smtp.gmail.com", EmailUtililty.EmailFolder.INBOX);
+    EmailUtililty emailUtililty = new EmailUtililty("john.smith.fly365@gmail.com", "@Fly365@Fly365", "smtp.gmail.com", EmailUtililty.EmailFolder.INBOX);
 
    By emailTXT = By.id("identifierId");
    By emailNextBTN = By.id("identifierNext");
@@ -26,7 +26,7 @@ public class GmailTest extends TestBase {
     By passwordNextBTN = By.id("passwordNext");
     By menuLINK = By.xpath("//*[@id='gbwa']/div/a");
     By gmailLink = By.xpath("//*[@id='gb23']");
-    By firstMessageLINK = By.xpath("//div[2]/span//span[text()='Fly365']");
+    By firstMessageLINK = By.xpath("//div[2]/span//span[contains(text(), 'Fly365')]");
     By cllickHereLINK = By.xpath("//p[contains(text(),'Unsubscribe please')]/child::a");
     By verifyBTN = By.xpath("//table//table//table//td/a");
     By resetPasswordBTN = By.xpath("//table//table//table//td/a");
@@ -37,11 +37,12 @@ public class GmailTest extends TestBase {
     @And("^Go to the email account$")
     public void goToTheEmailAccount() throws InterruptedException {
         Thread.sleep(2000);
-        driver.navigate().to("https://accounts.google.com");
+//        driver.navigate().to("https://accounts.google.com");
+        driver.navigate().to("https://mail.google.com");
         driver.findElement(emailTXT).sendKeys("john.smith.fly365@gmail.com");
         driver.findElement(emailNextBTN).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(passwordTXT));
-        driver.findElement(passwordTXT).sendKeys("@Fly12345");
+        driver.findElement(passwordTXT).sendKeys("@Fly365@Fly365");
         driver.findElement(passwordNextBTN).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(menuLINK));
         driver.findElement(menuLINK).click();

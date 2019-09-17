@@ -16,7 +16,7 @@ public class ConfirmationTest extends TestBase {
 
     By bookingConfirmationSuccessfulMSG = By.xpath("//div[text()='Thank you for booking with Fly365']");
     By fly365ReferenceHDR = By.xpath("//span[text()='Fly365 Ref.:']/following-sibling::strong");
-    By totalPriceAfterConfirmationVAL = By.xpath("//p[text()='total']/following-sibling::p");
+    By totalPriceAfterConfirmationVAL = By.xpath("//p[contains(text(),'Total')]/following-sibling::p");
 
     @Then("^'Thank you for booking with Fly365' message is displayed$")
     public void thankYouForBookingWithFlyMessageIsDisplayed() {

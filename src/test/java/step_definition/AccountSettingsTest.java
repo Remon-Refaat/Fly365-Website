@@ -29,7 +29,7 @@ public class AccountSettingsTest extends TestBase {
     private By updatedNameHDR = By.xpath("//span[@class='el-dropdown-link capitalize text-xs text-white el-dropdown-selfdefine']");
     private By addressLine1TXT = By.xpath("//input[@placeholder='Address Line 1']");
     private By addressLine2TXT = By.xpath("//input[@placeholder='Address Line 2']");
-    private By cityTXT = By.xpath("//input[@placeholder='NY']");
+    private By cityTXT = By.xpath("//input[@placeholder='City']");
     private By zipTXT = By.xpath("//input[@placeholder='90210']");
     private By updateSuccMSG = By.xpath("//p[contains(text(),'Updated successfully!')]");
 

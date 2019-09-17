@@ -1,4 +1,3 @@
-@Smoke
 
 @Booking_Anonymous
 Feature: Booking a Trip for Anonymous User
@@ -17,10 +16,9 @@ Feature: Booking a Trip for Anonymous User
     And Add the following data in the passenger Details
       | Title | First Name | Middle Name | Last Name | Day | Month    | Year |
       | Mr    | John       | William     | Smith     | 15  | February | 1985 |
-
     And Add the following data in the Contact Details
       | Title | First Name | Last Name | Email                        | Phone Number|
-      | Mr    | John      | Smith      | john.smith.fly365@gmail.com  |0136253637474|
+      | Mr    | John      | Smith      | john.smith.fly365@gmail.com  |01010101010|
     And Click on Next Step
     And Add a valid data for the credit card
       | Card Holder Number | Card Number         | Card Expire Date | Card CVV |
@@ -44,7 +42,7 @@ Feature: Booking a Trip for Anonymous User
 
     And Add the following data in the Contact Details
       | Title | First Name | Last Name | Email                        | Phone Number|
-      | Mr    | John      | Smith      | john.smith.fly365@gmail.com  |0136253637474|
+      | Mr    | John      | Smith      | john.smith.fly365@gmail.com  |01010101010|
     And Click on Next Step
     And Add a valid data for the credit card
       | Card Holder Number | Card Number         | Card Expire Date | Card CVV |

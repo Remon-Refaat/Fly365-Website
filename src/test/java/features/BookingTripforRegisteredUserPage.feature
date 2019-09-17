@@ -1,4 +1,3 @@
-@Smoke
 
 @Booking_Register
 Feature: Booking a Trip for Registered User
@@ -58,13 +57,13 @@ Feature: Booking a Trip for Registered User
     And Select 'One Stop' trips
     And Choose a trip
     And Add the following data in the passenger Details
-      | Title | First Name | Middle Name | Last Name | Day | Month    | Year |
-      | Mr    | John       | William     | Smith     | 15  | February | 1985 |
-      | Mr    | Michael    | William     | Smith     | 15  | February | 1985 |
-      | Mr    | Frank      | William     | Smith     | 15  | February | 2012 |
-      | Mr    | Peter      | William     | Smith     | 15  | February | 2012 |
-      | Mr    | Paul       | Peter       | Frank     | 15  | January  | 2019 |
-      | Mr    | John       | Peter       | Frank     | 15  | January  | 2019 |
+      | Title  | First Name | Middle Name | Last Name | Day | Month    | Year |
+      | Mr     | John       | William     | Smith     | 15  | February | 1985 |
+      | Mr     | Michael    | William     | Smith     | 15  | February | 1985 |
+      | Master | Frank      | William     | Smith     | 15  | February | 2012 |
+      | Master | Peter      | William     | Smith     | 15  | February | 2012 |
+      | Miss   | Suzy       | Peter       | Frank     | 15  | January  | 2019 |
+      | Miss   | Lila       | Peter       | Frank     | 15  | January  | 2019 |
     And Click on Next Step
     And Add a valid data for the credit card
       | Card Holder Number | Card Number         | Card Expire Date | Card CVV |
@@ -82,7 +81,6 @@ Feature: Booking a Trip for Registered User
     And Download the tax invoice pdf
     Then The tax invoice pdf contains the correct data for Round Trip
     And delete new user at database "john.smith.fly365@gmail.com"
-
 
   @delete_pdf
   @Sign_Out
@@ -104,10 +102,10 @@ Feature: Booking a Trip for Registered User
     And Select 'One Stop' trips
     And Choose a trip
     And Add the following data in the passenger Details
-      | Title | First Name | Middle Name | Last Name | Day | Month    | Year |
-      | Mr    | John       | William     | Smith     | 15  | February | 1985 |
-      | Mr    | Frank      | William     | Smith     | 15  | February | 2012 |
-      | Mr    | Paul       | Peter       | Frank     | 15  | January  | 2019 |
+      | Title  | First Name | Middle Name | Last Name | Day | Month    | Year |
+      | Mr     | John       | William     | Smith     | 15  | February | 1985 |
+      | Master | Frank      | William     | Smith     | 15  | February | 2012 |
+      | Master | Paul       | Peter       | Frank     | 15  | January  | 2019 |
     And Click on Next Step
     And Add a valid data for the credit card
       | Card Holder Number | Card Number         | Card Expire Date | Card CVV |

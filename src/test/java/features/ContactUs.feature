@@ -1,4 +1,4 @@
-@Smoke
+@Test1
 
 @Contact_Us
 Feature: Use Contact Us Page

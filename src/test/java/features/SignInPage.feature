@@ -27,13 +27,13 @@ Feature: login to account
     And user enter email "john.smith.fly365@gmail.com"
     And user enter password "111"
     When the user click on login button
-    Then user shall see password error message
+    Then user shall see password too short error message
 
   Scenario: login into account with password more than 60 chars
     And user enter email "john.smith.fly365@gmail.com"
     And user enter password "1111111111111111111111111111111111111111111111111111111111111"
     When the user click on login button
-    Then user shall see password error message
+    Then user shall see password too long error message
 
   Scenario: login into account with empty password
     And user enter email "john.smith.fly365@gmail.com"

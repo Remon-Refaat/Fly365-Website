@@ -90,13 +90,22 @@ public class SignInTest extends TestBase {
 
     }
 
-    @Then("^user shall see password error message$")
-    public void userShallSeePasswordErrorMessage() {
+    @Then("^user shall see password too short error message$")
+    public void userShallSeePasswordTooShortErrorMessage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(PassWordErrorMSG));
         WebElement passWordErrorMessage = driver.findElement(PassWordErrorMSG);
         Assert.assertTrue(passWordErrorMessage.isDisplayed());
         String PassWordErrorMSGText = driver.findElement(PassWordErrorMSG).getText();
-        Assert.assertEquals(PassWordErrorMSGText, "!Password length must be between 8 to 50 characters");
+        Assert.assertEquals(PassWordErrorMSGText, "!Password is too short (minimum is 8 characters)");
+    }
+
+    @Then("^user shall see password too long error message$")
+    public void userShallSeePasswordTooLongErrorMessage() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(PassWordErrorMSG));
+        WebElement passWordErrorMessage = driver.findElement(PassWordErrorMSG);
+        Assert.assertTrue(passWordErrorMessage.isDisplayed());
+        String PassWordErrorMSGText = driver.findElement(PassWordErrorMSG).getText();
+        Assert.assertEquals(PassWordErrorMSGText, "!Password is too long (maximum is 50 characters)");
     }
 
     @Then("^user shall see empty password error message$")
@@ -117,7 +126,7 @@ public class SignInTest extends TestBase {
         WebElement emailErrorMessage = driver.findElement(EmailErrorMSG);
         Assert.assertTrue(emailErrorMessage.isDisplayed());
         String EMailErrorMSGText = driver.findElement(EmailErrorMSG).getText();
-        Assert.assertEquals(EMailErrorMSGText, "!Please enter email");
+        Assert.assertEquals(EMailErrorMSGText, "!Please enter a valid email");
     }
 
     @Then("^user shall see email error message$")
@@ -155,7 +164,7 @@ public class SignInTest extends TestBase {
         if (DataBase.data != null) {
             DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "delete from users where email='" + userEmail + "'");
         }
-        DataBase.execute_update("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "insert into users (email, \"lastName\",\"firstName\",password,\"storeId\", \"groupId\",\"title\",\"phoneNumber\",\"isActive\",\"isLocked\")values('" + userEmail + "','Smith','John','" + userHashPassWord + "','fly365_com','fly365','Mr','+20 136253637474',True,False)");
+        DataBase.execute_update("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "insert into users (email, \"lastName\",\"firstName\",password,\"storeId\", \"groupId\",\"title\",\"phoneNumber\",\"isActive\",\"isLocked\")values('" + userEmail + "','Smith','John','" + userHashPassWord + "','fly365_com','fly365','Mr','+201010101010',True,False)");
     }
 
     @And("^delete new user at database \"(.*)\"$")

@@ -26,9 +26,9 @@ public class FindMyBooking extends TestBase {
 
     By taxInvoiceBTN = By.xpath("//a[contains(text(),'Invoice PDF')]");
     By bookingConfirmationBTN = By.xpath("//a[contains(text(),'Ticket PDF')]");
-    By fly365RefVAL = By.xpath("//div//div[2]/div/div[1]/div/strong");
-    By airlineRefVAL = By.xpath("//div//div[2]/div/div[2]/div/strong");
-    By dateIssuedVAL = By.xpath("//div//div[2]/div/div[3]/div/strong");
+    By fly365RefVAL = By.xpath("/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[2]/div[2]/div[3]/div[1]/div[1]/div[1]/strong[1]");
+    By airlineRefVAL = By.xpath("/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[2]/div[2]/div[3]/div[2]/div[1]/div[1]/strong[1]");
+    By dateIssuedVAL = By.xpath("/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[2]/div[2]/div[3]/div[3]/div[1]/div[1]/strong[1]");
     By firstTripDepartureDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-0-origin']//div[2]/span[2]");
     By secondTripDepartureDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-0-origin']//div[2]/span[2]");
     By firstTripArrivalDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-destination']/div[2]/span[2]");

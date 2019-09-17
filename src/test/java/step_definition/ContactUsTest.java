@@ -37,7 +37,7 @@ public class ContactUsTest extends TestBase {
     @Then("^'Contact Us' page is opened matching New Zealand site$")
     public void contactUsPageIsOpenedMatchingNewZealandSite() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(emailSupportTXT));
-        Assert.assertEquals(driver.findElement(emailSupportTXT).getText(),"nz.support@fly365.com");
+        Assert.assertEquals(driver.findElement(emailSupportTXT).getText(),"support@fly365.com");
     }
 
     @And("^Enter Full Name$")

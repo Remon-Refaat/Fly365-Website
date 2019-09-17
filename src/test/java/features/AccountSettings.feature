@@ -1,4 +1,3 @@
-@Smoke
 
 @Account_Settings
 @Sign_Out
@@ -8,9 +7,8 @@ Feature: Open Account Settings page
     Given Navigate to Fly365 "stage" site
     And open login page
 
-  @new
   Scenario: Verify that the logged in user can open account settings page
-    And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
+    And insert new user at database "john.smith.fly365@gmail.com" "$2a$10$XyUBJgb8xZk9I1XX.K87wu35PKRlVU1HYrAKJ7gZMScoCAgtCWWv."
     And user enter email "john.smith.fly365@gmail.com"
     And user enter password "@Test123"
     When the user click on login button

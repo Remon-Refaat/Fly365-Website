@@ -1,4 +1,3 @@
-@Smoke
 
 @Add_Traveller
 @Sign_Out
