@@ -14,15 +14,17 @@ public class ConfirmationTest extends TestBase {
     public static String fly356Refernce;
 
 
-    private By bookingConfirmationSuccessfulMSG = By.xpath("//div[text()='Thank you for booking with Fly365']");
-    private By fly365ReferenceHDR = By.xpath("//span[text()='Fly365 Ref.:']/following-sibling::strong");
-    private By totalPriceAfterConfirmationVAL = By.xpath("//p[text()='total']/following-sibling::p");
+    By bookingConfirmationSuccessfulMSG = By.xpath("//div[text()='Thank you for booking with Fly365']");
+    By fly365ReferenceHDR = By.xpath("//span[text()='Fly365 Ref.:']/following-sibling::strong");
+    By totalPriceAfterConfirmationVAL = By.xpath("//p[contains(text(),'Total')]/following-sibling::p");
 
     @Then("^'Thank you for booking with Fly365' message is displayed$")
     public void thankYouForBookingWithFlyMessageIsDisplayed() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(bookingConfirmationSuccessfulMSG));
         Assert.assertTrue(driver.findElement(bookingConfirmationSuccessfulMSG).isDisplayed());
     }
+
+
 
 
     @And("^Get the 'Fly365 Ref' code$")
@@ -36,6 +38,6 @@ public class ConfirmationTest extends TestBase {
     public void theTotalFareIsTheSameBeforeAndAfterTheBooking() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(totalPriceAfterConfirmationVAL));
         String totalPriceAfterConfirmation = driver.findElement(totalPriceAfterConfirmationVAL).getText().trim();
-        Assert.assertEquals(totalPriceAfterConfirmation, SearchResultTest.tripPrice);
+        Assert.assertEquals(totalPriceAfterConfirmation,SearchResultTest.tripPrice);
     }
 }

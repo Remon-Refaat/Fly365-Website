@@ -1,10 +1,9 @@
-@Smoke
 
 @My_Booking
 Feature: Go to MyBooking page
 
   Background: Open Fly365 site
-    Given Navigate to Fly365 "stage" site
+    Given Navigate to "NZ" Fly365 "stage" site
     And open login page
 
   @Sign_Out

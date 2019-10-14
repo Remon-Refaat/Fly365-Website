@@ -1,10 +1,9 @@
-@Smoke
 
 @Search_Trips
 Feature: Search for trips and assert on search results
 
   Background: Open Fly365 site
-    Given Navigate to Fly365 "stage" site
+    Given Navigate to "NZ" Fly365 "stage" site
 
 
   Scenario: Verify that the system display the the correct search results counts for one-way trips

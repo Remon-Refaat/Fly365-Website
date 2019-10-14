@@ -1,11 +1,10 @@
-@Smoke
 
 @Add_Traveller
 @Sign_Out
 Feature: Add Traveller to Login user
 
   Background:
-    Given Navigate to Fly365 "stage" site
+    Given Navigate to "NZ" Fly365 "stage" site
 
 
   Scenario: Check that Login user can add traveller

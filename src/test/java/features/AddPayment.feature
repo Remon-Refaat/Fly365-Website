@@ -1,11 +1,10 @@
-@Smoke
 
 @Add_Payment
 @Sign_Out
 Feature: Add Payment to Login user
 
   Background:
-    Given Navigate to Fly365 "stage" site
+    Given Navigate to "NZ" Fly365 "stage" site
 
   Scenario: Check that Login user can add payment card
     And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."

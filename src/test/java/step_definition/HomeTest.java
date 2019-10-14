@@ -60,7 +60,7 @@ public class HomeTest extends TestBase {
     private By plusChildBTN = By.xpath("//*[contains(@id,'el-popover')]//div[2]/div/span[2]");
     private By plusInfantBTN = By.xpath("//*[contains(@id,'el-popover')]//div[3]/div/span[2]");
     private By searchNowBTN = By.xpath("//button[@class='btn uppercase btn-search-form font-bold lg:w-full w-2/5 m-auto btn-primary-second h-full']");
-    private By findMyBookingLINK = By.xpath("//button[text()='Find My Booking']");
+    private By findMyBookingLINK = By.xpath("//button[text()='Manage My Booking']");
     private By findMyBookingEmailTXT = By.xpath("//div[@class='container p-8 retrieve-booking-form']//input[@placeholder='Email']");
     private By findMyBookingAirlineFly365OrderTXT = By.xpath("//div[@class='container p-8 retrieve-booking-form']//input[@placeholder='Fly365 Reference']");
     private By findMyBookingFindBookingBTN = By.xpath("//div[@class='container p-8 retrieve-booking-form']//button[text()='FIND BOOKING']");
@@ -81,9 +81,10 @@ public class HomeTest extends TestBase {
     private By emptyEmailAtSubscribe = By.xpath("//div[@class='form-group']//span[@class='tooltiptext with-arrow']");
 
 
-    @Given("^Navigate to Fly365 \"(.*)\" site$")
-    public void NavigateToFly365Site(String site) {
-        driver.navigate().to("https://nz.fly365" + site + ".com/en");
+    @Given("^Navigate to \"(.*)\" Fly365 \"(.*)\" site$")
+    public void NavigateToFly365Site(String store, String site) {
+        driver.navigate().to("https://" + store + ".fly365" + site + ".com/en");
+        //driver.navigate().to("https://flydev:flydev@2019@nz.fly365" + site + ".com/en");
     }
 
     @And("^Press on 'About us'$")
@@ -233,7 +234,7 @@ public class HomeTest extends TestBase {
 
 
     @And("^Book a trip from API for \"(.*)\" and get \"(.*)\"$")
-    public void bookATripFromAPIForAndGet(String domain, String reference) {
+    public void bookATripFromAPIForAndGet(String domain, String reference) throws InterruptedException {
         String requestUrl = "https://api.fly365" + domain + ".com/flight-search/search";
         String allAvailableTrips = apiObject.sendPostRequest(requestUrl, apiObject.oneWayAPI());
         String itinaryID = apiObject.getItineraryId(allAvailableTrips, 2);
@@ -245,6 +246,7 @@ public class HomeTest extends TestBase {
         if (reference.equals("Fly365 Reference")) {
             pnrNumber = apiObject.checkoutTrip(cardID, domain)[1];
         }
+        System.out.println(pnrNumber);
     }
 
 
@@ -415,7 +417,7 @@ public class HomeTest extends TestBase {
     @Then("^empty subscribe error message appear$")
     public void emptySubscribeErrorMessageAppear() {
         String emptysubscriber = driver.findElement(emptyEmailAtSubscribe).getText();
-        Assert.assertEquals(emptysubscriber, "!Please enter email");
+        Assert.assertEquals(emptysubscriber, "!Please enter a valid email");
     }
 
 }

@@ -1,10 +1,9 @@
-@Smoke
 
 @Contact_Us
 Feature: Use Contact Us Page
 
   Background: Open Fly365 site
-    Given Navigate to Fly365 "stage" site
+    Given Navigate to "NZ" Fly365 "stage" site
 
 
   Scenario: Verify that "Contact Us" page match with New Zealand site

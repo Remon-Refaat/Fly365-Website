@@ -1,10 +1,9 @@
-@Smoke
 
 @Find_Booking
 Feature: Find my Booking
 
   Background:
-    Given Navigate to Fly365 "stage" site
+    Given Navigate to "NZ" Fly365 "stage" site
 
   Scenario: Verify that the anonymous user can retrieve his/her booking via Fly365 Reference
     And Book a trip from API for "stage" and get "Fly365 Reference"

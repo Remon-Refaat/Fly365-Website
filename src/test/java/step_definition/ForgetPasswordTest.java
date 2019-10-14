@@ -70,7 +70,7 @@ public class ForgetPasswordTest extends TestBase {
         WebElement ErrorMessage = driver.findElement(EmailErrorMSG);
         Assert.assertTrue(ErrorMessage.isDisplayed());
         String EmptyEmailMSGText = driver.findElement(EmailErrorMSG).getText();
-        Assert.assertEquals(EmptyEmailMSGText, "!Please enter email");
+        Assert.assertEquals(EmptyEmailMSGText, "!Please enter a valid email");
     }
 
     @Then("^user shall see email error message at forget password page$")

@@ -1,11 +1,10 @@
-@Smoke
 
 @Forget_Password
 Feature: Forget Password
   test forget password feature
 
   Background:
-    Given Navigate to Fly365 "stage" site
+    Given Navigate to "NZ" Fly365 "stage" site
     And open login page
 
 

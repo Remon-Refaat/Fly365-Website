@@ -24,11 +24,11 @@ public class AddTraveller extends TestBase {
     private By MRTitle = By.xpath("//div[1]/div[1]/ul[1]/li[span[text()='Mr']]");
     private By TravellerFirstNameTXT = By.xpath("//input[@placeholder='First name']");
     private By TravellerFamileyNameTXT = By.xpath("//input[@placeholder='Family name']");
-    private By TravellerBirthDateDayDrop = By.xpath("/html[1]/body[1]/div[1]/div[3]/div[1]/div[2]/div[2]/div[2]/form[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]");
+    private By TravellerBirthDateDayDrop = By.xpath("//body//div//div//div//div//div//div[1]//div[1]//div[2]//div[1]//div[1]//div[1]//div[1]//div[1]//input[1]");
     private By Day1 = By.xpath("/html[1]/body[1]/div[7]/div[1]/div[1]/ul[1]/li[2]");
-    private By TravellerBirthDateMonth = By.xpath("/html[1]/body[1]/div[1]/div[3]/div[1]/div[2]/div[2]/div[2]/form[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/input[1]");
+    private By TravellerBirthDateMonth = By.xpath("//body//div//div//div//div//div[1]//div[1]//div[2]//div[1]//div[1]//div[1]//div[2]//div[1]//input[1]");
     private By Month1 = By.xpath("/html[1]/body[1]/div[6]/div[1]/div[1]/ul[1]/li[4]");
-    private By TravellerBirthDateYear = By.xpath("/html[1]/body[1]/div[1]/div[3]/div[1]/div[2]/div[2]/div[2]/form[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/input[1]");
+    private By TravellerBirthDateYear = By.xpath("//body//div//div//div//div//div[1]//div[1]//div[2]//div[1]//div[1]//div[1]//div[3]//div[1]//input[1]");
     private By Year1 = By.xpath("/html[1]/body[1]/div[7]/div[1]/div[1]/ul[1]/li[2]");
     private By SaveTravellerInnerBTN = By.xpath("//button[@class='btn btn-primary-second w-full btn-add-traveller']");
     private By AddedTraveller = By.xpath("//label[contains(text(),'ID Type')]");

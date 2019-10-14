@@ -17,7 +17,7 @@ public class GeneralMethods extends TestBase {
 
     WebDriverWait wait = new WebDriverWait(driver, 10);
 
-
+    // This general method for drop down list in website //
     public void selectFromDDL(By field, String value) throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOfElementLocated(field));
         driver.findElement(field).click();
@@ -25,6 +25,14 @@ public class GeneralMethods extends TestBase {
         List<WebElement> allDDL = driver.findElements(By.xpath("//div[@class='el-select-dropdown el-popper']"));
         WebElement lastDDL = allDDL.get(allDDL.size() - 1);
         lastDDL.findElement(By.xpath("./div[1]/div[1]/ul[1]/li[span[contains(text(), '" + value + "')]]")).click();
+    }
+
+    // This general method for drop down list in Hub //
+    public void selectFromDDLHub(String field, String value) throws InterruptedException {
+        driver.findElement(By.xpath("//div[@name='"+field+"']//i[@class='open-indicator']")).click();
+        Thread.sleep(4000);
+        driver.findElement(By.xpath("//span[contains(normalize-space(text()),'"+value+"')]")).click();
+
     }
 
     public void selectFromAutoCompleteDDL(String value) throws InterruptedException {

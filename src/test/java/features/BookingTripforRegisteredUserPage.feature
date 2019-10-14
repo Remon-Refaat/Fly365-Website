@@ -1,10 +1,9 @@
-@Smoke
 
 @Booking_Register
 Feature: Booking a Trip for Registered User
 
   Background:
-    Given Navigate to Fly365 "stage" site
+    Given Navigate to "NZ" Fly365 "stage" site
     And open login page
 
   @Sign_Out
@@ -15,7 +14,7 @@ Feature: Booking a Trip for Registered User
     And user enter password "@Test123"
     When the user click on login button
     And Wait until My Booking Page is opened
-    And Navigate to Fly365 "stage" site
+    And Navigate to "NZ" Fly365 "stage" site
     And Select One Way trip
     And Add airport to the Origin "Cairo International Airport (CAI), Egypt"
     And Add airport to the Destination "Dublin International (DUB), Ireland"
@@ -45,7 +44,7 @@ Feature: Booking a Trip for Registered User
     And user enter password "@Test123"
     When the user click on login button
     And Wait until My Booking Page is opened
-    And Navigate to Fly365 "stage" site
+    And Navigate to "NZ" Fly365 "stage" site
     And Select Round Trip trip
     And Add airport to the Origin "Cairo International Airport (CAI), Egypt"
     And Add airport to the Destination "Dublin International (DUB), Ireland"
@@ -58,13 +57,13 @@ Feature: Booking a Trip for Registered User
     And Select 'One Stop' trips
     And Choose a trip
     And Add the following data in the passenger Details
-      | Title | First Name | Middle Name | Last Name | Day | Month    | Year |
-      | Mr    | John       | William     | Smith     | 15  | February | 1985 |
-      | Mr    | Michael    | William     | Smith     | 15  | February | 1985 |
-      | Mr    | Frank      | William     | Smith     | 15  | February | 2012 |
-      | Mr    | Peter      | William     | Smith     | 15  | February | 2012 |
-      | Mr    | Paul       | Peter       | Frank     | 15  | January  | 2019 |
-      | Mr    | John       | Peter       | Frank     | 15  | January  | 2019 |
+      | Title  | First Name | Middle Name | Last Name | Day | Month    | Year |
+      | Mr     | John       | William     | Smith     | 15  | February | 1985 |
+      | Mr     | Michael    | William     | Smith     | 15  | February | 1985 |
+      | Master | Frank      | William     | Smith     | 15  | February | 2012 |
+      | Master | Peter      | William     | Smith     | 15  | February | 2012 |
+      | Miss   | Suzy       | Peter       | Frank     | 15  | January  | 2019 |
+      | Miss   | Lila       | Peter       | Frank     | 15  | January  | 2019 |
     And Click on Next Step
     And Add a valid data for the credit card
       | Card Holder Number | Card Number         | Card Expire Date | Card CVV |
@@ -83,7 +82,6 @@ Feature: Booking a Trip for Registered User
     Then The tax invoice pdf contains the correct data for Round Trip
     And delete new user at database "john.smith.fly365@gmail.com"
 
-
   @delete_pdf
   @Sign_Out
   Scenario: Verify that the the Booking Confirmation pdf contains the correct data (Round Trip)
@@ -92,7 +90,7 @@ Feature: Booking a Trip for Registered User
     And user enter password "@Test123"
     When the user click on login button
     And Wait until My Booking Page is opened
-    And Navigate to Fly365 "stage" site
+    And Navigate to "NZ" Fly365 "stage" site
     And Select Round Trip trip
     And Add airport to the Origin "Auckland International (AKL), New Zealand"
     And Add airport to the Destination "Canberra (CBR), Australia"
@@ -104,10 +102,10 @@ Feature: Booking a Trip for Registered User
     And Select 'One Stop' trips
     And Choose a trip
     And Add the following data in the passenger Details
-      | Title | First Name | Middle Name | Last Name | Day | Month    | Year |
-      | Mr    | John       | William     | Smith     | 15  | February | 1985 |
-      | Mr    | Frank      | William     | Smith     | 15  | February | 2012 |
-      | Mr    | Paul       | Peter       | Frank     | 15  | January  | 2019 |
+      | Title  | First Name | Middle Name | Last Name | Day | Month    | Year |
+      | Mr     | John       | William     | Smith     | 15  | February | 1985 |
+      | Master | Frank      | William     | Smith     | 15  | February | 2012 |
+      | Master | Paul       | Peter       | Frank     | 15  | January  | 2019 |
     And Click on Next Step
     And Add a valid data for the credit card
       | Card Holder Number | Card Number         | Card Expire Date | Card CVV |
@@ -134,7 +132,7 @@ Feature: Booking a Trip for Registered User
     And user enter password "@Test123"
     When the user click on login button
     And Wait until My Booking Page is opened
-    And Navigate to Fly365 "stage" site
+    And Navigate to "NZ" Fly365 "stage" site
     And Select Multi City trip
     And Choose the number of flights "3"
     And Add the following origin, destinations and date periods

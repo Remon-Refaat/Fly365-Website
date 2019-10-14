@@ -1,10 +1,9 @@
-@Smoke
 
 @Home_Page
 Feature: Home page
 
   Background:
-    Given Navigate to Fly365 "stage" site
+    Given Navigate to "NZ" Fly365 "stage" site
 
 
   Scenario: Verify that "About Us" link in the footer open on the correct link

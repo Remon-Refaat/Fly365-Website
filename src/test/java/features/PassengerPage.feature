@@ -1,10 +1,9 @@
-@Smoke
 
 @Passenger_Page
 Feature: Passenger page
 
   Background:
-    Given Navigate to Fly365 "stage" site
+    Given Navigate to "NZ" Fly365 "stage" site
 
   Scenario: Verify that the mandatory fields are required at one way
     And Select One Way trip
