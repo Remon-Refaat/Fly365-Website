@@ -1,6 +1,13 @@
 
 Feature: Apply discount on flight trips
 
+  Scenario: Verify that the Rules is Opened and redirected successfully
+    Given  Navigate to Fly "stage" site
+    When login to hub with super admin
+    And  Open menu
+    And  Open  "Discount"
+    Then Assert that "discount" URL "stage" is opened successfully
+
   Scenario: Verify that the super admin can access discount campaign
     When Open hub login page
     And  login into hub with super admin
@@ -26,7 +33,6 @@ Feature: Apply discount on flight trips
     And  Click on Submit
     Then Check Discount rule updated successfully
 
-    @Eyad
   Scenario: Verify that the enable discount rule applied on search result
     And  Delete new discount from database
     When Apply discount rule from API
@@ -44,7 +50,6 @@ Feature: Apply discount on flight trips
     And  Click on Submit
     Then Check Discount rule updated successfully
 
-  @Eyad
   Scenario: Verify that the super admin can disable all discount rules
     When Open hub login page
     And  login into hub with super admin
