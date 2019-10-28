@@ -43,3 +43,18 @@ mvn clean test –Pfull
 mvn -Dbrowser=safari clean test –Pfull
 mvn install -Dcucumber.options="--tags @Smoke"
 mvn -Dbrowser=safari install -Dcucumber.options="--tags @Smoke"
+
+# Deploy and Pull Request Process
+
+- Add new changes local [git add *]
+- Commit your changes local [git commit -m “upload discount”]
+- Copy your changes [git stash]
+- Pull recent version from master [git pull origin master]
+- Paste your changes again [git stash apply]
+- Resolve conflict if exist
+- Run your new script and ensure everything is Ok
+- Create temp branch [git checkout -b discount_branch]
+- Push your committed changes [git push origin discount_branch]
+- Open pull request on stage-test branch through GitHub
+- Review and merge
+- Delete temp branch [git branch -d discount_branch]
