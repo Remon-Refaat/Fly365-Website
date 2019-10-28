@@ -8,7 +8,7 @@ import org.testng.Assert;
 
 public class TermsConditionsTest extends TestBase {
 
-    boolean result;
+    private boolean result;
     private By termsConditionsHDRLINK = By.xpath("//a[@class='link text-sm font-normal mr-5 router-link-exact-active router-link-active']");
 
     @Then("^'Terms and Conditions' page is opened$")
@@ -29,6 +29,6 @@ public class TermsConditionsTest extends TestBase {
                 break;
             }
         }
-        Assert.assertEquals(result,true);
+        Assert.assertTrue(result);
     }
 }

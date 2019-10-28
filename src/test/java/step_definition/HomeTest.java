@@ -81,9 +81,9 @@ public class HomeTest extends TestBase {
     private By emptyEmailAtSubscribe = By.xpath("//div[@class='form-group']//span[@class='tooltiptext with-arrow']");
 
 
-    @Given("^Navigate to Fly365 \"(.*)\" site$")
-    public void NavigateToFly365Site(String site) {
-        driver.navigate().to("https://nz.fly365" + site + ".com/en");
+    @Given("^Navigate to \"(.*)\" Fly365 \"(.*)\" site$")
+    public void NavigateToFly365Site(String store, String site) {
+        driver.navigate().to("https://" + store + ".fly365" + site + ".com/en");
         //driver.navigate().to("https://flydev:flydev@2019@nz.fly365" + site + ".com/en");
     }
 
@@ -234,7 +234,7 @@ public class HomeTest extends TestBase {
 
 
     @And("^Book a trip from API for \"(.*)\" and get \"(.*)\"$")
-    public void bookATripFromAPIForAndGet(String domain, String reference) {
+    public void bookATripFromAPIForAndGet(String domain, String reference) throws InterruptedException {
         String requestUrl = "https://api.fly365" + domain + ".com/flight-search/search";
         String allAvailableTrips = apiObject.sendPostRequest(requestUrl, apiObject.oneWayAPI());
         String itinaryID = apiObject.getItineraryId(allAvailableTrips, 2);
@@ -386,7 +386,7 @@ public class HomeTest extends TestBase {
     @Then("^'Passenger Rules' pop up will be opened$")
     public void passengerRulesPopUpWillBeOpened() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(passengerRulesHDR));
-        Assert.assertEquals(driver.findElement(passengerRulesHDR).getText(),"Passenger Rules");
+        Assert.assertEquals(driver.findElement(passengerRulesHDR).getText(), "Passenger Rules");
 
     }
 

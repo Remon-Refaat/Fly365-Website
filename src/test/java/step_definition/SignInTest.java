@@ -96,7 +96,7 @@ public class SignInTest extends TestBase {
         WebElement passWordErrorMessage = driver.findElement(PassWordErrorMSG);
         Assert.assertTrue(passWordErrorMessage.isDisplayed());
         String PassWordErrorMSGText = driver.findElement(PassWordErrorMSG).getText();
-        Assert.assertEquals(PassWordErrorMSGText, "!Password is too short (minimum is 8 characters)");
+        Assert.assertEquals(PassWordErrorMSGText, "!password is too short (minimum is 8 characters)");
     }
 
     @Then("^user shall see password too long error message$")
@@ -105,7 +105,7 @@ public class SignInTest extends TestBase {
         WebElement passWordErrorMessage = driver.findElement(PassWordErrorMSG);
         Assert.assertTrue(passWordErrorMessage.isDisplayed());
         String PassWordErrorMSGText = driver.findElement(PassWordErrorMSG).getText();
-        Assert.assertEquals(PassWordErrorMSGText, "!Password is too long (maximum is 50 characters)");
+        Assert.assertEquals(PassWordErrorMSGText, "!password is too long (maximum is 50 characters)");
     }
 
     @Then("^user shall see empty password error message$")

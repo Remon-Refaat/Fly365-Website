@@ -8,7 +8,6 @@ import helper.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.postgresql.replication.PGReplicationConnectionImpl;
 import org.testng.Assert;
 
 import java.util.Map;
@@ -81,8 +80,8 @@ public class AddPayment extends TestBase {
 
     @And("^Delete payment card from database$")
     public void deletePaymentCardFromDatabase() {
-        DataBase.execute_query_dbs(hostName,dbsName,"delete from user_cards where user_cards.\"lastFourDigits\" = '2134' AND user_cards.\"cardType\" = 'user_card'");
-        DataBase.execute_query_dbs(hostName,dbsName,"delete from user_cards where user_cards.\"lastFourDigits\" = '4242' AND user_cards.\"cardType\" = 'user_card'");
+        DataBase.execute_query_dbs(hostName, dbsName, "delete from user_cards where user_cards.\"lastFourDigits\" = '2134' AND user_cards.\"cardType\" = 'user_card'");
+        DataBase.execute_query_dbs(hostName, dbsName, "delete from user_cards where user_cards.\"lastFourDigits\" = '4242' AND user_cards.\"cardType\" = 'user_card'");
 
     }
 

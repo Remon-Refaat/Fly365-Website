@@ -53,8 +53,15 @@ public class GmailTest extends TestBase {
 
     @And("^Open the new message$")
     public void openTheNewMessage() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(firstMessageLINK));
-        driver.findElement(firstMessageLINK).click();
+       try{
+           wait.until(ExpectedConditions.visibilityOfElementLocated(firstMessageLINK));
+           driver.findElement(firstMessageLINK).click();
+
+       }catch(Exception e){
+           driver.findElement(firstMessageLINK).click();
+
+       }
+
     }
 
     @And("^Delete all messages in the Inbox$")

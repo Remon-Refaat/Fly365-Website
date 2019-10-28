@@ -9,24 +9,19 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.util.List;
 
-import static java.lang.Thread.*;
 
-public class SearchTrips extends TestBase
-{
+public class SearchTrips extends TestBase {
     WebDriverWait wait = new WebDriverWait(driver, 10);
 
-    APIUtility apiObj = new APIUtility();
-    GeneralMethods gmObj = new GeneralMethods();
+    private APIUtility apiObj = new APIUtility();
+    private GeneralMethods gmObj = new GeneralMethods();
 
     private By flightOptionsHDR = By.xpath("//span[text()='FLY365 MIX AND MATCH FLIGHT OPTIONS']");
     private By originAirportCode = By.xpath("//span[contains(normalize-space(text()),'AKL')]");
@@ -44,7 +39,7 @@ public class SearchTrips extends TestBase
     private By firstSegmentDestinationCodeWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-0-destination > span.text-sm.text-black.font-semibold");
     private By firstSegmentCabinClassWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-0-carrier-aircraft > label.airway-code.text-black");
     private By firstSegmentBaggageWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0 > div > div:nth-child(2) > div > div > div > div.col-lg-13.mr-0.xl\\3a mr-16.md\\3a mr-12.col-24 > div:nth-child(1) > div:nth-child(1) > div.col-md-4.md\\3a flex.hidden > div > label.airway-code.text-black");
-    private By firstSegmentOriginTerminalWEB= By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-0-origin > div > div.flex.md\\3a flex-col.flex-row > span:nth-child(3)");
+    private By firstSegmentOriginTerminalWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-0-origin > div > div.flex.md\\3a flex-col.flex-row > span:nth-child(3)");
     private By firstSegmentDestinationTerminalWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-0-destination > div.flex.md\\3a flex-col.flex-row > span:nth-child(3)");
     private By firstSegmentOriginDepTimeWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-0-origin > div > div.flex.items-center > span.text-lg.text-black.font-semibold");
     private By firstSegmentDestinationDepTimeWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-0-destination > div.flex.items-center > span.text-lg.text-black.font-semibold");
@@ -58,7 +53,7 @@ public class SearchTrips extends TestBase
     private By secondSegmentDestinationCodeWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-1-destination > span.text-sm.text-black.font-semibold");
     private By secondSegmentCabinClassWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-1-carrier-aircraft > label.airway-code.text-black");
     private By secondSegmentBaggageWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0 > div > div:nth-child(2) > div > div > div > div.col-lg-13.mr-0.xl\\3a mr-16.md\\3a mr-12.col-24 > div:nth-child(2) > div:nth-child(3) > div.col-md-4.md\\3a flex.hidden > div > label.airway-code.text-black");
-    private By secondSegmentOriginTerminalWEB= By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-1-origin > div > div.flex.md\\3a flex-col.flex-row > span:nth-child(3)");
+    private By secondSegmentOriginTerminalWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-1-origin > div > div.flex.md\\3a flex-col.flex-row > span:nth-child(3)");
     private By secondSegmentDestinationTerminalWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-1-destination > div.flex.md\\3a flex-col.flex-row > span:nth-child(3)");
     private By secondSegmentOriginDepTimeWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-1-origin > div > div.flex.items-center > span.text-lg.text-black.font-semibold");
     private By secondSegmentDestinationDepTimeWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-1-destination > div.flex.items-center > span.text-lg.text-black.font-semibold");
@@ -67,26 +62,24 @@ public class SearchTrips extends TestBase
     private By secondSegmentFlightTimeWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-1-duration > div");
 
 
-
     @And("^Scroll to the end of the page$")
-        public void scrollToTheEndOfThePage() throws InterruptedException {
+    public void scrollToTheEndOfThePage() throws InterruptedException {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(flightOptionsHDR));
-        JavascriptExecutor js = (JavascriptExecutor)driver;
-        for (int i = 0; i < 18; i++)
-        {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        for (int i = 0; i < 18; i++) {
             js.executeScript("scrollBy(0,2500)");
         }
     }
 
 
     @Then("^Check count of search results$")
-    public void checkCountOfSearchResults() throws InterruptedException{
+    public void checkCountOfSearchResults() throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOfElementLocated(flightOptionsHDR));
         String count = driver.findElement(By.xpath("//span[@class='ml-2 text-black text-sm font-medium']")).getText();
         List result = driver.findElements(flightOptionsHDR);
         String displayedCount = String.valueOf(result.size());
-        Assert.assertEquals(displayedCount,count);
+        Assert.assertEquals(displayedCount, count);
     }
 
     @Then("^The system display results as per search criteria$")
@@ -96,7 +89,7 @@ public class SearchTrips extends TestBase
         int displayedOrigin = originResult.size();
         List destinationResult = driver.findElements(destinationAirportCode);
         int displayedDestination = destinationResult.size();
-        Assert.assertEquals(displayedOrigin,displayedDestination);
+        Assert.assertEquals(displayedOrigin, displayedDestination);
     }
 
     @And("^Open Flight Details$")
@@ -111,14 +104,14 @@ public class SearchTrips extends TestBase
         return flightdetails;
     }
 
-    public String oneWayTripAPI() {
+    private String oneWayTripAPI() {
         String departureDate1 = gmObj.addDateWithCertainPeriodAndFormat(10, "yyyy-MM-dd");
         String oneWayTrip = "{\"legs\": [{\"origin\": \"AKL\",\"destination\": \"DXB\",\"departureDate\": \"" + departureDate1 + "\"}],\n" +
                 " \"cabinClass\": \"Economy\",\"infant\": 1,\"child\": 1,\"adult\": 1}";
         return oneWayTrip;
     }
 
-    public String roundTripAPI() {
+    private String roundTripAPI() {
         String departureDate1 = gmObj.addDateWithCertainPeriodAndFormat(10, "yyyy-MM-dd");
         String departureDate2 = gmObj.addDateWithCertainPeriodAndFormat(15, "yyyy-MM-dd");
         String roundTrip = "{\"legs\": [{\"origin\": \"AKL\",\"destination\": \"DXB\",\"departureDate\": \"" + departureDate1 + "\"\n" +
@@ -127,7 +120,7 @@ public class SearchTrips extends TestBase
         return roundTrip;
     }
 
-    public String multiCityAPI() {
+    private String multiCityAPI() {
         String departureDate1 = gmObj.addDateWithCertainPeriodAndFormat(10, "yyyy-MM-dd");
         String departureDate2 = gmObj.addDateWithCertainPeriodAndFormat(20, "yyyy-MM-dd");
         String departureDate3 = gmObj.addDateWithCertainPeriodAndFormat(30, "yyyy-MM-dd");
@@ -139,11 +132,11 @@ public class SearchTrips extends TestBase
     }
 
 
-    public static String originallegId = null;
-    public static String displayedPriceAPI = null;
-    public static String itineraryCarrierAPI = null;
+    private static String originallegId = null;
+    private static String displayedPriceAPI = null;
+    private static String itineraryCarrierAPI = null;
 
-    public static String getDetailsOfItinerary(String returnedJsongString, int tripnumber) {
+    private static String getDetailsOfItinerary(String returnedJsongString, int tripnumber) {
         JSONObject jObject = new JSONObject(returnedJsongString);
         JSONArray arr = jObject.getJSONArray("itineraries");
         for (int i = 0; i < arr.length(); i++) {
@@ -154,14 +147,14 @@ public class SearchTrips extends TestBase
         return originallegId;
     }
 
-    public static String firstSegmentId = null;
-    public static String secondSegmentId = null;
-    public static String thirdSegmentId = null;
-    public static int durationAPI;
-    public static int stopsAPI;
+    private static String firstSegmentId = null;
+    private static String secondSegmentId = null;
+    private static String thirdSegmentId = null;
+    private static int durationAPI;
+    private static int stopsAPI;
 
 
-    public void getDetailsOfLegs(String returnedJsong) {
+    private void getDetailsOfLegs(String returnedJsong) {
         JSONObject jObject = new JSONObject(returnedJsong);
         JSONArray arr = jObject.getJSONArray("legs");
         for (int i = 0; i < arr.length(); i++) {
@@ -175,38 +168,38 @@ public class SearchTrips extends TestBase
             }
         }
     }
-    public static String firstSegmentCarrierNameAPI = null;
-    public static String firstSegmentFlightNumberAPI = null;
-    public static String firstSegmentAircraftNameAPI = null;
-    public static String firstSegmentOriginCodeAPI = null;
-    public static String firstSegmentOriginDepDateAPI = null;
-    public static String firstSegmentOriginDepTimeAPI = null;
-    public static String firstSegmentOriginTerminalAPI = null;
-    public static String firstSegmentDestinationCodeAPI = null;
-    public static String firstSegmentDestinationDepDateAPI = null;
-    public static String firstSegmentDestinationDepTimeAPI = null;
-    public static String firstSegmentDestinationTerminalAPI = null;
-    public static String firstSegmentFuellingStopsAPI = null;
-    public static String firstSegmentBaggageAPI = null;
-    public static String firstSegmentFlightTimeAPI = null;
-    public static String firstSegmentCabinClassAPI = null;
 
-    public static String secondSegmentCarrierNameAPI = null;
-    public static String secondSegmentFlightNumberAPI = null;
-    public static String secondSegmentAircraftNameAPI = null;
-    public static String secondSegmentOriginCodeAPI = null;
-    public static String secondSegmentOriginDepDateAPI = null;
-    public static String secondSegmentOriginDepTimeAPI = null;
-    public static String secondSegmentOriginTerminalAPI = null;
-    public static String secondSegmentDestinationCodeAPI = null;
-    public static String secondSegmentDestinationDepDateAPI = null;
-    public static String secondSegmentDestinationDepTimeAPI = null;
-    public static String secondSegmentDestinationTerminalAPI = null;
-    public static String secondSegmentFuellingStopsAPI = null;
-    public static String secondSegmentBaggageAPI = null;
-    public static String secondSegmentFlightTimeAPI = null;
-    public static String secondSegmentCabinClassAPI = null;
+    private static String firstSegmentCarrierNameAPI = null;
+    private static String firstSegmentFlightNumberAPI = null;
+    private static String firstSegmentAircraftNameAPI = null;
+    private static String firstSegmentOriginCodeAPI = null;
+    private static String firstSegmentOriginDepDateAPI = null;
+    private static String firstSegmentOriginDepTimeAPI = null;
+    private static String firstSegmentOriginTerminalAPI = null;
+    private static String firstSegmentDestinationCodeAPI = null;
+    private static String firstSegmentDestinationDepDateAPI = null;
+    private static String firstSegmentDestinationDepTimeAPI = null;
+    private static String firstSegmentDestinationTerminalAPI = null;
+    private static String firstSegmentFuellingStopsAPI = null;
+    private static String firstSegmentBaggageAPI = null;
+    private static String firstSegmentFlightTimeAPI = null;
+    private static String firstSegmentCabinClassAPI = null;
 
+    private static String secondSegmentCarrierNameAPI = null;
+    private static String secondSegmentFlightNumberAPI = null;
+    private static String secondSegmentAircraftNameAPI = null;
+    private static String secondSegmentOriginCodeAPI = null;
+    private static String secondSegmentOriginDepDateAPI = null;
+    private static String secondSegmentOriginDepTimeAPI = null;
+    private static String secondSegmentOriginTerminalAPI = null;
+    private static String secondSegmentDestinationCodeAPI = null;
+    private static String secondSegmentDestinationDepDateAPI = null;
+    private static String secondSegmentDestinationDepTimeAPI = null;
+    private static String secondSegmentDestinationTerminalAPI = null;
+    private static String secondSegmentFuellingStopsAPI = null;
+    private static String secondSegmentBaggageAPI = null;
+    private static String secondSegmentFlightTimeAPI = null;
+    private static String secondSegmentCabinClassAPI = null;
 
 
     public void getDetailsOfSegments(String returnedJson) {
@@ -223,7 +216,7 @@ public class SearchTrips extends TestBase
                 firstSegmentOriginTerminalAPI = "Terminal" + arr.getJSONObject(i).getJSONObject("origin").get("terminal").toString();
                 firstSegmentDestinationCodeAPI = arr.getJSONObject(i).getJSONObject("destination").get("code").toString();
                 firstSegmentDestinationDepDateAPI = arr.getJSONObject(i).getJSONObject("destination").getJSONObject("arrivalTime").get("date").toString();
-                firstSegmentDestinationDepTimeAPI= arr.getJSONObject(i).getJSONObject("destination").getJSONObject("arrivalTime").get("time").toString();
+                firstSegmentDestinationDepTimeAPI = arr.getJSONObject(i).getJSONObject("destination").getJSONObject("arrivalTime").get("time").toString();
                 firstSegmentDestinationTerminalAPI = "Terminal" + arr.getJSONObject(i).getJSONObject("destination").get("terminal").toString();
                 firstSegmentFuellingStopsAPI = arr.getJSONObject(i).getJSONArray("fuellingStops").toString();
                 firstSegmentFlightTimeAPI = arr.getJSONObject(i).getJSONObject("flightInfo").get("flightTime").toString();
@@ -239,7 +232,7 @@ public class SearchTrips extends TestBase
                 secondSegmentOriginTerminalAPI = "Terminal" + arr.getJSONObject(i).getJSONObject("origin").get("terminal").toString();
                 secondSegmentDestinationCodeAPI = arr.getJSONObject(i).getJSONObject("destination").get("code").toString();
                 secondSegmentDestinationDepDateAPI = arr.getJSONObject(i).getJSONObject("destination").getJSONObject("arrivalTime").get("date").toString();
-                secondSegmentDestinationDepTimeAPI= arr.getJSONObject(i).getJSONObject("destination").getJSONObject("arrivalTime").get("time").toString();
+                secondSegmentDestinationDepTimeAPI = arr.getJSONObject(i).getJSONObject("destination").getJSONObject("arrivalTime").get("time").toString();
                 secondSegmentDestinationTerminalAPI = "Terminal" + arr.getJSONObject(i).getJSONObject("destination").get("terminal").toString();
                 secondSegmentFuellingStopsAPI = arr.getJSONObject(i).getJSONArray("fuellingStops").toString();
                 secondSegmentFlightTimeAPI = arr.getJSONObject(i).getJSONObject("flightInfo").get("flightTime").toString();
@@ -269,7 +262,7 @@ public class SearchTrips extends TestBase
     @And("^Check Flight Details for one way from API$")
     public void checkFlightDetailsForOneWayFromAPI() {
         String itineraryResults = apiObj.sendPostRequest("https://api.fly365stage.com/flight-search/search", oneWayTripAPI());
-        getDetailsOfItinerary(itineraryResults,1);
+        getDetailsOfItinerary(itineraryResults, 1);
         getDetailsOfLegs(itineraryResults);
         getDetailsOfSegments(itineraryResults);
     }
@@ -277,7 +270,7 @@ public class SearchTrips extends TestBase
     @And("^Check Flight Details for round trip from API$")
     public void checkFlightDetailsForRoundTripFromAPI() {
         String itineraryResults = apiObj.sendPostRequest("https://api.fly365stage.com/flight-search/search", roundTripAPI());
-        getDetailsOfItinerary(itineraryResults,1);
+        getDetailsOfItinerary(itineraryResults, 1);
         getDetailsOfLegs(itineraryResults);
         getDetailsOfSegments(itineraryResults);
     }
@@ -285,20 +278,18 @@ public class SearchTrips extends TestBase
     @And("^Check Flight Details for multi city trip from API$")
     public void checkFlightDetailsForMultiCityTripFromAPI() {
         String itineraryResults = apiObj.sendPostRequest("https://api.fly365stage.com/flight-search/search", multiCityAPI());
-        getDetailsOfItinerary(itineraryResults,1);
+        getDetailsOfItinerary(itineraryResults, 1);
         getDetailsOfLegs(itineraryResults);
         getDetailsOfSegments(itineraryResults);
     }
 
-    public String stopCount(){
+    public String stopCount() {
         String stopsCountAPI = null;
-        if (stopsAPI == 0){
+        if (stopsAPI == 0) {
             stopsCountAPI = "Non-Stop";
-        }
-        else if (stopsAPI == 1){
+        } else if (stopsAPI == 1) {
             stopsCountAPI = "One Stop";
-        }
-        else {
+        } else {
             stopsCountAPI = stopsAPI + " Stops";
         }
         return stopsCountAPI;
@@ -307,39 +298,39 @@ public class SearchTrips extends TestBase
 
     @And("^Compare the two results$")
     public void compareTheTwoResults() throws ParseException {
-        Assert.assertEquals(gmObj.changeFaretoDecimalFormatAPI(displayedPriceAPI),gmObj.changeFaretoDecimalFormat(displayedPriceWEB));
-        Assert.assertEquals(itineraryCarrierAPI,driver.findElement(itineraryCarrierWEB).getText());
-        Assert.assertEquals(stopCount(),driver.findElement(stopsWEB).getText());
-        Assert.assertEquals(durationAPI,gmObj.changeTimeFormatInMinutes(driver.findElement(durationWEB).getText().replaceAll("[\\D]"," ").trim()));
+        Assert.assertEquals(gmObj.changeFaretoDecimalFormatAPI(displayedPriceAPI), gmObj.changeFaretoDecimalFormat(displayedPriceWEB));
+        Assert.assertEquals(itineraryCarrierAPI, driver.findElement(itineraryCarrierWEB).getText());
+        Assert.assertEquals(stopCount(), driver.findElement(stopsWEB).getText());
+        Assert.assertEquals(durationAPI, gmObj.changeTimeFormatInMinutes(driver.findElement(durationWEB).getText().replaceAll("[\\D]", " ").trim()));
 
-        Assert.assertEquals(firstSegmentCarrierNameAPI,driver.findElement(firstSegmentCarrierNameWEB).getText());
-        Assert.assertEquals(firstSegmentFlightNumberAPI,driver.findElement(firstSegmentflightNumberWEB).getText().replaceAll("[a-zA-Z\\s\\-]",""));
-        Assert.assertEquals(firstSegmentAircraftNameAPI,driver.findElement(firstSegmentAircraftNameWEB).getText());
-        Assert.assertEquals(firstSegmentCabinClassAPI,driver.findElement(firstSegmentCabinClassWEB).getText());
-        Assert.assertEquals(firstSegmentBaggageAPI,driver.findElement(firstSegmentBaggageWEB).getText());
-        Assert.assertEquals(firstSegmentOriginCodeAPI,driver.findElement(firstSegmentOriginCodeWEB).getText().replaceAll(".*\\(|\\).*",""));
-        Assert.assertEquals(firstSegmentDestinationCodeAPI,driver.findElement(firstSegmentDestinationCodeWEB).getText().replaceAll(".*\\(|\\).*",""));
-        Assert.assertEquals(firstSegmentOriginTerminalAPI,driver.findElement(firstSegmentOriginTerminalWEB).getText().replaceAll("[\\s]",""));
-        Assert.assertEquals(firstSegmentDestinationTerminalAPI,driver.findElement(firstSegmentDestinationTerminalWEB).getText().replaceAll("[\\s]",""));
-        Assert.assertEquals(firstSegmentOriginDepTimeAPI,driver.findElement(firstSegmentOriginDepTimeWEB).getText().replaceAll("\\s\\-",""));
-        Assert.assertEquals(firstSegmentDestinationDepTimeAPI,driver.findElement(firstSegmentDestinationDepTimeWEB).getText().replaceAll("\\s\\-",""));
-        Assert.assertEquals(firstSegmentOriginDepDateAPI,gmObj.changeDateFormat(driver.findElement(firstSegmentOriginDepDateWEB).getText()));
-        Assert.assertEquals(firstSegmentDestinationDepDateAPI,gmObj.changeDateFormat(driver.findElement(firstSegmentDestinationDepDateWEB).getText()));
+        Assert.assertEquals(firstSegmentCarrierNameAPI, driver.findElement(firstSegmentCarrierNameWEB).getText());
+        Assert.assertEquals(firstSegmentFlightNumberAPI, driver.findElement(firstSegmentflightNumberWEB).getText().replaceAll("[a-zA-Z\\s\\-]", ""));
+        Assert.assertEquals(firstSegmentAircraftNameAPI, driver.findElement(firstSegmentAircraftNameWEB).getText());
+        Assert.assertEquals(firstSegmentCabinClassAPI, driver.findElement(firstSegmentCabinClassWEB).getText());
+        Assert.assertEquals(firstSegmentBaggageAPI, driver.findElement(firstSegmentBaggageWEB).getText());
+        Assert.assertEquals(firstSegmentOriginCodeAPI, driver.findElement(firstSegmentOriginCodeWEB).getText().replaceAll(".*\\(|\\).*", ""));
+        Assert.assertEquals(firstSegmentDestinationCodeAPI, driver.findElement(firstSegmentDestinationCodeWEB).getText().replaceAll(".*\\(|\\).*", ""));
+        Assert.assertEquals(firstSegmentOriginTerminalAPI, driver.findElement(firstSegmentOriginTerminalWEB).getText().replaceAll("[\\s]", ""));
+        Assert.assertEquals(firstSegmentDestinationTerminalAPI, driver.findElement(firstSegmentDestinationTerminalWEB).getText().replaceAll("[\\s]", ""));
+        Assert.assertEquals(firstSegmentOriginDepTimeAPI, driver.findElement(firstSegmentOriginDepTimeWEB).getText().replaceAll("\\s\\-", ""));
+        Assert.assertEquals(firstSegmentDestinationDepTimeAPI, driver.findElement(firstSegmentDestinationDepTimeWEB).getText().replaceAll("\\s\\-", ""));
+        Assert.assertEquals(firstSegmentOriginDepDateAPI, gmObj.changeDateFormat(driver.findElement(firstSegmentOriginDepDateWEB).getText()));
+        Assert.assertEquals(firstSegmentDestinationDepDateAPI, gmObj.changeDateFormat(driver.findElement(firstSegmentDestinationDepDateWEB).getText()));
         //Assert.assertEquals(firstSegmentFlightTimeAPI,gmObj.changeTimeFormatInMinutes(driver.findElement(firstSegmentFlightTimeWEB).getText().replaceAll("[\\D]"," ").trim()));
 
-        Assert.assertEquals(secondSegmentCarrierNameAPI,driver.findElement(secondSegmentCarrierNameWEB).getText());
-        Assert.assertEquals(secondSegmentFlightNumberAPI,driver.findElement(secondSegmentflightNumberWEB).getText().replaceAll("[a-zA-Z\\s\\-]",""));
-        Assert.assertEquals(secondSegmentAircraftNameAPI,driver.findElement(secondSegmentAircraftNameWEB).getText());
-        Assert.assertEquals(secondSegmentCabinClassAPI,driver.findElement(secondSegmentCabinClassWEB).getText());
-        Assert.assertEquals(secondSegmentBaggageAPI,driver.findElement(secondSegmentBaggageWEB).getText());
-        Assert.assertEquals(secondSegmentOriginCodeAPI,driver.findElement(secondSegmentOriginCodeWEB).getText().replaceAll(".*\\(|\\).*",""));
-        Assert.assertEquals(secondSegmentDestinationCodeAPI,driver.findElement(secondSegmentDestinationCodeWEB).getText().replaceAll(".*\\(|\\).*",""));
-        Assert.assertEquals(secondSegmentOriginTerminalAPI,driver.findElement(secondSegmentOriginTerminalWEB).getText().replaceAll("[\\s]",""));
-        Assert.assertEquals(secondSegmentDestinationTerminalAPI,driver.findElement(secondSegmentDestinationTerminalWEB).getText().replaceAll("[\\s]",""));
-        Assert.assertEquals(secondSegmentOriginDepTimeAPI,driver.findElement(secondSegmentOriginDepTimeWEB).getText().replaceAll("\\s\\-",""));
-        Assert.assertEquals(secondSegmentDestinationDepTimeAPI,driver.findElement(secondSegmentDestinationDepTimeWEB).getText().replaceAll("\\s\\-",""));
-        Assert.assertEquals(secondSegmentOriginDepDateAPI,gmObj.changeDateFormat(driver.findElement(secondSegmentOriginDepDateWEB).getText()));
-        Assert.assertEquals(secondSegmentDestinationDepDateAPI,gmObj.changeDateFormat(driver.findElement(secondSegmentDestinationDepDateWEB).getText()));
+        Assert.assertEquals(secondSegmentCarrierNameAPI, driver.findElement(secondSegmentCarrierNameWEB).getText());
+        Assert.assertEquals(secondSegmentFlightNumberAPI, driver.findElement(secondSegmentflightNumberWEB).getText().replaceAll("[a-zA-Z\\s\\-]", ""));
+        Assert.assertEquals(secondSegmentAircraftNameAPI, driver.findElement(secondSegmentAircraftNameWEB).getText());
+        Assert.assertEquals(secondSegmentCabinClassAPI, driver.findElement(secondSegmentCabinClassWEB).getText());
+        Assert.assertEquals(secondSegmentBaggageAPI, driver.findElement(secondSegmentBaggageWEB).getText());
+        Assert.assertEquals(secondSegmentOriginCodeAPI, driver.findElement(secondSegmentOriginCodeWEB).getText().replaceAll(".*\\(|\\).*", ""));
+        Assert.assertEquals(secondSegmentDestinationCodeAPI, driver.findElement(secondSegmentDestinationCodeWEB).getText().replaceAll(".*\\(|\\).*", ""));
+        Assert.assertEquals(secondSegmentOriginTerminalAPI, driver.findElement(secondSegmentOriginTerminalWEB).getText().replaceAll("[\\s]", ""));
+        Assert.assertEquals(secondSegmentDestinationTerminalAPI, driver.findElement(secondSegmentDestinationTerminalWEB).getText().replaceAll("[\\s]", ""));
+        Assert.assertEquals(secondSegmentOriginDepTimeAPI, driver.findElement(secondSegmentOriginDepTimeWEB).getText().replaceAll("\\s\\-", ""));
+        Assert.assertEquals(secondSegmentDestinationDepTimeAPI, driver.findElement(secondSegmentDestinationDepTimeWEB).getText().replaceAll("\\s\\-", ""));
+        Assert.assertEquals(secondSegmentOriginDepDateAPI, gmObj.changeDateFormat(driver.findElement(secondSegmentOriginDepDateWEB).getText()));
+        Assert.assertEquals(secondSegmentDestinationDepDateAPI, gmObj.changeDateFormat(driver.findElement(secondSegmentDestinationDepDateWEB).getText()));
         //Assert.assertEquals(secondSegmentFlightTimeAPI,gmObj.changeTimeFormatInMinutes(driver.findElement(secondSegmentFlightTimeWEB).getText().replaceAll("[\\D]"," ").trim()));
     }
 }

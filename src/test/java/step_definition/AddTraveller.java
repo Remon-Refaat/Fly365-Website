@@ -67,12 +67,12 @@ public class AddTraveller extends TestBase {
     @And("^user add traveller$")
     public void userEnterTravellerTitle() throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOfElementLocated(TravellerFirstNameTXT));
-        gmObject.selectFromDDL(TravellerTitleDrop,"Mr");
+        gmObject.selectFromDDL(TravellerTitleDrop, "Mr");
         driver.findElement(TravellerFirstNameTXT).sendKeys("john");
         driver.findElement(TravellerFamileyNameTXT).sendKeys("smith");
-        gmObject.selectFromDDL(TravellerBirthDateDayDrop,"7");
-        gmObject.selectFromDDL(TravellerBirthDateMonth,"June");
-        gmObject.selectFromDDL(TravellerBirthDateYear,"1988");
+        gmObject.selectFromDDL(TravellerBirthDateDayDrop, "7");
+        gmObject.selectFromDDL(TravellerBirthDateMonth, "June");
+        gmObject.selectFromDDL(TravellerBirthDateYear, "1988");
         driver.findElement(SaveTravellerInnerBTN).click();
         driver.findElement(cancelBTN).click();
         Assert.assertTrue(driver.findElement(AddedTraveller).isDisplayed());
@@ -100,14 +100,14 @@ public class AddTraveller extends TestBase {
 
     @Then("^Deleted user is removed from the list$")
     public void deletedUserIsRemovedFromTheList() {
-        Assert.assertEquals(driver.findElement(noTravelersFoundMSG).getText(),"Sorry you have not added a traveller");
+        Assert.assertEquals(driver.findElement(noTravelersFoundMSG).getText(), "Sorry you have not added a traveller");
     }
 
     @And("^User edit the saved traveler$")
     public void userEditTheSavedTraveler() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(editTravelerBTN));
         driver.findElement(editTravelerBTN).click();
-        driver.findElement(TravellerFirstNameTXT).sendKeys(Keys.chord(Keys.BACK_SPACE,Keys.BACK_SPACE,Keys.BACK_SPACE,Keys.BACK_SPACE));
+        driver.findElement(TravellerFirstNameTXT).sendKeys(Keys.chord(Keys.BACK_SPACE, Keys.BACK_SPACE, Keys.BACK_SPACE, Keys.BACK_SPACE));
         driver.findElement(TravellerFirstNameTXT).sendKeys("david");
         driver.findElement(editSaveBTN).click();
     }

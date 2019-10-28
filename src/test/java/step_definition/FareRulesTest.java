@@ -7,8 +7,8 @@ import org.testng.Assert;
 
 public class FareRulesTest extends TestBase {
 
-    boolean result;
-    By fareRulesHDR = By.xpath("//h1");
+    private boolean result;
+    private By fareRulesHDR = By.xpath("//h1");
 
     @Then("^'Fare Rules' page will be opened$")
     public void fareRulesPageWillBeOpened() throws InterruptedException {
@@ -22,6 +22,6 @@ public class FareRulesTest extends TestBase {
                 break;
             }
         }
-        Assert.assertEquals(result,true);
+        Assert.assertTrue(result);
     }
 }
