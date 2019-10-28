@@ -23,7 +23,7 @@ public class PassengersDetailsTest extends TestBase {
     private By contactFirstNameTXT = By.xpath("//div[@class='el-form-item col-sm-8 col-lg-6']//input[@placeholder='First Name']");
     private By contactLastNameTXT = By.xpath("//div[@class='el-form-item col-sm-8 col-lg-6']//input[@placeholder='Family Name']");
     private By contactEmailAddressTXT = By.id("contact-email");
-    private By phoneNumbereTXT = By.xpath("//input[@type='tel']");
+    private By phoneNumbereTXT = By.xpath("//*[@id='contact-details']/div[4]/div[2]/div/div/div[1]/div/input");
     private By nextStepBTN = By.xpath("//button[text()='Next Step']");
     private By firstReadMoreLINK = By.xpath("//p/a[1]");
     private By secondReadMoreLINK = By.xpath("//p/a[2]");
@@ -50,7 +50,7 @@ public class PassengersDetailsTest extends TestBase {
         for (Map<String, String> passengerDetails : passengerData.asMaps(String.class, String.class)) {
 
             gmObject.selectFromDDL(By.id("title-" + i + ""), passengerDetails.get("Title"));
-            driver.findElement(By.id("firstname-" + i + "")).sendKeys(passengerDetails.get("First Name"));
+            driver.findElement(By.id("passenger-firstname-" + i + "")).sendKeys(passengerDetails.get("First Name"));
             driver.findElement(By.id("middlename-" + i + "")).sendKeys(passengerDetails.get("Middle Name"));
             driver.findElement(By.id("lastName-" + i + "")).sendKeys(passengerDetails.get("Last Name"));
             gmObject.selectFromDDL(By.xpath("//*[@id='birthdate-" + i + "']//input[@placeholder='Day']"), passengerDetails.get("Day"));
@@ -83,7 +83,7 @@ public class PassengersDetailsTest extends TestBase {
 
     @Then("^'Passenger' page will be opened$")
     public void passengerPageWillBeOpened() {
-        Assert.assertEquals(driver.getTitle(),"Fly365 - passengers");
+        Assert.assertEquals(driver.getTitle(), "Fly365 - passengers");
     }
 
     @And("^Press on first 'Read more'$")
@@ -118,6 +118,7 @@ public class PassengersDetailsTest extends TestBase {
         wait.until(ExpectedConditions.visibilityOfElementLocated(totalTravelTimeHDR));
         Assert.assertTrue(driver.findElement(totalTravelTimeHDR).isDisplayed());
     }
+
     @Then("^error message appear for each field at fill passenger details$")
     public void errorMessageAppearForEachFieldAtFillPassengerDetails() throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOfElementLocated(passengerTitleEmptyErrorMSG));

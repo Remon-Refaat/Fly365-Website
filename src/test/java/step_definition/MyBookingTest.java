@@ -70,7 +70,7 @@ public class MyBookingTest extends TestBase {
     @Then("^The user can see his booking in my Booking$")
     public void theUserCanSeeHisBookingInMyBooking() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(lastFly365RefVAL));
-        Assert.assertEquals(driver.findElement(lastFly365RefVAL).getText(),ConfirmationTest.fly356Refernce);
+        Assert.assertEquals(driver.findElement(lastFly365RefVAL).getText(), ConfirmationTest.fly356Refernce);
     }
 
     @And("^Go to My Booking$")
