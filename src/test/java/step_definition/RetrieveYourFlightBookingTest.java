@@ -1,5 +1,6 @@
 package step_definition;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import helper.TestBase;
 import org.openqa.selenium.By;
@@ -12,8 +13,10 @@ public class RetrieveYourFlightBookingTest extends TestBase {
     WebDriverWait wait = new WebDriverWait(driver, 10);
 
     private By retrieveYourFlightBookingHDR = By.xpath("//div[text()='Retrieve your flight booking']");
-    private By fly365RefHDR = By.xpath("//strong[@class='txt-primary-second font-semibold ml-1']");
+    private By fly365RefHDR = By.xpath("(//strong[@class='txt-primary-second font-semibold'])[1]");
     private By airlineRefHDR = By.xpath("//strong[@class='text-primary-first font-semibold ml-1']");
+
+    public static String PNRNumber = null;
 
     @Then("^The system will retrieve the details of the Booking for this \"(.*)\"$")
     public void theSystemWillRetrieveTheDetailsOfTheBookingForThis(String reference) {
@@ -26,4 +29,8 @@ public class RetrieveYourFlightBookingTest extends TestBase {
         }
     }
 
+    @And("^Get Fly Reference$")
+    public void getFlyReference() {
+        PNRNumber = driver.findElement(fly365RefHDR).getText();
+    }
 }

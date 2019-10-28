@@ -28,7 +28,7 @@ public class DataBase {
                 System.out.println("ResultSet is empty");
             } else {
                 do {
-                    data = rs.getString("email");
+                    data = rs.getString("id");
                     //System.out.println(data);
                 }
                 while (rs.next());
