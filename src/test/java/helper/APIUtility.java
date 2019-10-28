@@ -1,17 +1,12 @@
 package helper;
 
-import cucumber.api.PendingException;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 
 public class APIUtility extends TestBase {
@@ -22,13 +17,12 @@ public class APIUtility extends TestBase {
         try {
             URL url = new URL(requestUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
             connection.setDoInput(true);
             connection.setDoOutput(true);
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json");
-            connection.setRequestProperty("x-store-id", "fly365_com");
-            connection.setRequestProperty("authorization", "5TGy5xPegnkS2ML7pNbSsWJfSywSLQGZ");
+            connection.setRequestProperty("x-store-id", "fly365_nz");
+            connection.setRequestProperty("authorization", "guMRjevTJNNgv49LRTNCTzfp9cWnW6Sj");
             connection.setRequestProperty("x-store-user", "fly365_com_nz");
             OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream(), "UTF-8");
             writer.write(tripType);
@@ -39,9 +33,43 @@ public class APIUtility extends TestBase {
             while ((line = br.readLine()) != null) {
                 jsonString.append(line);
             }
+            int responseCode = connection.getResponseCode();
+            System.out.println("\nSending 'POST' request to URL : " + url);
+            System.out.println("Response Code : " + responseCode);
             br.close();
             connection.disconnect();
             return jsonString.toString();
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+
+    }
+
+    public static String sendGetRequest(String requestUrl) {
+        try {
+            URL url = new URL(requestUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.setDoOutput(true);
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Content-Type", "text/plain");
+            connection.setRequestProperty("x-store-id", "fly365_com");
+            connection.setRequestProperty("authorization", "5TGy5xPegnkS2ML7pNbSsWJfSywSLQGZ");
+            //connection.setRequestProperty("x-store-user", "fly365_com_nz");
+            //OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream(), "UTF-8");
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            StringBuffer response = new StringBuffer();
+            String line;
+            while ((line = br.readLine()) != null) {
+                response.append(line);
+            }
+            int responseCode = connection.getResponseCode();
+            System.out.println("\nSending 'GET' request to URL : " + url);
+            System.out.println("Response Code : " + responseCode);
+            br.close();
+            connection.disconnect();
+            return response.toString();
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
@@ -117,11 +145,11 @@ public class APIUtility extends TestBase {
     public static String getDiscountName(String returnedJsongString, int tripnumber) {
         JSONObject jObject = new JSONObject(returnedJsongString);
         JSONArray arr = jObject.getJSONArray("itineraries");
-        String discountName = null;
-        for (int i = 0; i < arr.length(); i++) {
-            discountName = arr.getJSONObject(tripnumber - 1).getJSONObject("discounts").get("name").toString();
+        String discountNameapi = null;
+        for (int i = 0; i < arr.length(); i++){
+            discountNameapi = arr.getJSONObject(tripnumber - 1).getJSONObject("discounts").get("name").toString();
         }
-        return discountName;
+        return discountNameapi;
     }
 
     public static String getDiscountStatus(String returnedJsongString, int tripnumber) {
@@ -152,66 +180,42 @@ public class APIUtility extends TestBase {
         sendPostRequest("https://api.fly365" + domain + ".com/flight/cart/" + cartID + "/passenger", addPassengerDetailsAPI);
     }
 
-    public static String[] checkoutTrip(String cartID, String domain) throws InterruptedException {
-
-        String addCardDetailsAPI = "{\"method\":\"cc\",\"type\":\"direct\",\"card\":{\"number\":\"4242424242424242\",\"cvv\":\"123\",\n" +
-                "\"expiryDate\":\"1120\",\"type\":\"visa\",\"holderName\": \"Alaa Attya\"},\n" +
-                " \"billingAddress\":{\"address\":\"Something\",\"country\":\"DO\",\"city\":\"AZS\",\"zipCode\":\"5678\",\"state\":\"NY\"}}";
+    public static String[] checkoutTrip(String cartID, String domain) {
+        String addCardDetailsAPI = "{\n" +
+                "    \"method\": \"cc\",\n" +
+                "    \"type\": \"direct\",\n" +
+                "    \"card\": {\n" +
+                "        \"number\": \"5123450000000008\",\n" +
+                "        \"cvv\": \"123\",\n" +
+                "        \"expiryDate\": \"1122\",\n" +
+                "        \"type\": \"cc-visa-credit\",\n" +
+                "        \"holderName\": \"Alaa Attya\"\n" +
+                "    },\n" +
+                "    \"billingAddress\": {\n" +
+                "        \"address\": \"Something\",\n" +
+                "        \"country\": \"DO\",\n" +
+                "        \"city\": \"AZS\",\n" +
+                "        \"zipCode\": \"5678\",\n" +
+                "        \"state\": \"NY\"\n" +
+                "    },\n" +
+                "    \"holdFees\":{\n" +
+                "    \t\"amount\": 15.8\n" +
+                "    }\n" +
+                "}";
         String returnedJsonString = sendPostRequest("https://api.fly365" + domain + ".com/flight/cart/" + cartID + "/checkout", addCardDetailsAPI);
-//To validate that the order no./pnr number is displayed correctly in retrieve my booking
-        Thread.sleep(15000);
+
+        //To validate that the order no./pnr number is displayed correctly in retrieve my booking
         JSONObject jObject = new JSONObject(returnedJsonString);
-        String orderNumber = jObject.getString("orderNumber");
-        String pnrNumber = jObject.getString("flightPNR");
-        String referenceNum = jObject.getString("orderReference");
-        String[] fly365AirlineRef = {orderNumber, pnrNumber};
+        String orderNumber = jObject.getJSONObject("order").get("orderNumber").toString();
+        String orderId = jObject.getJSONObject("order").get("orderId").toString();
+        String[] fly365AirlineRef = {orderNumber, orderId};
         return fly365AirlineRef;
     }
 
 
-
-
-
-    public static void createTicketAPI(String domain) throws IOException {
-        String createContactUsAPI = "{\"name\":\"me\",\"email\":\"khaled.abdelaziz@fly365.com\", \"category\":\"Booking Enquiry\", \"message\":\"testing contact\"}";
-        sendPostRequestCreateTicket("https://api.fly365" + domain + ".com/api/user",createContactUsAPI);
+    public String getresult(String orderId, String orderNumber) {
+        String finalResponse = sendGetRequest("https://api.fly365stage.com/user/order/find?orderId=" + orderId + "&orderNumber=" + orderNumber +"");
+        return finalResponse;
     }
 
-
-    public static void createRuleAPI(String domain){
-        String createRuleAPI = "{ \"name\" : \"egypt-dubai14\", \"storeId\" : \"fly365_nz\", \"carrierCodeString\" : \"RJ\", \"bookingCodeString\": \"Q\","+
-                "\"departureType\" : \"country\", \"departureCodeString\" : \"eg\", \"destinationType\" : \"country\", \"destinationCodeString\" : \"ae\","+
-                "\"airlineChangeFees\" : 100, \"fly365ChangeFees\" : 200, \"defaultBaseChangeFees\": 50, \"defaultTaxChangeFees\": 50,"+
-                "\"airlineCancelFees\": 1000, \"fly365CancelFees\": 2000, \"cancellationOption\": 1, \"isActive\": false }";
-        sendPostRequestCreateTicket("https://www.fly365" + domain + ".com/api/rules",createRuleAPI);
-    }
-
-    public static String sendPostRequestCreateTicket(String requestUrl, String createRuleAPI) {
-        try {
-            URL url = new URL(requestUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-            connection.setDoInput(true);
-            connection.setDoOutput(true);
-            connection.setRequestMethod("POST");
-            connection.setRequestProperty("Content-Type", "application/json");
-            connection.setRequestProperty("x-user-token", "iKW0cf68638aeaad43297055aa446693276EcV");
-            connection.setRequestProperty("authorization", "XXu5WbKbM6XHbU5VKNETr6AMnNaVNd9E");
-            OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream(), "UTF-8");
-            writer.write(createRuleAPI);
-            writer.close();
-            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            StringBuffer jsonString = new StringBuffer();
-            String line;
-            while ((line = br.readLine()) != null) {
-                jsonString.append(line);
-            }
-            br.close();
-            connection.disconnect();
-            return jsonString.toString();
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }
 }
-

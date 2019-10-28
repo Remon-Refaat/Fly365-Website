@@ -18,18 +18,18 @@ import java.util.ArrayList;
 public class GmailTest extends TestBase {
 
     WebDriverWait wait = new WebDriverWait(driver, 10);
-    EmailUtililty emailUtililty = new EmailUtililty("john.smith.fly365@gmail.com", "@Fly365@Fly365", "smtp.gmail.com", EmailUtililty.EmailFolder.INBOX);
+    private EmailUtililty emailUtililty = new EmailUtililty("john.smith.fly365@gmail.com", "@Fly365@Fly365", "smtp.gmail.com", EmailUtililty.EmailFolder.INBOX);
 
-   By emailTXT = By.id("identifierId");
-   By emailNextBTN = By.id("identifierNext");
-    By passwordTXT = By.xpath("//input[@name='password']");
-    By passwordNextBTN = By.id("passwordNext");
-    By menuLINK = By.xpath("//*[@id='gbwa']/div/a");
-    By gmailLink = By.xpath("//*[@id='gb23']");
-    By firstMessageLINK = By.xpath("//div[2]/span//span[contains(text(), 'Fly365')]");
-    By cllickHereLINK = By.xpath("//p[contains(text(),'Unsubscribe please')]/child::a");
-    By verifyBTN = By.xpath("//table//table//table//td/a");
-    By resetPasswordBTN = By.xpath("//table//table//table//td/a");
+    private By emailTXT = By.id("identifierId");
+    private By emailNextBTN = By.id("identifierNext");
+    private By passwordTXT = By.xpath("//input[@name='password']");
+    private By passwordNextBTN = By.id("passwordNext");
+    private By menuLINK = By.xpath("//*[@id='gbwa']/div/a");
+    private By gmailLink = By.xpath("//*[@id='gb23']");
+    private By firstMessageLINK = By.xpath("//div[2]/span//span[text()='Fly365']");
+    private By cllickHereLINK = By.xpath("//p[contains(text(),'Unsubscribe please')]/child::a");
+    private By verifyBTN = By.xpath("//table//table//table//td/a");
+    private By resetPasswordBTN = By.xpath("//table//table//table//td/a");
 
     public GmailTest() throws MessagingException {
     }
@@ -70,7 +70,7 @@ public class GmailTest extends TestBase {
     }
 
     @And("^Press on 'Click Here' link$")
-    public void pressOnClickHereLink() throws InterruptedException{
+    public void pressOnClickHereLink() throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOfElementLocated(cllickHereLINK));
         driver.findElement(cllickHereLINK).click();
 
