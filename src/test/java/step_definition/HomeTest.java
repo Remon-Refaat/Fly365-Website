@@ -18,13 +18,14 @@ import java.util.Map;
 
 public class HomeTest extends TestBase {
 
-    WebDriverWait wait = new WebDriverWait(driver, 10);
+    WebDriverWait wait = new WebDriverWait(driver, 30);
     GeneralMethods gmObject = new GeneralMethods();
     APIUtility apiObject = new APIUtility();
     ConfirmationTest ctobject = new ConfirmationTest();
     public static String orderNumber = null;
     public static String pnrNumber = null;
     public static String currentWindow = driver.getWindowHandle();
+
 
 
     private By aboutUsLINK = By.xpath("//a[text()='About us']");
@@ -233,20 +234,28 @@ public class HomeTest extends TestBase {
     }
 
 
-    @And("^Book a trip from API for \"(.*)\" and get \"(.*)\"$")
-    public void bookATripFromAPIForAndGet(String domain, String reference) throws InterruptedException {
+    @And("^Book a \"(.*)\" trip from API for \"(.*)\" and get \"(.*)\"$")
+    public void bookATripFromAPIForAndGet(String tripType , String domain, String reference) throws InterruptedException {
         String requestUrl = "https://api.fly365" + domain + ".com/flight-search/search";
-        String allAvailableTrips = apiObject.sendPostRequest(requestUrl, apiObject.oneWayAPI());
+        String allAvailableTrips = null;
+        if(tripType.contains("multi")){
+            allAvailableTrips = apiObject.sendPostRequest(requestUrl, apiObject.multiCityAPI());
+        }
+        else if(tripType.contains("round")){
+            allAvailableTrips = apiObject.sendPostRequest(requestUrl, apiObject.roundTripAPI());
+        }
+        else if(tripType.contains("one")){
+            allAvailableTrips = apiObject.sendPostRequest(requestUrl, apiObject.oneWayAPI());
+        }
         String itinaryID = apiObject.getItineraryId(allAvailableTrips, 2);
         String cardID = apiObject.createCart(itinaryID, domain);
         apiObject.addPassenger(cardID, domain);
-        if (reference.equals("Airline Reference")) {
+        if (reference.equals("order")) {
             orderNumber = apiObject.checkoutTrip(cardID, domain)[0];
         }
-        if (reference.equals("Fly365 Reference")) {
+        /*if (reference.equals("Fly365 Reference")) {
             pnrNumber = apiObject.checkoutTrip(cardID, domain)[1];
-        }
-        System.out.println(pnrNumber);
+        }*/
     }
 
 
@@ -262,17 +271,17 @@ public class HomeTest extends TestBase {
 
     @And("^Add a valid \"(.*)\"$")
     public void addAValid(String reference) {
-
-        if (reference.equals("Fly365 Reference")) {
-            driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(pnrNumber);
+        driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(orderNumber);
+        if (reference.equals("order")) {
+            driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(orderNumber);
         }
-        if (reference.equals("Airline Reference")) {
+        if (reference.equals("order")) {
             driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(orderNumber);
         }
     }
 
     @And("^Add a valid Reference 'Fly365 Ref'$")
-    public void addAValidReferenceFly365Ref() {
+    public void addAValidReferenceFly365Ref()  {
         driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(ctobject.fly356Refernce);
 
     }
@@ -360,7 +369,7 @@ public class HomeTest extends TestBase {
 
     @And("^Add previously subscribed email address \"(.*)\" to Subscription Email field$")
     public void addPreviouslySubscribedEmailAddressToSubscriptionEmailField(String emailAddress) throws Throwable {
-        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "Select email from newsletter_users where email = '" + emailAddress + "'");
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "Select email from newsletter_users where email = '" + emailAddress +"'");
         if (DataBase.data == null) {
             DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "insert into newsletter_users (email, \"isSubscribed\",\"storeId\",\"groupId\", \"isRegistered\")values('" + emailAddress + "',True,'fly365_nz','fly365',False)");
         }
@@ -369,7 +378,7 @@ public class HomeTest extends TestBase {
 
     @Then("^Error validation message is displayed$")
     public void errorValidationMessageIsDisplayed() {
-        Assert.assertEquals(driver.findElement(alreadySubscribedErrorMSG).getText(), "You have already subscribed fly365");
+        Assert.assertEquals(driver.findElement(alreadySubscribedErrorMSG).getText(),"You have already subscribed fly365");
 
     }
 
@@ -387,7 +396,7 @@ public class HomeTest extends TestBase {
     @Then("^'Passenger Rules' pop up will be opened$")
     public void passengerRulesPopUpWillBeOpened() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(passengerRulesHDR));
-        Assert.assertEquals(driver.findElement(passengerRulesHDR).getText(), "Passenger Rules");
+        Assert.assertEquals(driver.findElement(passengerRulesHDR).getText(),"Passenger Rules");
 
     }
 
@@ -419,5 +428,6 @@ public class HomeTest extends TestBase {
         String emptysubscriber = driver.findElement(emptyEmailAtSubscribe).getText();
         Assert.assertEquals(emptysubscriber, "!Please enter a valid email");
     }
+
 
 }

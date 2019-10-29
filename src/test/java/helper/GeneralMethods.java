@@ -123,4 +123,9 @@ public class GeneralMethods extends TestBase {
         return sdf.format(date);
     }
 
+    public void makeBrowserBack() throws InterruptedException {
+        Thread.sleep(1000);
+        driver.navigate().back();
+    }
+
 }
