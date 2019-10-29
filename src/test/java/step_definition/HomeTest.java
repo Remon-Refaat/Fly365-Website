@@ -253,9 +253,6 @@ public class HomeTest extends TestBase {
         if (reference.equals("order")) {
             orderNumber = apiObject.checkoutTrip(cardID, domain)[0];
         }
-        /*if (reference.equals("Fly365 Reference")) {
-            pnrNumber = apiObject.checkoutTrip(cardID, domain)[1];
-        }*/
     }
 
 
