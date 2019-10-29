@@ -1,7 +1,4 @@
-
-@Forget_Password
 Feature: Forget Password
-  test forget password feature
 
   Background:
     Given Navigate to "NZ" Fly365 "stage" site
@@ -84,7 +81,6 @@ Feature: Forget Password
     And press on forget password link
     When click on send email button
     Then user shall see empty email error message at forget password page
-
 
   Scenario: Customer forget password with invalid email
     And press on forget password link

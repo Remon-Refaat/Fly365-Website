@@ -1,5 +1,3 @@
-
-@Passenger_Page
 Feature: Passenger page
 
   Background:

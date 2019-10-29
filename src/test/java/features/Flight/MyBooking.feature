@@ -1,5 +1,3 @@
-
-@My_Booking
 Feature: Go to MyBooking page
 
   Background: Open Fly365 site
