@@ -5,6 +5,7 @@ import cucumber.api.java.en.Then;
 import helper.GeneralMethods;
 import helper.TestBase;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -12,7 +13,7 @@ import org.testng.Assert;
 
 public class ContactUsTest extends TestBase {
 
-    WebDriverWait wait = new WebDriverWait(driver, 10);
+    WebDriverWait wait = new WebDriverWait(driver,10);
 
     private GeneralMethods gmObject = new GeneralMethods();
 
@@ -36,7 +37,7 @@ public class ContactUsTest extends TestBase {
     @Then("^'Contact Us' page is opened matching New Zealand site$")
     public void contactUsPageIsOpenedMatchingNewZealandSite() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(emailSupportTXT));
-        Assert.assertEquals(driver.findElement(emailSupportTXT).getText(), "nz.support@fly365.com");
+        Assert.assertEquals(driver.findElement(emailSupportTXT).getText(),"support@fly365.com");
     }
 
     @And("^Enter Full Name$")
@@ -51,7 +52,7 @@ public class ContactUsTest extends TestBase {
 
     @And("^Choose Category$")
     public void chooseCategory() throws InterruptedException {
-        gmObject.selectFromDDL(categoryDDL, "General Question");
+        gmObject.selectFromDDL(categoryDDL,"General Question");
     }
 
     @And("^Write the message$")

@@ -23,7 +23,7 @@ public class TestBase extends AbstractTestNGCucumberTests {
 
     public static WebDriver driver;
 
-    @BeforeSuite
+   @BeforeSuite
     @Parameters({"browser"})
     public void startDriver(@Optional("chrome") String browserName) {
         if (browserName.equalsIgnoreCase("chrome")) {

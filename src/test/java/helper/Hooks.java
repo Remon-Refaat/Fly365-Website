@@ -70,7 +70,8 @@ public class Hooks extends TestBase {
     @After
     public void clearTheCash() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.localStorage.clear();");
+        js.executeScript("window.sessionStorage.clear();");
+        //js.executeScript("window.localStorage.clear();");
         driver.manage().deleteAllCookies();
     }
 
