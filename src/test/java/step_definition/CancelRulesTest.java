@@ -1,8 +1,11 @@
 package step_definition;
 
 import com.github.javafaker.Faker;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import helper.APIUtility;
 import helper.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -12,6 +15,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import java.io.IOException;
 
 
 public class CancelRulesTest extends TestBase {
@@ -50,10 +55,14 @@ public class CancelRulesTest extends TestBase {
 
     public JavascriptExecutor jse = (JavascriptExecutor)driver;
 
+    APIUtility apiObj = new APIUtility();
 
     private Faker fakerNameGenerator = new Faker();
     private String fakerRuleName = fakerNameGenerator.name().name();
     private String updatedRuleName = fakerNameGenerator.name().name();
+
+    static String returnedMyBookJson = null;
+    static String myBookArrData[] = null;
 
     @And("^Open Rules$")
     public void openRules() throws InterruptedException {
@@ -109,6 +118,7 @@ public class CancelRulesTest extends TestBase {
     public void ruleIsAddedToTheList() throws InterruptedException {
         backToRuleList();
         wait.until(ExpectedConditions.visibilityOfElementLocated(ruleInTable));
+        System.out.println(driver.findElement(ruleInTable).getText());
         Assert.assertTrue(driver.findElement(ruleInTable).getText().equalsIgnoreCase(fakerRuleName));
     }
 
@@ -164,6 +174,7 @@ public class CancelRulesTest extends TestBase {
     @And("^Submit Rule With Same Name$")
     public void createRuleSameName() throws InterruptedException {
         fakerRuleName = driver.findElement(ruleInTable).getText();
+        System.out.println(fakerRuleName);
         clickCreateRule();
         fillRuleData();
         submitRule();
@@ -200,6 +211,9 @@ public class CancelRulesTest extends TestBase {
         jse.executeScript("arguments[0].scrollIntoView()", nameElement);
         wait.until(ExpectedConditions.visibilityOfElementLocated(nameError));
         String errorTXT = driver.findElement(nameError).getText();
+        System.out.println(errorTXT);
         Assert.assertTrue(errorTXT.contains("please select another name"));
     }
+
+
 }

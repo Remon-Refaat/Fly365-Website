@@ -5,7 +5,10 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import helper.*;
+import helper.APIUtility;
+import helper.DataBase;
+import helper.GeneralMethods;
+import helper.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,14 +18,14 @@ import java.util.Map;
 
 public class HomeTest extends TestBase {
 
-    WebDriverWait wait = new WebDriverWait(driver, 10);
+    WebDriverWait wait = new WebDriverWait(driver, 30);
     GeneralMethods gmObject = new GeneralMethods();
     APIUtility apiObject = new APIUtility();
     ConfirmationTest ctobject = new ConfirmationTest();
-    HttpClient hc = new HttpClient();
     public static String orderNumber = null;
     public static String pnrNumber = null;
     public static String currentWindow = driver.getWindowHandle();
+
 
 
     private By aboutUsLINK = By.xpath("//a[text()='About us']");
@@ -231,19 +234,28 @@ public class HomeTest extends TestBase {
     }
 
 
-    @And("^Book a trip from API for \"(.*)\" and get \"(.*)\"$")
-    public void bookATripFromAPIForAndGet(String domain, String reference) throws InterruptedException {
+    @And("^Book a \"(.*)\" trip from API for \"(.*)\" and get \"(.*)\"$")
+    public void bookATripFromAPIForAndGet(String tripType , String domain, String reference) throws InterruptedException {
         String requestUrl = "https://api.fly365" + domain + ".com/flight-search/search";
-        String allAvailableTrips = apiObject.sendPostRequest(requestUrl, apiObject.oneWayAPI());
+        String allAvailableTrips = null;
+        if(tripType.contains("multi")){
+            allAvailableTrips = apiObject.sendPostRequest(requestUrl, apiObject.multiCityAPI());
+        }
+        else if(tripType.contains("round")){
+            allAvailableTrips = apiObject.sendPostRequest(requestUrl, apiObject.roundTripAPI());
+        }
+        else if(tripType.contains("one")){
+            allAvailableTrips = apiObject.sendPostRequest(requestUrl, apiObject.oneWayAPI());
+        }
         String itinaryID = apiObject.getItineraryId(allAvailableTrips, 2);
         String cardID = apiObject.createCart(itinaryID, domain);
         apiObject.addPassenger(cardID, domain);
-        if (reference.equals("Airline Reference")) {
+        if (reference.equals("order")) {
             orderNumber = apiObject.checkoutTrip(cardID, domain)[0];
         }
-        if (reference.equals("Fly365 Reference")) {
+        /*if (reference.equals("Fly365 Reference")) {
             pnrNumber = apiObject.checkoutTrip(cardID, domain)[1];
-        }
+        }*/
     }
 
 
@@ -259,11 +271,11 @@ public class HomeTest extends TestBase {
 
     @And("^Add a valid \"(.*)\"$")
     public void addAValid(String reference) {
-
-        if (reference.equals("Fly365 Reference")) {
-            driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(pnrNumber);
+        driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(orderNumber);
+        if (reference.equals("order")) {
+            driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(orderNumber);
         }
-        if (reference.equals("Airline Reference")) {
+        if (reference.equals("order")) {
             driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(orderNumber);
         }
     }
@@ -384,7 +396,7 @@ public class HomeTest extends TestBase {
     @Then("^'Passenger Rules' pop up will be opened$")
     public void passengerRulesPopUpWillBeOpened() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(passengerRulesHDR));
-        Assert.assertEquals(driver.findElement(passengerRulesHDR).getText(), "Passenger Rules");
+        Assert.assertEquals(driver.findElement(passengerRulesHDR).getText(),"Passenger Rules");
 
     }
 
@@ -416,5 +428,6 @@ public class HomeTest extends TestBase {
         String emptysubscriber = driver.findElement(emptyEmailAtSubscribe).getText();
         Assert.assertEquals(emptysubscriber, "!Please enter a valid email");
     }
+
 
 }

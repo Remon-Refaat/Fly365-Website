@@ -1,3 +1,5 @@
+@check
+
 Feature: Apply discount on flight trips
 
   Scenario: Verify that the Rules is Opened and redirected successfully
