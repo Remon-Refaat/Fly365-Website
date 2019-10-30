@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 //import static org.codehaus.groovy.tools.shell.util.Logger.io;
 
 public class APIUtility extends TestBase {
+    public static String depCity = null , arrCity = null , bookingCode = null , storeId = null, carrierCode = null, email = null, mobileNumber = null , airLineRef =null, flyRef=null;
 
     GeneralMethods gmObject = new GeneralMethods();
 
@@ -157,15 +158,18 @@ public class APIUtility extends TestBase {
     }
 
     public static String[] getstoreId(String returnedJsonString) {
-        String depCity = null , arrCity = null , bookingCode = null , storeId = null, carrierCode = null;
+        //String depCity = null , arrCity = null , bookingCode = null , storeId = null, carrierCode = null, email = null, mobileNumber = null , airLineRef =null;
         String[] ruleData = null;
         ArrayList<String> bookingCodeArr= new ArrayList<String>();
         ArrayList<String> orgDest= new ArrayList<String>();
         int bookingCodeIndex = 0;
         JSONObject jObject = new JSONObject(returnedJsonString);
         JSONArray prodArr = jObject.getJSONArray("products");
+        airLineRef = prodArr.getJSONObject(0).getJSONObject("confirmation").get("supplierConfirmationCode").toString();
+        flyRef = prodArr.getJSONObject(0).getJSONObject("confirmation").get("vendorConfirmationCode").toString();
         storeId = jObject.getString("storeId");
-
+        email = jObject.getJSONObject("customer").getString("email");
+        mobileNumber = jObject.getJSONObject("customer").getString("mobileNumber");
         for (int i = 0; i < prodArr.length(); i++) {
             JSONObject optionObject = (JSONObject) prodArr.get(i);
             JSONArray optArr = optionObject.getJSONArray("options");
@@ -205,7 +209,7 @@ public class APIUtility extends TestBase {
 
 
         }
-        ruleData = new String[]{storeId, carrierCode, bookingCode, depCity, arrCity};
+        ruleData = new String[]{storeId, carrierCode, bookingCode, depCity, arrCity, airLineRef};
         return ruleData;
 
     }

@@ -34,7 +34,7 @@ public class ApplyCancelTest extends TestBase {
     private By frstOrderStatus = By.xpath("(//li[contains (@class,'el-select-dropdown__item selected')])[2]");
     private By orderDetailsStatus = By.xpath("(//li[contains (@class,'el-select-dropdown__item selected')])[4]");
     private By selectStatusOrderDetailsBTN = By.cssSelector("ul.mb-3 div.el-select");
-    static String returnedMyBookJson = null;
+    private static String returnedMyBookJson = null;
     static String myBookArrData[] = null;
     APIUtility apiObj = new APIUtility();
 
