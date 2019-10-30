@@ -1,4 +1,4 @@
-
+@applyCancel
 Feature: Apply Cancel on Bookings
 
   Scenario: Verify that customer can cancel booking when rule matches and successful message is displayed
@@ -143,7 +143,7 @@ Feature: Apply Cancel on Bookings
     Then Booking Status Will Be To Be Refunded
     And Delete Created Rule From Database
 
-    @applyCancel
+
   Scenario: Verify that rule is not applied if it isn't active
     Given Navigate to "NZ" Fly365 "stage" site
     Given Delete All Rules
