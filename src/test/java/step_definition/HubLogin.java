@@ -184,7 +184,7 @@ public class HubLogin extends TestBase {
     @And("^Search for Order Number from Quick Search$")
     public void searchForOrderNumberFromQuickSearch() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(quickSearchTXT));
-        driver.findElement(quickSearchTXT).sendKeys(RetrieveYourFlightBookingTest.PNRNumber);
+        driver.findElement(quickSearchTXT).sendKeys(HomeTest.orderNumber);
         wait.until(ExpectedConditions.visibilityOfElementLocated(frstQuickSearchItem));
         driver.findElement(quickSearchTXT).sendKeys(Keys.ARROW_DOWN);
         driver.findElement(quickSearchTXT).sendKeys(Keys.ENTER);
