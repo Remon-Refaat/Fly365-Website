@@ -1,5 +1,3 @@
-
-@Booking_Register
 Feature: Booking a Trip for Registered User
 
   Background:

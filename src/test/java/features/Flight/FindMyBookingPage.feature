@@ -1,5 +1,3 @@
-
-@Find_Booking
 Feature: Find my Booking
 
   Background:

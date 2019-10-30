@@ -1,4 +1,3 @@
-@applyCancel
 Feature: Apply Cancel on Bookings
 
   Scenario: Verify that customer can cancel booking when rule matches and successful message is displayed
@@ -18,8 +17,6 @@ Feature: Apply Cancel on Bookings
     And Click Cancel My Booking
     Then Request Is sent Successfully
     And Delete Created Rule From Database
-
-
 
   Scenario: Verify that status of canceled booking is to be refunded
     Given Navigate to "NZ" Fly365 "stage" site
@@ -62,7 +59,6 @@ Feature: Apply Cancel on Bookings
     Then Order Will Have To be Refunded status
     And Delete Created Rule From Database
 
-
   Scenario: Verify that canceled booking status for order details in hub is to be refunded
     Given Navigate to "NZ" Fly365 "stage" site
     Given Delete All Rules
@@ -86,7 +82,6 @@ Feature: Apply Cancel on Bookings
     And Search for Order Number from Quick Search
     Then Order Details Will Have To be Refunded status
     And Delete Created Rule From Database
-
 
   Scenario: Verify that customer can cancel one way trip when rule matches
     Given Navigate to "NZ" Fly365 "stage" site
@@ -124,7 +119,6 @@ Feature: Apply Cancel on Bookings
     Then Booking Status Will Be To Be Refunded
     And Delete Created Rule From Database
 
-
   Scenario: Verify that customer can cancel round trip when rule matches
     Given Navigate to "NZ" Fly365 "stage" site
     Given Delete All Rules
@@ -142,7 +136,6 @@ Feature: Apply Cancel on Bookings
     And Click Cancel My Booking
     Then Booking Status Will Be To Be Refunded
     And Delete Created Rule From Database
-
 
   Scenario: Verify that rule is not applied if it isn't active
     Given Navigate to "NZ" Fly365 "stage" site

@@ -1,5 +1,3 @@
-
-@Payment_Page
 Feature: Payment page
 
   Background:
