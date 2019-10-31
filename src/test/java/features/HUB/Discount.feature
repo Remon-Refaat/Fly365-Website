@@ -71,3 +71,4 @@ Feature: Apply discount on flight trips
     And  Make Search from API
     Then Check Discount rule disabled
     And  Delete new discount from database
+
