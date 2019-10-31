@@ -13,7 +13,10 @@ import java.util.stream.Collectors;
 //import static org.codehaus.groovy.tools.shell.util.Logger.io;
 
 public class APIUtility extends TestBase {
-    public static String depCity = null , arrCity = null , bookingCode = null , storeId = null, carrierCode = null, email = null, mobileNumber = null , airLineRef =null, flyRef=null;
+    public static String depCity = null , arrCity = null , bookingCode = null ,storeUser= null, storeId = null, carrierCode = null,
+            email = null, mobileNumber = null , airLineRef =null, flyRef=null, paymentGateway= null, discountName=null ;
+    public static Number totalPrice;
+
 
     GeneralMethods gmObject = new GeneralMethods();
 
@@ -170,6 +173,11 @@ public class APIUtility extends TestBase {
         storeId = jObject.getString("storeId");
         email = jObject.getJSONObject("customer").getString("email");
         mobileNumber = jObject.getJSONObject("customer").getString("mobileNumber");
+        storeUser = jObject.getString("storeUser");
+        paymentGateway= jObject.getJSONObject("payment").getJSONObject("additionalInformation").getString("provider");
+        totalPrice= jObject.getJSONObject("displayTotal").getNumber("total");
+
+        System.out.println(totalPrice);
         for (int i = 0; i < prodArr.length(); i++) {
             JSONObject optionObject = (JSONObject) prodArr.get(i);
             JSONArray optArr = optionObject.getJSONArray("options");
@@ -177,6 +185,9 @@ public class APIUtility extends TestBase {
             JSONObject valueArr = firstOptObject.getJSONObject("value");
             JSONObject carrierObject = valueArr.getJSONObject("carrier");
             carrierCode = carrierObject.get("code").toString();
+            JSONObject discountObject= valueArr.getJSONObject("discounts");
+            discountName = discountObject.get("name").toString();
+            System.out.println(discountName);
             JSONArray legsArray = valueArr.getJSONArray("legs");
 
             for(int l=0 ; l <legsArray.length() ; l++){
