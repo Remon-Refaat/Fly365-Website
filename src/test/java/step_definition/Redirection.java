@@ -21,6 +21,8 @@ public class Redirection extends TestBase {
     private By HubLoginBTN = By.xpath("//button[@class='btn btn-lg btn-primary btn-block']");
     private By HubDashWelcomeMSG = By.xpath("//h2[@class='d-flex justify-content-center align-items-center text-primary dashboard__title']");
     private By Menu = By.xpath("//div[@class='el-submenu__title']//img");
+    private By settingsBTN = By.xpath("//i[@class='icon-settings']");
+    private By holdSettingsBTN = By.xpath("//li[text()='Hold Settings']");
 
 
 
@@ -62,5 +64,13 @@ public class Redirection extends TestBase {
         throw new PendingException();
     }
 
+    @And("^Open Hold Settings$")
+    public void openHoldSettings() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(settingsBTN));
+        driver.findElement(settingsBTN).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(holdSettingsBTN));
+        driver.findElement(holdSettingsBTN).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div//h6[@class='title'])[1]")));
+    }
 
 }

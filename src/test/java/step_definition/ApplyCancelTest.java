@@ -1,6 +1,7 @@
 package step_definition;
 
 import com.github.javafaker.Faker;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -21,6 +22,7 @@ public class ApplyCancelTest extends TestBase {
 
     private By manageMyBookBTN = By.xpath("//span[text()='Manage My Booking']");
     private By cancelBookBTN = By.xpath("//div[text()='Cancel Booking']");
+    private By dimmedCancelBookBTN = By.xpath("//div[text()='Cancel Booking']/ancestor::li");
     private By acceptTermsCHBOX = By.xpath("//span[@class = 'el-checkbox__inner']");
     private By cancelMyBookBTN = By.xpath("//button[text() = 'Cancel My Booking']");
     private By thanksMSG = By.xpath("//h2[@class = 'mb-5 text-black text-xl']");
@@ -67,9 +69,11 @@ public class ApplyCancelTest extends TestBase {
     }
 
     @And("^Click on Manage My Booking$")
-    public void clickOnManageMyBooking() {
+    public void clickOnManageMyBooking() throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOfElementLocated(manageMyBookBTN));
-        driver.findElement(manageMyBookBTN).click();
+        //driver.findElement(manageMyBookBTN).click();
+        Thread.sleep(1200);
+        driver.findElement(By.xpath("//span[text()='Manage My Booking']/ancestor::a")).click();
     }
 
     @And("^Click Cancel Booking$")
@@ -164,4 +168,11 @@ public class ApplyCancelTest extends TestBase {
             DataBase.execute_query_dbs(hostName, dbsName, "delete from rules");
         }
     }
+
+    @Then("^Cancel My Booking is not Clickable$")
+    public void cancelMyBookingIsNotClickable() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(cancelBookBTN));
+        Assert.assertTrue(driver.findElement(dimmedCancelBookBTN).getAttribute("class").contains("is-disabled"));
+    }
+
 }

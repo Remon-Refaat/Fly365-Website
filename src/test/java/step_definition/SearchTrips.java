@@ -61,7 +61,6 @@ public class SearchTrips extends TestBase {
     private By secondSegmentDestinationDepDateWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-1-destination > div.flex.items-center > span.text-sm.text-black.ml-1");
     private By secondSegmentFlightTimeWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-1-duration > div");
 
-
     @And("^Scroll to the end of the page$")
     public void scrollToTheEndOfThePage() throws InterruptedException {
 
