@@ -1,4 +1,3 @@
-
 Feature: Apply Cancel on Bookings
 
   Scenario: Verify that customer can cancel booking when rule matches and successful message is displayed to customer
@@ -104,7 +103,6 @@ Feature: Apply Cancel on Bookings
     And Search for Order Number from Quick Search
     Then Order Details Will Have To be Refunded status
     And Delete Created Rule From Database
-
 
   Scenario: Verify that customer can cancel one way trip when rule matches
     Given Navigate to "NZ" Fly365 "stage" site

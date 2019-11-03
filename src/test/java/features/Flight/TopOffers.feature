@@ -1,4 +1,3 @@
-@Top_Offers
 Feature: Open Top Offers page
 
   Background: Open Fly365 site

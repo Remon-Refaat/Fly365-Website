@@ -253,9 +253,9 @@ public class HomeTest extends TestBase {
         if (reference.equals("order")) {
             orderNumber = apiObject.checkoutTrip(cardID, domain)[0];
         }
-        /*if (reference.equals("Fly365 Reference")) {
+        if (reference.equals("Fly365 Reference")) {
             pnrNumber = apiObject.checkoutTrip(cardID, domain)[1];
-        }*/
+        }
     }
 
 
@@ -281,7 +281,7 @@ public class HomeTest extends TestBase {
     }
 
     @And("^Add a valid Reference 'Fly365 Ref'$")
-    public void addAValidReferenceFly365Ref() {
+    public void addAValidReferenceFly365Ref()  {
         driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(ctobject.fly356Refernce);
 
     }
@@ -369,7 +369,7 @@ public class HomeTest extends TestBase {
 
     @And("^Add previously subscribed email address \"(.*)\" to Subscription Email field$")
     public void addPreviouslySubscribedEmailAddressToSubscriptionEmailField(String emailAddress) throws Throwable {
-        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "Select email from newsletter_users where email = '" + emailAddress + "'");
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "Select email from newsletter_users where email = '" + emailAddress +"'");
         if (DataBase.data == null) {
             DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "insert into newsletter_users (email, \"isSubscribed\",\"storeId\",\"groupId\", \"isRegistered\")values('" + emailAddress + "',True,'fly365_nz','fly365',False)");
         }
@@ -378,7 +378,7 @@ public class HomeTest extends TestBase {
 
     @Then("^Error validation message is displayed$")
     public void errorValidationMessageIsDisplayed() {
-        Assert.assertEquals(driver.findElement(alreadySubscribedErrorMSG).getText(), "You have already subscribed fly365");
+        Assert.assertEquals(driver.findElement(alreadySubscribedErrorMSG).getText(),"You have already subscribed fly365");
 
     }
 
@@ -396,7 +396,7 @@ public class HomeTest extends TestBase {
     @Then("^'Passenger Rules' pop up will be opened$")
     public void passengerRulesPopUpWillBeOpened() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(passengerRulesHDR));
-        Assert.assertEquals(driver.findElement(passengerRulesHDR).getText(), "Passenger Rules");
+        Assert.assertEquals(driver.findElement(passengerRulesHDR).getText(),"Passenger Rules");
 
     }
 
