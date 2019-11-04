@@ -3,7 +3,7 @@ Feature: Apply Hold on Bookings
 
   Scenario: Verify Hold button is not displayed if departure is less than minimum hours before departure and ticketing
     Given  Navigate to Fly "stage" site
-    When login to hub with super admin
+    When login into hub with super admin
     And  Open menu
     And  Open  "Rules"
     And Open Hold Settings
@@ -21,7 +21,7 @@ Feature: Apply Hold on Bookings
 
   Scenario: Verify Hold button is not displayed when hold is matched but disabled
     Given  Navigate to Fly "stage" site
-    When login to hub with super admin
+    When login into hub with super admin
     And  Open menu
     And  Open  "Rules"
     And Open Hold Settings
@@ -40,7 +40,7 @@ Feature: Apply Hold on Bookings
 
   Scenario: Verify Hold button is not displayed when hold value is 0
     Given  Navigate to Fly "stage" site
-    When login to hub with super admin
+    When login into hub with super admin
     And  Open menu
     And  Open  "Rules"
     And Open Hold Settings
@@ -58,7 +58,7 @@ Feature: Apply Hold on Bookings
 
   Scenario: Verify Hold value is displayed correctly in hold button
     Given  Navigate to Fly "stage" site
-    When login to hub with super admin
+    When login into hub with super admin
     And  Open menu
     And  Open  "Rules"
     And Open Hold Settings
@@ -76,7 +76,7 @@ Feature: Apply Hold on Bookings
 
   Scenario: Verify Hold Hours is displayed successfully
     Given  Navigate to Fly "stage" site
-    When login to hub with super admin
+    When login into hub with super admin
     And  Open menu
     And  Open  "Rules"
     And Open Hold Settings
@@ -96,7 +96,7 @@ Feature: Apply Hold on Bookings
 
   Scenario: Verify Excluded airline will not have hold button
     Given  Navigate to Fly "stage" site
-    When login to hub with super admin
+    When login into hub with super admin
     And  Open menu
     And  Open  "Rules"
     And Open Hold Settings
