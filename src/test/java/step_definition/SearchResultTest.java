@@ -14,6 +14,7 @@ public class SearchResultTest extends TestBase {
     private By stopsFilterBTN = By.xpath("//button[contains(text(),'STOPS')]");
     private By onlyOneStopsLINK = By.xpath("//label[span//div[contains(text(), '1')]]/following-sibling::button");
     private By tripPriceVAL = By.xpath("//div[contains(@class,'result-group')][2]//div[contains(@id,'-price')]");
+    private By frstHoldBTN = By.xpath("(//div[contains(@class,'flex md:flex-row')]//button[contains(text(),'HOLD')])[1]");
 
     public static String tripPrice;
 
@@ -43,5 +44,11 @@ public class SearchResultTest extends TestBase {
     public void getThePriceOfTheTrip() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(tripPriceVAL));
         tripPrice = driver.findElement(tripPriceVAL).getText().trim();
+    }
+
+    @And("^Click on hold button$")
+    public void clickOnHoldButton() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(frstHoldBTN));
+        driver.findElement(frstHoldBTN).click();
     }
 }
