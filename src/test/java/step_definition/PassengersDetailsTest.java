@@ -1,11 +1,13 @@
 package step_definition;
 
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import helper.GeneralMethods;
 import helper.TestBase;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -40,7 +42,7 @@ public class PassengersDetailsTest extends TestBase {
     private By ContactDetailsLastNameEmptyErrorMSG = By.xpath("//body/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first']/div[@class='passengers bg-secondary-fourth']/div[@class='content-passengers container md:px-0 px-8']/div[@class='row']/div[@class='col-lg-16 col-sm-24']/div[@class='contact-details passengers-details bg-white rounded md:mb-5 mb-3']/div[@class='contact-details-name lg:px-12 px-6 py-10']/div[@class='row']/div[@class='contact-details-form col-24']/div[@class='w-full col-lg-24 mb-0 md:mb-5']/form[@id='contact-details']/div[@class='row mb-3 md:mb-5']/div[4]/div[1]/div[2]/span[1]");
     private By ContactDetailsEmailEmptyErrorMSg = By.xpath("//div[@class='col-lg-15']//div[@class='el-form-item is-error']//span[@class='tooltiptext with-arrow']");
     private By ContactDetailsPhoneEmptyErrorMSG = By.xpath("//div[@class='col-lg-15']//div[@class='el-form-item w-full is-error']//span[@class='tooltiptext with-arrow']");
-
+    private By holdHoursMSG = By.xpath("//small[@class='pl-2 mt-2 text-primary-fourth']");
 
     @And("^Add the following data in the passenger Details$")
     public void addTheFollowingDataInThePassengerDetails(DataTable passengerData) throws InterruptedException {
@@ -148,6 +150,14 @@ public class PassengersDetailsTest extends TestBase {
 
         String ContactemptyPhone = driver.findElement(ContactDetailsPhoneEmptyErrorMSG).getText();
         Assert.assertEquals(ContactemptyPhone, "!Please enter Phone Number");
+
+    }
+
+    @Then("^Hold hours is displayed with this value \"([^\"]*)\" correctly in passenger details$")
+    public void holdHoursIsDisplayedWithThisValueCorrectlyInPassengerDetails(String holdHours) throws Throwable {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(holdHoursMSG));
+        WebElement holdHoursmsgElmnt = driver.findElement(holdHoursMSG);
+        Assert.assertEquals(holdHoursmsgElmnt.getText() , "(Valid for "+holdHours+" hours )");
 
     }
 }
