@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import javax.swing.*;
 import java.util.Map;
 
 public class PassengersDetailsTest extends TestBase {
@@ -43,6 +44,24 @@ public class PassengersDetailsTest extends TestBase {
     private By ContactDetailsEmailEmptyErrorMSg = By.xpath("//div[@class='col-lg-15']//div[@class='el-form-item is-error']//span[@class='tooltiptext with-arrow']");
     private By ContactDetailsPhoneEmptyErrorMSG = By.xpath("//div[@class='col-lg-15']//div[@class='el-form-item w-full is-error']//span[@class='tooltiptext with-arrow']");
     private By holdHoursMSG = By.xpath("//small[@class='pl-2 mt-2 text-primary-fourth']");
+    private By passportSection = By.xpath("//span[contains(text(), 'Passport Details (optional)')]");
+    private By passportNumber = By.xpath("//input[@id='id-number-0']");
+    private By passportExpiryDay = By.xpath("//div[@name='idExpiryDate']//input[@placeholder='Day']");
+    private By passportExpiryMonth = By.xpath("//div[@name='idExpiryDate']//input[@placeholder='Month']");
+    private By passportExpiryYear = By.xpath("//div[@name='idExpiryDate']//input[@placeholder='Year']");
+    private By passportCountry = By.xpath("//div[@name='country']//input[@placeholder='Select a Country']");
+    private By frequentFlyerSection= By.xpath("//span[contains(text(), 'Frequent Flyer (optional)')]");
+    private By frequentFlyerNumber= By.xpath("//div[@class='el-form-item__content']//input[@placeholder='Number']");
+   /* private By serviceSection= By.xpath("//div[@id='el-collapse-head-7762']");
+    private By seat = By.xpath("//div[@class='el-input el-input--suffix']//input[@placeholder='Select Seat']");
+    private By meal = By.xpath("//input[@name='meal-1572872930184']");
+    private By specialAssist = By.xpath("//input[@name='special-assistance-1572872930184']");*/
+    private By specialRequestSection = By.xpath("//span[@class='mr-2']");
+    private By specialRequestField= By.xpath("//textarea[@class='el-textarea__inner']");
+
+
+
+
 
     @And("^Add the following data in the passenger Details$")
     public void addTheFollowingDataInThePassengerDetails(DataTable passengerData) throws InterruptedException {
@@ -160,4 +179,41 @@ public class PassengersDetailsTest extends TestBase {
         Assert.assertEquals(holdHoursmsgElmnt.getText() , "(Valid for "+holdHours+" hours )");
 
     }
+
+    @And("^click on Passport details section$")
+    public void clickOnPassportDetailsSection() {
+        driver.findElement(passportSection).click();
+    }
+
+    @And("^Add passport number$")
+    public void addPassportNumber() {
+        driver.findElement(passportNumber).sendKeys("A1234567890");
+    }
+
+    @And("^Add passport expiry date$")
+    public void addPassportExpiryDate() throws InterruptedException {
+        gmObject.selectFromDDL(passportExpiryDay,"5");
+        gmObject.selectFromDDL(passportExpiryMonth,"September");
+        gmObject.selectFromDDL(passportExpiryYear, "2026");
+
+    }
+
+    @And("^Select passport country$")
+    public void selectPassportCountry() throws InterruptedException {
+        gmObject.selectFromDDL(passportCountry, "Egypt");
+
+    }
+
+    @And("^click on frequent flyer section$")
+    public void clickOnFrequentFlyerSection() {
+        driver.findElement(frequentFlyerSection).click();
+    }
+
+    @And("^Add frequent flyer number$")
+    public void addFrequentFlyerNumber() {
+        driver.findElement(frequentFlyerNumber).sendKeys("123456");
+    }
+
+
+
 }
