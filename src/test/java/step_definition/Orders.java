@@ -49,7 +49,7 @@ public class Orders extends TestBase {
     @Then("^Assert that total price is correct$")
     public void assertThatTotalPriceIsCorrect() throws InterruptedException {
         Thread.sleep(4000);
-        Assert.assertEquals(driver.findElement(displayedPrice).getText().replaceAll("0*\\D*$",""),APIUtility.totalPrice.toString());
+        Assert.assertEquals(driver.findElement(displayedPrice).getText().replaceAll("0*\\D*$",""),APIUtility.totalPrice);
     }
 
     @Then("^Assert that Discount campaign name is correct$")

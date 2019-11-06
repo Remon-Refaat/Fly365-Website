@@ -54,6 +54,7 @@ Feature: BackOffice Scenarios
     And Search for Order Number from Quick Search
     Then Assert that Payment Gateway is correct
 
+  @backoffice
   Scenario: Verify that agent can view total price for the booked order
     When Book a "one way" trip from API for "stage" and get "order"
     And Get data for this booking "john.smith.fly365@gmail.com"
