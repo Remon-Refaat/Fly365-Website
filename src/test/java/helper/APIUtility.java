@@ -1,5 +1,10 @@
 package helper;
 
+import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+import io.restassured.response.ResponseBody;
+import io.restassured.specification.RequestSpecification;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.*;
@@ -9,13 +14,16 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
 
 //import static org.codehaus.groovy.tools.shell.util.Logger.io;
 
 public class APIUtility extends TestBase {
     public static String depCity = null , arrCity = null , bookingCode = null ,storeUser= null, storeId = null, carrierCode = null,
             email = null, mobileNumber = null , airLineRef =null, flyRef=null, paymentGateway= null, discountName=null ;
-    public static Number totalPrice;
+    public static JsonPath jsonPathEvaluator;
+    public static String totalPrice;
 
 
     GeneralMethods gmObject = new GeneralMethods();
@@ -86,7 +94,7 @@ public class APIUtility extends TestBase {
 
     public String oneWayAPI() {
         String departureDate1 = gmObject.addDateWithCertainPeriodAndFormat(10, "yyyy-MM-dd");
-        String oneWay = "{\"legs\": [{\"origin\": \"LON\",\"destination\": \"CAI\",\"departureDate\": \"" + departureDate1 + "\"}],\n" +
+        String oneWay = "{\"legs\": [{\"origin\": \"LHR\",\"destination\": \"CAI\",\"departureDate\": \"" + departureDate1 + "\"}],\n" +
                 " \"cabinClass\": \"Economy\",\"infant\": 0,\"child\": 0,\"adult\": 1}";
         return oneWay;
     }
@@ -94,8 +102,8 @@ public class APIUtility extends TestBase {
     public String roundTripAPI() {
         String departureDate1 = gmObject.addDateWithCertainPeriodAndFormat(10, "yyyy-MM-dd");
         String departureDate2 = gmObject.addDateWithCertainPeriodAndFormat(20, "yyyy-MM-dd");
-        String roundTrip = "{\"legs\": [{\"origin\": \"DMS\",\"destination\": \"CAI\",\"departureDate\": \"" + departureDate1 + "\"\n" +
-                "   },{\"origin\": \"CAI\",\"destination\": \"DMS\",\"departureDate\": \"" + departureDate2 + "\"}],\n" +
+        String roundTrip = "{\"legs\": [{\"origin\": \"DMM\",\"destination\": \"CAI\",\"departureDate\": \"" + departureDate1 + "\"\n" +
+                "   },{\"origin\": \"CAI\",\"destination\": \"DMM\",\"departureDate\": \"" + departureDate2 + "\"}],\n" +
                 " \"cabinClass\": \"Economy\",\"infant\": 0,\"child\": 0,\"adult\": 1}";
         return roundTrip;
     }
@@ -160,68 +168,43 @@ public class APIUtility extends TestBase {
         return discountName;
     }
 
-    public static String[] getstoreId(String returnedJsonString) {
-        //String depCity = null , arrCity = null , bookingCode = null , storeId = null, carrierCode = null, email = null, mobileNumber = null , airLineRef =null;
-        String[] ruleData = null;
+    public static void getstoreId(String returnedJsonString) {
         ArrayList<String> bookingCodeArr= new ArrayList<String>();
         ArrayList<String> orgDest= new ArrayList<String>();
         int bookingCodeIndex = 0;
-        JSONObject jObject = new JSONObject(returnedJsonString);
-        JSONArray prodArr = jObject.getJSONArray("products");
-        airLineRef = prodArr.getJSONObject(0).getJSONObject("confirmation").get("supplierConfirmationCode").toString();
-        flyRef = prodArr.getJSONObject(0).getJSONObject("confirmation").get("vendorConfirmationCode").toString();
-        storeId = jObject.getString("storeId");
-        email = jObject.getJSONObject("customer").getString("email");
-        mobileNumber = jObject.getJSONObject("customer").getString("mobileNumber");
-        storeUser = jObject.getString("storeUser");
-        paymentGateway= jObject.getJSONObject("payment").getJSONObject("additionalInformation").getString("provider");
-        totalPrice= jObject.getJSONObject("displayTotal").getNumber("total");
-
-        System.out.println(totalPrice);
-        for (int i = 0; i < prodArr.length(); i++) {
-            JSONObject optionObject = (JSONObject) prodArr.get(i);
-            JSONArray optArr = optionObject.getJSONArray("options");
-            JSONObject firstOptObject = (JSONObject) optArr.get(1);
-            JSONObject valueArr = firstOptObject.getJSONObject("value");
-            JSONObject carrierObject = valueArr.getJSONObject("carrier");
-            carrierCode = carrierObject.get("code").toString();
-            JSONObject discountObject= valueArr.getJSONObject("discounts");
-            discountName = discountObject.get("name").toString();
-            System.out.println(discountName);
-            JSONArray legsArray = valueArr.getJSONArray("legs");
-
-            for(int l=0 ; l <legsArray.length() ; l++){
-                JSONObject segments = legsArray.getJSONObject(l);
-                JSONArray segmentArray = segments.getJSONArray("segments");
-                for(int segCount = 0 ; segCount<segmentArray.length() ; segCount++) {
-                    bookingCodeArr.add(segmentArray.getJSONObject(segCount).getJSONObject("bookingInfo").get("bookingCode").toString());
-                    bookingCodeIndex ++;
-                }
-
+        airLineRef = jsonPathEvaluator.get("products[0].confirmation.supplierConfirmationCode").toString();
+        flyRef = jsonPathEvaluator.get("products[0].confirmation.vendorConfirmationCode").toString();
+        storeId = jsonPathEvaluator.get("storeId").toString();
+        email = jsonPathEvaluator.get("customer.email").toString();
+        mobileNumber = jsonPathEvaluator.get("customer.mobileNumber").toString();
+        storeUser = jsonPathEvaluator.get("storeUser").toString();
+        paymentGateway = jsonPathEvaluator.get("payment.additionalInformation.provider").toString();
+        totalPrice = jsonPathEvaluator.get("displayTotal.total").toString();
+        carrierCode = jsonPathEvaluator.get("products[0].options[1].value.carrier.code").toString();
+        //discountName = jsonPathEvaluator.get("products[0].options[1].value.discounts.name");
+        List<JSONArray> legsArr = jsonPathEvaluator.getList("products[0].options[1].value.legs");
+        for(int i=0 ; i <legsArr.size() ; i++){
+            List<JSONArray> segArr = jsonPathEvaluator.getList("products[0].options[1].value.legs["+i+"].segments");
+            for(int segCount = 0 ; segCount<segArr.size() ; segCount++) {
+                bookingCodeArr.add(jsonPathEvaluator.get("products[0].options[1].value.legs["+i+"].segments["+segCount+"].bookingInfo.bookingCode").toString());
+                bookingCodeIndex ++;
             }
-            List<String> removeDuplCodes = bookingCodeArr.stream().distinct().collect(Collectors.toList());
-            bookingCode = String.join("," ,removeDuplCodes) ;
-
-            JSONObject secondOptObject = (JSONObject) optArr.get(2);
-            JSONObject valueArr2 = secondOptObject.getJSONObject("value");
-            JSONArray legsArray2 = valueArr2.getJSONArray("legs");
-            for(int l=0 ; l <legsArray2.length() ; l++){
-                JSONObject orgDestCodes = legsArray.getJSONObject(l);
-                orgDest.add(orgDestCodes.getString("origin").toString());
-                orgDest.add(orgDestCodes.getString("destination").toString());
-            }
-            depCity = orgDest.get(0);
-            if(orgDest.get(0).equals(orgDest.get(orgDest.size()-1))){
-                arrCity = orgDest.get(orgDest.size()-2);
-            }
-            else{
-                arrCity = orgDest.get(orgDest.size()-1);
-            }
-
-
         }
-        ruleData = new String[]{storeId, carrierCode, bookingCode, depCity, arrCity, airLineRef};
-        return ruleData;
+        List<String> removeDuplCodes = bookingCodeArr.stream().distinct().collect(Collectors.toList());
+        bookingCode = String.join("," ,removeDuplCodes) ;
+        List<JSONArray> searchCriteriaArr = jsonPathEvaluator.getList("products[0].options[2].value.legs");
+        for (int x = 0; x < searchCriteriaArr.size(); x++) {
+            orgDest.add(jsonPathEvaluator.get("products[0].options[2].value.legs["+x+"].origin").toString());
+            orgDest.add(jsonPathEvaluator.get("products[0].options[2].value.legs["+x+"].destination").toString());
+        }
+        depCity = orgDest.get(0);
+        System.out.println(orgDest);
+        if(orgDest.get(0).equals(orgDest.get(orgDest.size()-1))){
+            arrCity = orgDest.get(orgDest.size()-2);
+        }
+        else{
+            arrCity = orgDest.get(orgDest.size()-1);
+        }
 
     }
 
@@ -394,7 +377,18 @@ public class APIUtility extends TestBase {
     }
 
     public static String sendGetRequests(String url) {
-        try {
+
+        RestAssured.baseURI = url;
+        RequestSpecification httpRequest = RestAssured.given();
+        httpRequest.header("x-user-token", "iKW0cf68638aeaad43297055aa446693276EcV");
+        httpRequest.header("x-store-id", "fly365_com");
+        httpRequest.header("authorization", "XXu5WbKbM6XHbU5VKNETr6AMnNaVNd9E");
+        Response response = httpRequest.get(RestAssured.baseURI);
+        ResponseBody body = response.getBody();
+        jsonPathEvaluator = response.jsonPath();
+        String bodyStringValue = body.asString();
+        return bodyStringValue;
+        /*try {
             URL urlReq = new URL(url);
             HttpURLConnection connection = (HttpURLConnection) urlReq.openConnection();
 
@@ -415,7 +409,7 @@ public class APIUtility extends TestBase {
             return jsonString.toString();
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
-        }
+        }*/
     }
     public String getresult(String orderId, String orderNumber) {
         String finalResponse = sendGetRequest("https://api.fly365stage.com/user/order/find?orderId=" + orderId + "&orderNumber=" + orderNumber +"");

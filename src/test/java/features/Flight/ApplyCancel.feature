@@ -1,3 +1,5 @@
+@applyCancel
+
 Feature: Apply Cancel on Bookings
 
   Scenario: Verify that customer can cancel booking when rule matches and successful message is displayed to customer
@@ -36,11 +38,10 @@ Feature: Apply Cancel on Bookings
     Then Booking Status Will Be To Be Refunded
     And Delete Created Rule From Database
 
-  @applyCancel
   Scenario: Verify that customer can't cancel refundable flight canceled before
     Given Navigate to "NZ" Fly365 "stage" site
     Given Delete All Rules
-    And Book a "round trip" trip from API for "stage" and get "order"
+    And Book a "one way" trip from API for "stage" and get "order"
     And Get data for this booking "john.smith.fly365@gmail.com"
     And Get StoreID
     And Create "Active" "Refundable" Rule from API for "stage"
