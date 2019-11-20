@@ -37,7 +37,7 @@ public class ApplyCancelTest extends TestBase {
     private By orderDetailsStatus = By.xpath("(//li[contains (@class,'el-select-dropdown__item selected')])[4]");
     private By selectStatusOrderDetailsBTN = By.cssSelector("ul.mb-3 div.el-select");
     private static String returnedMyBookJson = null;
-    static String myBookArrData[] = null;
+    //static String myBookArrData[] = null;
     APIUtility apiObj = new APIUtility();
 
     private Faker fakerNameGenerator = new Faker();
@@ -49,8 +49,9 @@ public class ApplyCancelTest extends TestBase {
 
     @Given("^Create \"([^\"]*)\" \"([^\"]*)\" Rule from API for \"(.*)\"$")
     public void createAruleFromApiFor(String status , String cancelOption , String domain) throws IOException {
-        APIUtility.sendPostRequestCreateTicket("https://api.fly365" + domain + ".com/rules/rule", apiObj.createRuleAPI(fakerRuleName , myBookArrData[0] , myBookArrData[1], myBookArrData[2],
-                "airport", myBookArrData[3], "airport" , myBookArrData[4] , cancelOption ,status));
+        APIUtility.sendPostRequestCreateTicket("https://api.fly365" + domain + ".com/rules/rule", apiObj.createRuleAPI(fakerRuleName ,
+                                    APIUtility.storeId , APIUtility.carrierCode, APIUtility.bookingCode,
+                "airport", APIUtility.depCity, "airport" , APIUtility.arrCity , cancelOption ,status));
 
         //apiObj.createRuleAPI(domain);
     }
@@ -65,7 +66,7 @@ public class ApplyCancelTest extends TestBase {
 
     @And("^Get StoreID$")
     public void getStoreID() {
-        myBookArrData = APIUtility.getstoreId(returnedMyBookJson);
+       APIUtility.getstoreId(returnedMyBookJson);
     }
 
     @And("^Click on Manage My Booking$")
