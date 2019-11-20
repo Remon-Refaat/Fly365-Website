@@ -94,7 +94,7 @@
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>smtp</artifactId>
-            <version>1.6.0</version>
+            <version>1.6.4</version>
         </dependency>
 
         <dependency>
