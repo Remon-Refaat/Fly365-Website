@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
+import step_definition.RetrieveYourFlightBookingTest.*;
 
 public class HubLogin extends TestBase {
 
@@ -54,7 +54,7 @@ public class HubLogin extends TestBase {
     @And("^login into hub with super admin$")
     public void loginIntoHubWithSuperAdmin() {
         driver.findElement(HubLoginEmailTXT).sendKeys("john.smith.fly365@gmail.com");
-        driver.findElement(HubLoginPasswordTXT).sendKeys("@Fly10200");
+        driver.findElement(HubLoginPasswordTXT).sendKeys("@John12345");
         driver.findElement(HubLoginBTN).click();
         String WelcomeMSG = driver.findElement(HubDashWelcomeMSG).getText();
         Assert.assertEquals(WelcomeMSG, "Welcome to Fly365 Hub");
@@ -185,6 +185,15 @@ public class HubLogin extends TestBase {
     public void searchForOrderNumberFromQuickSearch() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(quickSearchTXT));
         driver.findElement(quickSearchTXT).sendKeys(HomeTest.orderNumber);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(frstQuickSearchItem));
+        driver.findElement(quickSearchTXT).sendKeys(Keys.ARROW_DOWN);
+        driver.findElement(quickSearchTXT).sendKeys(Keys.ENTER);
+    }
+
+    @And("^Search for Order Number from Quick Search Through UI$")
+    public void searchForOrderNumberFromQuickSearchThroughUI() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(quickSearchTXT));
+        driver.findElement(quickSearchTXT).sendKeys(RetrieveYourFlightBookingTest.PNRNumber);
         wait.until(ExpectedConditions.visibilityOfElementLocated(frstQuickSearchItem));
         driver.findElement(quickSearchTXT).sendKeys(Keys.ARROW_DOWN);
         driver.findElement(quickSearchTXT).sendKeys(Keys.ENTER);

@@ -27,8 +27,6 @@ public class ConfirmationTest extends TestBase {
     }
 
 
-
-
     @And("^Get the 'Fly365 Ref' code$")
     public void getTheFlyRefCode() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(fly365ReferenceHDR));
