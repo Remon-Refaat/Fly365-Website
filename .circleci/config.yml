@@ -5,19 +5,20 @@ jobs:
     working_directory: ~/circleci-demo-java-spring
 
     docker:
-      - image: circleci/openjdk:8-jdk-browsers
-      - image: circleci/node:jessie-browsers
-      - image: cypress/browsers:chrome65-ff57
+      - image: circleci/openjdk:8-jdk-stretch
+      - image: selenium/standalone-chrome:3.4.0
+      - image: selenium/standalone-firefox:3.141.59
 
     steps:
-
+      - setup_remote_docker
       - checkout
+
       - run:
           name: Download Selenium
-          command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
+          command: curl -O http://selenium-release.storage.googleapis.com/3.9/selenium-server-standalone-3.9.1.jar
       - run:
           name: Start Selenium
-          command: java -jar selenium-server-standalone-3.5.3.jar -log selenium.log
+          command: java -jar selenium-server-standalone-3.9.1.jar -log selenium.log
           background: true
 
       - restore_cache:
