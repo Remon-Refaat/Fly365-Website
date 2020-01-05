@@ -1,5 +1,6 @@
 package helper;
 
+import com.github.javafaker.Bool;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -13,6 +14,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
@@ -24,12 +26,13 @@ public class APIUtility extends TestBase {
             email = null, mobileNumber = null , airLineRef =null, flyRef=null, paymentGateway= null, discountName=null ;
     public static JsonPath jsonPathEvaluator;
     public static String totalPrice;
+    private static List<Object> itineraries;
 
 
     GeneralMethods gmObject = new GeneralMethods();
 
     public static String sendPostRequest(String requestUrl, String tripType) {
-        try {
+        /*try {
             URL url = new URL(requestUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
@@ -54,10 +57,24 @@ public class APIUtility extends TestBase {
             System.out.println("Response Code : " + responseCode);
             br.close();
             connection.disconnect();
+            System.out.println(jsonString.toString());
             return jsonString.toString();
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
-        }
+        }*/
+
+        RestAssured.baseURI = requestUrl;
+        RequestSpecification httpRequest = RestAssured.given();
+        httpRequest.header("Content-Type", "application/json");
+        httpRequest.header("x-store-id", "fly365_nz");
+        httpRequest.header("authorization", "guMRjevTJNNgv49LRTNCTzfp9cWnW6Sj");
+        httpRequest.header("x-store-user", "fly365_com_nz");
+        Response response = httpRequest.body(tripType).post(RestAssured.baseURI);
+        ResponseBody body = response.getBody();
+        jsonPathEvaluator = response.jsonPath();
+        String bodyStringValue = body.asString();
+      //  System.out.println(bodyStringValue);
+        return bodyStringValue;
 
     }
 
@@ -181,7 +198,7 @@ public class APIUtility extends TestBase {
         paymentGateway = jsonPathEvaluator.get("payment.additionalInformation.provider").toString();
         totalPrice = jsonPathEvaluator.get("displayTotal.total").toString();
         carrierCode = jsonPathEvaluator.get("products[0].options[1].value.carrier.code").toString();
-        //discountName = jsonPathEvaluator.get("products[0].options[1].value.discounts.name");
+        discountName = jsonPathEvaluator.get("products[0].options[1].value.discounts.name");
         List<JSONArray> legsArr = jsonPathEvaluator.getList("products[0].options[1].value.legs");
         for(int i=0 ; i <legsArr.size() ; i++){
             List<JSONArray> segArr = jsonPathEvaluator.getList("products[0].options[1].value.legs["+i+"].segments");
@@ -198,7 +215,6 @@ public class APIUtility extends TestBase {
             orgDest.add(jsonPathEvaluator.get("products[0].options[2].value.legs["+x+"].destination").toString());
         }
         depCity = orgDest.get(0);
-        System.out.println(orgDest);
         if(orgDest.get(0).equals(orgDest.get(orgDest.size()-1))){
             arrCity = orgDest.get(orgDest.size()-2);
         }

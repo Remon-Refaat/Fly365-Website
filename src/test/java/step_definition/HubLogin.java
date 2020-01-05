@@ -56,8 +56,6 @@ public class HubLogin extends TestBase {
         driver.findElement(HubLoginEmailTXT).sendKeys("john.smith.fly365@gmail.com");
         driver.findElement(HubLoginPasswordTXT).sendKeys("@Fly10200");
         driver.findElement(HubLoginBTN).click();
-        String WelcomeMSG = driver.findElement(HubDashWelcomeMSG).getText();
-        Assert.assertEquals(WelcomeMSG, "Welcome to Fly365 Hub");
     }
 
     @And("^open Back office$")

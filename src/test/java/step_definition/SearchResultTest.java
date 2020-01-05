@@ -1,11 +1,14 @@
 package step_definition;
 
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
 import helper.TestBase;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 public class SearchResultTest extends TestBase {
     WebDriverWait wait = new WebDriverWait(driver, 60);
@@ -17,6 +20,7 @@ public class SearchResultTest extends TestBase {
     private By frstHoldBTN = By.xpath("(//div[contains(@class,'flex md:flex-row')]//button[contains(text(),'HOLD')])[1]");
 
     public static String tripPrice;
+    public static String holdPrice;
 
 
     @And("^Choose a trip$")
@@ -51,4 +55,17 @@ public class SearchResultTest extends TestBase {
         wait.until(ExpectedConditions.visibilityOfElementLocated(frstHoldBTN));
         driver.findElement(frstHoldBTN).click();
     }
+
+    @Then("^Hold With Value \"([^\"]*)\" is displayed in hold button$")
+    public void holdWithValueIsDisplayedInHoldButton(String holdValue) throws Throwable {
+        WebElement frstHoldElmnt = driver.findElement(frstHoldBTN);
+        holdPrice = driver.findElement(frstHoldBTN).getText().trim();
+        Assert.assertTrue(frstHoldElmnt.getText().contains(holdValue));
+    }
+    @Then("^Hold button is not displayed$")
+    public void holdButtonIsNotDisplayed() {
+        //WebElement frstHoldElmnt = driver.findElement(frstHoldBTN);
+        Assert.assertTrue(wait.until(ExpectedConditions.invisibilityOfElementLocated(frstHoldBTN)));
+    }
+
 }

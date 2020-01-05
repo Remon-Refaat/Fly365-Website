@@ -65,4 +65,11 @@ public class ConfirmationTest extends TestBase {
 
         throw new PendingException();
     }
+
+    @Then("^The total hold price is the same before and after the booking$")
+    public void theTotalHoldPriceIsTheSameBeforeAndAfterTheBooking() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(totalPriceAfterConfirmationVAL));
+        String totalPriceAfterConfirmation = driver.findElement(totalPriceAfterConfirmationVAL).getText().trim();
+        Assert.assertEquals(totalPriceAfterConfirmation,SearchResultTest.holdPrice.replace("HOLD FOR ",""));
+    }
 }
