@@ -1,4 +1,4 @@
-# Mac Setup Instructions How To Install Java and Maven [![CircleCI](https://circleci.com/gh/fly365com/automation_site.svg?style=svg)](https://circleci.com/gh/fly365com/automation_site)
+# Mac Setup Instructions How To Install Java and Maven
 
 1. Install the Java 8 Development Kit (a.k.a.JDK) for your operating system (https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 2. Install HomeBrew on your mac through this commandline from terminal
