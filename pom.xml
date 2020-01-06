@@ -77,7 +77,7 @@
         <dependency>
             <groupId>com.vimalselvam</groupId>
             <artifactId>cucumber-extentsreport</artifactId>
-            <version>2.0.5</version>
+            <version>3.1.1</version>
         </dependency>
         <dependency>
             <groupId>com.aventstack</groupId>
