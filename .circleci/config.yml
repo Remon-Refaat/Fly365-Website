@@ -6,8 +6,7 @@ jobs:
 
     docker:
       - image: circleci/openjdk:8-jdk-stretch
-      - image: selenium/standalone-chrome:3.4.0
-      - image: selenium/standalone-firefox:3.141.59
+      - image: selenium/node-chrome:3.141.59-bismuth
 
     steps:
       - setup_remote_docker

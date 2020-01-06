@@ -6,3 +6,4 @@ Feature: Mailer Scenarios
     And  Open menu
     And  Open  "Mailer"
     Then Assert that "mailer" URL "stage" is opened successfully
+

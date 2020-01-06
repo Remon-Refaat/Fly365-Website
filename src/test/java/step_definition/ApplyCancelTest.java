@@ -176,4 +176,5 @@ public class ApplyCancelTest extends TestBase {
         Assert.assertTrue(driver.findElement(dimmedCancelBookBTN).getAttribute("class").contains("is-disabled"));
     }
 
+
 }
