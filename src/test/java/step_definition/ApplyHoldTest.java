@@ -1,10 +1,6 @@
 package step_definition;
 
-import com.github.javafaker.Bool;
-import com.google.gson.JsonObject;
-import com.sun.deploy.association.utility.AppUtility;
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -12,17 +8,13 @@ import helper.APIUtility;
 import helper.DataBase;
 import helper.TestBase;
 import org.json.JSONArray;
-import org.omg.CORBA.Object;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
