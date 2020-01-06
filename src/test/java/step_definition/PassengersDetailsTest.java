@@ -7,8 +7,10 @@ import cucumber.api.java.en.Then;
 import helper.GeneralMethods;
 import helper.TestBase;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -52,12 +54,20 @@ public class PassengersDetailsTest extends TestBase {
     private By passportCountry = By.xpath("//div[@name='country']//input[@placeholder='Select a Country']");
     private By frequentFlyerSection= By.xpath("//span[contains(text(), 'Frequent Flyer (optional)')]");
     private By frequentFlyerNumber= By.xpath("//div[@class='el-form-item__content']//input[@placeholder='Number']");
-   /* private By serviceSection= By.xpath("//div[@id='el-collapse-head-7762']");
+    private By serviceSection= By.xpath("//span[contains(text(), 'Service Requests (optional)')]");
     private By seat = By.xpath("//div[@class='el-input el-input--suffix']//input[@placeholder='Select Seat']");
-    private By meal = By.xpath("//input[@name='meal-1572872930184']");
-    private By specialAssist = By.xpath("//input[@name='special-assistance-1572872930184']");*/
+    private By meal = By.xpath("//div[@class='el-input el-input--suffix']//input[@placeholder='Select Meal']");
+    private By specialAssist = By.xpath("//div[@class='el-input el-input--suffix']//input[@placeholder='Select Special Assistance']");
     private By specialRequestSection = By.xpath("//span[@class='mr-2']");
     private By specialRequestField= By.xpath("//textarea[@class='el-textarea__inner']");
+    private By editTraveler = By.xpath("//i[@class='icon-edit']");
+    private By specialRequestData = By.xpath("//div[@class='item']");
+    private By specialRequestinHub = By.xpath("//span[contains(text(),'Special request')]");
+    private By seatinHub = By.xpath("//*[@id='editTraveller___BV_modal_body_']/div/form/section[4]/div[1]/div/div/input");
+    private By mealinHub = By.xpath("//*[@id='editTraveller___BV_modal_body_']/div/form/section[4]/div[2]/div/div/input");
+    private By specialAssisstinHub = By.xpath("//*[@id='editTraveller___BV_modal_body_']/div/form/section[4]/div[3]/div/div[1]/input");
+
+
 
 
 
@@ -85,6 +95,7 @@ public class PassengersDetailsTest extends TestBase {
 
     @And("^Add the following data in the Contact Details$")
     public void addTheFollowingDataInTheContactDetails(DataTable contactData) throws InterruptedException {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(contactTitleField));
 
         for (Map<String, String> contactDetails : contactData.asMaps(String.class, String.class)) {
 
@@ -215,5 +226,55 @@ public class PassengersDetailsTest extends TestBase {
     }
 
 
+    @And("^Click on Service Request section$")
+    public void clickOnServiceRequestSection() {
+        driver.findElement(serviceSection).click();
+    }
+
+    @And("^User select preferences$")
+    public void userSelectPreferencesAndAnd() throws InterruptedException {
+        gmObject.selectFromDDL(seat, "Seat3");
+        gmObject.selectFromDDL(meal, "Meal3");
+        gmObject.selectFromDDL(specialAssist, "specialAssistance1");
+
+    }
+
+    @And("^Click on Edit Traveler Icon$")
+    public void clickOnEditTravelerIcon() {
+        driver.findElement(editTraveler).click();
+    }
+
+
+    @And("^Assert that seat is \"([^\"]*)\" and meal \"([^\"]*)\" and assistance is \"([^\"]*)\"$")
+    public void assertThatSeatIsAndMealAndAssistanceIs(String seat, String meal, String assist) throws Throwable {
+        Thread.sleep(4000);
+        String seat1= driver.findElement(seatinHub).getAttribute("value");
+        Assert.assertEquals(seat1,seat);
+        String meal1 = driver.findElement(mealinHub).getAttribute("value");
+        Assert.assertEquals(meal1, meal);
+        String assist1 = driver.findElement(specialAssisstinHub).getAttribute("value");
+        Assert.assertEquals(assist1, assist);
+
+        throw new PendingException();
+    }
+
+    @And("^Click on Write request$")
+    public void clickOnWriteRequest() {
+        driver.findElement(specialRequestSection).click();
+    }
+
+    @And("^Write your request \"([^\"]*)\"$")
+    public void writeYourRequest(String request) throws Throwable {
+        driver.findElement(specialRequestField).sendKeys(request);
+        throw new PendingException();
+    }
+
+    @And("^Assert that special request is having \"([^\"]*)\"$")
+    public void assertThatSpecialRequestIsHaving(String request) throws Throwable {
+        driver.findElement(specialRequestinHub);
+       driver.findElement(specialRequestData).getText();
+       Assert.assertEquals(request, "Testing Request");
+
+    }
 
 }

@@ -1,4 +1,5 @@
 # Mac Setup Instructions How To Install Java and Maven
+
 1. Install the Java 8 Development Kit (a.k.a.JDK) for your operating system (https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 2. Install HomeBrew on your mac through this commandline from terminal
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -45,6 +46,13 @@ For example, SignUp.feature
 - mvn -Dbrowser=safari clean test –Pfull
 - mvn install -Dcucumber.options="--tags @Smoke"
 - mvn -Dbrowser=safari install -Dcucumber.options="--tags @Smoke"
+
+# Selenium Grid
+- Install hub through java -jar selenium-server-standalone-3.141.59.jar -role hub
+- Check hub on selenium grid dashboard through http://localhost:4444/grid/console
+- Install node for firefox through java -Dwebdriver.gecko.driver=“/Users/mohamedhassan/Downloads/myGitPRoject-master/Selenium/geckodriver" -jar selenium-server-standalone-3.141.59.jar -role node -hub http://localhost:4444/grid/console -browser browserName=firefox -port 5566
+- Install node for chrome through java -jar -Dwebdriver.chrome.driver=“/usr/bin/chromedriver" selenium-server-standalone-3.141.59.jar -role node -hub http://localhost:4444/grid/console -browser browserName=chrome -port 5588
+
 
 # Deploy and Pull Request Process
 
