@@ -3,7 +3,6 @@ Feature: Search for trips and assert on search results
   Background: Open Fly365 site
     Given Navigate to "NZ" Fly365 "stage" site
 
-
   Scenario: Verify that the system display the the correct search results counts for one-way trips
     And Select One Way trip
     And Add airport to the Origin "Auckland International (AKL), New Zealand"

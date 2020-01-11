@@ -46,7 +46,7 @@
         <dependency>
             <groupId>com.github.javafaker</groupId>
             <artifactId>javafaker</artifactId>
-            <version>1.0.1</version>
+            <version>0.16</version>
         </dependency>
 
         <dependency>
@@ -65,7 +65,7 @@
         <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
-            <version>1.9.4</version>
+            <version>1.9.3</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -77,7 +77,7 @@
         <dependency>
             <groupId>com.vimalselvam</groupId>
             <artifactId>cucumber-extentsreport</artifactId>
-            <version>3.1.1</version>
+            <version>2.0.5</version>
         </dependency>
         <dependency>
             <groupId>com.aventstack</groupId>
@@ -88,25 +88,25 @@
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>javax.mail-api</artifactId>
-            <version>1.6.2</version>
+            <version>1.5.5</version>
         </dependency>
 
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>smtp</artifactId>
-            <version>1.6.4</version>
+            <version>1.6.0</version>
         </dependency>
 
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
-            <version>1.6.2</version>
+            <version>1.6.0</version>
         </dependency>
 
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20190722</version>
+            <version>20180813</version>
         </dependency>
 
         <dependency>
@@ -134,8 +134,6 @@
             <scope>test</scope>
         </dependency>
 
-
-
     </dependencies>
 
 
@@ -162,7 +160,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.1</version>
+                    <version>3.8.0</version>
                     <configuration>
                         <source>8</source>
                         <target>8</target>
@@ -172,7 +170,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0-M4</version>
+                    <version>3.0.0-M3</version>
                     <configuration>
                         <suiteXmlFiles>
                             <suiteXmlFile>${testNGSuite}</suiteXmlFile>

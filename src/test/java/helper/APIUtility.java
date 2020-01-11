@@ -1,6 +1,5 @@
 package helper;
 
-import com.github.javafaker.Bool;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -8,22 +7,21 @@ import io.restassured.response.ResponseBody;
 import io.restassured.specification.RequestSpecification;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.testng.Assert;
+
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
 
 //import static org.codehaus.groovy.tools.shell.util.Logger.io;
 
 public class APIUtility extends TestBase {
-    public static String depCity = null , arrCity = null , bookingCode = null ,storeUser= null, storeId = null, carrierCode = null,
-            email = null, mobileNumber = null , airLineRef =null, flyRef=null, paymentGateway= null, discountName=null ;
+    public static String depCity = null, arrCity = null, bookingCode = null, storeUser = null, storeId = null, carrierCode = null,
+            email = null, mobileNumber = null, airLineRef = null, flyRef = null, paymentGateway = null, discountName = null;
     public static JsonPath jsonPathEvaluator;
     public static String totalPrice;
     private static List<Object> itineraries;
@@ -73,7 +71,6 @@ public class APIUtility extends TestBase {
         ResponseBody body = response.getBody();
         jsonPathEvaluator = response.jsonPath();
         String bodyStringValue = body.asString();
-      //  System.out.println(bodyStringValue);
         return bodyStringValue;
 
     }
@@ -186,8 +183,8 @@ public class APIUtility extends TestBase {
     }
 
     public static void getstoreId(String returnedJsonString) {
-        ArrayList<String> bookingCodeArr= new ArrayList<String>();
-        ArrayList<String> orgDest= new ArrayList<String>();
+        ArrayList<String> bookingCodeArr = new ArrayList<String>();
+        ArrayList<String> orgDest = new ArrayList<String>();
         int bookingCodeIndex = 0;
         airLineRef = jsonPathEvaluator.get("products[0].confirmation.supplierConfirmationCode").toString();
         flyRef = jsonPathEvaluator.get("products[0].confirmation.vendorConfirmationCode").toString();
@@ -200,26 +197,25 @@ public class APIUtility extends TestBase {
         carrierCode = jsonPathEvaluator.get("products[0].options[1].value.carrier.code").toString();
         discountName = jsonPathEvaluator.get("products[0].options[1].value.discounts.name");
         List<JSONArray> legsArr = jsonPathEvaluator.getList("products[0].options[1].value.legs");
-        for(int i=0 ; i <legsArr.size() ; i++){
-            List<JSONArray> segArr = jsonPathEvaluator.getList("products[0].options[1].value.legs["+i+"].segments");
-            for(int segCount = 0 ; segCount<segArr.size() ; segCount++) {
-                bookingCodeArr.add(jsonPathEvaluator.get("products[0].options[1].value.legs["+i+"].segments["+segCount+"].bookingInfo.bookingCode").toString());
-                bookingCodeIndex ++;
+        for (int i = 0; i < legsArr.size(); i++) {
+            List<JSONArray> segArr = jsonPathEvaluator.getList("products[0].options[1].value.legs[" + i + "].segments");
+            for (int segCount = 0; segCount < segArr.size(); segCount++) {
+                bookingCodeArr.add(jsonPathEvaluator.get("products[0].options[1].value.legs[" + i + "].segments[" + segCount + "].bookingInfo.bookingCode").toString());
+                bookingCodeIndex++;
             }
         }
         List<String> removeDuplCodes = bookingCodeArr.stream().distinct().collect(Collectors.toList());
-        bookingCode = String.join("," ,removeDuplCodes) ;
+        bookingCode = String.join(",", removeDuplCodes);
         List<JSONArray> searchCriteriaArr = jsonPathEvaluator.getList("products[0].options[2].value.legs");
         for (int x = 0; x < searchCriteriaArr.size(); x++) {
-            orgDest.add(jsonPathEvaluator.get("products[0].options[2].value.legs["+x+"].origin").toString());
-            orgDest.add(jsonPathEvaluator.get("products[0].options[2].value.legs["+x+"].destination").toString());
+            orgDest.add(jsonPathEvaluator.get("products[0].options[2].value.legs[" + x + "].origin").toString());
+            orgDest.add(jsonPathEvaluator.get("products[0].options[2].value.legs[" + x + "].destination").toString());
         }
         depCity = orgDest.get(0);
-        if(orgDest.get(0).equals(orgDest.get(orgDest.size()-1))){
-            arrCity = orgDest.get(orgDest.size()-2);
-        }
-        else{
-            arrCity = orgDest.get(orgDest.size()-1);
+        if (orgDest.get(0).equals(orgDest.get(orgDest.size() - 1))) {
+            arrCity = orgDest.get(orgDest.size() - 2);
+        } else {
+            arrCity = orgDest.get(orgDest.size() - 1);
         }
 
     }
@@ -287,30 +283,29 @@ public class APIUtility extends TestBase {
     }
 
 
-    public String createRuleAPI(String ruleName , String storeID , String carrierCode , String bookCode , String depType , String depCode ,
-                                String destType , String destCode , String refundability , String status){
+    public String createRuleAPI(String ruleName, String storeID, String carrierCode, String bookCode, String depType, String depCode,
+                                String destType, String destCode, String refundability, String status) {
         int cnacelOption = 0;
         String createRuleAPIBody = null;
         boolean isActive = true;
-        if(status.equalsIgnoreCase("Active")){
+        if (status.equalsIgnoreCase("Active")) {
             isActive = true;
-        }
-        else{
+        } else {
             isActive = false;
         }
-        if(refundability.equalsIgnoreCase("refundable")){
+        if (refundability.equalsIgnoreCase("refundable")) {
             cnacelOption = 1;
             createRuleAPIBody = "{" +
                     "\"name\" : \"" + ruleName + "\"," +
                     "\"storeId\" : \"" + storeID + "\"," +
                     "\n" +
                     "\"carrierCodeString\" : \"" + carrierCode + "\"," +
-                    "\"bookingCodeString\": \"" + bookCode +"\"," +
+                    "\"bookingCodeString\": \"" + bookCode + "\"," +
                     "\n" +
-                    "\"departureType\" : \""+ depType + "\"," +
+                    "\"departureType\" : \"" + depType + "\"," +
                     "\"departureCodeString\" : \"" + depCode + "\"," +
                     "\n" +
-                    "\"destinationType\" : \"" + destType +"\"," +
+                    "\"destinationType\" : \"" + destType + "\"," +
                     "\"destinationCodeString\" : \"" + destCode + "\"," +
                     "\n" +
                     "\"airlineChangeFees\" : 100," +
@@ -326,20 +321,19 @@ public class APIUtility extends TestBase {
                     "\n" +
                     "\"isActive\": " + isActive + "\n" +
                     "}";
-        }
-        else{
+        } else {
             cnacelOption = 2;
             createRuleAPIBody = "{" +
                     "\"name\" : \"" + ruleName + "\"," +
                     "\"storeId\" : \"" + storeID + "\"," +
                     "\n" +
                     "\"carrierCodeString\" : \"" + carrierCode + "\"," +
-                    "\"bookingCodeString\": \"" + bookCode +"\"," +
+                    "\"bookingCodeString\": \"" + bookCode + "\"," +
                     "\n" +
-                    "\"departureType\" : \""+ depType + "\"," +
+                    "\"departureType\" : \"" + depType + "\"," +
                     "\"departureCodeString\" : \"" + depCode + "\"," +
                     "\n" +
-                    "\"destinationType\" : \"" + destType +"\"," +
+                    "\"destinationType\" : \"" + destType + "\"," +
                     "\"destinationCodeString\" : \"" + destCode + "\"," +
                     "\n" +
                     "\"airlineChangeFees\" : 100," +
@@ -387,7 +381,7 @@ public class APIUtility extends TestBase {
     }
 
 
-    public static String getTripResponse(String email , String orderNumber){
+    public static String getTripResponse(String email, String orderNumber) {
         String response = sendGetRequests("https://www.fly365stage.com/api/user/order/find?email=" + email + "&orderNumber=" + orderNumber);
         return response;
     }
@@ -427,9 +421,58 @@ public class APIUtility extends TestBase {
             throw new RuntimeException(e.getMessage());
         }*/
     }
+
     public String getresult(String orderId, String orderNumber) {
-        String finalResponse = sendGetRequest("https://api.fly365stage.com/user/order/find?orderId=" + orderId + "&orderNumber=" + orderNumber +"");
+        String finalResponse = sendGetRequest("https://api.fly365stage.com/user/order/find?orderId=" + orderId + "&orderNumber=" + orderNumber + "");
         return finalResponse;
     }
+
+
+
+
+    public static void sendPutRequest(String requestUrl,String body) {
+        RestAssured.baseURI = requestUrl;
+        RequestSpecification httpRequest = RestAssured.given();
+        httpRequest.header("Content-Type", "application/json");
+        httpRequest.header("x-user-token", "lhA27cd524d4579576316fa4b6c3abfe0d7pSL");
+        httpRequest.header("authorization", "4jzthfsrmK9rhgKTr5XkEjeEcZ7kf9eA");
+        httpRequest.body(body);
+        httpRequest.put(requestUrl);
+
+
+    }
+
+
+    public static void updateHoldRule(String domain, Integer holdHours, Integer hoursBeforeTicketing, Integer hoursBeforeDeparture, Boolean isHoldEnabled, Integer amount, String StoreId, List<String> excludedAirlines) {
+
+        String updateSettingsBody=
+                "{\n" +
+                        "  \"hoursBeforeFirstDeparture\":" + hoursBeforeDeparture+ "," +"\n" +
+                        "  \"HoursBeforeLastTicketingTime\":" + hoursBeforeTicketing+ "," + "\n" +
+                        "  \"holdHours\" :" + holdHours + "," + "\n" +
+                        "  \"isHoldEnabled\" :" +  isHoldEnabled + "\n" +
+                        "}\n";
+
+        sendPutRequest("https://internal.fly365"+ domain +".com/rules/hold/configs",updateSettingsBody);
+
+        String updateHoldFeesBody =
+                "{\n" +
+                        " \"storeId\":" + "\"" + StoreId + "\""  + ","  +  "\n"+
+                        " \"amount\":" + amount  + "\n" +
+
+
+                         "}\n";
+        sendPutRequest("https://internal.fly365"+ domain +".com/rules/hold/fees",updateHoldFeesBody);
+
+        String updateHoldExcludedAirlines =
+                "{\n" +
+                        "\"excludedAirlines\" :" + excludedAirlines + "\n" +
+
+                        "}\n";
+
+        sendPutRequest("https://internal.fly365"+ domain +".com/rules/hold/excluded-airlines", updateHoldExcludedAirlines);
+
+    }
+
 }
 

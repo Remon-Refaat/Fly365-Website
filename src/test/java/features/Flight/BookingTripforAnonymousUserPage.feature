@@ -112,6 +112,7 @@ Feature: Booking a Trip for Anonymous User
     And Assert that frequent flyer "123456" is displayed in confirmation page
 
 
+
   Scenario: Verify that user can select preferences in passenger details  while booking
     And Select One Way trip
     And Add airport to the Origin "Cairo International Airport (CAI), Egypt"
