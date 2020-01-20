@@ -77,7 +77,7 @@
         <dependency>
             <groupId>com.vimalselvam</groupId>
             <artifactId>cucumber-extentsreport</artifactId>
-            <version>3.1.1</version>
+            <version>2.0.5</version>
         </dependency>
         <dependency>
             <groupId>com.aventstack</groupId>
@@ -131,6 +131,13 @@
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <version>3.0.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>3.7.1</version>
             <scope>test</scope>
         </dependency>
 

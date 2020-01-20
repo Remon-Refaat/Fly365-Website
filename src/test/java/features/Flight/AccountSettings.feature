@@ -1,5 +1,4 @@
-
-@Account_Settings
+@test
 @Sign_Out
 Feature: Open Account Settings page
 

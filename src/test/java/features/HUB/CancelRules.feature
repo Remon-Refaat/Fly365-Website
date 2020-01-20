@@ -1,4 +1,3 @@
-
 Feature: Create Cancel Rule
 
   Scenario: Verify that agent can create rule & successful message is displayed

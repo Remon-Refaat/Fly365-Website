@@ -62,9 +62,9 @@ public class HomeTest extends TestBase {
     private By plusInfantBTN = By.xpath("//*[contains(@id,'el-popover')]//div[3]/div/span[2]");
     private By searchNowBTN = By.xpath("//button[@class='btn uppercase btn-search-form font-bold lg:w-full w-2/5 m-auto btn-primary-second h-full']");
     private By findMyBookingLINK = By.xpath("//button[text()='Manage My Booking']");
-    private By findMyBookingEmailTXT = By.xpath("//div[@class='container p-8 retrieve-booking-form']//input[@placeholder='Email']");
-    private By findMyBookingAirlineFly365OrderTXT = By.xpath("//div[@class='container p-8 retrieve-booking-form']//input[@placeholder='Fly365 Reference']");
-    private By findMyBookingFindBookingBTN = By.xpath("//div[@class='container p-8 retrieve-booking-form']//button[text()='FIND BOOKING']");
+    private By findMyBookingEmailTXT = By.xpath("//input[@placeholder='Email']");
+    private By findMyBookingAirlineFly365OrderTXT = By.xpath("//input[@placeholder='Fly365 Reference']");
+    private By findMyBookingFindBookingBTN = By.xpath("//button[text()='FIND BOOKING']");
     private By addMoreCitiesLINK = By.xpath("//div[@class='flex items-center btn-add-more float-left text-white text-xs h-6 px-1 cursor-pointer leading-normal']");
     private By subscriptionTXT = By.xpath("//input[@placeholder='Your Email']");
     private By subscribeBTN = By.xpath("//button[text()='subscribe']");
@@ -235,7 +235,7 @@ public class HomeTest extends TestBase {
 
 
     @And("^Book a \"(.*)\" trip from API for \"(.*)\" and get \"(.*)\"$")
-    public void bookATripFromAPIForAndGet(String tripType , String domain, String reference) throws InterruptedException {
+    public void bookATripFromAPIForAndGet(String tripType , String domain, String reference) {
         String requestUrl = "https://api.fly365" + domain + ".com/flight-search/search";
         String allAvailableTrips = null;
         if(tripType.contains("multi")){
@@ -256,6 +256,7 @@ public class HomeTest extends TestBase {
         if (reference.equals("Fly365 Reference")) {
             pnrNumber = apiObject.checkoutTrip(cardID, domain)[1];
         }
+        System.out.println();
     }
 
 
@@ -266,18 +267,19 @@ public class HomeTest extends TestBase {
 
     @And("^Add a valid email address \"(.*)\"$")
     public void addAValidEmailAddress(String findMyBookingEmailAddress) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(findMyBookingEmailTXT));
         driver.findElement(findMyBookingEmailTXT).sendKeys(findMyBookingEmailAddress);
     }
 
     @And("^Add a valid \"(.*)\"$")
     public void addAValid(String reference) {
         driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(orderNumber);
-        if (reference.equals("order")) {
-            driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(orderNumber);
-        }
-        if (reference.equals("order")) {
-            driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(orderNumber);
-        }
+       // if (reference.equals("order")) {
+       //     driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(orderNumber);
+       // }
+       // if (reference.equals("order")) {
+       //     driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(orderNumber);
+       // }
     }
 
     @And("^Add a valid Reference 'Fly365 Ref'$")

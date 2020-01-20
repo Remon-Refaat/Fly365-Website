@@ -1,5 +1,3 @@
-@applyCancel
-
 Feature: Apply Cancel on Bookings
 
   Scenario: Verify that customer can cancel booking when rule matches and successful message is displayed to customer
