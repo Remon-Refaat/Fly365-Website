@@ -40,7 +40,7 @@ public class HubLogin extends TestBase {
     private By ticketLST = By.xpath("//div[@class='tickets-container mb-5']");
     private By orderNumberTXT = By.id("Order number");
     private By submitSearchBTN = By.xpath("//input[@name='submit']");
-    private By quickSearchTXT = By.xpath("//input[contains(@placeholder ,'Please Enter PNR ')]");
+    private By quickSearchTXT = By.xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/input[1]");
     private By frstQuickSearchItem = By.xpath("//li[contains(@id ,'el-autocomplete')]");
     private By frstOrder = By.xpath("//span[@xpath='1']");
 
@@ -189,7 +189,8 @@ public class HubLogin extends TestBase {
     }
 
     @And("^Search for Order Number from Quick Search Through UI$")
-    public void searchForOrderNumberFromQuickSearchThroughUI() {
+    public void searchForOrderNumberFromQuickSearchThroughUI() throws InterruptedException {
+        Thread.sleep(3000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(quickSearchTXT));
         driver.findElement(quickSearchTXT).sendKeys(RetrieveYourFlightBookingTest.PNRNumber);
         wait.until(ExpectedConditions.visibilityOfElementLocated(frstQuickSearchItem));

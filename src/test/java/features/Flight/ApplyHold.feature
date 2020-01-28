@@ -134,7 +134,7 @@ Feature: Apply Hold on Bookings
     And Make Search from API
     Then Itineraries does not have hold
 
-@apply
+
   Scenario: Verify Hold is not applied when hold is matched but disabled
     Given  Navigate to Fly "stage" site
     When Set Data on stage for hold Rule API through fly365_nz and exclude "sv","ms"

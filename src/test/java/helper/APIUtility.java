@@ -242,9 +242,9 @@ public class APIUtility extends TestBase {
     public static void addPassenger(String cartID, String domain) {
 
         String addPassengerDetailsAPI = "{\"passengers\": [" +
-                "{\"firstName\": \"John\",\"middleName\": \"William\",\"lastName\": \"Smith\",\"title\": \"Mr\",\"dateOfBirth\": \"1991-06-04\"," +
+                "{\"title\": \"Mr\", \"firstName\": \"John\",\"middleName\": \"William\",\"lastName\": \"Smith\",\"dateOfBirth\": \"1991-06-04\"," +
                 "\"reference\": \"123\",\"passengerType\": \"ADT\",\"frequentFlyerOptions\": {\"airlineCode\": \"code\",\"number\": \"num\"" +
-                "}}],\"customer\": {\"title\": \"mr\",\"firstName\": \"John\",\"lastName\": \"William\",\"email\": \"john.smith.fly365@gmail.com\"," +
+                "}}],\"customer\": {\"title\": \"Mr\",\"firstName\": \"John\",\"lastName\": \"William\",\"email\": \"john.smith.fly365@gmail.com\"," +
                 "\"mobileNumber\": \"0121234567\"}}";
         sendPostRequest("https://api.fly365" + domain + ".com/flight/cart/" + cartID + "/passenger", addPassengerDetailsAPI);
 

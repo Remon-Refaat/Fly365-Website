@@ -1,12 +1,19 @@
 package step_definition;
 
+import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import helper.APIUtility;
 import helper.TestBase;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import helper.GeneralMethods;
+import static helper.APIUtility.flyRef;
+
+import org.openqa.selenium.support.ui.Select;
 
 public class Orders extends TestBase {
 
@@ -18,6 +25,16 @@ public class Orders extends TestBase {
     private By displayedPrice = By.xpath("//small[text()='Displayed Price']/following-sibling::strong");
     private By discountCampaign = By.xpath("//small[text()='Campaign']/following-sibling::strong");
     private By discountAmount = By.xpath("//small[text()='Amount']/following-sibling::strong");
+    private By editIcon = By.xpath("//span[@class='icon-edit pull-right']");
+    private By firstName = By.xpath("//input[@placeholder='First Name']");
+    private By lastName = By.xpath("//input[@placeholder='Last Name']");
+    private By phoneNumber = By.xpath("//input[@placeholder='Enter a phone number']");
+    private By email = By.xpath("//input[@placeholder='Email']");
+    private By save = By.xpath("//button[@class='btn btn-lg btn-primary btn-block']");
+    private By fullName = By.xpath("//span[@class='information-label'][contains(text(),'Mr')]");
+    private By Email = By.xpath("//span[@class='information-label'][contains(text(),'.com')]");
+    private By mobileNumber = By.xpath("//span[@class='information-label'][contains(text(),'+1')]");
+    private By title = By.xpath("//select[@name='title']");
 
 
     @Then("^Assert that Airline reference is correct$")
@@ -30,7 +47,7 @@ public class Orders extends TestBase {
     @Then("^Assert that Fly reference is correct$")
     public void assertThatFlyReferenceIsCorrect() throws InterruptedException {
         Thread.sleep(4000);
-        Assert.assertEquals(driver.findElement(flyref).getText().trim(),APIUtility.flyRef);
+        Assert.assertEquals(driver.findElement(flyref).getText().trim(), flyRef);
     }
 
     @Then("^Assert that store user is correct$")
@@ -57,4 +74,30 @@ public class Orders extends TestBase {
         Thread.sleep(4000);
         Assert.assertEquals(driver.findElement(discountCampaign).getText(),APIUtility.discountName);
     }
+
+
+    @And("^click on edit passenger details$")
+    public void clickOnEditPassengerDetails() {
+        driver.findElement(editIcon).click();
+    }
+
+    @And("^Change passenger name \"([^\"]*)\" and \"([^\"]*)\" email \"([^\"]*)\" and phone number \"([^\"]*)\" and data edited successfully$")
+    public void changePassengerNameAndEmailAndPhoneNumber(String fName, String lName, String useremail, String number) throws Throwable {
+
+        WebElement title_dropdown=driver.findElement(title);
+        Select Title =new Select(title_dropdown);
+        Title.selectByValue("Mr");
+        driver.findElement(firstName).sendKeys(fName);
+        driver.findElement(lastName).sendKeys(lName);
+        driver.findElement(email).sendKeys(useremail);
+        driver.findElement(phoneNumber).sendKeys(number);
+        driver.findElement(save).click();
+        Thread.sleep(4000);
+        Assert.assertEquals(driver.findElement(fullName).getText(),  "Mr"+ fName+lName );
+        Assert.assertEquals(driver.findElement(Email).getText(), useremail);
+        Assert.assertEquals(driver.findElement(mobileNumber).getText(), "+1 "+number);
+        throw new PendingException();
+    }
+
+
 }

@@ -40,7 +40,7 @@ public class Redirection extends TestBase {
     }
 
     @And("^Open  \"([^\"]*)\"$")
-    public void open(String Systems)  {
+    public void open(String Systems) throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),"+ Systems+")]")));
         driver.findElement(By.xpath("//span[contains(text(),'"+ Systems+"')]")).click();
 
