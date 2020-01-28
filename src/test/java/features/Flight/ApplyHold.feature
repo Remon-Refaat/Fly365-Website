@@ -167,7 +167,6 @@ Feature: Apply Hold on Bookings
     And Make Search from API
     Then Itineraries does not have hold
 
-  @apply
   Scenario: Verify Hold is not applied when hold is matched but disabled
     Given  Navigate to Fly "stage" site
     Given Set hold data for store "NZ" in database
