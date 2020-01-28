@@ -256,7 +256,6 @@ public class HomeTest extends TestBase {
         if (reference.equals("Fly365 Reference")) {
             pnrNumber = apiObject.checkoutTrip(cardID, domain)[1];
         }
-        System.out.println();
     }
 
 
