@@ -1,6 +1,7 @@
 package helper;
 
 import cucumber.api.testng.AbstractTestNGCucumberTests;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -24,8 +25,9 @@ public class TestBase extends AbstractTestNGCucumberTests {
     public void startDriver(@Optional("chrome") String browserName) {
         if (browserName.equalsIgnoreCase("chrome")) {
             Reporter.log("=====Chrome Browser Session Started=====", true);
-            String chromePath = System.getProperty("user.dir") + "/Resources/chromedriver";
-            System.setProperty("webdriver.chrome.driver", chromePath);
+            WebDriverManager.chromedriver().setup();
+            //String chromePath = System.getProperty("user.dir") + "/Resources/chromedriver";
+            //System.setProperty("webdriver.chrome.driver", chromePath);
 
             //to download file in Downloads file
             String downloadFilepath = System.getProperty("user.dir") + "/Downloads";

@@ -36,7 +36,6 @@ Feature: login to account
     When the user click on login button
     Then user shall see empty password error message
 
-
   Scenario: Login into account with empty email
     And user enter an empty email
     And user enter password "@Test123"

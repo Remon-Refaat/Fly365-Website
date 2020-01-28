@@ -1,5 +1,3 @@
-
-@Booking_Anonymous
 Feature: Booking a Trip for Anonymous User
 
   Background:

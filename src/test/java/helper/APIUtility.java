@@ -162,7 +162,7 @@ public class APIUtility extends TestBase {
         return discountRule;
     }
 
-    public static String getItineraryId(String returnedJsongString, int tripnumber) {
+    public static String    getItineraryId(String returnedJsongString, int tripnumber) {
         JSONObject jObject = new JSONObject(returnedJsongString);
         JSONArray arr = jObject.getJSONArray("itineraries");
         String itineraryId = null;

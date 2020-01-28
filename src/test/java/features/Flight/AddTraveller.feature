@@ -1,5 +1,3 @@
-
-@Add_Traveller
 @Sign_Out
 Feature: Add Traveller to Login user
 

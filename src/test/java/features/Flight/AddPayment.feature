@@ -1,5 +1,3 @@
-
-@Add_Payment
 @Sign_Out
 Feature: Add Payment to Login user
 

@@ -11,7 +11,6 @@ Feature: tickets
     Then ticket created
 
 
-
   Scenario: Verify that customer can send direct mail to open a ticket
     Given send direct mail to support mail
     And Open hub login page
@@ -23,7 +22,7 @@ Feature: tickets
     And press send
     Then ticket created
 
-  @CancelTicket
+
   Scenario: Verify ticket is created through cancelling non refundable booking
     Given Navigate to "NZ" Fly365 "stage" site
     Given Delete All Rules
