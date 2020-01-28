@@ -87,6 +87,7 @@ Feature: Apply Hold on Bookings
     And Filter with the following Airline "Egyptair"
     Then Hold button is not displayed
 
+
   Scenario: Traveler can hold a trip
     Given  Navigate to Fly "stage" site
     When Set Data on stage for hold Rule API through fly365_nz and exclude "sv"
