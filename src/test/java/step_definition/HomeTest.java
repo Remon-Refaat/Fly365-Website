@@ -60,7 +60,7 @@ public class HomeTest extends TestBase {
     private By plusAdultBTN = By.xpath("//*[contains(@id,'el-popover')]//div[1]/div/span[2]");
     private By plusChildBTN = By.xpath("//*[contains(@id,'el-popover')]//div[2]/div/span[2]");
     private By plusInfantBTN = By.xpath("//*[contains(@id,'el-popover')]//div[3]/div/span[2]");
-    private By searchNowBTN = By.xpath("//button[@class='btn uppercase btn-search-form font-bold lg:w-full w-2/5 m-auto btn-primary-second h-full']");
+    private By searchNowBTN = By.xpath("//button[@class='btn uppercase btn-search-form font-bold w-full m-auto btn-primary-second h-full']");
     private By findMyBookingLINK = By.xpath("//button[text()='Manage My Booking']");
     private By findMyBookingEmailTXT = By.xpath("//input[@placeholder='Email']");
     private By findMyBookingAirlineFly365OrderTXT = By.xpath("//input[@placeholder='Fly365 Reference']");

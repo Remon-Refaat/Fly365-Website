@@ -1,9 +1,12 @@
 package step_definition;
 
+import com.sun.org.apache.xerces.internal.xs.StringList;
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import helper.APIUtility;
 import helper.DataBase;
 import helper.TestBase;
@@ -15,8 +18,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class ApplyHoldTest extends TestBase {
 
@@ -215,17 +218,15 @@ public class ApplyHoldTest extends TestBase {
             } else {
                 reqHoldStatus = false;
             }
-            DataBase.execute_update(hostName, dbsHoldCon, "UPDATE hold_configs SET \"hoursBeforeFirstDeparture\"="+holdRuleData.get("Min hours before departure")+" ," +
+            DataBase.execute_update(hostName, dbsHoldCon, "UPDATE hold_configs SET \"hoursBeforeFirstDeparture\"=" + holdRuleData.get("Min hours before departure") + " ," +
                     " \"hoursBeforeLastTicketingTime\" = " + holdRuleData.get("Min hours before ticketing") + "," +
-                    " \"isHoldEnabled\" = "+reqHoldStatus+"," +
+                    " \"isHoldEnabled\" = " + reqHoldStatus + "," +
                     " \"holdHours\" = " + holdRuleData.get("Hold hours") + " " +
                     "WHERE \"id\"=\'de896fb8-358a-4615-bd7c-ef9c5c1f9761\'");
             System.out.println(holdRuleData.get("Exc airlines"));
             DataBase.execute_update(hostName, dbsHoldCon, "UPDATE hold_excluded_airlines SET \"code\" ='" + holdRuleData.get("Exc airlines") + "' WHERE \"id\" = \'49fab3e8-add9-45a1-aa10-ee3c8e344f14\'");
             DataBase.execute_update(hostName, dbsHoldCon, "UPDATE hold_fees SET \"amount\" ='" + holdRuleData.get("hold value") + "' WHERE \"storeId\" = '" + appliedHoldStore + "'");
 
-
-            //
         }
 
 
@@ -238,9 +239,9 @@ public class ApplyHoldTest extends TestBase {
         System.out.println(itinerariesAvailability);
         String id = "";
         for (int c = 0; c < itineraries.size(); c++) {
-            Boolean itenaryAvail = APIUtility.jsonPathEvaluator.getBoolean("itineraries["+c+"].hold.isAvailable");
+            Boolean itenaryAvail = APIUtility.jsonPathEvaluator.getBoolean("itineraries[" + c + "].hold.isAvailable");
             if (itenaryAvail) {
-                id = APIUtility.jsonPathEvaluator.get("itineraries["+c+"].itineraryId").toString();
+                id = APIUtility.jsonPathEvaluator.get("itineraries[" + c + "].itineraryId").toString();
                 break;
             }
         }
@@ -253,4 +254,25 @@ public class ApplyHoldTest extends TestBase {
         System.out.println(itinerariesAvailability);
         Assert.assertFalse(itinerariesAvailability.contains(true));
     }
-}
+
+
+    @Given("^Set Data on (.*) for hold Rule API through (.*) and exclude (.*)$")
+    public void setDataForHoldRule(String domain, String StoreId, String excludedAirlines,  DataTable Data) {
+        for (Map<String, String> holdRuleData : Data.asMaps(String.class, String.class)) {
+            String departureHours = holdRuleData.get("Min hours before departure");
+            String ticketingHours = holdRuleData.get("Min hours before ticketing");
+            String holdHours = holdRuleData.get("Hold hours");
+            String status =  holdRuleData.get("Hold status");
+            String holdAmount = holdRuleData.get("hold value");
+            List<String> exairlines =  new ArrayList<>(Arrays.asList(excludedAirlines.split(",")));
+            APIUtility.updateHoldRule(domain, Integer.valueOf(holdHours), Integer.valueOf(ticketingHours), Integer.valueOf(departureHours), Boolean.valueOf(status), Integer.valueOf(holdAmount), StoreId, exairlines);
+        }
+    }
+
+
+
+
+
+    }
+
+

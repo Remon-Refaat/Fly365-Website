@@ -17,7 +17,8 @@ public class SearchResultTest extends TestBase {
     private By stopsFilterBTN = By.xpath("//button[contains(text(),'STOPS')]");
     private By onlyOneStopsLINK = By.xpath("//label[span//div[contains(text(), '1')]]/following-sibling::button");
     private By tripPriceVAL = By.xpath("//div[contains(@class,'result-group')][2]//div[contains(@id,'-price')]");
-    private By frstHoldBTN = By.xpath("(//div[contains(@class,'flex md:flex-row')]//button[contains(text(),'HOLD')])[1]");
+    private By frstHoldBTN = By.xpath("/html/body/div[1]/div/div[2]/div/div[3]/div/div[2]/div[2]/div[2]/div[2]/div/button[1]");
+
 
     public static String tripPrice;
     public static String holdPrice;

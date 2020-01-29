@@ -78,3 +78,20 @@ Feature: BackOffice Scenarios
     And Search for Order Number from Quick Search
     Then Assert that Discount campaign name is correct
 
+
+    Scenario: Verify that agent can edit passenger details
+      When Book a "one way" trip from API for "stage" and get "order"
+      And Get data for this booking "john.smith.fly365@gmail.com"
+      And Get StoreID
+      And Open hub login page
+      And login into hub with super admin
+      And Open menu
+      And Open  "BackOffice"
+      And Search for Order Number from Quick Search
+      And click on edit passenger details
+      And Change passenger name " Mohamed " and "Emad" email "john.smith.fly.365@gmail.com" and phone number "345 455 2344" and data edited successfully
+
+
+
+
+
