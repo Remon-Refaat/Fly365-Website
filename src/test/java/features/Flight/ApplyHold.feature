@@ -1,6 +1,5 @@
 Feature: Apply Hold on Bookings
 
-
   Scenario: Verify Hold button is not displayed if departure is less than minimum hours before departure and ticketing
     Given  Navigate to Fly "stage" site
     When Set Data on stage for hold Rule API through fly365_nz and exclude "sv"
@@ -13,7 +12,6 @@ Feature: Apply Hold on Bookings
     And Select the date of the departure, after "2" day from today
     And Press on Search Now
     Then Hold button is not displayed
-
 
   Scenario: Verify Hold button is not displayed when hold is matched but disabled
     Given  Navigate to Fly "stage" site
@@ -41,7 +39,6 @@ Feature: Apply Hold on Bookings
     And Press on Search Now
     Then Hold button is not displayed
 
-
   Scenario: Verify Hold value is displayed correctly in hold button
     Given  Navigate to Fly "stage" site
     When Set Data on stage for hold Rule API through fly365_nz and exclude "sv"
@@ -54,8 +51,6 @@ Feature: Apply Hold on Bookings
     And Select the date of the departure, after "10" day from today
     And Press on Search Now
     Then Hold With Value "300" is displayed in hold button
-
-
 
   Scenario: Verify Hold Hours is displayed successfully
     Given  Navigate to Fly "stage" site
@@ -117,6 +112,8 @@ Feature: Apply Hold on Bookings
     Then The total hold price is the same before and after the booking
 
 
+
+
     Scenario: Verify hold is applied on itineraries when they are matched
     Given  Navigate to Fly "stage" site
       When Set Data on stage for hold Rule API through fly365_nz and exclude "sv"
@@ -124,7 +121,6 @@ Feature: Apply Hold on Bookings
         | 72                         |  | 72                         |  | 90      |  | true   |  | 40         |
       And Make Search from API
      Then Assert itineraries has hold
-
 
 
   Scenario: Verify hold isn't applied on itineraries when hold value is 0
@@ -135,7 +131,6 @@ Feature: Apply Hold on Bookings
     And Make Search from API
     Then Itineraries does not have hold
 
-
   Scenario: Verify Hold is not applied when hold is matched but disabled
     Given  Navigate to Fly "stage" site
     When Set Data on stage for hold Rule API through fly365_nz and exclude "sv","ms"
@@ -143,8 +138,3 @@ Feature: Apply Hold on Bookings
       | 72                         |  | 72                         |  | 90      |  | false |  | 40         |
     And Make Search from API
     Then Itineraries does not have hold
-
-
-
-
-

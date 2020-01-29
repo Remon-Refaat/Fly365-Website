@@ -66,8 +66,7 @@ public class SearchResultTest extends TestBase {
     @Then("^Hold button is not displayed$")
     public void holdButtonIsNotDisplayed() {
         //WebElement frstHoldElmnt = driver.findElement(frstHoldBTN);
-       Assert.assertTrue(wait.until(ExpectedConditions.invisibilityOfElementLocated(frstHoldBTN)));
-
+        Assert.assertTrue(wait.until(ExpectedConditions.invisibilityOfElementLocated(frstHoldBTN)));
     }
 
 }

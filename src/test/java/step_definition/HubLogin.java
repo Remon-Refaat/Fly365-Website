@@ -189,8 +189,7 @@ public class HubLogin extends TestBase {
     }
 
     @And("^Search for Order Number from Quick Search Through UI$")
-    public void searchForOrderNumberFromQuickSearchThroughUI() throws InterruptedException {
-        Thread.sleep(3000);
+    public void searchForOrderNumberFromQuickSearchThroughUI() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(quickSearchTXT));
         driver.findElement(quickSearchTXT).sendKeys(RetrieveYourFlightBookingTest.PNRNumber);
         wait.until(ExpectedConditions.visibilityOfElementLocated(frstQuickSearchItem));

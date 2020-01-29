@@ -55,6 +55,7 @@ Feature: Booking a Trip for Anonymous User
     And Press Find Booking
     Then The user can retrieve his booking from Find my Booking
 
+
   Scenario: Verify that user can Add passport details in passenger details while booking
     And Select One Way trip
     And Add airport to the Origin "Cairo International Airport (CAI), Egypt"
@@ -107,7 +108,6 @@ Feature: Booking a Trip for Anonymous User
     And Select the Fare Rules and Terms and Conditions
     And Press on Pay button
     And Assert that frequent flyer "123456" is displayed in confirmation page
-
 
 
   Scenario: Verify that user can select preferences in passenger details  while booking
@@ -171,4 +171,3 @@ Feature: Booking a Trip for Anonymous User
     And open Back office
     And Search for Order Number from Quick Search
     And Assert that special request is having "Testing Request"
-

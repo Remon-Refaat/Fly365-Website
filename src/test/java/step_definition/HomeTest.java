@@ -225,7 +225,7 @@ public class HomeTest extends TestBase {
         String returnDate = gmObject.addDateWithCertainPeriodAndFormat(period, "dd MMM yyyy");
         driver.findElement(returnRoundCalenderDPK).sendKeys(returnDate);
         driver.findElement(roundTripTAB).click();
-        Thread.sleep(6000);
+        Thread.sleep(500);
     }
 
     @And("^Press on Search Now$")

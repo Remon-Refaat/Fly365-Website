@@ -12,7 +12,7 @@ Feature: Find my Booking
     Then The system will retrieve the details of the Booking for this "Fly365 Reference"
 
   Scenario: Verify that the anonymous user can retrieve his/her booking via Airline Reference
-    And Book a "round" trip from API for "stage" and get "Airline Reference"
+    #And Book a trip from API for "stage" and get "Airline Reference"
     And Click on Find My Booking
     And Add a valid email address "john.smith.fly365@gmail.com"
     And Add a valid "Airline Reference"
