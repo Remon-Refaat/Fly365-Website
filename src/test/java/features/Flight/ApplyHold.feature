@@ -114,6 +114,7 @@ Feature: Apply Hold on Bookings
 
 
 
+
     Scenario: Verify hold is applied on itineraries when they are matched
     Given  Navigate to Fly "stage" site
       When Set Data on stage for hold Rule API through fly365_nz and exclude "sv"
