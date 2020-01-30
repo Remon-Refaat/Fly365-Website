@@ -236,7 +236,8 @@ public class HomeTest extends TestBase {
 
     @And("^Book a \"(.*)\" trip from API for \"(.*)\" and get \"(.*)\"$")
     public void bookATripFromAPIForAndGet(String tripType , String domain, String reference) {
-        String requestUrl = "https://api.fly365" + domain + ".com/flight-search/search";
+        //String requestUrl = "https://api.fly365" + domain + ".com/flight-search/search";
+        String requestUrl = "https://nz.fly365" + domain + ".com/api/flight-search/search";
         String allAvailableTrips = null;
         if(tripType.contains("multi")){
             allAvailableTrips = apiObject.sendPostRequest(requestUrl, apiObject.multiCityAPI());
@@ -247,7 +248,7 @@ public class HomeTest extends TestBase {
         else if(tripType.contains("one")){
             allAvailableTrips = apiObject.sendPostRequest(requestUrl, apiObject.oneWayAPI());
         }
-        String itinaryID = apiObject.getItineraryId(allAvailableTrips, 2);
+        String itinaryID = apiObject.getItineraryId(allAvailableTrips, 1);
         String cardID = apiObject.createCart(itinaryID, domain);
         apiObject.addPassenger(cardID, domain);
         if (reference.equals("order")) {

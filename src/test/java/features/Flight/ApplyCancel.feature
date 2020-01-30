@@ -157,6 +157,7 @@ Feature: Apply Cancel on Bookings
     Then Booking Status Will Be To Be Refunded
     And Delete Created Rule From Database
 
+
   Scenario: Verify that rule is not applied if it isn't active
     Given Navigate to "NZ" Fly365 "stage" site
     Given Delete All Rules
