@@ -108,7 +108,6 @@ Feature: Search for trips and assert on search results
     And Check Flight Details for round trip from API
     And Compare the two results
 
-  @search
   Scenario: Verify that the system display the the correct search results counts for multi-city trips
     And Select Multi City trip
     And Choose the number of flights "3"
