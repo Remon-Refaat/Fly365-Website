@@ -15,7 +15,6 @@ Feature: Search for trips and assert on search results
     And Scroll to the end of the page
     Then Check count of search results
 
-
   Scenario: Verify that the system display the the correct search results data for one-way trips
     And Select One Way trip
     And Add airport to the Origin "Auckland International (AKL), New Zealand"
@@ -109,6 +108,7 @@ Feature: Search for trips and assert on search results
     And Check Flight Details for round trip from API
     And Compare the two results
 
+  @search
   Scenario: Verify that the system display the the correct search results counts for multi-city trips
     And Select Multi City trip
     And Choose the number of flights "3"

@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 public class APIUtility extends TestBase {
     public static String depCity = null, arrCity = null, bookingCode = null, storeUser = null, storeId = null, carrierCode = null,
-            email = null, mobileNumber = null, airLineRef = null, flyRef = null, paymentGateway = null, discountName = null;
+            email = null, mobileNumber = null, airLineRef = null, flyRef = null, paymentGateway = null, discountName = null,orderId = null;
     public static JsonPath jsonPathEvaluator;
     public static String totalPrice;
     private static List<Object> itineraries;
@@ -72,7 +72,6 @@ public class APIUtility extends TestBase {
         jsonPathEvaluator = response.jsonPath();
         String bodyStringValue = body.asString();
         return bodyStringValue;
-
     }
 
     public static String sendGetRequest(String requestUrl) {
@@ -95,8 +94,6 @@ public class APIUtility extends TestBase {
                 response.append(line);
             }
             int responseCode = connection.getResponseCode();
-            System.out.println("\nSending 'GET' request to URL : " + url);
-            System.out.println("Response Code : " + responseCode);
             br.close();
             connection.disconnect();
             return response.toString();
@@ -108,7 +105,7 @@ public class APIUtility extends TestBase {
 
     public String oneWayAPI() {
         String departureDate1 = gmObject.addDateWithCertainPeriodAndFormat(10, "yyyy-MM-dd");
-        String oneWay = "{\"legs\": [{\"origin\": \"LHR\",\"destination\": \"CAI\",\"departureDate\": \"" + departureDate1 + "\"}],\n" +
+        String oneWay = "{\"legs\": [{\"origin\": \"JED\",\"destination\": \"CAI\",\"departureDate\": \"" + departureDate1 + "\"}],\n" +
                 " \"cabinClass\": \"Economy\",\"infant\": 0,\"child\": 0,\"adult\": 1}";
         return oneWay;
     }
@@ -196,6 +193,7 @@ public class APIUtility extends TestBase {
         totalPrice = jsonPathEvaluator.get("displayTotal.total").toString();
         carrierCode = jsonPathEvaluator.get("products[0].options[1].value.carrier.code").toString();
         discountName = jsonPathEvaluator.get("products[0].options[1].value.discounts.name");
+        orderId = jsonPathEvaluator.get("id").toString();
         List<JSONArray> legsArr = jsonPathEvaluator.getList("products[0].options[1].value.legs");
         for (int i = 0; i < legsArr.size(); i++) {
             List<JSONArray> segArr = jsonPathEvaluator.getList("products[0].options[1].value.legs[" + i + "].segments");
@@ -233,10 +231,11 @@ public class APIUtility extends TestBase {
     public static String createCart(String itineraryId, String domain) {
 
         String createCartAPI = "{\"itineraryId\": \"" + itineraryId + "\"}";
-        String returnedJsonString = sendPostRequest("https://api.fly365" + domain + ".com/flight/cart", createCartAPI);
+        //String returnedJsonString = sendPostRequest("https://api.fly365" + domain + ".com/flight/cart", createCartAPI);
+        String returnedJsonString = sendPostRequest("https://nz.fly365" + domain + ".com/api/flight/cart", createCartAPI);
         JSONObject jObject = new JSONObject(returnedJsonString);
-        return jObject.getString("id");
-
+        //return jObject.getString("id");
+        return jObject.get("id").toString();
     }
 
     public static void addPassenger(String cartID, String domain) {
@@ -246,8 +245,8 @@ public class APIUtility extends TestBase {
                 "\"reference\": \"123\",\"passengerType\": \"ADT\",\"frequentFlyerOptions\": {\"airlineCode\": \"code\",\"number\": \"num\"" +
                 "}}],\"customer\": {\"title\": \"Mr\",\"firstName\": \"John\",\"lastName\": \"William\",\"email\": \"john.smith.fly365@gmail.com\"," +
                 "\"mobileNumber\": \"0121234567\"}}";
-        sendPostRequest("https://api.fly365" + domain + ".com/flight/cart/" + cartID + "/passenger", addPassengerDetailsAPI);
-
+        //sendPostRequest("https://api.fly365" + domain + ".com/flight/cart/" + cartID + "/passenger", addPassengerDetailsAPI);
+        sendPostRequest("https://nz.fly365" + domain + ".com/api/flight/cart/" + cartID + "/passenger", addPassengerDetailsAPI);
     }
 
     public static String[] checkoutTrip(String cartID, String domain) {
@@ -272,8 +271,8 @@ public class APIUtility extends TestBase {
                 "    \t\"amount\": 15.8\n" +
                 "    }\n" +
                 "}";
-        String returnedJsonString = sendPostRequest("https://api.fly365" + domain + ".com/flight/cart/" + cartID + "/checkout", addCardDetailsAPI);
-
+        //String returnedJsonString = sendPostRequest("https://api.fly365" + domain + ".com/flight/cart/" + cartID + "/checkout", addCardDetailsAPI);
+        String returnedJsonString = sendPostRequest("https://nz.fly365" + domain + ".com/api/flight/cart/" + cartID + "/checkout", addCardDetailsAPI);
 //To validate that the order no./pnr number is displayed correctly in retrieve my booking
         JSONObject jObject = new JSONObject(returnedJsonString);
         String orderNumber = jObject.getJSONObject("order").get("orderNumber").toString();
@@ -472,6 +471,24 @@ public class APIUtility extends TestBase {
 
         sendPutRequest("https://internal.fly365"+ domain +".com/rules/hold/excluded-airlines", updateHoldExcludedAirlines);
 
+    }
+
+    public String modifyBookingAPI(String url , String departure , String arrival , int addedDays) {
+        String departureDate1 = gmObject.addDateWithCertainPeriodAndFormat(addedDays, "yyyy-MM-dd");
+        String modifyBody = "{\"child\":0,\"adult\":1,\"infant\":0,\"cabinClass\":\"economy\"," +
+                "\"legs\":[{\"origin\":\"" + departure + "\",\"destination\":\"" + arrival + "\",\"departureDate\":\"" + departureDate1 + "\"}]," +
+                "\"oldOrderId\":\"" + orderId + "\"}";
+        String returnedJsonString = sendPostRequest(url, modifyBody);
+        JSONObject jObject = new JSONObject(returnedJsonString);
+        return jObject.toString();
+    }
+
+    public static String createCartModifiedOrder(String store, String domain , String itineraryId, String ditchedOrderId) {
+
+        String createCartModifiedOrderAPI = "{\"itineraryId\": \"" + itineraryId + "\",\"ditchedOrderId\":\"" + ditchedOrderId + "\"}";
+        String returnedJsonString = sendPostRequest("https://" + store +".fly365" + domain + ".com/api/flight/cart", createCartModifiedOrderAPI);
+        JSONObject jObject = new JSONObject(returnedJsonString);
+        return jObject.get("id").toString();
     }
 
 }
