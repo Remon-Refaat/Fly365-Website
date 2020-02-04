@@ -72,6 +72,7 @@ public class APIUtility extends TestBase {
         jsonPathEvaluator = response.jsonPath();
         String bodyStringValue = body.asString();
         return bodyStringValue;
+
     }
 
     public static String sendGetRequest(String requestUrl) {
@@ -94,6 +95,8 @@ public class APIUtility extends TestBase {
                 response.append(line);
             }
             int responseCode = connection.getResponseCode();
+            System.out.println("\nSending 'GET' request to URL : " + url);
+            System.out.println("Response Code : " + responseCode);
             br.close();
             connection.disconnect();
             return response.toString();
@@ -234,8 +237,8 @@ public class APIUtility extends TestBase {
         //String returnedJsonString = sendPostRequest("https://api.fly365" + domain + ".com/flight/cart", createCartAPI);
         String returnedJsonString = sendPostRequest("https://nz.fly365" + domain + ".com/api/flight/cart", createCartAPI);
         JSONObject jObject = new JSONObject(returnedJsonString);
-        //return jObject.getString("id");
-        return jObject.get("id").toString();
+        return jObject.getString("id");
+
     }
 
     public static void addPassenger(String cartID, String domain) {
