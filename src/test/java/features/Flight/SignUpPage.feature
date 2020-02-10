@@ -78,6 +78,7 @@ Feature: Sign Up
       | John       | !@#$%^&   | john.smith.fly365@gmail.com | 12345678 |
       | John       | حرف عربي  | john.smith.fly365@gmail.com | 12345678 |
 
+    @john
   @Sign_Out
   Scenario: Verify that the user can sign up
     And Delete the user "john.smith.fly365@gmail.com" if he exists in the database
