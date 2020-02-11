@@ -47,6 +47,22 @@ For example, SignUp.feature
 - mvn install -Dcucumber.options="--tags @Smoke"
 - mvn -Dbrowser=safari install -Dcucumber.options="--tags @Smoke"
 
+# How to Install git
+- Download updated version from https://git-scm.com/downloads
+- Run dmg file
+- Generate the SSH key through: Run $ ssh-keygen -t rsa -b 4096 -C “your_email@example.com”
+- Start the ssh-agent in the background Run $ eval “$(ssh-agent -s)”
+- Add any password
+- Add GitHub email
+- Copy ssh key through Run $ clip < ~/.ssh/id_rsa.pub
+- Open GitHub account
+- Open Settings
+- Open SSH keys
+- Paste the Key copied and save To make the remote repo accessible from IDE
+- Run git remote add origin ssh://git@example.com:1234/myRepo.git
+- To test connection between github and your IDE Run $ ssh -T git@github.com
+- Open terminal from downloaded repo folder and make initialization through git init
+
 # Selenium Grid
 - Install hub through java -jar selenium-server-standalone-3.141.59.jar -role hub
 - Check hub on selenium grid dashboard through http://localhost:4444/grid/console
@@ -56,15 +72,13 @@ For example, SignUp.feature
 
 # Deploy and Pull Request Process
 
-- Add new changes local [git add *]
+- Add new changes local [git add .]
 - Commit your changes local [git commit -m “upload discount”]
-- Copy your changes [git stash]
-- Pull recent version from master [git pull origin master]
-- Paste your changes again [git stash apply]
+- Create temp branch [git checkout -b discount_branch]
+- Pull project from stage using git pull origin master
 - Resolve conflict if exist
 - Run your new script and ensure everything is Ok
-- Create temp branch [git checkout -b discount_branch]
 - Push your committed changes [git push origin discount_branch]
-- Open pull request on stage-test branch through GitHub
-- Review and merge
+- Open pull request on stage branch through GitHub
+- Review, merge, and delete temp branch
 - Delete temp branch [git branch -d discount_branch]
