@@ -16,8 +16,6 @@ public class SignUpTest extends TestBase {
 
     WebDriverWait wait = new WebDriverWait(driver, 50);
 
-    //private By signUpHDR = By.xpath("//div[@class='text-xs mb-8 text-primary-fourth']");
-    //private By signUpBTN = By.xpath("//li/a[text()='Sign up']");
     private By firstNameTXT = By.xpath("//input[@placeholder='First Name']");
     private By lastNameTXT = By.xpath("//input[@placeholder='Family Name']");
     private By emailTXT = By.xpath("//input[@placeholder='john@example.com']");
@@ -80,10 +78,8 @@ public class SignUpTest extends TestBase {
     @And("The new record set on database")
     public void theNewRecordSetOnDatabase() throws InterruptedException {
         DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com", "user_api", "select email from users where email='john.smith.fly365@gmail.com'");
-        Thread.sleep(4000);
-        System.out.println(DataBase.data);
         Assert.assertEquals(DataBase.data, "john.smith.fly365@gmail.com");
-        //DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "delete from users where email='john.smith.fly365@gmail.com'");
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "delete from users where email='john.smith.fly365@gmail.com'");
     }
 
     @And("^Click on Show beside password$")
@@ -174,13 +170,11 @@ public class SignUpTest extends TestBase {
     }
 
     @And("^Delete the user \"(.*)\" if he exists in the database$")
-    public void deleteTheUserIfHeExistsInTheDatabase(String userEmail) throws Throwable {
+    public void deleteTheUserIfHeExistsInTheDatabase(String userEmail) {
         DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "Select email from users where email = '" + userEmail + "'");
-        Thread.sleep(4000);
         if (DataBase.data != null) {
             DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "delete from users where email='" + userEmail + "'");
         }
-        Thread.sleep(3000);
     }
 
 
