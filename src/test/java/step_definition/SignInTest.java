@@ -31,7 +31,7 @@ public class SignInTest extends TestBase {
     private By emptyPassWordErrorMSG = By.xpath("//div[2]/div[2]//div[2]/span");
     private By EmailErrorMSG = By.xpath("//body[@class='lang-en']/div/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first flex flex-col']/div[@class='form-container py-10']/div[@class='form-layout mx-auto bg-white rounded text-white relative']/div[@class='row']/div[@class='col-13 p-12']/div[@class='flex flex-col text-white']/div[@class='flex flex-col text-white']/form[@class='el-form']/div[@class='form-container']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/span[1]");
     private By HomePageTitle = By.xpath("//a[text()='SIGN IN']");
-    private By SignInHeader = By.xpath("//div[@class='text-xs mb-8 text-primary-fourth']");
+    private By SignInHeader = By.xpath("//div[@class='text-sm mb-8 text-primary-fourth leading-normal']");
 
 
     @Then("^'Sign In' page is opened$")
