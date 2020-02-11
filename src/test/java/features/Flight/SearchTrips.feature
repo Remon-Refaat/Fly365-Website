@@ -40,6 +40,7 @@ Feature: Search for trips and assert on search results
     And Scroll to the end of the page
     Then Check count of search results
 
+
   Scenario: Verify that the system display the the correct search results data for round-trips
     And Select Round Trip trip
     And Add airport to the Origin "Auckland International (AKL), New Zealand"
@@ -51,7 +52,6 @@ Feature: Search for trips and assert on search results
     And Press on Search Now
     And Scroll to the end of the page
     Then The system display results as per search criteria
-
 
   Scenario: Verify that the system display the the correct search results counts for multi-city trips
     And Select Multi City trip

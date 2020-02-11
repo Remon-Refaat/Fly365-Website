@@ -13,10 +13,7 @@ import org.testng.Assert;
 public class SearchResultTest extends TestBase {
     WebDriverWait wait = new WebDriverWait(driver, 60);
 
- //private By  bookThisTripBTN= By.xpath("//span[contains(text(),'BOOK FOR')]");
     private By bookThisTripBTN= By.xpath("(//span[contains(text(),'BOOK FOR')])[3]");
-    //div[@class='text-primary-third container px-0']//div[3]//div[2]//div[3]//div[2]//div[1]//button[1]
-   // private By bookThisTripBTN = By.xpath("//div[@class='search-container']/div[2]//button[contains(text(),'BOOK FOR')]");
     private By stopsFilterBTN = By.xpath("//button[contains(text(),'STOPS')]");
     private By onlyOneStopsLINK = By.xpath("//label[span//div[contains(text(), '1')]]/following-sibling::button");
     private By tripPriceVAL = By.xpath("//div[@id='itin-gp-2-price']");
@@ -28,7 +25,7 @@ public class SearchResultTest extends TestBase {
 
 
     @And("^Choose a trip$")
-    public void chooseATrip() throws InterruptedException {
+    public void chooseATrip() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(bookThisTripBTN));
         tripPrice = driver.findElement(tripPriceVAL).getText();
         driver.findElement(bookThisTripBTN).click();
@@ -61,7 +58,7 @@ public class SearchResultTest extends TestBase {
     }
 
     @Then("^Hold With Value \"([^\"]*)\" is displayed in hold button$")
-    public void holdWithValueIsDisplayedInHoldButton(String holdValue) throws Throwable {
+    public void holdWithValueIsDisplayedInHoldButton(String holdValue) {
         WebElement frstHoldElmnt = driver.findElement(frstHoldBTN);
         holdPrice = driver.findElement(frstHoldBTN).getText().trim();
         Assert.assertTrue(frstHoldElmnt.getText().contains(holdValue));

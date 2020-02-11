@@ -16,7 +16,6 @@ public class AddPayment extends TestBase {
     WebDriverWait wait = new WebDriverWait(driver, 60);
 
     private By PaymentTab = By.xpath("//a[contains(text(),'PAYMENT')]");
-    private By PaymentHeaderTXT = By.xpath("//h3[contains(text(), 'My Credit Cards')]");
     private By AddPaymentBTN = By.xpath("//button[contains(text(),'ADD CREDIT CARD')]");
     private By SavePaymentBTN = By.xpath("//button[contains(text(),'ADD')]");
     private By CardNoTXT = By.xpath("//input[@placeholder='xxxx xxxx xxxx xxxx']");
@@ -37,21 +36,16 @@ public class AddPayment extends TestBase {
 
     @And("^User press on payment tab$")
     public void userPressOnPaymentTab() {
-
         wait.until(ExpectedConditions.visibilityOfElementLocated(PaymentTab));
         driver.findElement(PaymentTab).click();
-        //String pHeaderText = driver.findElement(PaymentHeaderTXT).getText();
-        //wait.until(ExpectedConditions.visibilityOfElementLocated(AddPaymentBTN));
-        //Assert.assertEquals(pHeaderText, "My Credit Cards");
     }
 
     @And("^user press on add payment button$")
     public void userPressOnAddPaymentButton() {
          wait.until(ExpectedConditions.visibilityOfElementLocated(AddPaymentBTN));
         driver.findElement(AddPaymentBTN).click();
-        // wait.until(ExpectedConditions.visibilityOfElementLocated(AddPaymentBTN));
         String SavePaymentBTNText = driver.findElement(SavePaymentBTN).getText();
-        //Assert.assertEquals(SavePaymentBTNText, "ADD");
+        Assert.assertEquals(SavePaymentBTNText, "ADD");
     }
 
     @And("^user add Payment$")
@@ -61,7 +55,7 @@ public class AddPayment extends TestBase {
         driver.findElement(EXPDateTXT).sendKeys("1234");
         driver.findElement(CVVTXT).sendKeys("123");
         driver.findElement(SavePaymentBTN).click();
-        // Assert.assertTrue(driver.findElement(AddedCard).isDisplayed());
+        Assert.assertTrue(driver.findElement(AddedCard).isDisplayed());
 
     }
 
@@ -99,7 +93,7 @@ public class AddPayment extends TestBase {
     }
 
     @And("^Click Save button$")
-    public void clickSaveBuuton() {
+    public void clickSaveButton() {
         driver.findElement(SavePaymentBTN).click();
     }
 

@@ -109,11 +109,9 @@ public class PassengersDetailsTest extends TestBase {
     }
 
     @And("^Click on Next Step$")
-    public void clickOnNextStep() throws InterruptedException {
+    public void clickOnNextStep()  {
         wait.until(ExpectedConditions.visibilityOfElementLocated(passengerComponent));
         driver.findElement(nextStepBTN).click();
-
-
     }
 
 

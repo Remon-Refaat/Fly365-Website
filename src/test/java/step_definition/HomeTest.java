@@ -193,9 +193,8 @@ public class HomeTest extends TestBase {
     }
 
     @And("^Add airport to the Origin \"(.*)\"$")
-    public void addAirportToTheOrigin(String originAirport) throws InterruptedException {
+    public void addAirportToTheOrigin(String originAirport) {
         driver.findElement(originTXT).sendKeys(originAirport);
-        Thread.sleep(3000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(airportSearchResultOrigin));
         driver.findElement(airportSearchResultOrigin).click();
     }

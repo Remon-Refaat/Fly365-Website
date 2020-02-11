@@ -6,7 +6,7 @@ Feature: Go to MyBooking page
 
   @Sign_Out
   Scenario: Verify that the registered user can go to My Booking page
-    And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
+    And insert new user at database "john.smith.fly365@gmail.com" "$2a$10$CBQKVE4xsSFH6mYiUSFiAODo0omGgQQbXV0Vmtngvs84gI0hXZoIC"
     And user enter email "john.smith.fly365@gmail.com"
     And user enter password "@Test123"
     When the user click on login button
@@ -17,7 +17,7 @@ Feature: Go to MyBooking page
   @Sign_Out
    Scenario: Verify that registered user can find his booking in My Bookings page
      And Book a "oneway" trip from API for "stage" and get "flyref"
-     And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
+     And insert new user at database "john.smith.fly365@gmail.com" "$2a$10$CBQKVE4xsSFH6mYiUSFiAODo0omGgQQbXV0Vmtngvs84gI0hXZoIC"
      And user enter email "john.smith.fly365@gmail.com"
      And user enter password "@Test123"
      When the user click on login button
@@ -26,8 +26,8 @@ Feature: Go to MyBooking page
      And delete new user at database "john.smith.fly365@gmail.com"
 
   @Sign_Out
-     Scenario: Verify that user can view booking details thorugh my booking page
-       And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
+     Scenario: Verify that user can view booking details through my booking page
+       And insert new user at database "john.smith.fly365@gmail.com" "$2a$10$CBQKVE4xsSFH6mYiUSFiAODo0omGgQQbXV0Vmtngvs84gI0hXZoIC"
        And user enter email "john.smith.fly365@gmail.com"
        And user enter password "@Test123"
        When the user click on login button

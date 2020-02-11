@@ -4,9 +4,6 @@ import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import helper.DataBase;
-import helper.GeneralMethods;
 import helper.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -24,7 +21,6 @@ public class Redirection extends TestBase {
     private By Menu = By.xpath("//div[@class='el-submenu__title']//img");
     private By settingsBTN = By.xpath("//i[@class='icon-settings']");
     private By holdSettingsBTN = By.xpath("//li[text()='Hold Settings']");
-
 
 
 

@@ -227,7 +227,7 @@ public class FindMyBooking extends TestBase {
 
     @And("^Download the tax invoice pdf$")
     public void downloadTheTaxInvoicePdf() throws InterruptedException {
-        Thread.sleep(16000);
+        Thread.sleep(20000);
         driver.findElement(taxInvoiceBTN).click();
         Thread.sleep(7000);
     }

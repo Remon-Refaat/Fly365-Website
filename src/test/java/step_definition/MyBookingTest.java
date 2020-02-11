@@ -53,7 +53,7 @@ public class MyBookingTest extends TestBase {
         Assert.assertEquals(driver.findElement(homePageHDR).getText(), "Low Fares");
     }
 
-    /*@Then("^The account is verified successfully$")
+    @Then("^The account is verified successfully$")
     public void theAccountIsVerifiedSuccessfully() throws InterruptedException {
         Thread.sleep(8000);
         for (String windowID : driver.getWindowHandles()) {
@@ -67,7 +67,7 @@ public class MyBookingTest extends TestBase {
         }
         Assert.assertEquals(assertion, true);
 
-    }*/
+    }
 
     @Then("^The user can see his booking in my Booking$")
     public void theUserCanSeeHisBookingInMyBooking() {

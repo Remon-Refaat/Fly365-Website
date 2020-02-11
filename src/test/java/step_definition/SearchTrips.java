@@ -89,7 +89,6 @@ public class SearchTrips extends TestBase {
         List result = driver.findElements(flightOptionsHDR);
         String displayedCount = String.valueOf(result.size());
         Assert.assertEquals(displayedCount, count);
-
     }
 
     @Then("^The system display results as per search criteria$")

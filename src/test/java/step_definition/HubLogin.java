@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import step_definition.RetrieveYourFlightBookingTest.*;
 
 public class HubLogin extends TestBase {
 
@@ -39,7 +40,6 @@ public class HubLogin extends TestBase {
     private By ticketLST = By.xpath("//div[@class='tickets-container mb-5']");
     private By orderNumberTXT = By.id("Order number");
     private By submitSearchBTN = By.xpath("//input[@name='submit']");
-    //private By quickSearchTXT = By.xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/input[1]");
     private By quickSearchTXT = By.xpath("//input[@placeholder='Enter PNR or Order No. or Order Rf. or customer email']");
     private By frstQuickSearchItem = By.xpath("//li[contains(@id ,'el-autocomplete')]");
     private By frstOrder = By.xpath("//span[@xpath='1']");
@@ -47,7 +47,7 @@ public class HubLogin extends TestBase {
 
     @And("^Open hub login page$")
     public void openHubLoginPage() {
-        driver.navigate().to("https://hub.fly365stage.com/");
+        driver.navigate().to("https://hub.fly365stage.com/login?redirect=/");
     }
 
 
@@ -197,7 +197,7 @@ public class HubLogin extends TestBase {
         driver.findElement(quickSearchTXT).sendKeys(Keys.ENTER);
     }
     @And("^Search for booking returned in \"([^\"]*)\" Quick Search$")
-    public void searchForBookingReturnedInQuickSearch(String order) throws Throwable {
+    public void searchForBookingReturnedInQuickSearch(String order){
         String orderNumber = null;
         if(order.equalsIgnoreCase("booking pnr response")){
             orderNumber = HomeTest.pnrNumberCheckoutResponse;

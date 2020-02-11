@@ -1,3 +1,4 @@
+
 Feature: Booking a Trip for Anonymous User
 
   Background:
@@ -27,10 +28,11 @@ Feature: Booking a Trip for Anonymous User
     Then The total fare is the same before and after the booking
 
   Scenario: Verify that the user can retrieve his booking from Find my Booking (Round Trip)
-    And Select One Way trip
+    And Select Round Trip trip
     And Add airport to the Origin "Cairo International Airport (CAI), Egypt"
     And Add airport to the Destination "Dublin International (DUB), Ireland"
-    And Select the date of the departure, after "5" day from today
+    And Select the date of the departure for round trip, after "5" day from today
+    And Select the date of the return for round trip, after "15" day from today
     And Press on Search Now
     And Get the price of the trip
     And Choose a trip
@@ -62,6 +64,7 @@ Feature: Booking a Trip for Anonymous User
     And Add airport to the Destination "Dublin International (DUB), Ireland"
     And Select the date of the departure, after "5" day from today
     And Press on Search Now
+    And Get the price of the trip
     And Choose a trip
     And Add the following data in the passenger Details
       | Title | First Name | Middle Name | Last Name | Day | Month    | Year |
@@ -137,7 +140,6 @@ Feature: Booking a Trip for Anonymous User
     And login into hub with super admin
     And Open menu
     And Open  "BackOffice"
-    #And Search for Order Number from Quick Search Through UI
     And Search for booking returned in "retrieved booking pnr" Quick Search
     And Click on Edit Traveler Icon
     And Assert that seat is "Aisle Seat Request" and meal "SEA FOOD MEAL" and assistance is "WHEELCHAIR - CANNOT CLIMB STAIRS"
