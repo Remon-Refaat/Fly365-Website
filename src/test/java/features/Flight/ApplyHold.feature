@@ -1,3 +1,4 @@
+@holdAllTest
 Feature: Apply Hold on Bookings
 
   Scenario: Verify Hold button is not displayed if departure is less than minimum hours before departure and ticketing
@@ -119,12 +120,11 @@ Feature: Apply Hold on Bookings
       And Make Search from API
      Then Assert itineraries has hold
 
-
   Scenario: Verify hold isn't applied on itineraries when hold value is 0
     Given  Navigate to Fly "stage" site
     When Set Data on stage for hold Rule API through fly365_nz and exclude "sv"
       | Min hours before departure |  | Min hours before ticketing |  | Hold hours |  | Hold status |  | hold value |
-      | 72                         |  | 72                         |  | 90      |  | true |  | 0         |
+      | 72                         |  | 72                         |  | 96      |  | true |  | 0         |
     And Make Search from API
     Then Itineraries does not have hold
 

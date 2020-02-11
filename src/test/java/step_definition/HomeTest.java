@@ -1,7 +1,6 @@
 package step_definition;
 
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -14,7 +13,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import step_definition.FlightAndHubAPIs.BookingCycleAPI;
 
+import java.io.IOException;
 import java.util.Map;
 
 public class HomeTest extends TestBase {
@@ -22,11 +23,11 @@ public class HomeTest extends TestBase {
     WebDriverWait wait = new WebDriverWait(driver, 30);
     GeneralMethods gmObject = new GeneralMethods();
     APIUtility apiObject = new APIUtility();
+    BookingCycleAPI bookingApiObj = new BookingCycleAPI();
     ConfirmationTest ctobject = new ConfirmationTest();
     public static String orderNumber = null;
     public static String pnrNumber = null;
     public static String currentWindow = driver.getWindowHandle();
-
 
 
     private By aboutUsLINK = By.xpath("//a[text()='About us']");
@@ -236,28 +237,32 @@ public class HomeTest extends TestBase {
 
 
     @And("^Book a \"(.*)\" trip from API for \"(.*)\" and get \"(.*)\"$")
-    public void bookATripFromAPIForAndGet(String tripType , String domain, String reference) {
+    public void bookATripFromAPIForAndGet(String tripType , String domain, String reference) throws IOException {
         //String requestUrl = "https://api.fly365" + domain + ".com/flight-search/search";
         String requestUrl = "https://nz.fly365" + domain + ".com/api/flight-search/search";
         String allAvailableTrips = null;
         if(tripType.contains("multi")){
-            allAvailableTrips = apiObject.sendPostRequest(requestUrl, apiObject.multiCityAPI());
+            allAvailableTrips = apiObject.sendRequestFlight(requestUrl, bookingApiObj.multiCityAPI(),"post");
         }
         else if(tripType.contains("round")){
-            allAvailableTrips = apiObject.sendPostRequest(requestUrl, apiObject.roundTripAPI());
+            allAvailableTrips = apiObject.sendRequestFlight(requestUrl, bookingApiObj.roundTripAPI(),"post");
         }
         else if(tripType.contains("one")){
-            allAvailableTrips = apiObject.sendPostRequest(requestUrl, apiObject.oneWayAPI());
+            allAvailableTrips = apiObject.sendRequestFlight(requestUrl, bookingApiObj.oneWayAPI(), "post");
         }
-        String itinaryID = apiObject.getItineraryId(allAvailableTrips, 1);
-        String cardID = apiObject.createCart(itinaryID, domain);
-        apiObject.addPassenger(cardID, domain);
-        if (reference.equals("order")) {
-            orderNumber = apiObject.checkoutTrip(cardID, domain)[0];
+        String itinaryID = bookingApiObj.getItineraryId(allAvailableTrips, 1);
+        String cardID = bookingApiObj.createCart(itinaryID, domain);
+        bookingApiObj.addPassenger(cardID, domain);
+        String[] checkoutResponse = bookingApiObj.checkoutTrip(cardID, domain);
+        orderNumber = checkoutResponse[0];
+        String orderIdCheckoutResponse = checkoutResponse[1];
+        System.out.println(orderNumber + orderIdCheckoutResponse );
+        /*if (reference.equals("order")) {
+            orderNumber = bookingApiObj.checkoutTrip(cardID, domain)[0];
         }
-        if (reference.equals("Fly365 Reference")) {
-            pnrNumber = apiObject.checkoutTrip(cardID, domain)[1];
-        }
+        if (reference.eqxuals("Fly365 Reference")) {
+            pnrNumber = bookingApiObj.checkoutTrip(cardID, domain)[1];
+        }*/
     }
 
 

@@ -27,9 +27,9 @@ public class SignInTest extends TestBase {
     private By LogoutBTN = By.xpath("//li[contains(text(),'Sign Out')]");
     private By AccountSettingBTN = By.xpath("//a[@class='account-links__link text-sm flex font-medium items-center link link-with-icon']");
     private By InvalidLogInMSG = By.xpath("//div[@class='tooltip error error']//span[@class='tooltiptext']");
-    private By PassWordErrorMSG = By.xpath("//span[@class='tooltiptext with-arrow']");
+    private By PassWordErrorMSG = By.xpath("//body[@class='lang-en']/div/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first flex flex-col']/div[@class='form-container py-10']/div[@class='form-layout mx-auto bg-white rounded text-white relative']/div[@class='row']/div[@class='col-13 p-12']/div[@class='flex flex-col text-white']/div[@class='flex flex-col text-white']/form[@class='el-form']/div[@class='form-container']/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/span[1]");
     private By emptyPassWordErrorMSG = By.xpath("//div[2]/div[2]//div[2]/span");
-    private By EmailErrorMSG = By.xpath("//span[@class='tooltiptext with-arrow']");
+    private By EmailErrorMSG = By.xpath("//body[@class='lang-en']/div/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first flex flex-col']/div[@class='form-container py-10']/div[@class='form-layout mx-auto bg-white rounded text-white relative']/div[@class='row']/div[@class='col-13 p-12']/div[@class='flex flex-col text-white']/div[@class='flex flex-col text-white']/form[@class='el-form']/div[@class='form-container']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/span[1]");
     private By HomePageTitle = By.xpath("//a[text()='SIGN IN']");
     private By SignInHeader = By.xpath("//div[@class='text-xs mb-8 text-primary-fourth']");
 
@@ -83,18 +83,18 @@ public class SignInTest extends TestBase {
     @Then("^user shall see InValid Login Error Message$")
     public void userShallSeeInValidLogInErrorMessage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(InvalidLogInMSG));
-        WebElement ErrorMessage = driver.findElement(InvalidLogInMSG);
-        Assert.assertTrue(ErrorMessage.isDisplayed());
+        //WebElement ErrorMessage = driver.findElement(InvalidLogInMSG);
+        //Assert.assertTrue(ErrorMessage.isDisplayed());
         String InValidLoginMSGText = driver.findElement(InvalidLogInMSG).getText();
-        Assert.assertEquals(InValidLoginMSGText, "!Invalid login information, please check and try again.");
+        Assert.assertEquals(InValidLoginMSGText, "!invalid login information, please check and try again");
 
     }
 
     @Then("^user shall see password too short error message$")
     public void userShallSeePasswordTooShortErrorMessage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(PassWordErrorMSG));
-        WebElement passWordErrorMessage = driver.findElement(PassWordErrorMSG);
-        Assert.assertTrue(passWordErrorMessage.isDisplayed());
+        //WebElement passWordErrorMessage = driver.findElement(PassWordErrorMSG);
+        //Assert.assertTrue(passWordErrorMessage.isDisplayed());
         String PassWordErrorMSGText = driver.findElement(PassWordErrorMSG).getText();
         Assert.assertEquals(PassWordErrorMSGText, "!password is too short (minimum is 8 characters)");
     }
@@ -102,8 +102,8 @@ public class SignInTest extends TestBase {
     @Then("^user shall see password too long error message$")
     public void userShallSeePasswordTooLongErrorMessage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(PassWordErrorMSG));
-        WebElement passWordErrorMessage = driver.findElement(PassWordErrorMSG);
-        Assert.assertTrue(passWordErrorMessage.isDisplayed());
+        //WebElement passWordErrorMessage = driver.findElement(PassWordErrorMSG);
+        //Assert.assertTrue(passWordErrorMessage.isDisplayed());
         String PassWordErrorMSGText = driver.findElement(PassWordErrorMSG).getText();
         Assert.assertEquals(PassWordErrorMSGText, "!password is too long (maximum is 50 characters)");
     }
@@ -123,8 +123,8 @@ public class SignInTest extends TestBase {
     @Then("^user shall see email empty error message$")
     public void userShallSeeEmptyEmailErrorMessage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(EmailErrorMSG));
-        WebElement emailErrorMessage = driver.findElement(EmailErrorMSG);
-        Assert.assertTrue(emailErrorMessage.isDisplayed());
+        //WebElement emailErrorMessage = driver.findElement(EmailErrorMSG);
+        //Assert.assertTrue(emailErrorMessage.isDisplayed());
         String EMailErrorMSGText = driver.findElement(EmailErrorMSG).getText();
         Assert.assertEquals(EMailErrorMSGText, "!Please enter a valid email");
     }
@@ -132,8 +132,8 @@ public class SignInTest extends TestBase {
     @Then("^user shall see email error message$")
     public void userShallSeeEmailErrorMessage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(EmailErrorMSG));
-        WebElement emailErrorMessage = driver.findElement(EmailErrorMSG);
-        Assert.assertTrue(emailErrorMessage.isDisplayed());
+        //WebElement emailErrorMessage = driver.findElement(EmailErrorMSG);
+        //Assert.assertTrue(emailErrorMessage.isDisplayed());
         String EMailErrorMSGText = driver.findElement(EmailErrorMSG).getText();
         Assert.assertEquals(EMailErrorMSGText, "!Please enter a valid email");
     }

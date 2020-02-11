@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 
@@ -259,24 +260,24 @@ public class SearchTrips extends TestBase {
 
 
     @And("^Check Flight Details for one way from API$")
-    public void checkFlightDetailsForOneWayFromAPI() {
-        String itineraryResults = apiObj.sendPostRequest("https://api.fly365stage.com/flight-search/search", oneWayTripAPI());
+    public void checkFlightDetailsForOneWayFromAPI() throws IOException {
+        String itineraryResults = apiObj.sendRequestFlight("https://api.fly365stage.com/flight-search/search", oneWayTripAPI(), "post");
         getDetailsOfItinerary(itineraryResults, 1);
         getDetailsOfLegs(itineraryResults);
         getDetailsOfSegments(itineraryResults);
     }
 
     @And("^Check Flight Details for round trip from API$")
-    public void checkFlightDetailsForRoundTripFromAPI() {
-        String itineraryResults = apiObj.sendPostRequest("https://api.fly365stage.com/flight-search/search", roundTripAPI());
+    public void checkFlightDetailsForRoundTripFromAPI() throws IOException {
+        String itineraryResults = apiObj.sendRequestFlight("https://api.fly365stage.com/flight-search/search", roundTripAPI() , "post");
         getDetailsOfItinerary(itineraryResults, 1);
         getDetailsOfLegs(itineraryResults);
         getDetailsOfSegments(itineraryResults);
     }
 
     @And("^Check Flight Details for multi city trip from API$")
-    public void checkFlightDetailsForMultiCityTripFromAPI() {
-        String itineraryResults = apiObj.sendPostRequest("https://api.fly365stage.com/flight-search/search", multiCityAPI());
+    public void checkFlightDetailsForMultiCityTripFromAPI() throws IOException {
+        String itineraryResults = apiObj.sendRequestFlight("https://api.fly365stage.com/flight-search/search", multiCityAPI(), "post");
         getDetailsOfItinerary(itineraryResults, 1);
         getDetailsOfLegs(itineraryResults);
         getDetailsOfSegments(itineraryResults);

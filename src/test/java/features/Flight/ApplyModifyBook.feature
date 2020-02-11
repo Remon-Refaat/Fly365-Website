@@ -1,13 +1,12 @@
+@modifyTestAll
 Feature: Apply Modify on Bookings
 
 
   Scenario: Modify order through API
     Given Navigate to "NZ" Fly365 "stage" site
-    Given Delete All Rules
+    #Given Delete All Rules
     And Book a "one way" trip from API for "stage" and get "order"
-    And Get data for this booking "john.smith.fly365@gmail.com"
-    And Get StoreID
-    And Create "Active" "Refundable" Rule from API for "stage"
+    And Create "Active" "Refundable" Rule from API for "stage" matched with booking
     And Modify the booking with this data through api
       | store |  | environment |  | SearchDateAfter| | departure | | arrival |
       | nz    |  | stage          |  | 15             | | JED       | | CAI     |
@@ -16,11 +15,9 @@ Feature: Apply Modify on Bookings
 
     Scenario: Verify that user can modify a booking when there is a rule matched
       Given Navigate to "NZ" Fly365 "stage" site
-      Given Delete All Rules
+      #Given Delete All Rules
       And Book a "one way" trip from API for "stage" and get "order"
-      And Get data for this booking "john.smith.fly365@gmail.com"
-      And Get StoreID
-      And Create "Active" "Refundable" Rule from API for "stage"
+      And Create "Active" "Refundable" Rule from API for "stage" matched with booking
       And Click on Find My Booking
       And Add a valid email address "john.smith.fly365@gmail.com"
       And Add a valid "orderNumber"
@@ -40,18 +37,15 @@ Feature: Apply Modify on Bookings
 
   Scenario: Verify user can't modify modified order & can send case only
     Given Navigate to "NZ" Fly365 "stage" site
-    Given Delete All Rules
+    #Given Delete All Rules
     And Book a "one way" trip from API for "stage" and get "order"
-    And Get data for this booking "john.smith.fly365@gmail.com"
-    And Get StoreID
-    And Create "Active" "Refundable" Rule from API for "stage"
+    And Create "Active" "Refundable" Rule from API for "stage" matched with booking
     And Modify the booking with this data through api
       | store |  | environment |  | SearchDateAfter| | departure | | arrival |
       | nz    |  | stage          |  | 15             | | JED       | | CAI     |
     And Book the new order through api on store "nz" and the environment "stage" and get "order"
-    And Get data for this booking with this email "john.smith.fly365@gmail.com" and "modifiedOrderNumber"
     And Delete Created Rule From Database
-    And Create "Active" "Refundable" Rule from API for "stage"
+    And Create "Active" "Refundable" Rule from API for "stage" matched with booking
     And Click on Find My Booking
     And Add a valid email address "john.smith.fly365@gmail.com"
     And Add a valid "modifiedOrderNumber"
@@ -64,18 +58,15 @@ Feature: Apply Modify on Bookings
 
   Scenario: Verify user can't cancel modified order & can send case only
     Given Navigate to "NZ" Fly365 "stage" site
-    Given Delete All Rules
+    #Given Delete All Rules
     And Book a "one way" trip from API for "stage" and get "order"
-    And Get data for this booking "john.smith.fly365@gmail.com"
-    And Get StoreID
-    And Create "Active" "Refundable" Rule from API for "stage"
+    And Create "Active" "Refundable" Rule from API for "stage" matched with booking
     And Modify the booking with this data through api
       | store |  | environment |  | SearchDateAfter| | departure | | arrival |
       | nz    |  | stage          |  | 15             | | JED       | | CAI     |
     And Book the new order through api on store "nz" and the environment "stage" and get "order"
-    And Get data for this booking with this email "john.smith.fly365@gmail.com" and "modifiedOrderNumber"
     And Delete Created Rule From Database
-    And Create "Active" "Refundable" Rule from API for "stage"
+    And Create "Active" "Refundable" Rule from API for "stage" matched with booking
     And Click on Find My Booking
     And Add a valid email address "john.smith.fly365@gmail.com"
     And Add a valid "modifiedOrderNumber"
@@ -88,11 +79,9 @@ Feature: Apply Modify on Bookings
 
   Scenario: Verify old order will have status cancel
     Given Navigate to "NZ" Fly365 "stage" site
-    Given Delete All Rules
+    #Given Delete All Rules
     And Book a "one way" trip from API for "stage" and get "order"
-    And Get data for this booking "john.smith.fly365@gmail.com"
-    And Get StoreID
-    And Create "Active" "Refundable" Rule from API for "stage"
+    And Create "Active" "Refundable" Rule from API for "stage" matched with booking
     And Modify the booking with this data through api
       | store |  | environment |  | SearchDateAfter| | departure | | arrival |
       | nz    |  | stage          |  | 15             | | JED       | | CAI     |
@@ -106,11 +95,9 @@ Feature: Apply Modify on Bookings
 
   Scenario: Verify old order can't be cancel
     Given Navigate to "NZ" Fly365 "stage" site
-    Given Delete All Rules
+    #Given Delete All Rules
     And Book a "one way" trip from API for "stage" and get "order"
-    And Get data for this booking "john.smith.fly365@gmail.com"
-    And Get StoreID
-    And Create "Active" "Refundable" Rule from API for "stage"
+    And Create "Active" "Refundable" Rule from API for "stage" matched with booking
     And Modify the booking with this data through api
       | store |  | environment |  | SearchDateAfter| | departure | | arrival |
       | nz    |  | stage          |  | 15             | | JED       | | CAI     |
@@ -125,11 +112,9 @@ Feature: Apply Modify on Bookings
 
   Scenario: Verify old order can't be modified again
     Given Navigate to "NZ" Fly365 "stage" site
-    Given Delete All Rules
+    #Given Delete All Rules
     And Book a "one way" trip from API for "stage" and get "order"
-    And Get data for this booking "john.smith.fly365@gmail.com"
-    And Get StoreID
-    And Create "Active" "Refundable" Rule from API for "stage"
+    And Create "Active" "Refundable" Rule from API for "stage" matched with booking
     And Modify the booking with this data through api
       | store |  | environment |  | SearchDateAfter| | departure | | arrival |
       | nz    |  | stage          |  | 15             | | JED       | | CAI     |
@@ -143,11 +128,9 @@ Feature: Apply Modify on Bookings
 
   Scenario: Verify user can't change origin country
     Given Navigate to "NZ" Fly365 "stage" site
-    Given Delete All Rules
+    #Given Delete All Rules
     And Book a "one way" trip from API for "stage" and get "order"
-    And Get data for this booking "john.smith.fly365@gmail.com"
-    And Get StoreID
-    And Create "Active" "Refundable" Rule from API for "stage"
+    And Create "Active" "Refundable" Rule from API for "stage" matched with booking
     And Modify the booking with this data through api
       | store |  | environment |  | SearchDateAfter| | departure | | arrival |
       | nz    |  | stage          |  | 15             | | DXB       | | CAI     |
@@ -156,11 +139,9 @@ Feature: Apply Modify on Bookings
 
   Scenario: Verify only itineraries with same carrier code of old booking returned in response while modifying order
     Given Navigate to "NZ" Fly365 "stage" site
-    Given Delete All Rules
+    #Given Delete All Rules
     And Book a "one way" trip from API for "stage" and get "order"
-    And Get data for this booking "john.smith.fly365@gmail.com"
-    And Get StoreID
-    And Create "Active" "Refundable" Rule from API for "stage"
+    And Create "Active" "Refundable" Rule from API for "stage" matched with booking
     And Modify the booking with this data through api
       | store |  | environment |  | SearchDateAfter| | departure | | arrival |
       | nz    |  | stage          |  | 15             | | JED       | | CAI     |

@@ -10,16 +10,21 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import step_definition.FlightAndHubAPIs.BookingCycleAPI;
+import step_definition.FlightAndHubAPIs.ModifyBookingAPI;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 public class ApplyModifyTest extends TestBase {
     WebDriverWait wait = new WebDriverWait(driver, 30);
     APIUtility apiObj = new APIUtility();
-    private static String returnedMyBookJson = null;
+    ModifyBookingAPI modifyApiObj = new ModifyBookingAPI();
+    BookingCycleAPI bookingApiObj = new BookingCycleAPI();
 
+    private static String returnedMyBookJson = null;
+    String carrierCode = null;
     private static String modifiedItineraryID = null;
     public static String modifiedOrderNumberFromApi = null;
     public static String modifiedPnrNumberFromApi = null;
@@ -35,7 +40,7 @@ public class ApplyModifyTest extends TestBase {
     private By dimmedChangeBookBTN = By.xpath("//div[text()='Change Booking']/ancestor::li");
 
     @And("^Modify the booking with this data through api$")
-    public void modifyTheBookingWithThisDataThroughApi(DataTable Data) {
+    public void modifyTheBookingWithThisDataThroughApi(DataTable Data) throws IOException {
         for (Map<String, String> modifySearchData : Data.asMaps(String.class, String.class)) {
             String store = modifySearchData.get("store");
             String environment = modifySearchData.get("environment");
@@ -44,10 +49,10 @@ public class ApplyModifyTest extends TestBase {
             String arrival = modifySearchData.get("arrival");
             int addedDaysToInt = Integer.parseInt(addedDays);
             String modifyApiUrl = "https://"+store+".fly365"+environment+".com/api/flight-search/modify";
-            String availableTrips =  apiObj.modifyBookingAPI(modifyApiUrl , departure , arrival , addedDaysToInt);
+            String availableTrips =  modifyApiObj.modifyBookingAPI(modifyApiUrl , departure , arrival , addedDaysToInt);
 
             try{
-                modifiedItineraryID = apiObj.getItineraryId(availableTrips, 1);
+                modifiedItineraryID = bookingApiObj.getItineraryId(availableTrips, 1);
             }catch (Exception e){
                 System.out.println(e.getMessage());
             }
@@ -59,12 +64,12 @@ public class ApplyModifyTest extends TestBase {
 
     @And("^Book the new order through api on store \"([^\"]*)\" and the environment \"([^\"]*)\" and get \"([^\"]*)\"$")
     public void bookTheNewOrderThroughApiOnStoreAndTheEnvironmentAndGet(String store, String environment, String reference) throws Throwable {
-        String cardID = apiObj.createCartModifiedOrder(store , environment , modifiedItineraryID , apiObj.orderId);
+        String cardID = modifyApiObj.createCartModifiedOrder(store , environment , modifiedItineraryID , BookingCycleAPI.orderIdCheckoutResponse);
         if (reference.equals("order")) {
-            modifiedOrderNumberFromApi = apiObj.checkoutTrip(cardID, environment)[0];
+            modifiedOrderNumberFromApi = bookingApiObj.checkoutTrip(cardID, environment)[0];
         }
         if (reference.equals("Fly365 Reference")) {
-            modifiedPnrNumberFromApi = apiObj.checkoutTrip(cardID, environment)[1];
+            modifiedPnrNumberFromApi = bookingApiObj.checkoutTrip(cardID, environment)[1];
         }
     }
 
@@ -84,14 +89,6 @@ public class ApplyModifyTest extends TestBase {
     public void yourBookingHasBenChangedSuccessfulMessageIsDisplayed() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(modificationConfirmationSuccessfulMSG));
         Assert.assertTrue(driver.findElement(modificationConfirmationSuccessfulMSG).isDisplayed());
-    }
-
-    @And("^Get data for this booking with this email \"([^\"]*)\" and \"([^\"]*)\"$")
-    public void getDataForThisBookingWithThisEmailAnd(String email, String reference) throws Throwable {
-        if(reference.equalsIgnoreCase("modifiedOrderNumber")){
-            returnedMyBookJson = APIUtility.getTripResponse(email , modifiedOrderNumberFromApi);
-        }
-        APIUtility.getstoreId(returnedMyBookJson);
     }
 
     @Then("^Modification Request Is sent Successfully$")
@@ -138,7 +135,8 @@ public class ApplyModifyTest extends TestBase {
     public void assertAllReturnedItinerariesHaveTheSameCarrierCode() {
         List<String> carrierCodes = apiObj.jsonPathEvaluator.getList("itineraries.carrier.code");
         for (String carrier : carrierCodes) {
-            Assert.assertEquals(carrier ,apiObj.carrierCode);
+            Assert.assertEquals(carrier ,bookingApiObj.carrierCode);
         }
     }
+
 }

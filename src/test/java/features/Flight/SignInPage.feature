@@ -61,7 +61,7 @@ Feature: login to account
   @Sign_Out
   Scenario: Login into account with correct Upper case email
     And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
-    And user enter email "john.smith.fly365@gmail.com"
+    And user enter email "JOHN.SMITH.FLY365@GMAIL.COM"
     And user enter password "@Test123"
     When the user click on login button
     Then the user shall be redirect to my booking page
