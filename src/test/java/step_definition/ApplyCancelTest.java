@@ -130,6 +130,7 @@ public class ApplyCancelTest extends TestBase {
         DataBase.execute_query_dbs(hostName, dbsName, "select * from rules where \"name\" = '" + nameWithoutCase + "' ");
         if (DataBase.data != null){
             DataBase.execute_query_dbs(hostName, dbsName, "delete from rules where \"name\" = '" + nameWithoutCase +"'");
+
         }
     }
 

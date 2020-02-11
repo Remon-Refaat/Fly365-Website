@@ -13,10 +13,13 @@ import org.testng.Assert;
 public class SearchResultTest extends TestBase {
     WebDriverWait wait = new WebDriverWait(driver, 60);
 
-    private By bookThisTripBTN = By.xpath("//div[@class='search-container']/div[2]//button[contains(text(),'BOOK FOR')]");
+ //private By  bookThisTripBTN= By.xpath("//span[contains(text(),'BOOK FOR')]");
+    private By bookThisTripBTN= By.xpath("(//span[contains(text(),'BOOK FOR')])[3]");
+    //div[@class='text-primary-third container px-0']//div[3]//div[2]//div[3]//div[2]//div[1]//button[1]
+   // private By bookThisTripBTN = By.xpath("//div[@class='search-container']/div[2]//button[contains(text(),'BOOK FOR')]");
     private By stopsFilterBTN = By.xpath("//button[contains(text(),'STOPS')]");
     private By onlyOneStopsLINK = By.xpath("//label[span//div[contains(text(), '1')]]/following-sibling::button");
-    private By tripPriceVAL = By.xpath("//div[contains(@class,'result-group')][2]//div[contains(@id,'-price')]");
+    private By tripPriceVAL = By.xpath("//div[@id='itin-gp-2-price']");
     private By frstHoldBTN = By.xpath("/html/body/div[1]/div/div[2]/div/div[3]/div/div[2]/div[2]/div[2]/div[2]/div/button[1]");
 
 
@@ -25,7 +28,7 @@ public class SearchResultTest extends TestBase {
 
 
     @And("^Choose a trip$")
-    public void chooseATrip() {
+    public void chooseATrip() throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOfElementLocated(bookThisTripBTN));
         tripPrice = driver.findElement(tripPriceVAL).getText();
         driver.findElement(bookThisTripBTN).click();

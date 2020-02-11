@@ -15,20 +15,20 @@ import java.util.Map;
 public class AddPayment extends TestBase {
     WebDriverWait wait = new WebDriverWait(driver, 60);
 
-    private By PaymentTab = By.xpath("//a[@class='account-links__link flex text-sm items-center link link-with-icon mr-5']");
-    private By PaymentHeaderTXT = By.xpath("//h3[@class='text-xl font-bold']");
-    private By AddPaymentBTN = By.xpath("//button[@class='btn px-3 py-2 m-auto md:mt-0 mt-4 btn-primary-second']");
-    private By SavePaymentBTN = By.xpath("//button[@class='btn btn-primary-second add-button']");
+    private By PaymentTab = By.xpath("//a[contains(text(),'PAYMENT')]");
+    private By PaymentHeaderTXT = By.xpath("//h3[contains(text(), 'My Credit Cards')]");
+    private By AddPaymentBTN = By.xpath("//button[contains(text(),'ADD CREDIT CARD')]");
+    private By SavePaymentBTN = By.xpath("//button[contains(text(),'ADD')]");
     private By CardNoTXT = By.xpath("//input[@placeholder='xxxx xxxx xxxx xxxx']");
     private By CardHolderTXT = By.xpath("//input[@placeholder='John Doe']");
     private By EXPDateTXT = By.xpath("//input[@placeholder='MM/YY']");
     private By CVVTXT = By.xpath("//input[@placeholder='123']");
-    private By AddedCard = By.xpath("//button[text()='ADD']");
-    private By DeleteCardBTN = By.xpath("//button[text()='REMOVE CARD']");
+    private By AddedCard = By.xpath("//button[@class='btn btn-primary-second add-button']");
+    private By DeleteCardBTN = By.xpath("//button[contains(text(),'REMOVE CARD')]");
     private By ConfirmDeleteCardBTN = By.xpath("//button[@class='btn btn-primary-second w-32 ml-2']");
     private By ConfirmDeleteTXT = By.xpath("//h3[@class='mt-8 text-xl mb-2 font-bold flex justify-center']");
-    private By selectDefaultBTN = By.xpath("//button[text()='SELECT DEFAULT']");
-    private By cancelBTN = By.xpath("//button[text()='CANCEL']");
+    private By selectDefaultBTN = By.xpath("//button[contains(text(),'SELECT DEFAULT')]");
+    private By cancelBTN = By.xpath("//button[contains(text(),'CANCEL')]");
     private By cardAddSuccMSG = By.xpath("//p[contains(text(),'Card addedd successfully')]");
 
     private String hostName = "k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432";
@@ -40,14 +40,14 @@ public class AddPayment extends TestBase {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(PaymentTab));
         driver.findElement(PaymentTab).click();
-        String pHeaderText = driver.findElement(PaymentHeaderTXT).getText();
+        //String pHeaderText = driver.findElement(PaymentHeaderTXT).getText();
         //wait.until(ExpectedConditions.visibilityOfElementLocated(AddPaymentBTN));
         //Assert.assertEquals(pHeaderText, "My Credit Cards");
     }
 
     @And("^user press on add payment button$")
     public void userPressOnAddPaymentButton() {
-        // wait.until(ExpectedConditions.visibilityOfElementLocated(AddPaymentBTN));
+         wait.until(ExpectedConditions.visibilityOfElementLocated(AddPaymentBTN));
         driver.findElement(AddPaymentBTN).click();
         // wait.until(ExpectedConditions.visibilityOfElementLocated(AddPaymentBTN));
         String SavePaymentBTNText = driver.findElement(SavePaymentBTN).getText();

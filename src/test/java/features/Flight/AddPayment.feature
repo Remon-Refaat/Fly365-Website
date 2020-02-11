@@ -34,7 +34,7 @@ Feature: Add Payment to Login user
     And user press on add payment button
     And Add the following payment card details
       | Card Number        | Holder Name | Expiry Date | CVV |
-      | 424242424242424242 | John Smith  | 1234        | 123 |
+      | 4000068558002134| John Smith  | 1234        | 123 |
     And Click Save button
     And Delete new payment from website
     And Success message is displayed

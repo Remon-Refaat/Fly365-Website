@@ -20,7 +20,7 @@ public class SignInTest extends TestBase {
     private Faker fakerLogin = new Faker();
 
     private By LoginBTN = By.xpath("//button[contains(text(),'Login')]");
-    private By LoginHeaderBTN = By.xpath("//a[text()='SIGN IN']");
+    private By LoginHeaderBTN = By.xpath("//a[contains(text(),'SIGN IN')]");
     private By LoginEmailTXT = By.xpath("//input[@placeholder='john@example.com']");
     private By LoginPassWordTXT = By.xpath("//input[@placeholder='******************']");
     private By ProfileNameBTN = By.xpath("//span[@class='el-dropdown-link capitalize text-xs text-white el-dropdown-selfdefine']");
@@ -31,7 +31,7 @@ public class SignInTest extends TestBase {
     private By emptyPassWordErrorMSG = By.xpath("//div[2]/div[2]//div[2]/span");
     private By EmailErrorMSG = By.xpath("//span[@class='tooltiptext with-arrow']");
     private By HomePageTitle = By.xpath("//a[text()='SIGN IN']");
-    private By SignInHeader = By.xpath("//div[@class='text-xs mb-8 text-primary-fourth']");
+    private By SignInHeader = By.xpath("//div[@class='text-sm mb-8 text-primary-fourth leading-normal']");
 
 
     @Then("^'Sign In' page is opened$")

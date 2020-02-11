@@ -99,7 +99,7 @@ Feature: Apply Cancel on Bookings
     And login into hub with super admin
     And open Back office
     And Open Orders
-    And Search for Order Number from Quick Search
+    And Search for booking returned in "booking pnr response" Quick Search
     Then Order Details Will Have To be Refunded status
     And Delete Created Rule From Database
 

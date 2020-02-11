@@ -1,6 +1,7 @@
 package step_definition;
 
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import helper.DataBase;
@@ -16,19 +17,20 @@ public class SignUpTest extends TestBase {
 
     WebDriverWait wait = new WebDriverWait(driver, 50);
 
+    private By signinBTN = By.xpath("//a[@class='text-black w-24 text-center block float-right hover:text-white bg-white btn hover:bg-primary-second font-normal py-2 px-5 rounded-sm text-sm no-underline']");
     private By signUpHDR = By.xpath("//div[@class='text-xs mb-8 text-primary-fourth']");
-    private By signUpBTN = By.xpath("//li/a[text()='Sign up']");
+    private By signUpBTN = By.xpath("//a[@class='text-primary-second link-sign-up font-semibold no-underline']");
     private By firstNameTXT = By.xpath("//input[@placeholder='First Name']");
     private By lastNameTXT = By.xpath("//input[@placeholder='Family Name']");
     private By emailTXT = By.xpath("//input[@placeholder='john@example.com']");
     private By passwordTXT = By.xpath("//input[@placeholder='******************']");
-    private By creatAccountBTN = By.xpath("//button[text()='CREATE ACCOUNT']");
+    private By creatAccountBTN = By.xpath("//button[@class='w-full h-10 text-sm btn btn-primary-second border-0 uppercase']");
     private By validationNameErrorMSG = By.xpath("//span[text()='Name must be letters only']");
     private By validationEmailErrorMSG = By.xpath("//span[text()='Please enter a valid email']");
-    private By validationPasswordErrorMSG = By.xpath("//span[text()='Password length must be between 8 to 50 characters']");
+    private By validationPasswordErrorMSG = By.xpath("//span[text()='password is too short (minimum is 8 characters)']");
     private By firstNameRequiredErrorMSG = By.xpath("//span[text()='Please enter first name']");
     private By lastNameRequiredErrorMSG = By.xpath("//span[text()='Please enter family name']");
-    private By emailRequiredErrorMSG = By.xpath("//span[text()='Please enter email']");
+    private By emailRequiredErrorMSG = By.xpath("//span[contains(text(),'Please enter a valid email')]");
     private By passwordRequiredErrorMSG = By.xpath("//span[text()='Please enter password']");
     private By emailExitErrorMSG = By.xpath("//span[text()='email already existed']");
     private By showPasswordBTN = By.xpath("//span[text()='Show']");
@@ -37,8 +39,13 @@ public class SignUpTest extends TestBase {
     private By passwordNotDisplayedLBL = By.xpath("//div[@class='password-input el-input']/input[@type='password']");
 
 
+    String email = "john.smith.fly365@gmail.com";
+    private String hostName = "k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432";
+    private String dbsName = "user_api";
+
     @And("Open Sign up page")
     public void openSignUpPage() {
+        driver.findElement(signinBTN).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(signUpBTN));
         driver.findElement(signUpBTN).click();
     }
@@ -117,7 +124,7 @@ public class SignUpTest extends TestBase {
         Assert.assertEquals(lErrorMSG, "Please Enter Family Name");
 
         String eErrorMSG = driver.findElement(emailRequiredErrorMSG).getText();
-        Assert.assertEquals(eErrorMSG, "Please enter email");
+        Assert.assertEquals(eErrorMSG, "Please enter a valid email");
 
         String pErrorMSG = driver.findElement(passwordRequiredErrorMSG).getText();
         Assert.assertEquals(pErrorMSG, "Please enter password");
@@ -141,7 +148,7 @@ public class SignUpTest extends TestBase {
     public void theSystemShouldDisplayValidationMessageForInvalidPassword() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(validationPasswordErrorMSG));
         String pass_error = driver.findElement(validationPasswordErrorMSG).getText();
-        Assert.assertEquals(pass_error, "Password length must be between 8 to 50 characters");
+        Assert.assertEquals(pass_error, "password is too short (minimum is 8 characters)");
     }
 
     @Then("^The system display validation message for email already exist$")
@@ -165,12 +172,11 @@ public class SignUpTest extends TestBase {
     }
 
     @And("^Delete the user \"(.*)\" if he exists in the database$")
-    public void deleteTheUserIfHeExistsInTheDatabase(String userEmail) throws Throwable {
-        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "Select email from users where email = '" + userEmail + "'");
+    public void deleteTheUserIfHeExistsInTheDatabase(String userEmail) {
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", dbsName, "Select email from users where email = '" + userEmail + "'");
         if (DataBase.data != null) {
-            DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "delete from users where email='" + userEmail + "'");
+            DataBase.execute_query_dbs(hostName, "user_api", "delete from users where email='" + userEmail + "'");
         }
     }
-
 
 }

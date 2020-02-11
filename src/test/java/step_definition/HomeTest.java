@@ -23,7 +23,7 @@ public class HomeTest extends TestBase {
     APIUtility apiObject = new APIUtility();
     ConfirmationTest ctobject = new ConfirmationTest();
     public static String orderNumber = null;
-    public static String pnrNumber = null;
+    public static String pnrNumberCheckoutResponse = null;
     public static String currentWindow = driver.getWindowHandle();
 
 
@@ -193,8 +193,9 @@ public class HomeTest extends TestBase {
     }
 
     @And("^Add airport to the Origin \"(.*)\"$")
-    public void addAirportToTheOrigin(String originAirport) {
+    public void addAirportToTheOrigin(String originAirport) throws InterruptedException {
         driver.findElement(originTXT).sendKeys(originAirport);
+        Thread.sleep(3000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(airportSearchResultOrigin));
         driver.findElement(airportSearchResultOrigin).click();
     }
@@ -255,7 +256,7 @@ public class HomeTest extends TestBase {
             orderNumber = apiObject.checkoutTrip(cardID, domain)[0];
         }
         if (reference.equals("Fly365 Reference")) {
-            pnrNumber = apiObject.checkoutTrip(cardID, domain)[1];
+            pnrNumberCheckoutResponse = apiObject.checkoutTrip(cardID, domain)[1];
         }
     }
 

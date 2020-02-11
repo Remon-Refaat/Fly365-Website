@@ -24,8 +24,8 @@ public class GmailTest extends TestBase {
    By emailNextBTN = By.id("identifierNext");
     By passwordTXT = By.xpath("//input[@name='password']");
     By passwordNextBTN = By.id("passwordNext");
-    By menuLINK = By.xpath("//*[@id='gbwa']/div/a");
-    By gmailLink = By.xpath("//*[@id='gb23']");
+    By menuLINK = By.xpath("//a[@class='gb_D']");
+    By gmailLink = By.xpath("//span[contains(text(),'Gmail')]");
     By firstMessageLINK = By.xpath("//div[2]/span//span[contains(text(), 'Fly365')]");
     By cllickHereLINK = By.xpath("//p[contains(text(),'Unsubscribe please')]/child::a");
     By verifyBTN = By.xpath("//table//table//table//td/a");
@@ -37,8 +37,8 @@ public class GmailTest extends TestBase {
     @And("^Go to the email account$")
     public void goToTheEmailAccount() throws InterruptedException {
         Thread.sleep(2000);
-//        driver.navigate().to("https://accounts.google.com");
-        driver.navigate().to("https://mail.google.com");
+       driver.navigate().to("https://accounts.google.com");
+       // driver.navigate().to("https://accounts.google.com/signin/v2/identifier?continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&service=mail&sacu=1&rip=1&flowName=GlifWebSignIn&flowEntry=ServiceLogin");
         driver.findElement(emailTXT).sendKeys("john.smith.fly365@gmail.com");
         driver.findElement(emailNextBTN).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(passwordTXT));
@@ -102,6 +102,8 @@ public class GmailTest extends TestBase {
         Thread.sleep(10000);
         boolean result = emailUtililty.isMessageInFolder("Account Verification Success", true);
         Assert.assertEquals(result,true);
+
+
     }
 
 

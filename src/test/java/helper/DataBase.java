@@ -14,6 +14,7 @@ public class DataBase {
     static String USER = "root";
     static String PASS = "fly12345";
     public static String data;
+    public static String subject;
 
 
     public static void execute_query_dbs(String hostName, String dbsName, String query) {
@@ -29,7 +30,6 @@ public class DataBase {
             } else {
                 do {
                     data = rs.getString("id");
-                    //System.out.println(data);
                 }
                 while (rs.next());
             }
