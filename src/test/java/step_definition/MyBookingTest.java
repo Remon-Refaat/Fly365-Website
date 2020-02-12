@@ -24,6 +24,8 @@ public class MyBookingTest extends TestBase {
     private By homePageHDR = By.xpath("//span[text()='Low Fares']");
     private By myBookingLINK = By.xpath("//div[2]/div[1]/div/div[1]/a[1]");
     private By lastFly365RefVAL = By.xpath("//div[2]/div[3]//div[1]//div[1]/div/strong");
+    private By bookingDetailsBTN = By.xpath("(//a[@class='btn btn-primary-second font-bold text-xs btn-more-derails h-8 w-32 p-1 no-underline'])[1]");
+    private By bookingHeader = By.xpath("//div[@class='text-black font-medium text-sm mr-5']");
 
     @And("^Click on My Booking$")
     public void clickOnMyBooking() {
@@ -77,5 +79,18 @@ public class MyBookingTest extends TestBase {
     public void goToMyBooking() {
         driver.findElement(By.xpath("//*[contains(@class,'el-icon--right svg-icon svg-fill')]")).click();
         driver.findElement(By.linkText("My Account")).click();
+    }
+
+
+    @Then("^Click on Booking details button$")
+    public void clickOnBookingDetailsButton() {
+        driver.findElement(bookingDetailsBTN).click();
+
+    }
+
+    @Then("^Assert that the booking details is displayed successfully$")
+    public void assertThatTheBookingDetailsIsDisplayedSuccessfully() {
+       String headerMsg= driver.findElement(bookingHeader).getText();
+        Assert.assertEquals(headerMsg, "Available files to download:");
     }
 }

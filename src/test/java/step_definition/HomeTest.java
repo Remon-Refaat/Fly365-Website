@@ -24,7 +24,7 @@ public class HomeTest extends TestBase {
     APIUtility apiObject = new APIUtility();
     ConfirmationTest ctobject = new ConfirmationTest();
     public static String orderNumber = null;
-    public static String pnrNumber = null;
+    public static String pnrNumberCheckoutResponse = null;
     public static String currentWindow = driver.getWindowHandle();
 
 
@@ -268,7 +268,7 @@ public class HomeTest extends TestBase {
             orderNumber = apiObject.checkoutTrip(cardID, domain)[0];
         }
         if (reference.equals("Fly365 Reference")) {
-            pnrNumber = apiObject.checkoutTrip(cardID, domain)[1];
+            pnrNumberCheckoutResponse = apiObject.checkoutTrip(cardID, domain)[1];
         }
     }
 
@@ -361,7 +361,10 @@ public class HomeTest extends TestBase {
 
     @And("^Add the email address \"(.*)\" to Subscription Email field$")
     public void addTheEmailAddressToSubscriptionEmailField(String emailAddress) {
-        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "delete from newsletter_users where email='" + emailAddress + "'");
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "Select * from newsletter_users where email = '" + emailAddress + "'");
+        if (DataBase.data != null) {
+            DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "delete from newsletter_users where email='" + emailAddress + "'");
+        }
         driver.findElement(subscriptionTXT).sendKeys(emailAddress);
 
     }
@@ -382,7 +385,7 @@ public class HomeTest extends TestBase {
 
     @And("^Add previously subscribed email address \"(.*)\" to Subscription Email field$")
     public void addPreviouslySubscribedEmailAddressToSubscriptionEmailField(String emailAddress) throws Throwable {
-        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "Select email from newsletter_users where email = '" + emailAddress +"'");
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "Select * from newsletter_users where email = '" + emailAddress +"'");
         if (DataBase.data == null) {
             DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "insert into newsletter_users (email, \"isSubscribed\",\"storeId\",\"groupId\", \"isRegistered\")values('" + emailAddress + "',True,'fly365_nz','fly365',False)");
         }

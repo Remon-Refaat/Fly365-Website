@@ -1,4 +1,3 @@
-
 @Subscription_Email
 @Sign_Up
 Feature: Sign Up
@@ -6,10 +5,10 @@ Feature: Sign Up
   Background: Open Fly365 Site
     Given Navigate to "NZ" Fly365 "stage" site
     And   Open Sign up page
+    And Delete the user "john.smith.fly365@gmail.com" if he exists in the database
 
   Scenario: Verify that the user can open sign up page
     And   Sign Up page is opened
-
 
   @Go_Tab_Again
   @New_Tab
@@ -17,7 +16,6 @@ Feature: Sign Up
   @Sign_Out
   Scenario: Verify that the Account Verification Success email is sent successfully
     And Delete all messages in the Inbox
-    And Delete the user "john.smith.fly365@gmail.com" if he exists in the database
     And   Fill the following required data
       | First Name | Last Name | Email Address               | Password |
       | John       | Smith     | john.smith.fly365@gmail.com | 12345678 |
@@ -30,7 +28,6 @@ Feature: Sign Up
   @Sign_Out
   Scenario: Verify that Verify your email is sent successfully
     And Delete all messages in the Inbox
-    And Delete the user "john.smith.fly365@gmail.com" if he exists in the database
     And   Fill the following required data
       | First Name | Last Name | Email Address               | Password |
       | John       | Smith     | john.smith.fly365@gmail.com | 12345678 |
@@ -42,7 +39,6 @@ Feature: Sign Up
   @Sign_Out
   Scenario: Verify that the account is verified successfully
     And Delete all messages in the Inbox
-    And Delete the user "john.smith.fly365@gmail.com" if he exists in the database
     And   Fill the following required data
       | First Name | Last Name | Email Address               | Password |
       | John       | Smith     | john.smith.fly365@gmail.com | 12345678 |
@@ -80,7 +76,6 @@ Feature: Sign Up
 
   @Sign_Out
   Scenario: Verify that the user can sign up
-    And Delete the user "john.smith.fly365@gmail.com" if he exists in the database
     And   Fill the following required data
       | First Name | Last Name | Email Address               | Password |
       | John       | Smith     | john.smith.fly365@gmail.com | 12345678 |
@@ -114,7 +109,7 @@ Feature: Sign Up
 
 
   Scenario: Verify that the user can't sign up with the same email twice
-    Given insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
+    Given insert new user at database "john.smith.fly365@gmail.com" "$2a$10$CBQKVE4xsSFH6mYiUSFiAODo0omGgQQbXV0Vmtngvs84gI0hXZoIC"
     And   Fill the following required data
       | First Name | Last Name | Email Address               | Password |
       | John       | Smith     | john.smith.fly365@gmail.com | 12345678 |

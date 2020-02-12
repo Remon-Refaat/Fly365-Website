@@ -125,11 +125,11 @@ Feature: Passenger page
     And Get Fly Reference
     And Open hub login page
     And login into hub with super admin
-    And open Back office
-    And Search for Order Number from Quick Search Through UI
+    And Open menu
+    And Open  "BackOffice"
+    And Search for booking returned in "retrieved booking pnr" Quick Search
     And Click on Edit Traveler Icon
-    And Assert that seat is "Seat3" and meal "Meal3" and assistance is "specialAssistance1"
-
+    And Assert that seat is "Aisle Seat Request" and meal "SEA FOOD MEAL" and assistance is "WHEELCHAIR - CANNOT CLIMB STAIRS"
 
 
   Scenario: Verify that user can add special request in passenger details  while booking
@@ -157,7 +157,8 @@ Feature: Passenger page
     And Press on Pay button
     And Open hub login page
     And login into hub with super admin
-    And open Back office
-    And Search for Order Number from Quick Search
+    And Open menu
+    And Open  "BackOffice"
+    And Search for booking returned in "retrieved booking pnr" Quick Search
     And Assert that special request is having "Testing Request"
 
