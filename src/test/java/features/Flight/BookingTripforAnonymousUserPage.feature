@@ -1,4 +1,3 @@
-
 Feature: Booking a Trip for Anonymous User
 
   Background:

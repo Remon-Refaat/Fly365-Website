@@ -26,7 +26,7 @@ public class SignUpTest extends TestBase {
     private By creatAccountBTN = By.xpath("//button[@class='w-full h-10 text-sm btn btn-primary-second border-0 uppercase']");
     private By validationNameErrorMSG = By.xpath("//span[text()='Name must be letters only']");
     private By validationEmailErrorMSG = By.xpath("//span[text()='Please enter a valid email']");
-    private By validationPasswordErrorMSG = By.xpath("//span[text()='password is too short (minimum is 8 characters)']");
+    private By validationPasswordErrorMSG = By.xpath("//span[text()='Password length must be between 8 to 50 characters']");
     private By firstNameRequiredErrorMSG = By.xpath("//span[text()='Please enter first name']");
     private By lastNameRequiredErrorMSG = By.xpath("//span[text()='Please enter family name']");
     private By emailRequiredErrorMSG = By.xpath("//span[contains(text(),'Please enter a valid email')]");
@@ -36,11 +36,10 @@ public class SignUpTest extends TestBase {
     private By hidePasswordBTN = By.xpath("//span[text()='Hide']");
     private By passwordDisplayedLBL = By.xpath("//div[@class='password-input el-input']/input[@type='text']");
     private By passwordNotDisplayedLBL = By.xpath("//div[@class='password-input el-input']/input[@type='password']");
+    private By LoginHeaderBTN = By.xpath("//a[contains(text(),'SIGN IN')]");
 
 
-    String email = "john.smith.fly365@gmail.com";
-    private String hostName = "k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432";
-    private String dbsName = "user_api";
+
 
     @And("Open Sign up page")
     public void openSignUpPage() {
@@ -77,8 +76,8 @@ public class SignUpTest extends TestBase {
 
 
     @And("The new record set on database")
-    public void theNewRecordSetOnDatabase() {
-        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "select email from users where email='john.smith.fly365@gmail.com'");
+    public void theNewRecordSetOnDatabase() throws InterruptedException {
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com", "user_api", "select * from users where email='john.smith.fly365@gmail.com'");
         Assert.assertEquals(DataBase.data, "john.smith.fly365@gmail.com");
         DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "delete from users where email='john.smith.fly365@gmail.com'");
     }
@@ -123,7 +122,7 @@ public class SignUpTest extends TestBase {
         Assert.assertEquals(lErrorMSG, "Please Enter Family Name");
 
         String eErrorMSG = driver.findElement(emailRequiredErrorMSG).getText();
-        Assert.assertEquals(eErrorMSG, "Please enter a valid email");
+        Assert.assertEquals(eErrorMSG, "Please enter email");
 
         String pErrorMSG = driver.findElement(passwordRequiredErrorMSG).getText();
         Assert.assertEquals(pErrorMSG, "Please enter password");
@@ -172,10 +171,11 @@ public class SignUpTest extends TestBase {
 
     @And("^Delete the user \"(.*)\" if he exists in the database$")
     public void deleteTheUserIfHeExistsInTheDatabase(String userEmail) {
-        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", dbsName, "Select email from users where email = '" + userEmail + "'");
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432","user_api", "select * from users where email = '" + userEmail + "'");
         if (DataBase.data != null) {
-            DataBase.execute_query_dbs(hostName, "user_api", "delete from users where email='" + userEmail + "'");
+            DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "delete from users where email='" + userEmail + "'");
         }
     }
+
 
 }

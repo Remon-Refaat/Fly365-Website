@@ -6,7 +6,7 @@ Feature: Add Traveller to Login user
 
 
   Scenario: Check that Login user can add traveller
-    And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
+    And insert new user at database "john.smith.fly365@gmail.com" "$2a$10$CBQKVE4xsSFH6mYiUSFiAODo0omGgQQbXV0Vmtngvs84gI0hXZoIC"
     And open login page
     And 'Sign In' page is opened
     And user enter email "john.smith.fly365@gmail.com"
@@ -21,7 +21,7 @@ Feature: Add Traveller to Login user
     And delete new user at database "john.smith.fly365@gmail.com"
 
   Scenario: Check that Login user can delete traveller
-    And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
+    And insert new user at database "john.smith.fly365@gmail.com" "$2a$10$CBQKVE4xsSFH6mYiUSFiAODo0omGgQQbXV0Vmtngvs84gI0hXZoIC"
     And open login page
     And 'Sign In' page is opened
     And user enter email "john.smith.fly365@gmail.com"
@@ -38,7 +38,7 @@ Feature: Add Traveller to Login user
     And delete new user at database "john.smith.fly365@gmail.com"
 
   Scenario: Check that Login user can edit traveller
-    And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
+    And insert new user at database "john.smith.fly365@gmail.com" "$2a$10$CBQKVE4xsSFH6mYiUSFiAODo0omGgQQbXV0Vmtngvs84gI0hXZoIC"
     And open login page
     And 'Sign In' page is opened
     And user enter email "john.smith.fly365@gmail.com"
