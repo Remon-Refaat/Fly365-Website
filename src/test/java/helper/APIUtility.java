@@ -7,29 +7,30 @@ import io.restassured.response.ResponseBody;
 import io.restassured.specification.RequestSpecification;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.testng.Assert;
+
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
 
 //import static org.codehaus.groovy.tools.shell.util.Logger.io;
 
 public class APIUtility extends TestBase {
-    public static String depCity = null , arrCity = null , bookingCode = null ,storeUser= null, storeId = null, carrierCode = null,
-            email = null, mobileNumber = null , airLineRef =null, flyRef=null, paymentGateway= null, discountName=null ;
+    public static String depCity = null, arrCity = null, bookingCode = null, storeUser = null, storeId = null, carrierCode = null,
+            email = null, mobileNumber = null, airLineRef = null, flyRef = null, paymentGateway = null, discountName = null,orderId = null;
     public static JsonPath jsonPathEvaluator;
     public static String totalPrice;
+    private static List<Object> itineraries;
 
 
     GeneralMethods gmObject = new GeneralMethods();
 
     public static String sendPostRequest(String requestUrl, String tripType) {
-        try {
+        /*try {
             URL url = new URL(requestUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
@@ -54,10 +55,23 @@ public class APIUtility extends TestBase {
             System.out.println("Response Code : " + responseCode);
             br.close();
             connection.disconnect();
+            System.out.println(jsonString.toString());
             return jsonString.toString();
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
-        }
+        }*/
+
+        RestAssured.baseURI = requestUrl;
+        RequestSpecification httpRequest = RestAssured.given();
+        httpRequest.header("Content-Type", "application/json");
+        httpRequest.header("x-store-id", "fly365_nz");
+        httpRequest.header("authorization", "guMRjevTJNNgv49LRTNCTzfp9cWnW6Sj");
+        httpRequest.header("x-store-user", "fly365_com_nz");
+        Response response = httpRequest.body(tripType).post(RestAssured.baseURI);
+        ResponseBody body = response.getBody();
+        jsonPathEvaluator = response.jsonPath();
+        String bodyStringValue = body.asString();
+        return bodyStringValue;
 
     }
 
@@ -94,7 +108,7 @@ public class APIUtility extends TestBase {
 
     public String oneWayAPI() {
         String departureDate1 = gmObject.addDateWithCertainPeriodAndFormat(10, "yyyy-MM-dd");
-        String oneWay = "{\"legs\": [{\"origin\": \"LHR\",\"destination\": \"CAI\",\"departureDate\": \"" + departureDate1 + "\"}],\n" +
+        String oneWay = "{\"legs\": [{\"origin\": \"DXB\",\"destination\": \"CAI\",\"departureDate\": \"" + departureDate1 + "\"}],\n" +
                 " \"cabinClass\": \"Economy\",\"infant\": 0,\"child\": 0,\"adult\": 1}";
         return oneWay;
     }
@@ -148,7 +162,7 @@ public class APIUtility extends TestBase {
         return discountRule;
     }
 
-    public static String getItineraryId(String returnedJsongString, int tripnumber) {
+    public static String    getItineraryId(String returnedJsongString, int tripnumber) {
         JSONObject jObject = new JSONObject(returnedJsongString);
         JSONArray arr = jObject.getJSONArray("itineraries");
         String itineraryId = null;
@@ -169,8 +183,8 @@ public class APIUtility extends TestBase {
     }
 
     public static void getstoreId(String returnedJsonString) {
-        ArrayList<String> bookingCodeArr= new ArrayList<String>();
-        ArrayList<String> orgDest= new ArrayList<String>();
+        ArrayList<String> bookingCodeArr = new ArrayList<String>();
+        ArrayList<String> orgDest = new ArrayList<String>();
         int bookingCodeIndex = 0;
         airLineRef = jsonPathEvaluator.get("products[0].confirmation.supplierConfirmationCode").toString();
         flyRef = jsonPathEvaluator.get("products[0].confirmation.vendorConfirmationCode").toString();
@@ -181,29 +195,29 @@ public class APIUtility extends TestBase {
         paymentGateway = jsonPathEvaluator.get("payment.additionalInformation.provider").toString();
         totalPrice = jsonPathEvaluator.get("displayTotal.total").toString();
         carrierCode = jsonPathEvaluator.get("products[0].options[1].value.carrier.code").toString();
-        //discountName = jsonPathEvaluator.get("products[0].options[1].value.discounts.name");
+        discountName = jsonPathEvaluator.get("products[0].options[1].value.discounts.name");
+        orderId = jsonPathEvaluator.get("id").toString();
+        System.out.println(orderId);
         List<JSONArray> legsArr = jsonPathEvaluator.getList("products[0].options[1].value.legs");
-        for(int i=0 ; i <legsArr.size() ; i++){
-            List<JSONArray> segArr = jsonPathEvaluator.getList("products[0].options[1].value.legs["+i+"].segments");
-            for(int segCount = 0 ; segCount<segArr.size() ; segCount++) {
-                bookingCodeArr.add(jsonPathEvaluator.get("products[0].options[1].value.legs["+i+"].segments["+segCount+"].bookingInfo.bookingCode").toString());
-                bookingCodeIndex ++;
+        for (int i = 0; i < legsArr.size(); i++) {
+            List<JSONArray> segArr = jsonPathEvaluator.getList("products[0].options[1].value.legs[" + i + "].segments");
+            for (int segCount = 0; segCount < segArr.size(); segCount++) {
+                bookingCodeArr.add(jsonPathEvaluator.get("products[0].options[1].value.legs[" + i + "].segments[" + segCount + "].bookingInfo.bookingCode").toString());
+                bookingCodeIndex++;
             }
         }
         List<String> removeDuplCodes = bookingCodeArr.stream().distinct().collect(Collectors.toList());
-        bookingCode = String.join("," ,removeDuplCodes) ;
+        bookingCode = String.join(",", removeDuplCodes);
         List<JSONArray> searchCriteriaArr = jsonPathEvaluator.getList("products[0].options[2].value.legs");
         for (int x = 0; x < searchCriteriaArr.size(); x++) {
-            orgDest.add(jsonPathEvaluator.get("products[0].options[2].value.legs["+x+"].origin").toString());
-            orgDest.add(jsonPathEvaluator.get("products[0].options[2].value.legs["+x+"].destination").toString());
+            orgDest.add(jsonPathEvaluator.get("products[0].options[2].value.legs[" + x + "].origin").toString());
+            orgDest.add(jsonPathEvaluator.get("products[0].options[2].value.legs[" + x + "].destination").toString());
         }
         depCity = orgDest.get(0);
-        System.out.println(orgDest);
-        if(orgDest.get(0).equals(orgDest.get(orgDest.size()-1))){
-            arrCity = orgDest.get(orgDest.size()-2);
-        }
-        else{
-            arrCity = orgDest.get(orgDest.size()-1);
+        if (orgDest.get(0).equals(orgDest.get(orgDest.size() - 1))) {
+            arrCity = orgDest.get(orgDest.size() - 2);
+        } else {
+            arrCity = orgDest.get(orgDest.size() - 1);
         }
 
     }
@@ -221,21 +235,22 @@ public class APIUtility extends TestBase {
     public static String createCart(String itineraryId, String domain) {
 
         String createCartAPI = "{\"itineraryId\": \"" + itineraryId + "\"}";
-        String returnedJsonString = sendPostRequest("https://api.fly365" + domain + ".com/flight/cart", createCartAPI);
+        //String returnedJsonString = sendPostRequest("https://api.fly365" + domain + ".com/flight/cart", createCartAPI);
+        String returnedJsonString = sendPostRequest("https://nz.fly365" + domain + ".com/api/flight/cart", createCartAPI);
         JSONObject jObject = new JSONObject(returnedJsonString);
-        return jObject.getString("id");
-
+        //return jObject.getString("id");
+        return jObject.get("id").toString();
     }
 
     public static void addPassenger(String cartID, String domain) {
 
         String addPassengerDetailsAPI = "{\"passengers\": [" +
-                "{\"firstName\": \"John\",\"middleName\": \"William\",\"lastName\": \"Smith\",\"title\": \"Mr\",\"dateOfBirth\": \"1991-06-04\"," +
+                "{\"title\": \"Mr\", \"firstName\": \"John\",\"middleName\": \"William\",\"lastName\": \"Smith\",\"dateOfBirth\": \"1991-06-04\"," +
                 "\"reference\": \"123\",\"passengerType\": \"ADT\",\"frequentFlyerOptions\": {\"airlineCode\": \"code\",\"number\": \"num\"" +
-                "}}],\"customer\": {\"title\": \"mr\",\"firstName\": \"John\",\"lastName\": \"William\",\"email\": \"john.smith.fly365@gmail.com\"," +
+                "}}],\"customer\": {\"title\": \"Mr\",\"firstName\": \"John\",\"lastName\": \"William\",\"email\": \"john.smith.fly365@gmail.com\"," +
                 "\"mobileNumber\": \"0121234567\"}}";
-        sendPostRequest("https://api.fly365" + domain + ".com/flight/cart/" + cartID + "/passenger", addPassengerDetailsAPI);
-
+        //sendPostRequest("https://api.fly365" + domain + ".com/flight/cart/" + cartID + "/passenger", addPassengerDetailsAPI);
+        sendPostRequest("https://nz.fly365" + domain + ".com/api/flight/cart/" + cartID + "/passenger", addPassengerDetailsAPI);
     }
 
     public static String[] checkoutTrip(String cartID, String domain) {
@@ -260,8 +275,8 @@ public class APIUtility extends TestBase {
                 "    \t\"amount\": 15.8\n" +
                 "    }\n" +
                 "}";
-        String returnedJsonString = sendPostRequest("https://api.fly365" + domain + ".com/flight/cart/" + cartID + "/checkout", addCardDetailsAPI);
-
+        //String returnedJsonString = sendPostRequest("https://api.fly365" + domain + ".com/flight/cart/" + cartID + "/checkout", addCardDetailsAPI);
+        String returnedJsonString = sendPostRequest("https://nz.fly365" + domain + ".com/api/flight/cart/" + cartID + "/checkout", addCardDetailsAPI);
 //To validate that the order no./pnr number is displayed correctly in retrieve my booking
         JSONObject jObject = new JSONObject(returnedJsonString);
         String orderNumber = jObject.getJSONObject("order").get("orderNumber").toString();
@@ -271,30 +286,29 @@ public class APIUtility extends TestBase {
     }
 
 
-    public String createRuleAPI(String ruleName , String storeID , String carrierCode , String bookCode , String depType , String depCode ,
-                                String destType , String destCode , String refundability , String status){
+    public String createRuleAPI(String ruleName, String storeID, String carrierCode, String bookCode, String depType, String depCode,
+                                String destType, String destCode, String refundability, String status) {
         int cnacelOption = 0;
         String createRuleAPIBody = null;
         boolean isActive = true;
-        if(status.equalsIgnoreCase("Active")){
+        if (status.equalsIgnoreCase("Active")) {
             isActive = true;
-        }
-        else{
+        } else {
             isActive = false;
         }
-        if(refundability.equalsIgnoreCase("refundable")){
+        if (refundability.equalsIgnoreCase("refundable")) {
             cnacelOption = 1;
             createRuleAPIBody = "{" +
                     "\"name\" : \"" + ruleName + "\"," +
                     "\"storeId\" : \"" + storeID + "\"," +
                     "\n" +
                     "\"carrierCodeString\" : \"" + carrierCode + "\"," +
-                    "\"bookingCodeString\": \"" + bookCode +"\"," +
+                    "\"bookingCodeString\": \"" + bookCode + "\"," +
                     "\n" +
-                    "\"departureType\" : \""+ depType + "\"," +
+                    "\"departureType\" : \"" + depType + "\"," +
                     "\"departureCodeString\" : \"" + depCode + "\"," +
                     "\n" +
-                    "\"destinationType\" : \"" + destType +"\"," +
+                    "\"destinationType\" : \"" + destType + "\"," +
                     "\"destinationCodeString\" : \"" + destCode + "\"," +
                     "\n" +
                     "\"airlineChangeFees\" : 100," +
@@ -310,20 +324,19 @@ public class APIUtility extends TestBase {
                     "\n" +
                     "\"isActive\": " + isActive + "\n" +
                     "}";
-        }
-        else{
+        } else {
             cnacelOption = 2;
             createRuleAPIBody = "{" +
                     "\"name\" : \"" + ruleName + "\"," +
                     "\"storeId\" : \"" + storeID + "\"," +
                     "\n" +
                     "\"carrierCodeString\" : \"" + carrierCode + "\"," +
-                    "\"bookingCodeString\": \"" + bookCode +"\"," +
+                    "\"bookingCodeString\": \"" + bookCode + "\"," +
                     "\n" +
-                    "\"departureType\" : \""+ depType + "\"," +
+                    "\"departureType\" : \"" + depType + "\"," +
                     "\"departureCodeString\" : \"" + depCode + "\"," +
                     "\n" +
-                    "\"destinationType\" : \"" + destType +"\"," +
+                    "\"destinationType\" : \"" + destType + "\"," +
                     "\"destinationCodeString\" : \"" + destCode + "\"," +
                     "\n" +
                     "\"airlineChangeFees\" : 100," +
@@ -371,7 +384,7 @@ public class APIUtility extends TestBase {
     }
 
 
-    public static String getTripResponse(String email , String orderNumber){
+    public static String getTripResponse(String email, String orderNumber) {
         String response = sendGetRequests("https://www.fly365stage.com/api/user/order/find?email=" + email + "&orderNumber=" + orderNumber);
         return response;
     }
@@ -411,9 +424,80 @@ public class APIUtility extends TestBase {
             throw new RuntimeException(e.getMessage());
         }*/
     }
+
     public String getresult(String orderId, String orderNumber) {
-        String finalResponse = sendGetRequest("https://api.fly365stage.com/user/order/find?orderId=" + orderId + "&orderNumber=" + orderNumber +"");
+        String finalResponse = sendGetRequest("https://api.fly365stage.com/user/order/find?orderId=" + orderId + "&orderNumber=" + orderNumber + "");
         return finalResponse;
     }
+
+
+
+
+    public static void sendPutRequest(String requestUrl,String body) {
+        RestAssured.baseURI = requestUrl;
+        RequestSpecification httpRequest = RestAssured.given();
+        httpRequest.header("Content-Type", "application/json");
+        httpRequest.header("x-user-token", "lhA27cd524d4579576316fa4b6c3abfe0d7pSL");
+        httpRequest.header("authorization", "4jzthfsrmK9rhgKTr5XkEjeEcZ7kf9eA");
+        httpRequest.body(body);
+        httpRequest.put(requestUrl);
+
+
+    }
+
+
+    public static void updateHoldRule(String domain, Integer holdHours, Integer hoursBeforeTicketing, Integer hoursBeforeDeparture, Boolean isHoldEnabled, Integer amount, String StoreId, List<String> excludedAirlines) {
+
+        String updateSettingsBody=
+                "{\n" +
+                        "  \"hoursBeforeFirstDeparture\":" + hoursBeforeDeparture+ "," +"\n" +
+                        "  \"HoursBeforeLastTicketingTime\":" + hoursBeforeTicketing+ "," + "\n" +
+                        "  \"holdHours\" :" + holdHours + "," + "\n" +
+                        "  \"isHoldEnabled\" :" +  isHoldEnabled + "\n" +
+                        "}\n";
+
+        sendPutRequest("https://internal.fly365"+ domain +".com/rules/hold/configs",updateSettingsBody);
+
+        String updateHoldFeesBody =
+                "{\n" +
+                        " \"storeId\":" + "\"" + StoreId + "\""  + ","  +  "\n"+
+                        " \"amount\":" + amount  + "\n" +
+
+
+                         "}\n";
+        sendPutRequest("https://internal.fly365"+ domain +".com/rules/hold/fees",updateHoldFeesBody);
+
+        String updateHoldExcludedAirlines =
+                "{\n" +
+                        "\"excludedAirlines\" :" + excludedAirlines + "\n" +
+
+                        "}\n";
+
+        sendPutRequest("https://internal.fly365"+ domain +".com/rules/hold/excluded-airlines", updateHoldExcludedAirlines);
+
+    }
+
+    public static void modifyBookingAPI(String url) {
+
+        String modifyBody = "{\n" +
+                "\t\"legs\": [\n" +
+                "\t\t{\n" +
+                "   \t\t\t\"origin\": \"LHR\",\n" +
+                "    \t\t\"destination\": \"CAI\",\n" +
+                "    \t\t\"departureDate\": \"2020-02-08\"\n" +
+                "\t\t}\n" +
+                "\t],\n" +
+                "\t\"cabinClass\": \"economy\",\n" +
+                "\t\"infant\": 0,\n" +
+                "\t\"child\": 0,\n" +
+                "\t\"adult\": 1,\n" +
+                "\t\"oldOrderId\": \""+orderId+"\n" +
+                "}";
+        String returnedJsonString = sendPostRequest(url, modifyBody);
+        System.out.println(returnedJsonString);
+        JSONObject jObject = new JSONObject(returnedJsonString);
+
+    }
+
 }
 

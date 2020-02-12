@@ -11,7 +11,7 @@ Feature: login to account
     Then user shall see InValid Login Error Message
 
   Scenario: login into account with wrong password
-    And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
+    And insert new user at database "john.smith.fly365@gmail.com" "$2a$10$CBQKVE4xsSFH6mYiUSFiAODo0omGgQQbXV0Vmtngvs84gI0hXZoIC"
     And user enter email "john.smith.fly365@gmail.com"
     And user enter password "1122334455"
     When the user click on login button
@@ -36,7 +36,6 @@ Feature: login to account
     When the user click on login button
     Then user shall see empty password error message
 
-
   Scenario: Login into account with empty email
     And user enter an empty email
     And user enter password "@Test123"
@@ -51,7 +50,7 @@ Feature: login to account
 
   @Sign_Out
   Scenario: Login into account with correct details
-    And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
+    And insert new user at database "john.smith.fly365@gmail.com" "$2a$10$CBQKVE4xsSFH6mYiUSFiAODo0omGgQQbXV0Vmtngvs84gI0hXZoIC"
     And user enter email "john.smith.fly365@gmail.com"
     And user enter password "@Test123"
     When the user click on login button
@@ -61,8 +60,8 @@ Feature: login to account
 
   @Sign_Out
   Scenario: Login into account with correct Upper case email
-    And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
-    And user enter email "john.smith.fly365@gmail.com"
+    And insert new user at database "john.smith.fly365@gmail.com" "$2a$10$CBQKVE4xsSFH6mYiUSFiAODo0omGgQQbXV0Vmtngvs84gI0hXZoIC"
+    And user enter email "JOHN.SMITH.FLY365@GMAIL.COM"
     And user enter password "@Test123"
     When the user click on login button
     Then the user shall be redirect to my booking page

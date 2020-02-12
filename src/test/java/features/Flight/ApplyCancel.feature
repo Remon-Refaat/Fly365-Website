@@ -1,5 +1,3 @@
-@applyCancel
-
 Feature: Apply Cancel on Bookings
 
   Scenario: Verify that customer can cancel booking when rule matches and successful message is displayed to customer
@@ -101,7 +99,7 @@ Feature: Apply Cancel on Bookings
     And login into hub with super admin
     And open Back office
     And Open Orders
-    And Search for Order Number from Quick Search
+    And Search for booking returned in "booking pnr response" Quick Search
     Then Order Details Will Have To be Refunded status
     And Delete Created Rule From Database
 
@@ -158,6 +156,7 @@ Feature: Apply Cancel on Bookings
     And Click Cancel My Booking
     Then Booking Status Will Be To Be Refunded
     And Delete Created Rule From Database
+
 
   Scenario: Verify that rule is not applied if it isn't active
     Given Navigate to "NZ" Fly365 "stage" site

@@ -17,7 +17,7 @@ public class AddTraveller extends TestBase {
     private GeneralMethods gmObject = new GeneralMethods();
 
     private By TravellerTAB = By.xpath("//a[@class='account-links__link text-sm flex items-center link link-with-icon mr-5']");
-    private By AddTravellerBTN = By.xpath("//button[@class='btn px-3 py-2 btn-primary-second m-auto md:mt-0 mt-4']");
+    private By AddTravellerBTN = By.xpath("//button[@class='btn px-3 py-2 btn-primary-second m-auto mt-0']");
     private By TravellerHeaderTXT = By.xpath("//h3[@class='text-xl font-semibold']");
     private By SaveTravellerBTN = By.xpath("//button[@class='btn btn-primary-second w-full btn-add-traveller']");
     private By TravellerTitleDrop = By.xpath("//input[@placeholder='Title']");
@@ -36,9 +36,9 @@ public class AddTraveller extends TestBase {
     private By confirmDeleteBTN = By.xpath("//button[text()='Confirm']");
     private By noTravelersFoundMSG = By.xpath("//h3[text()='Sorry you have not added a traveller']");
     private By successMessageTXT = By.xpath("//div[@class='el-notification__group is-with-icon']");
-    private By editTravelerBTN = By.xpath("//span[text()='Edit']");
-    private By editSaveBTN = By.xpath("//button[text()='Edit']");
-    private By cancelBTN = By.xpath("//button[text()='CANCEL']");
+    private By editTravelerBTN = By.xpath("//span[contains(text(),'Edit')]");
+    private By editSaveBTN = By.xpath("//button[contains(text(),'Edit')]");
+    private By cancelBTN = By.xpath("//button[contains(text(),'CANCEL')]");
 
     private String hostName = "k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432";
     private String dbsName = "user_api";

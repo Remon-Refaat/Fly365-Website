@@ -7,7 +7,7 @@ Feature: Booking a Trip for Registered User
   @Sign_Out
   Scenario: Verify that the registered user can book a One-Way trip
     And Delete all messages in the Inbox
-    And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
+    And insert new user at database "john.smith.fly365@gmail.com" "$2a$10$CBQKVE4xsSFH6mYiUSFiAODo0omGgQQbXV0Vmtngvs84gI0hXZoIC"
     And user enter email "john.smith.fly365@gmail.com"
     And user enter password "@Test123"
     When the user click on login button
@@ -37,7 +37,7 @@ Feature: Booking a Trip for Registered User
   @delete_pdf
   @Sign_Out
   Scenario: Verify that the the Tax Invoice pdf contains the correct data (Round Trip)
-    And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
+    And insert new user at database "john.smith.fly365@gmail.com" "$2a$10$CBQKVE4xsSFH6mYiUSFiAODo0omGgQQbXV0Vmtngvs84gI0hXZoIC"
     And user enter email "john.smith.fly365@gmail.com"
     And user enter password "@Test123"
     When the user click on login button
@@ -51,8 +51,8 @@ Feature: Booking a Trip for Registered User
     And Select Passengers: "2" adult, "2" child, "2" infant
     And Select "Economy" Class
     And Press on Search Now
-    And Press on 'Stops' Filter
-    And Select 'One Stop' trips
+    ##And Press on 'Stops' Filter
+    ##And Select 'One Stop' trips
     And Choose a trip
     And Add the following data in the passenger Details
       | Title  | First Name | Middle Name | Last Name | Day | Month    | Year |
@@ -83,7 +83,7 @@ Feature: Booking a Trip for Registered User
   @delete_pdf
   @Sign_Out
   Scenario: Verify that the the Booking Confirmation pdf contains the correct data (Round Trip)
-    And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
+    And insert new user at database "john.smith.fly365@gmail.com" "$2a$10$CBQKVE4xsSFH6mYiUSFiAODo0omGgQQbXV0Vmtngvs84gI0hXZoIC"
     And user enter email "john.smith.fly365@gmail.com"
     And user enter password "@Test123"
     When the user click on login button
@@ -96,8 +96,8 @@ Feature: Booking a Trip for Registered User
     And Select the date of the return for round trip, after "15" day from today
     And Select Passengers: "1" adult, "1" child, "1" infant
     And Press on Search Now
-    And Press on 'Stops' Filter
-    And Select 'One Stop' trips
+    ##And Press on 'Stops' Filter
+    ##And Select 'One Stop' trips
     And Choose a trip
     And Add the following data in the passenger Details
       | Title  | First Name | Middle Name | Last Name | Day | Month    | Year |
@@ -125,7 +125,7 @@ Feature: Booking a Trip for Registered User
   @Sign_Out
   Scenario: Verify that the Booking Confirmation email contains 'Tax Invoice' and 'Booking Confirmation' pdf (Multi City Trip)
     And Delete all messages in the Inbox
-    And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
+    And insert new user at database "john.smith.fly365@gmail.com" "$2a$10$CBQKVE4xsSFH6mYiUSFiAODo0omGgQQbXV0Vmtngvs84gI0hXZoIC"
     And user enter email "john.smith.fly365@gmail.com"
     And user enter password "@Test123"
     When the user click on login button

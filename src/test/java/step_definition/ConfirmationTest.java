@@ -15,7 +15,7 @@ public class ConfirmationTest extends TestBase {
     public static String fly356Refernce;
 
 
-    By bookingConfirmationSuccessfulMSG = By.xpath("//div[text()='Thank you for booking with Fly365']");
+    By bookingConfirmationSuccessfulMSG = By.xpath("//div[@class='mb-5 text-xl font-bold']");
     By fly365ReferenceHDR = By.xpath("//span[text()='Fly365 Ref.:']/following-sibling::strong");
     By totalPriceAfterConfirmationVAL = By.xpath("//p[contains(text(),'Total')]/following-sibling::p");
     By passengerDetailsSection = By.xpath("//h2[@class='text-sm py-3 pl-4 border-b-2 border-secondary-fifth text-primary-third font-medium bg-secondary-fourth bg-secondary-fourth']");
@@ -25,8 +25,6 @@ public class ConfirmationTest extends TestBase {
         wait.until(ExpectedConditions.visibilityOfElementLocated(bookingConfirmationSuccessfulMSG));
         Assert.assertTrue(driver.findElement(bookingConfirmationSuccessfulMSG).isDisplayed());
     }
-
-
 
 
     @And("^Get the 'Fly365 Ref' code$")
@@ -64,5 +62,12 @@ public class ConfirmationTest extends TestBase {
         Assert.assertEquals(flyerNumber, flyernumber);
 
         throw new PendingException();
+    }
+  
+    @Then("^The total hold price is the same before and after the booking$")
+    public void theTotalHoldPriceIsTheSameBeforeAndAfterTheBooking() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(totalPriceAfterConfirmationVAL));
+        String totalPriceAfterConfirmation = driver.findElement(totalPriceAfterConfirmationVAL).getText().trim();
+        Assert.assertEquals(totalPriceAfterConfirmation,SearchResultTest.holdPrice.replace("HOLD FOR ",""));
     }
 }

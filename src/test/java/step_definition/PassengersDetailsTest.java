@@ -7,8 +7,10 @@ import cucumber.api.java.en.Then;
 import helper.GeneralMethods;
 import helper.TestBase;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -23,11 +25,11 @@ public class PassengersDetailsTest extends TestBase {
 
 
     private By contactTitleField = By.id("contact-fullname");
-    private By contactFirstNameTXT = By.xpath("//div[@class='el-form-item col-sm-8 col-lg-6']//input[@placeholder='First Name']");
-    private By contactLastNameTXT = By.xpath("//div[@class='el-form-item col-sm-8 col-lg-6']//input[@placeholder='Family Name']");
+    private By contactFirstNameTXT = By.xpath("//div[@class='el-form-item col-6']//input[@placeholder='First Name']");
+    private By contactLastNameTXT = By.xpath("//div[@class='el-form-item col-6']//input[@placeholder='Family Name']");
     private By contactEmailAddressTXT = By.id("contact-email");
     private By phoneNumbereTXT = By.xpath("//*[@id='contact-details']/div[4]/div[2]/div/div/div[1]/div/input");
-    private By nextStepBTN = By.xpath("//button[text()='Next Step']");
+    private By nextStepBTN = By.xpath("//button[@class='alert-login-btn btn btn-primary-second font-bold uppercase h-10 w-64 ml-auto']");
     private By firstReadMoreLINK = By.xpath("//p/a[1]");
     private By secondReadMoreLINK = By.xpath("//p/a[2]");
     private By flightDetailsLink = By.xpath("//li/div/div/div[1]/div[3]");
@@ -35,14 +37,14 @@ public class PassengersDetailsTest extends TestBase {
     private By secondReadMoreHDR = By.xpath("//div[@class='el-dialog__wrapper'][2]/div[1]/div[1]/span");
     private By totalTravelTimeHDR = By.xpath("//div[3]//div[2]/div/div/div[1]/div/div[1]");
     private By passengerTitleEmptyErrorMSG = By.xpath("//span[contains(text(),'Please enter title')]");
-    private By passenegerFirstNameEmptyErrorMSG = By.xpath("//body/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first']/div[@class='passengers bg-secondary-fourth']/div[@class='content-passengers container md:px-0 px-8']/div[@class='row']/div[@class='col-lg-16 col-sm-24']/div[@id='passenger-form-0']/div/div[@class='bg-white lg:px-12 px-3 pt-10 pb-5']/div[@class='col-md-24 passenger-form']/form[@class='el-form passenger-form__content']/div[@class='first-name-container mb-4']/div[@class='flex flex-col']/div[@class='form-items flex flex-col md:flex-row justify-between items-center']/div[@class='row']/div[2]/div[1]/div[1]/div[2]/span[1]");
-    private By passenegerLastNameEmptyErrorMSG = By.xpath("//body/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first']/div[@class='passengers bg-secondary-fourth']/div[@class='content-passengers container md:px-0 px-8']/div[@class='row']/div[@class='col-lg-16 col-sm-24']/div[@id='passenger-form-0']/div/div[@class='bg-white lg:px-12 px-3 pt-10 pb-5']/div[@class='col-md-24 passenger-form']/form[@class='el-form passenger-form__content']/div[@class='first-name-container mb-4']/div[@class='flex flex-col']/div[@class='form-items flex flex-col md:flex-row justify-between items-center']/div[@class='row']/div[4]/div[1]/div[1]/div[2]/span[1]");
-    private By PassengerBirthDateEmptyErrorMSG = By.xpath("//div[@class='col-md-14']//span[@class='tooltiptext with-arrow']");
-    private By ContactDetialsTitleEmptyErroeMSG = By.xpath("//div[@class='el-form-item col-sm-8 col-lg-3 is-error']//span[@class='tooltiptext with-arrow']");
-    private By ContactdetailsFirstNameEmptyErrorMSG = By.xpath("//body/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first']/div[@class='passengers bg-secondary-fourth']/div[@class='content-passengers container md:px-0 px-8']/div[@class='row']/div[@class='col-lg-16 col-sm-24']/div[@class='contact-details passengers-details bg-white rounded md:mb-5 mb-3']/div[@class='contact-details-name lg:px-12 px-6 py-10']/div[@class='row']/div[@class='contact-details-form col-24']/div[@class='w-full col-lg-24 mb-0 md:mb-5']/form[@id='contact-details']/div[@class='row mb-3 md:mb-5']/div[3]/div[1]/div[2]/span[1]");
-    private By ContactDetailsLastNameEmptyErrorMSG = By.xpath("//body/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first']/div[@class='passengers bg-secondary-fourth']/div[@class='content-passengers container md:px-0 px-8']/div[@class='row']/div[@class='col-lg-16 col-sm-24']/div[@class='contact-details passengers-details bg-white rounded md:mb-5 mb-3']/div[@class='contact-details-name lg:px-12 px-6 py-10']/div[@class='row']/div[@class='contact-details-form col-24']/div[@class='w-full col-lg-24 mb-0 md:mb-5']/form[@id='contact-details']/div[@class='row mb-3 md:mb-5']/div[4]/div[1]/div[2]/span[1]");
-    private By ContactDetailsEmailEmptyErrorMSg = By.xpath("//div[@class='col-lg-15']//div[@class='el-form-item is-error']//span[@class='tooltiptext with-arrow']");
-    private By ContactDetailsPhoneEmptyErrorMSG = By.xpath("//div[@class='col-lg-15']//div[@class='el-form-item w-full is-error']//span[@class='tooltiptext with-arrow']");
+    private By passenegerFirstNameEmptyErrorMSG = By.xpath("//span[contains(text(),'Please enter first name')]");
+    private By passenegerLastNameEmptyErrorMSG = By.xpath("//span[contains(text(),'Please enter family name')]");
+    private By PassengerBirthDateEmptyErrorMSG = By.xpath("//div[@id='passenger-form-0']//div//div[@class='row birth-date-form w-full']//span[@class='tooltiptext with-arrow']");
+    private By ContactDetialsTitleEmptyErroeMSG = By.xpath("//div[@class='el-form-item col-3 is-error']//span[contains(text(),'Please enter title')]");
+    private By ContactdetailsFirstNameEmptyErrorMSG = By.xpath("//div[@class='el-form-item col-6 is-error']//span[contains(text(),'Please enter first name')]");
+    private By ContactDetailsLastNameEmptyErrorMSG = By.xpath("//div[@class='el-form-item col-6 is-error']//span[contains(text(),'Please enter family name')]");
+    private By ContactDetailsEmailEmptyErrorMSg = By.xpath("//span[contains(text(),'Please enter a valid Email')]");
+    private By ContactDetailsPhoneEmptyErrorMSG = By.xpath("//span[contains(text(),'Please enter Phone Number')]");
     private By holdHoursMSG = By.xpath("//small[@class='pl-2 mt-2 text-primary-fourth']");
     private By passportSection = By.xpath("//span[contains(text(), 'Passport Details (optional)')]");
     private By passportNumber = By.xpath("//input[@id='id-number-0']");
@@ -52,12 +54,21 @@ public class PassengersDetailsTest extends TestBase {
     private By passportCountry = By.xpath("//div[@name='country']//input[@placeholder='Select a Country']");
     private By frequentFlyerSection= By.xpath("//span[contains(text(), 'Frequent Flyer (optional)')]");
     private By frequentFlyerNumber= By.xpath("//div[@class='el-form-item__content']//input[@placeholder='Number']");
-   /* private By serviceSection= By.xpath("//div[@id='el-collapse-head-7762']");
+    private By serviceSection= By.xpath("//span[contains(text(), 'Service Requests (optional)')]");
     private By seat = By.xpath("//div[@class='el-input el-input--suffix']//input[@placeholder='Select Seat']");
-    private By meal = By.xpath("//input[@name='meal-1572872930184']");
-    private By specialAssist = By.xpath("//input[@name='special-assistance-1572872930184']");*/
+    private By meal = By.xpath("//div[@class='el-input el-input--suffix']//input[@placeholder='Select Meal']");
+    private By specialAssist = By.xpath("//div[@class='el-input el-input--suffix']//input[@placeholder='Select Special Assistance']");
     private By specialRequestSection = By.xpath("//span[@class='mr-2']");
     private By specialRequestField= By.xpath("//textarea[@class='el-textarea__inner']");
+    private By editTraveler = By.xpath("//i[@class='icon-edit']");
+    private By specialRequestData = By.xpath("//div[@class='item']");
+    private By specialRequestinHub = By.xpath("//span[contains(text(),'Special request')]");
+    private By seatinHub = By.xpath("//*[@id='editTraveller___BV_modal_body_']/div/form/section[4]/div[1]/div/div/input");
+    private By mealinHub = By.xpath("//*[@id='editTraveller___BV_modal_body_']/div/form/section[4]/div[2]/div/div/input");
+    private By specialAssisstinHub = By.xpath("//*[@id='editTraveller___BV_modal_body_']/div/form/section[4]/div[3]/div/div[1]/input");
+    private By passengerComponent = By.xpath("//div[@id='passenger-form-0']//div//div[@class='bg-white px-12 pt-10 pb-5']");
+
+
 
 
 
@@ -85,6 +96,7 @@ public class PassengersDetailsTest extends TestBase {
 
     @And("^Add the following data in the Contact Details$")
     public void addTheFollowingDataInTheContactDetails(DataTable contactData) throws InterruptedException {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(contactTitleField));
 
         for (Map<String, String> contactDetails : contactData.asMaps(String.class, String.class)) {
 
@@ -97,7 +109,8 @@ public class PassengersDetailsTest extends TestBase {
     }
 
     @And("^Click on Next Step$")
-    public void clickOnNextStep() {
+    public void clickOnNextStep()  {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(passengerComponent));
         driver.findElement(nextStepBTN).click();
     }
 
@@ -147,28 +160,28 @@ public class PassengersDetailsTest extends TestBase {
         Assert.assertEquals(passnegerEmptyTitle, "Please enter title");
 
         String passenegeremptyfirstname = driver.findElement(passenegerFirstNameEmptyErrorMSG).getText();
-        Assert.assertEquals(passenegeremptyfirstname, "!Please enter first name");
+        Assert.assertEquals(passenegeremptyfirstname, "Please enter first name");
 
         String passenegeremptylastname = driver.findElement(passenegerLastNameEmptyErrorMSG).getText();
-        Assert.assertEquals(passenegeremptylastname, "!Please enter family name");
+        Assert.assertEquals(passenegeremptylastname, "Please enter family name");
 
         String passenegeremptybirthdate = driver.findElement(PassengerBirthDateEmptyErrorMSG).getText();
         Assert.assertEquals(passenegeremptybirthdate, "!Please enter birth date");
 
         String ContactEmptyTitle = driver.findElement(ContactDetialsTitleEmptyErroeMSG).getText();
-        Assert.assertEquals(ContactEmptyTitle, "!Please enter title");
+        Assert.assertEquals(ContactEmptyTitle, "Please enter title");
 
         String ContactemptyFirstname = driver.findElement(ContactdetailsFirstNameEmptyErrorMSG).getText();
-        Assert.assertEquals(ContactemptyFirstname, "!Please enter first name");
+        Assert.assertEquals(ContactemptyFirstname, "Please enter first name");
 
         String ContactemptyLastName = driver.findElement(ContactDetailsLastNameEmptyErrorMSG).getText();
-        Assert.assertEquals(ContactemptyLastName, "!Please enter family name");
+        Assert.assertEquals(ContactemptyLastName, "Please enter family name");
 
         String Contactemptyemail = driver.findElement(ContactDetailsEmailEmptyErrorMSg).getText();
-        Assert.assertEquals(Contactemptyemail, "!Please enter email");
+        Assert.assertEquals(Contactemptyemail, "Please enter a valid Email");
 
         String ContactemptyPhone = driver.findElement(ContactDetailsPhoneEmptyErrorMSG).getText();
-        Assert.assertEquals(ContactemptyPhone, "!Please enter Phone Number");
+        Assert.assertEquals(ContactemptyPhone, "Please enter Phone Number");
 
     }
 
@@ -215,5 +228,55 @@ public class PassengersDetailsTest extends TestBase {
     }
 
 
+    @And("^Click on Service Request section$")
+    public void clickOnServiceRequestSection() {
+        driver.findElement(serviceSection).click();
+    }
+
+    @And("^User select preferences$")
+    public void userSelectPreferencesAndAnd() throws InterruptedException {
+        gmObject.selectFromDDL(seat, "Aisle Seat Request");
+        gmObject.selectFromDDL(meal, "SEA FOOD MEAL");
+        gmObject.selectFromDDL(specialAssist, "WHEELCHAIR - CANNOT CLIMB STAIRS");
+
+    }
+
+    @And("^Click on Edit Traveler Icon$")
+    public void clickOnEditTravelerIcon() {
+        driver.findElement(editTraveler).click();
+    }
+
+
+    @And("^Assert that seat is \"([^\"]*)\" and meal \"([^\"]*)\" and assistance is \"([^\"]*)\"$")
+    public void assertThatSeatIsAndMealAndAssistanceIs(String seat, String meal, String assist) throws Throwable {
+        Thread.sleep(4000);
+        String seat1= driver.findElement(seatinHub).getAttribute("value");
+        Assert.assertEquals(seat1,seat);
+        String meal1 = driver.findElement(mealinHub).getAttribute("value");
+        Assert.assertEquals(meal1, meal);
+        String assist1 = driver.findElement(specialAssisstinHub).getAttribute("value");
+        Assert.assertEquals(assist1, assist);
+
+        throw new PendingException();
+    }
+
+    @And("^Click on Write request$")
+    public void clickOnWriteRequest() {
+        driver.findElement(specialRequestSection).click();
+    }
+
+    @And("^Write your request \"([^\"]*)\"$")
+    public void writeYourRequest(String request) throws Throwable {
+        driver.findElement(specialRequestField).sendKeys(request);
+        throw new PendingException();
+    }
+
+    @And("^Assert that special request is having \"([^\"]*)\"$")
+    public void assertThatSpecialRequestIsHaving(String request) throws Throwable {
+        driver.findElement(specialRequestinHub);
+       driver.findElement(specialRequestData).getText();
+       Assert.assertEquals(request, "Testing Request");
+
+    }
 
 }

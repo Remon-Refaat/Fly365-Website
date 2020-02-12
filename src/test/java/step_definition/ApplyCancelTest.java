@@ -24,7 +24,7 @@ public class ApplyCancelTest extends TestBase {
     private By cancelBookBTN = By.xpath("//div[text()='Cancel Booking']");
     private By dimmedCancelBookBTN = By.xpath("//div[text()='Cancel Booking']/ancestor::li");
     private By acceptTermsCHBOX = By.xpath("//span[@class = 'el-checkbox__inner']");
-    private By cancelMyBookBTN = By.xpath("//button[text() = 'Cancel My Booking']");
+    private By cancelMyBookBTN = By.xpath("//button[contains(text(),'Cancel My Booking')]");
     private By thanksMSG = By.xpath("//h2[@class = 'mb-5 text-black text-xl']");
     private By requestSentMSG = By.xpath("//span[@class = 'mb-3 block text-black']");
     private By bookStatusMSG = By.xpath("//span[@class='text-success']");
@@ -49,7 +49,7 @@ public class ApplyCancelTest extends TestBase {
 
     @Given("^Create \"([^\"]*)\" \"([^\"]*)\" Rule from API for \"(.*)\"$")
     public void createAruleFromApiFor(String status , String cancelOption , String domain) throws IOException {
-        APIUtility.sendPostRequestCreateTicket("https://api.fly365" + domain + ".com/rules/rule", apiObj.createRuleAPI(fakerRuleName ,
+        APIUtility.sendPostRequestCreateTicket("https://internal.fly365" + domain + ".com/rules/rule", apiObj.createRuleAPI(fakerRuleName ,
                                     APIUtility.storeId , APIUtility.carrierCode, APIUtility.bookingCode,
                 "airport", APIUtility.depCity, "airport" , APIUtility.arrCity , cancelOption ,status));
 
