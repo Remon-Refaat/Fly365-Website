@@ -16,14 +16,14 @@ public class SignUpTest extends TestBase {
 
     WebDriverWait wait = new WebDriverWait(driver, 50);
 
-    private By signinBTN = By.xpath("//a[@class='text-black w-24 text-center block float-right hover:text-white bg-white btn hover:bg-primary-second font-normal py-2 px-5 rounded-sm text-sm no-underline']");
+    private By signinBTN = By.xpath("//a[contains(text(),'SIGN IN')]");
     private By signUpHDR = By.xpath("//div[@class='text-xs mb-8 text-primary-fourth']");
     private By signUpBTN = By.xpath("//a[@class='text-primary-second link-sign-up font-semibold no-underline']");
     private By firstNameTXT = By.xpath("//input[@placeholder='First Name']");
     private By lastNameTXT = By.xpath("//input[@placeholder='Family Name']");
     private By emailTXT = By.xpath("//input[@placeholder='john@example.com']");
     private By passwordTXT = By.xpath("//input[@placeholder='******************']");
-    private By creatAccountBTN = By.xpath("//button[@class='w-full h-10 text-sm btn btn-primary-second border-0 uppercase']");
+    private By creatAccountBTN = By.xpath("//button[contains(text(),'CREATE ACCOUNT')]");
     private By validationNameErrorMSG = By.xpath("//span[text()='Name must be letters only']");
     private By validationEmailErrorMSG = By.xpath("//span[text()='Please enter a valid email']");
     private By validationPasswordErrorMSG = By.xpath("//span[text()='Password length must be between 8 to 50 characters']");
@@ -36,7 +36,6 @@ public class SignUpTest extends TestBase {
     private By hidePasswordBTN = By.xpath("//span[text()='Hide']");
     private By passwordDisplayedLBL = By.xpath("//div[@class='password-input el-input']/input[@type='text']");
     private By passwordNotDisplayedLBL = By.xpath("//div[@class='password-input el-input']/input[@type='password']");
-    private By LoginHeaderBTN = By.xpath("//a[contains(text(),'SIGN IN')]");
 
 
 
@@ -76,8 +75,8 @@ public class SignUpTest extends TestBase {
 
 
     @And("The new record set on database")
-    public void theNewRecordSetOnDatabase() throws InterruptedException {
-        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com", "user_api", "select * from users where email='john.smith.fly365@gmail.com'");
+    public void theNewRecordSetOnDatabase() {
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "select * from users where email='john.smith.fly365@gmail.com'");
         Assert.assertEquals(DataBase.data, "john.smith.fly365@gmail.com");
         DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "delete from users where email='john.smith.fly365@gmail.com'");
     }
