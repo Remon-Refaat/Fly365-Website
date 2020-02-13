@@ -8,7 +8,6 @@ Feature: Open Top Offers page
     Given Click on one offer from top offers
     Then  Check the selected offer page open
 
-  @test
   Scenario: Verify that 404 page is displayed when user is navigating between stores and offer doesn't exist
     Given Click on offer link
     Then Click on view details button
