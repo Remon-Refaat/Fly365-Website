@@ -12,8 +12,8 @@ Feature: Open Account Settings page
     When the user click on login button
     And Click on Account Settings tab
     Then Account Settings page opened
-    And user logout
     And delete new user at database "john.smith.fly365@gmail.com"
+
 
   Scenario: Verify that the user can update his information
     And insert new user at database "john.smith.fly365@gmail.com" "$2a$10$CBQKVE4xsSFH6mYiUSFiAODo0omGgQQbXV0Vmtngvs84gI0hXZoIC"
@@ -24,8 +24,8 @@ Feature: Open Account Settings page
     Then Update First Name with David
     And Success message for update is display
     Then Check updated First Name
-    And user logout
     And delete new user at database "john.smith.fly365@gmail.com"
+
 
   Scenario: Verify that the user can add his billing address
     And insert new user at database "john.smith.fly365@gmail.com" "$2a$10$CBQKVE4xsSFH6mYiUSFiAODo0omGgQQbXV0Vmtngvs84gI0hXZoIC"
@@ -38,7 +38,6 @@ Feature: Open Account Settings page
       | Address Line 1 | Address Line 2 | City      | ZIP Code |
       | 509 Z Nozha    | Cairo, Egypt   | Nasr City | 11255    |
     And Success message for update is display
-    And user logout
     And delete new user at database "john.smith.fly365@gmail.com"
 
 
@@ -52,7 +51,6 @@ Feature: Open Account Settings page
     Then Enter old password "@Test123" and Enter New password "12345678"
     And Click on save button
     And Success message for update is display
-    And user logout
     And delete new user at database "john.smith.fly365@gmail.com"
 
 
@@ -64,6 +62,5 @@ Feature: Open Account Settings page
     And Click on Account Settings tab
     And Click on Email Settings tab
     And Success message for update is display
-    And user logout
     And delete new user at database "john.smith.fly365@gmail.com"
 

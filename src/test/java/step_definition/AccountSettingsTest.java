@@ -22,7 +22,7 @@ public class AccountSettingsTest extends TestBase {
     private By accountSettingsHDR = By.xpath("//p[contains(text(),'Account information details, Add or edit')]");
     private By firstNameTXT = By.xpath("//input[@placeholder='First Name']");
     private By save1BTN = By.xpath("//div[@class='account-form-container']//button[@type='submit'][contains(text(),'Save')]");
-    private By save2BTN = By.xpath("//div[@class='col-md-6 offset-md-18 mt-2']//button[@type='submit'][contains(text(),'Save')]");
+    private By save2BTN = By.xpath("//div[@class='col-6 offset-18 mt-2']//button[@class='w-full btn btn-primary-second'][contains(text(),'Save')]");
     private By save3BTN = By.xpath("//div[@id='pane-change-password-settings']//button[@type='submit'][contains(text(),'Save')]");
     private By save4BTN = By.xpath("//div[@id='pane-email-settings']//button[@type='submit'][contains(text(),'Save')]");
     private By updatedNameHDR = By.xpath("//span[@class='el-dropdown-link capitalize text-xs text-white el-dropdown-selfdefine']");
@@ -80,8 +80,9 @@ public class AccountSettingsTest extends TestBase {
             driver.findElement(addressLine2TXT).sendKeys(billingData.get("Address Line 1"));
             driver.findElement(cityTXT).sendKeys(billingData.get("City"));
             driver.findElement(zipTXT).sendKeys(billingData.get("ZIP Code"));
+            driver.findElement(save2BTN).click();
         }
-        driver.findElement(save2BTN).click();
+
     }
 
     @Then("^Success message for update is display$")

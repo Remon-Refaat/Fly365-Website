@@ -56,18 +56,19 @@ public class TopOffersTest extends TestBase {
         driver.findElement (StoreWWW).click();
 
     }
-
-
-
-        @Then("^Check that (\\d+) page is displayed$")
-        public void checkThatPageIsDisplayed(int arg0) {
+    @Then("^Assert that (\\d+) error page is displayed$")
+    public void assertThatErrorPageIsDisplayed(int arg0) {
         String headerText = driver.findElement(ErrorPageHDR).getText();
         Assert.assertEquals(headerText, "Oops! Why Are You Here ?");
     }
+
+
 
     @Then("^Check current URL matches the offer page$")
     public void checkCurrentURLMatchesTheOfferPage() {
         String URL = driver.getCurrentUrl();
         Assert.assertEquals(URL, "https://nz.fly365stage.com/en/offers" );
     }
+
+
 }
