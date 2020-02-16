@@ -162,6 +162,37 @@ Feature: Apply Cancel on Bookings
     And Delete Created Rule From Database
 
   @testRefactor
-  Scenario: Verify that customer can cancel multi city trip when rule matches
-    Given Navigate to "NZ" Fly365 "stage" site
-    And Book a "multi city" trip from API for "stage" and get "order"
+  Scenario: Verify that customer can cancel multi city trip when rule matchesGiven Navigate to "NZ" Fly365 "stage" site
+    And Search for trip using API
+      |    departures    | |   arrivals   | |   depDatesAfter  | |     Adults   | |  Infants  | |  Child    | |   CabinClass   |
+      |        CAI,DXB   | |   DXB,CAI   | |       10,15      | |       1      | |     1     | |     1     | |     economy    |
+
+    And Choose trip number "2" and create cart
+    #And Add passengers
+     # |Birthdates           | |PassengerTypes  | |Titles   | |FirstNames      | |LastNames      | |PassportNumber      | |PassportExpiry           | |PassportCountry| |FrequentFlyer   | |Seats         | |Meals             |         |SpecialAssist| |CustomerTitle| |CustomerFirstName| |CustomerLastName| |PhoneNumber| |Email|
+     # |1991-03-03,2015-09-08| |ADT,CNN         | |Mr,Mr    | |Hassan,Hamed    | |Sayed,Ragab    | |1234567,45456       | |2024-03-03,2022-03-03    | |Eg,AE          | |  ,45365        | |VOML,VOML     | |WINDOW,WINDOW     |         |WCHC,WCHC        | |Mr           | |Khaled           | |Aziz            | |20100000001| |khaled.abdelaziz@fly365.com|
+
+    And Add passengers with this data
+      |Birthdates         |1991-03-03,2019-03-03,2014-04-03      |
+      |PassengerTypes     |ADT,INF,CNN                 |
+      |Titles             |Mr,Mr,Ms                    |
+      |FirstNames         |Hassan,Tarek,Salma              |
+      |LastNames          |Sayed,Aziz,Ramy               |
+      |PassportNumber     |1234567,4324234,3123213              |
+      |PassportExpiry     |2024-03-03,2021-01-01,2023-09-08      |
+      |PassportCountry    |Eg,AE,AE                 |
+      |FrequentFlyer      |321321,321321,321321                     |
+      |Seats              |VOML,VOML,VOML                  |
+      |Meals              |WINDOW,WINDOW,WINDOW              |
+      |SpecialAssist      | , , ,                  |
+      |CustomerTitle      |Mr                         |
+      |CustomerFirstName  |Khaled                     |
+      |CustomerLastName   |Aziz                       |
+      |PhoneNumber        |20100000001                |
+      |Email              |khaled.abdelaziz@fly365.com|
+      |SpecialRequest     |Test Request               |
+
+    And Checkout and get booking details
+      |cardHolderName   | |cardExpiryDate  | |cardNumber         | |cvv    |
+      |John Smith       | |0522            | |5123450000000008   | |123    |
+

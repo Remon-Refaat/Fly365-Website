@@ -1,6 +1,4 @@
-@modifyTestAll
 Feature: Apply Modify on Bookings
-
 
   Scenario: Modify order through API
     Given Navigate to "NZ" Fly365 "stage" site

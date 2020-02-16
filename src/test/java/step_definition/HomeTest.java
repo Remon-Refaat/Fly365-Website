@@ -16,6 +16,7 @@ import org.testng.Assert;
 import step_definition.FlightAndHubAPIs.BookingCycleAPI;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 public class HomeTest extends TestBase {
@@ -281,7 +282,7 @@ public class HomeTest extends TestBase {
     public void addAValid(String reference) {
         //driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(orderNumber);
        if (reference.equals("orderNumber")) {
-           driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(orderNumber);
+           driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(bookingApiObj.orderNumberCheckoutResponse);
        }
        if (reference.equals("modifiedOrderNumber")) {
            driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(ApplyModifyTest.modifiedOrderNumberFromApi);
@@ -437,4 +438,84 @@ public class HomeTest extends TestBase {
         Assert.assertEquals(emptysubscriber, "!Please enter a valid email");
     }
 
+
+    //private static String allAvailableTrips = null;
+    //private static String itinaryID = null;
+    private static String cartId = null;
+    @And("^Search for trip using API$")
+    public void searchForTripUsingAPI(DataTable Data) throws IOException {
+        String requestUrl = "https://nz.fly365stage.com/api/flight-search/search";
+        String departures[] = null, arrivals[] = null, depDates[] = null;
+        int adults =0 , infants = 0, child = 0;
+        String cabinClass = null;
+        for (Map<String, String> SearchData : Data.asMaps(String.class, String.class)) {
+            departures = SearchData.get("departures").split(",");
+            arrivals = SearchData.get("arrivals").split(",");
+            depDates = SearchData.get("depDatesAfter").split(",");
+            adults = Integer.parseInt(SearchData.get("Adults"));
+            child = Integer.parseInt(SearchData.get("Child"));
+            infants = Integer.parseInt(SearchData.get("Infants"));
+            cabinClass = SearchData.get("CabinClass");
+            System.out.println(departures[0] +"**************"+ arrivals[0] +"************"+depDates[0]);
+        }
+        bookingApiObj.itinerariesSearchRequest = apiObject.sendRequestFlight(requestUrl, bookingApiObj.oneWayAPITest(departures, arrivals, depDates, adults, child, infants, cabinClass),"post");
+    }
+
+
+    @And("^Add passengers with this data$")
+    public void addPassengersWithThisData(DataTable table) throws IOException {
+        String birthDates[] = null, passengerTypes[] = null, titles[] = null, firstNames[] = null, lastNames[] = null,
+                passportNumber[] = null, passportExpiry[] = null, passportCountry[] = null, frequentFlyer[] = null,
+                seats[] = null, meals[] = null, specialAssist[] = null;
+        String customerTitle = null, customerFirstName = null, customerLastName = null, phoneNumber = null, email = null, specialRequest = null;
+
+        List<List<String>> rows = table.asLists(String.class);
+        birthDates = rows.get(0).get(1).split(",");
+        passengerTypes = rows.get(1).get(1).split(",");
+        titles = rows.get(2).get(1).split(",");
+        firstNames = rows.get(3).get(1).split(",");
+        lastNames = rows.get(4).get(1).split(",");
+        passportNumber = rows.get(5).get(1).split(",");
+        passportExpiry = rows.get(6).get(1).split(",");
+        passportCountry = rows.get(7).get(1).split(",");
+        frequentFlyer = rows.get(8).get(1).split(",");
+        seats = rows.get(9).get(1).split(",");
+        meals = rows.get(10).get(1).split(",");
+        specialAssist = rows.get(11).get(1).split(",");
+        customerTitle = rows.get(12).get(1);
+        customerFirstName = rows.get(13).get(1);
+        customerLastName = rows.get(14).get(1);
+        phoneNumber = rows.get(15).get(1);
+        email = rows.get(16).get(1);
+        specialRequest = rows.get(17).get(1);
+        System.out.println(birthDates[0] +"**************"+ passengerTypes[0] +"************"+titles[0]+"**************"+firstNames[0] +"**************"+ lastNames[0] +"************"
+                +passportNumber[0] +"**************"+ passportExpiry[0] +"************"+passportCountry[0] +"**************"+ frequentFlyer[0] +"************"
+                +seats[0] +"**************"+ meals[0] +"************"+specialAssist.length +"**************"+ customerTitle +"************"+ customerFirstName +"************"
+                + customerLastName +"************"+ phoneNumber +"************"+ email +"************");
+        bookingApiObj.addPassengerTest(bookingApiObj.cartIdForSelectedItinerary,"stage", birthDates, passengerTypes, titles, firstNames, lastNames, passportNumber, passportExpiry,
+                passportCountry, frequentFlyer, seats, meals, specialAssist, customerTitle, customerFirstName, customerLastName, phoneNumber, email, specialRequest);
+    }
+
+    @And("^Choose trip number \"([^\"]*)\" and create cart$")
+    public void chooseTripNumberAndCreateCart(String tripNumber) throws Throwable {
+        int tripNum= Integer.parseInt(tripNumber);
+        bookingApiObj.itinaryIdFromSearchRequest = bookingApiObj.getItineraryId(bookingApiObj.itinerariesSearchRequest, tripNum);
+        System.out.println(bookingApiObj.itinerariesSearchRequest);
+        System.out.println(bookingApiObj.itinaryIdFromSearchRequest);
+        System.out.println(bookingApiObj.createCart(bookingApiObj.itinaryIdFromSearchRequest , "stage"));
+        bookingApiObj.cartIdForSelectedItinerary = bookingApiObj.createCart(bookingApiObj.itinaryIdFromSearchRequest, "stage");
+    }
+
+    @And("^Checkout and get booking details$")
+    public void checkoutAndGetBookingDetails(DataTable Data) throws IOException {
+        String cardHolderName=null, cardExpiryDate=null, cardNumber=null, cvv=null;
+        for (Map<String, String> cardData : Data.asMaps(String.class, String.class)) {
+            cardHolderName = cardData.get("cardHolderName");
+            cardExpiryDate = cardData.get("cardExpiryDate");
+            cardNumber = cardData.get("cardNumber");
+            cvv = cardData.get("cvv");
+        }
+        String[] checkoutResponse = bookingApiObj.checkoutItinerary(bookingApiObj.cartIdForSelectedItinerary, "stage", cardHolderName, cardExpiryDate, cardNumber, cvv);
+
+    }
 }
