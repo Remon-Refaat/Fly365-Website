@@ -34,4 +34,5 @@ jobs:
         run: java -jar selenium-server-standalone-3.141.59.jar -log selenium.log &
 
       - name: Build with Maven
-        run: mvn -Dbrowser=headless install -Dcucumber.options="--tags @BVT"
+        #run: mvn -Dbrowser=headless install -Dcucumber.options="--tags @BVT"
+        run: mvn -Dbrowser=headless clean test -Pfull
