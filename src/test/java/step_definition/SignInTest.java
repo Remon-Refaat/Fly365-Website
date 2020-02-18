@@ -27,9 +27,9 @@ public class SignInTest extends TestBase {
     private By LogoutBTN = By.xpath("//li[contains(text(),'Sign Out')]");
     private By AccountSettingBTN = By.xpath("//a[@class='account-links__link text-sm flex font-medium items-center link link-with-icon']");
     private By InvalidLogInMSG = By.xpath("//div[@class='tooltip error error']//span[@class='tooltiptext']");
-    private By PassWordErrorMSG = By.xpath("//body[@class='lang-en']/div/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first flex flex-col']/div[@class='form-container py-10']/div[@class='form-layout mx-auto bg-white rounded text-white relative']/div[@class='row']/div[@class='col-13 p-12']/div[@class='flex flex-col text-white']/div[@class='flex flex-col text-white']/form[@class='el-form']/div[@class='form-container']/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/span[1]");
+    private By PassWordErrorMSG = By.xpath("//span[contains(text(),'password')]");
     private By emptyPassWordErrorMSG = By.xpath("//div[2]/div[2]//div[2]/span");
-    private By EmailErrorMSG = By.xpath("//body[@class='lang-en']/div/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first flex flex-col']/div[@class='form-container py-10']/div[@class='form-layout mx-auto bg-white rounded text-white relative']/div[@class='row']/div[@class='col-13 p-12']/div[@class='flex flex-col text-white']/div[@class='flex flex-col text-white']/form[@class='el-form']/div[@class='form-container']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/span[1]");
+    private By EmailErrorMSG = By.xpath("//span[contains(text(),'email')]");
     private By HomePageTitle = By.xpath("//a[text()='SIGN IN']");
     private By SignInHeader = By.xpath("//div[@class='text-sm mb-8 text-primary-fourth leading-normal']");
 
