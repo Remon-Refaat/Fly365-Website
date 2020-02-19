@@ -527,7 +527,6 @@ public class HomeTest extends TestBase {
             child = Integer.parseInt(SearchData.get("Child"));
             infants = Integer.parseInt(SearchData.get("Infants"));
             cabinClass = SearchData.get("CabinClass");
-            System.out.println(departures[0] +"**************"+ arrivals[0] +"************"+depDates[0]);
         }
         bookingApiObj.itinerariesSearchRequest = apiObject.sendRequestFlight(requestUrl, bookingApiObj.oneWayAPITest(departures, arrivals, depDates, adults, child, infants, cabinClass),"post");
     }
@@ -559,10 +558,6 @@ public class HomeTest extends TestBase {
         phoneNumber = rows.get(15).get(1);
         email = rows.get(16).get(1);
         specialRequest = rows.get(17).get(1);
-        System.out.println(birthDates[0] +"**************"+ passengerTypes[0] +"************"+titles[0]+"**************"+firstNames[0] +"**************"+ lastNames[0] +"************"
-                +passportNumber[0] +"**************"+ passportExpiry[0] +"************"+passportCountry[0] +"**************"+ frequentFlyer[0] +"************"
-                +seats[0] +"**************"+ meals[0] +"************"+specialAssist.length +"**************"+ customerTitle +"************"+ customerFirstName +"************"
-                + customerLastName +"************"+ phoneNumber +"************"+ email +"************");
         bookingApiObj.addPassengerTest(bookingApiObj.cartIdForSelectedItinerary,"stage", birthDates, passengerTypes, titles, firstNames, lastNames, passportNumber, passportExpiry,
                 passportCountry, frequentFlyer, seats, meals, specialAssist, customerTitle, customerFirstName, customerLastName, phoneNumber, email, specialRequest);
     }
@@ -570,12 +565,7 @@ public class HomeTest extends TestBase {
     @And("^Choose trip number \"([^\"]*)\" and create cart$")
     public void chooseTripNumberAndCreateCart(String tripNumber) throws Throwable {
         int tripNum= Integer.parseInt(tripNumber);
-        //System.out.println(APIUtility.jsonPathEvaluator);
-        //bookingApiObj.itinerariesSearchRequest = APIUtility.jsonPathEvaluator.getJsonObject("itineraries").toString();
         bookingApiObj.itinaryIdFromSearchRequest = bookingApiObj.getItineraryId(bookingApiObj.itinerariesSearchRequest, tripNum);
-        System.out.println(bookingApiObj.itinerariesSearchRequest);
-        System.out.println(bookingApiObj.itinaryIdFromSearchRequest);
-        //System.out.println(bookingApiObj.createCart(bookingApiObj.itinaryIdFromSearchRequest , "stage"));
         bookingApiObj.cartIdForSelectedItinerary = bookingApiObj.createCart(bookingApiObj.itinaryIdFromSearchRequest, "stage");
     }
 

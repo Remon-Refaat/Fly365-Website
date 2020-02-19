@@ -19,7 +19,7 @@ Feature: Apply Cancel on Bookings
       | PassportExpiry    | 2024-03-03                  |
       | PassportCountry   | Eg                          |
       | FrequentFlyer     | 321321                      |
-      | Seats             |, ,                        |
+      | Seats             | , ,                         |
       | Meals             | WINDOW                      |
       | SpecialAssist     | VVVVV                       |
       | CustomerTitle     | Mr                          |
@@ -187,8 +187,7 @@ Feature: Apply Cancel on Bookings
     Then Booking Status Will still confirmed
     And Delete Created Rule From Database
 
-  @testRefactor
-  Scenario: Verify that customer can cancel multi city trip when rule matchesGiven Navigate to "NZ" Fly365 "stage" site
+  Scenario: Test booking cycle through api
     And Search for trip using API
       | departures |  | arrivals |  | depDatesAfter |  | Adults |  | Infants |  | Child |  | CabinClass |
       | CAI,DXB    |  | DXB,CAI  |  | 10,15         |  | 1      |  | 1       |  | 1     |  | economy    |

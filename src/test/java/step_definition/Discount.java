@@ -178,7 +178,6 @@ public class Discount extends TestBase {
     public void checkDiscountRuleDisabled() throws InterruptedException {
         Thread.sleep(20000);
         List<String> discountStatus = api.jsonPathEvaluator.getList("itineraries.discounts");
-        System.out.println(discountStatus);
         for (String discount : discountStatus) {
             Assert.assertEquals(discount ,null);
         }
@@ -211,14 +210,12 @@ public class Discount extends TestBase {
         String finalResponse = bookingApiObj.getresult(bookingApiObj.orderIdCheckoutResponse, bookingApiObj.orderNumberCheckoutResponse);
         JSONObject jObject = new JSONObject(finalResponse);
         JSONArray arr = jObject.getJSONArray("products");
-        System.out.println(arr);
         String discountNAM = null;
         for (int i = 0; i < arr.length(); i++) {
             JSONArray array_1 = arr.getJSONObject(i).getJSONArray("options");
             JSONObject OBJ1 = array_1.getJSONObject(0);
             discountNAM = OBJ1.getJSONObject("discounts").get("name").toString();
         }
-        System.out.println(discountNAM);
         return responseField;
     }
 }

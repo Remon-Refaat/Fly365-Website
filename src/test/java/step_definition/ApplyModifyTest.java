@@ -24,8 +24,6 @@ public class ApplyModifyTest extends TestBase {
     ModifyBookingAPI modifyApiObj = new ModifyBookingAPI();
     BookingCycleAPI bookingApiObj = new BookingCycleAPI();
 
-    private static String returnedMyBookJson = null;
-    String carrierCode = null;
     public static String oldOrderNumber = null;
     private static String modifiedItineraryID = null;
     public static String modifiedOrderNumberFromApi = null;
@@ -53,13 +51,6 @@ public class ApplyModifyTest extends TestBase {
             departure = modifySearchData.get("departure");
             arrival = modifySearchData.get("arrival");
             addedDaysToInt = Integer.parseInt(addedDays);
-
-            /*try{
-                modifiedItineraryID = bookingApiObj.getItineraryId(availableTrips, 1);
-            }catch (Exception e){
-                System.out.println(e.getMessage());
-            }
-            System.out.println("********************"+ modifiedItineraryID + "**************");*/
         }
         String modifyApiUrl = "https://"+store+".fly365"+environment+".com/api/flight-search/modify";
         bookingApiObj.itinerariesSearchRequest = modifyApiObj.modifyBookingAPI(modifyApiUrl , departure , arrival , addedDaysToInt);
@@ -73,11 +64,8 @@ public class ApplyModifyTest extends TestBase {
     public void bookTheNewOrderThroughApiOnStoreAndTheEnvironmentAndGet(String store, String environment, String reference) throws Throwable {
         String cartID = modifyApiObj.createCartModifiedOrder(store , environment , modifiedItineraryID , BookingCycleAPI.orderIdCheckoutResponse);
         BookingCycleAPI.checkoutTrip(cartID , "stage");
-        System.out.println(BookingCycleAPI.orderIdCheckoutResponse);
         modifiedOrderNumberFromApi = bookingApiObj.orderNumberCheckoutResponse;
-        System.out.println(modifiedOrderNumberFromApi);
         modifiedPnrNumberFromApi = bookingApiObj.pnrNumberCheckoutResponse;
-        System.out.println(modifiedPnrNumberFromApi);
         if (reference.equals("order")) {
             modifiedOrderNumberFromApi = bookingApiObj.orderNumberCheckoutResponse;
         }
@@ -134,7 +122,6 @@ public class ApplyModifyTest extends TestBase {
     @Then("^Change My Booking is not Clickable$")
     public void changeMyBookingIsNotClickable() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(changeBookBTN));
-        System.out.println(driver.findElement(dimmedChangeBookBTN).getAttribute("class"));
         Assert.assertTrue(driver.findElement(dimmedChangeBookBTN).getAttribute("class").contains("is-disabled"));
     }
 

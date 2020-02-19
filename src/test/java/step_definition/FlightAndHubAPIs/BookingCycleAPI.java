@@ -53,7 +53,6 @@ public class BookingCycleAPI {
         JSONArray arr = jObject.getJSONArray("itineraries");
         for (int i = 0; i < arr.length(); i++) {
             itinaryIdFromSearchRequest = arr.getJSONObject(tripnumber - 1).getString("itineraryId");
-            System.out.println("***********************"+itinaryIdFromSearchRequest);
         }
         return itinaryIdFromSearchRequest;
     }
@@ -104,8 +103,6 @@ public class BookingCycleAPI {
         JSONObject jObject = new JSONObject(returnedJsonString);
         orderNumberCheckoutResponse = jObject.getJSONObject("order").get("orderNumber").toString();
         orderIdCheckoutResponse = jObject.getJSONObject("order").get("orderId").toString();
-        System.out.println(orderIdCheckoutResponse);
-        System.out.println(orderNumberCheckoutResponse);
         String finalResponse = getresult(orderIdCheckoutResponse, orderNumberCheckoutResponse);
         getBookingResponse();
     }
@@ -116,7 +113,6 @@ public class BookingCycleAPI {
         ArrayList<String> bookingCodeArr = new ArrayList<String>();
         airLineRef = APIUtility.jsonPathEvaluator.get("products[0].confirmation.supplierConfirmationCode").toString();
         pnrNumberCheckoutResponse = APIUtility.jsonPathEvaluator.get("products[0].confirmation.vendorConfirmationCode").toString();
-        System.out.println(pnrNumberCheckoutResponse);
         storeId = APIUtility.jsonPathEvaluator.get("storeId").toString();
         email = APIUtility.jsonPathEvaluator.get("customer.email").toString();
         mobileNumber = APIUtility.jsonPathEvaluator.get("customer.mobileNumber").toString();
@@ -181,14 +177,12 @@ public class BookingCycleAPI {
         String[] passportExpiry, String[] passportCountry, String[] frequentFlyer, String[] seats, String[] meals, String[] specialAssist, String customerTitle,
         String customerFirstName, String customerLastName, String phoneNumber, String email, String specialRequest) throws IOException {
         List<String> newStr = new ArrayList<String>(titles.length);
-        System.out.println(titles.length);
         for(int i=0;i<titles.length;i++){
             newStr.add("{\"dateOfBirth\":\""+birthDates[i]+"\",\"passengerType\":\""+passengerTypes[i]+"\",\"passengerNameByType\":\"\",\"title\":\""+titles[i]+"\",\"firstName\":\""+firstNames[i]+"\",\"middleName\":\"\"," +
             "\"lastName\":\""+lastNames[i]+"\",\"identificationDetail\":{\"idType\":\"passport\",\"idNumber\":\""+passportNumber[i]+"\",\"idExpiryDate\":\""+passportExpiry[i]+"\",\"country\":\""+passportCountry[i]+"\"}," +
             "\"reference\":\"6122\",\"frequentFlyerNumber\":\""+frequentFlyer[i]+"\",\"frequentFlyerOptions\":{},\"preferenceOptions\":{\"meal\":{\"code\":\""+meals[i]+"\"},\"seat\":{\"code\":\""+seats[i]+"\"}," +
             "\"specialAssistance\":{\"code\":\""+specialAssist[i]+"\"}}}");
         }
-        System.out.println(newStr);
         String passengerDetailsBody = "{\"customer\":{\"title\":\""+customerTitle+"\"," + "\"firstName\":\""+customerFirstName+"\"," +
             "\"lastName\":\""+customerLastName+"\",\"mobileNumber\":\""+phoneNumber+"\",\"email\":\""+email+"\"},\"passengers\":"+newStr+",\"specialRequest\":\""+specialRequest+"\"}}";
         APIUtility.sendRequestFlight("https://nz.fly365stage.com/api/flight/cart/" + cartID + "/passenger", passengerDetailsBody, "post");
@@ -201,11 +195,9 @@ public class BookingCycleAPI {
                 "\"newsletterSubscription\":false,\"acceptTerms\":true,\"acknowledgeRisk\":true,\"holdFees\":{}}";
         String returnedJsonString = APIUtility.sendRequestFlight("https://nz.fly365" + domain + ".com/api/flight/cart/" + cartID + "/checkout", addCardDetailsBody, "post");
 //To validate that the order no./pnr number is displayed correctly in retrieve my booking
-        System.out.println("*******++++++++++**********"+returnedJsonString);
         JSONObject jObject = new JSONObject(returnedJsonString);
         orderNumberCheckoutResponse = jObject.getJSONObject("order").get("orderNumber").toString();
         orderIdCheckoutResponse = jObject.getJSONObject("order").get("orderId").toString();
-        String[] fly365AirlineRef = {orderNumberCheckoutResponse, orderIdCheckoutResponse};
         String finalResponse = getresult(orderIdCheckoutResponse, orderNumberCheckoutResponse);
         getBookingResponse();
     }
