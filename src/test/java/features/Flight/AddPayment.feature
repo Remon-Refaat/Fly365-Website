@@ -1,4 +1,4 @@
-@BVT
+@New
 @Sign_Out
 Feature: Add Payment to Login user
 
