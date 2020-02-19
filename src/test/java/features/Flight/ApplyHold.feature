@@ -1,4 +1,3 @@
-@holdAllTest
 Feature: Apply Hold on Bookings
 
   Scenario: Verify Hold button is not displayed if departure is less than minimum hours before departure and ticketing
@@ -31,7 +30,7 @@ Feature: Apply Hold on Bookings
     Given  Navigate to Fly "stage" site
     When Set Data on stage for hold Rule API through fly365_nz and exclude "sv"
       | Min hours before departure |  | Min hours before ticketing |  | Hold hours |  | Hold status |  | hold value |
-      | 72                         |  | 72                         |  | 90      |  | true    |  | 40         |
+      | 72                         |  | 72                         |  | 90      |  | true    |  | 0         |
     And Navigate to "NZ" Fly365 "stage" site
     And Select One Way trip
     And Add airport to the Origin "Cairo International Airport (CAI), Egypt"

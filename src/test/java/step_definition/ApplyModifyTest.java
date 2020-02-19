@@ -1,6 +1,7 @@
 package step_definition;
 
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import helper.APIUtility;
@@ -25,9 +26,11 @@ public class ApplyModifyTest extends TestBase {
 
     private static String returnedMyBookJson = null;
     String carrierCode = null;
+    public static String oldOrderNumber = null;
     private static String modifiedItineraryID = null;
     public static String modifiedOrderNumberFromApi = null;
     public static String modifiedPnrNumberFromApi = null;
+    public static String modifiedCartId = null;
 
     private By changeBookBTN = By.xpath("//div[text()='Change Booking']");
     private By selectThisFlightBTN = By.xpath("(//span[contains(text(),'SELECT THIS FLIGHT')])[1]");
@@ -41,35 +44,45 @@ public class ApplyModifyTest extends TestBase {
 
     @And("^Modify the booking with this data through api$")
     public void modifyTheBookingWithThisDataThroughApi(DataTable Data) throws IOException {
+        String store =null, environment=null, addedDays=null,departure =null,arrival =null;
+        int addedDaysToInt =0;
         for (Map<String, String> modifySearchData : Data.asMaps(String.class, String.class)) {
-            String store = modifySearchData.get("store");
-            String environment = modifySearchData.get("environment");
-            String addedDays = modifySearchData.get("SearchDateAfter");
-            String departure = modifySearchData.get("departure");
-            String arrival = modifySearchData.get("arrival");
-            int addedDaysToInt = Integer.parseInt(addedDays);
-            String modifyApiUrl = "https://"+store+".fly365"+environment+".com/api/flight-search/modify";
-            String availableTrips =  modifyApiObj.modifyBookingAPI(modifyApiUrl , departure , arrival , addedDaysToInt);
+            store = modifySearchData.get("store");
+            environment = modifySearchData.get("environment");
+            addedDays = modifySearchData.get("SearchDateAfter");
+            departure = modifySearchData.get("departure");
+            arrival = modifySearchData.get("arrival");
+            addedDaysToInt = Integer.parseInt(addedDays);
 
-            try{
+            /*try{
                 modifiedItineraryID = bookingApiObj.getItineraryId(availableTrips, 1);
             }catch (Exception e){
                 System.out.println(e.getMessage());
             }
-            System.out.println("********************"+ modifiedItineraryID + "**************");
+            System.out.println("********************"+ modifiedItineraryID + "**************");*/
         }
+        String modifyApiUrl = "https://"+store+".fly365"+environment+".com/api/flight-search/modify";
+        bookingApiObj.itinerariesSearchRequest = modifyApiObj.modifyBookingAPI(modifyApiUrl , departure , arrival , addedDaysToInt);
+        oldOrderNumber = bookingApiObj.orderNumberCheckoutResponse ;
+        //bookingApiObj.itinerariesSearchRequest =
         //String modifyApiUrl = "https://"+store+".fly365"+environment+".com/api/flight-search/modify";
         //apiObj.modifyBookingAPI(modifyApiUrl);
     }
 
     @And("^Book the new order through api on store \"([^\"]*)\" and the environment \"([^\"]*)\" and get \"([^\"]*)\"$")
     public void bookTheNewOrderThroughApiOnStoreAndTheEnvironmentAndGet(String store, String environment, String reference) throws Throwable {
-        String cardID = modifyApiObj.createCartModifiedOrder(store , environment , modifiedItineraryID , BookingCycleAPI.orderIdCheckoutResponse);
+        String cartID = modifyApiObj.createCartModifiedOrder(store , environment , modifiedItineraryID , BookingCycleAPI.orderIdCheckoutResponse);
+        BookingCycleAPI.checkoutTrip(cartID , "stage");
+        System.out.println(BookingCycleAPI.orderIdCheckoutResponse);
+        modifiedOrderNumberFromApi = bookingApiObj.orderNumberCheckoutResponse;
+        System.out.println(modifiedOrderNumberFromApi);
+        modifiedPnrNumberFromApi = bookingApiObj.pnrNumberCheckoutResponse;
+        System.out.println(modifiedPnrNumberFromApi);
         if (reference.equals("order")) {
-            modifiedOrderNumberFromApi = bookingApiObj.checkoutTrip(cardID, environment)[0];
+            modifiedOrderNumberFromApi = bookingApiObj.orderNumberCheckoutResponse;
         }
         if (reference.equals("Fly365 Reference")) {
-            modifiedPnrNumberFromApi = bookingApiObj.checkoutTrip(cardID, environment)[1];
+            modifiedPnrNumberFromApi = bookingApiObj.pnrNumberCheckoutResponse;
         }
     }
 
@@ -139,4 +152,10 @@ public class ApplyModifyTest extends TestBase {
         }
     }
 
+    @And("^Choose modified trip number \"([^\"]*)\" and create cart$")
+    public void chooseModifiedTripNumberAndCreateCart(String tripNumber) throws Throwable {
+        int tripNum= Integer.parseInt(tripNumber);
+        modifiedItineraryID = bookingApiObj.getItineraryId(bookingApiObj.itinerariesSearchRequest, tripNum);
+        bookingApiObj.cartIdForSelectedItinerary = modifyApiObj.createCartModifiedOrder("nz" , "stage" , modifiedItineraryID , BookingCycleAPI.orderIdCheckoutResponse);
+    }
 }

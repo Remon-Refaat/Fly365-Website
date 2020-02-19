@@ -32,14 +32,17 @@ public class SearchTrips extends TestBase {
     private By displayedPriceWEB = By.xpath("//div[@id='itin-gp-0-price']");
     private By itineraryCarrierWEB = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0']/div/div[1]/div[1]/div/div/label");
     private By firstSegmentflightNumberWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-0-carrier");
-    private By stopsWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0 > div > div.search-item.px-4.bg-white.flex.items-center.search-item.search-item-active.search-item-selected.search-item > div.col-lg-14 > div > div.flex.col-6.flex-col.items-center.leading-none.mt-1.flight-stop.el-tooltip > span.text-xs.inline-block.text-primary-fourth.font-medium.mt-1 > span");
-    private By durationWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0 > div > div.search-item.px-4.bg-white.flex.items-center.search-item.search-item-active > div.col-lg-14 > div > div.flex.col-6.flex-col.items-center.leading-none.mt-1.flight-stop.el-tooltip > span.text-xs.inline-block.text-primary-fourth.font-medium.mb-1.flight-duration");
+    private By stopsWEB = By.xpath("/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[3]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/ul[1]/li[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/span[2]/span[1]");
+    //private By stopsWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0 > div > div.search-item.px-4.bg-white.flex.items-center.search-item.search-item-active.search-item-selected.search-item > div.col-lg-14 > div > div.flex.col-6.flex-col.items-center.leading-none.mt-1.flight-stop.el-tooltip > span.text-xs.inline-block.text-primary-fourth.font-medium.mt-1 > span");
+    // private By durationWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0 > div > div.search-item.px-4.bg-white.flex.items-center.search-item.search-item-active > div.col-lg-14 > div > div.flex.col-6.flex-col.items-center.leading-none.mt-1.flight-stop.el-tooltip > span.text-xs.inline-block.text-primary-fourth.font-medium.mb-1.flight-duration");
+    private By durationWEB = By.xpath("/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[3]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/ul[1]/li[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/span[1]");
     private By firstSegmentCarrierNameWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-0-carrier > div > label.airway-name.text-primary-fourth.font-normal");
     private By firstSegmentAircraftNameWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-0-carrier-aircraft > label.airway-name.text-primary-fourth");
     private By firstSegmentOriginCodeWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-0-origin > div > span.text-sm.text-black.font-medium");
     private By firstSegmentDestinationCodeWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-0-destination > span.text-sm.text-black.font-semibold");
     private By firstSegmentCabinClassWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-0-carrier-aircraft > label.airway-code.text-black");
-    private By firstSegmentBaggageWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0 > div > div:nth-child(2) > div > div > div > div.col-lg-13.mr-0.xl\\3a mr-16.md\\3a mr-12.col-24 > div:nth-child(1) > div:nth-child(1) > div.col-md-4.md\\3a flex.hidden > div > label.airway-code.text-black");
+    //private By firstSegmentBaggageWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0 > div > div:nth-child(2) > div > div > div > div.col-lg-13.mr-0.xl\\3a mr-16.md\\3a mr-12.col-24 > div:nth-child(1) > div:nth-child(1) > div.col-md-4.md\\3a flex.hidden > div > label.airway-code.text-black");
+    private By firstSegmentBaggageWEB = By.xpath("/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[3]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/ul[1]/li[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[3]/div[1]/label[2]");
     private By firstSegmentOriginTerminalWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-0-origin > div > div.flex.md\\3a flex-col.flex-row > span:nth-child(3)");
     private By firstSegmentDestinationTerminalWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-0-destination > div.flex.md\\3a flex-col.flex-row > span:nth-child(3)");
     private By firstSegmentOriginDepTimeWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-0-origin > div > div.flex.items-center > span.text-lg.text-black.font-semibold");
@@ -61,21 +64,24 @@ public class SearchTrips extends TestBase {
     private By secondSegmentOriginDepDateWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-1-origin > div > div.flex.items-center > span.text-sm.text-black.ml-1");
     private By secondSegmentDestinationDepDateWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-1-destination > div.flex.items-center > span.text-sm.text-black.ml-1");
     private By secondSegmentFlightTimeWEB = By.cssSelector("#itin-gp-0-optionset-0-option-0-segment-1-duration > div");
+    private By footer = By.xpath("//div[@class='footer-content pt-5 bg-primary-first lg:pt-10 pb-12']");
 
     @And("^Scroll to the end of the page$")
     public void scrollToTheEndOfThePage() throws InterruptedException {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(flightOptionsHDR));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        for (int i = 0; i < 18; i++) {
-            js.executeScript("scrollBy(0,2500)");
+        JavascriptExecutor js = ((JavascriptExecutor) driver);
+        for (int i = 0; i < 70; i++) {
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
         }
+
     }
 
 
     @Then("^Check count of search results$")
     public void checkCountOfSearchResults() throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOfElementLocated(flightOptionsHDR));
+        scrollToTheEndOfThePage();
         String count = driver.findElement(By.xpath("//span[@class='ml-2 text-black text-sm font-medium']")).getText();
         List result = driver.findElements(flightOptionsHDR);
         String displayedCount = String.valueOf(result.size());
@@ -100,7 +106,7 @@ public class SearchTrips extends TestBase {
 
     @And("^Check Flight Details from WEB$")
     public String checkFlightDetails() {
-        String flightdetails = driver.findElement(By.xpath("//body/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first']/div[@class='search-results bg-secondary-fourth']/div[@class='text-primary-third container lg:px-0 md:px-8 px-2']/div[@class='search-container']/div[@class='result-group relative rounded bg-primary-eighth py-1 relative mb-5']/div[@class='bg-secondary-fourth mx-1 result-group__items pb-3']/div[@class='row']/div[@class='w-full mx-3 bg-white result-group__container']/div[@class='el-radio-group w-full']/ul[@class='list-reset result-group__list m-3']/li/div[@id='itin-gp-0-optionset-0-option-0']/div[@class='search-item-wrapper bg-white']/div/div[@class='rounded w-full rounded-t-none pt-0 border-t-0 details-search-result-selected']/div[@class='flight-details bg-secondary-sixth m-3 mt-0 rounded bg-white']/div[@class='row']/div[@class='col-lg-13 mr-0 xl:mr-16 md:mr-12 col-24']/div[1]")).getText();
+       String flightdetails = driver.findElement(By.xpath("//body/div/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first flex flex-col']/div[@class='search-results bg-secondary-fourth']/div[@class='text-primary-third container px-0']/div[@class='search-container']/div[@class='result-group relative rounded bg-primary-eighth py-1 relative mb-5']/div[@class='bg-secondary-fourth mx-1 result-group__items']/div[@class='row']/div[@class='w-full mx-3 bg-white result-group__container']/div[@class='el-radio-group w-full']/ul[@class='list-reset result-group__list m-3']/li/div[@id='itin-gp-2-optionset-0-option-0']/div[@class='search-item-wrapper bg-white']/div/div[@class='rounded w-full rounded-t-none pt-0 border-t-0 details-search-result-selected']/div[@class='flight-details bg-secondary-sixth m-3 mt-0 rounded bg-white']/div[1]")).getText();
         return flightdetails;
     }
 
@@ -140,9 +146,9 @@ public class SearchTrips extends TestBase {
         JSONObject jObject = new JSONObject(returnedJsongString);
         JSONArray arr = jObject.getJSONArray("itineraries");
         for (int i = 0; i < arr.length(); i++) {
-            originallegId = arr.getJSONObject(tripnumber - 1).getJSONArray("legs").getString(0);
-            displayedPriceAPI = arr.getJSONObject(tripnumber - 1).getJSONObject("displayPricing").get("total").toString();
-            itineraryCarrierAPI = arr.getJSONObject(tripnumber - 1).getJSONObject("carrier").get("name").toString();
+            originallegId = arr.getJSONObject(tripnumber - 0).getJSONArray("legs").getString(0);
+            displayedPriceAPI = arr.getJSONObject(tripnumber - 0).getJSONObject("displayPricing").get("total").toString();
+            itineraryCarrierAPI = arr.getJSONObject(tripnumber - 0).getJSONObject("carrier").get("name").toString();
         }
         return originallegId;
     }
@@ -163,7 +169,7 @@ public class SearchTrips extends TestBase {
                 stopsAPI = arr.getJSONObject(i).getInt("stops");
                 JSONArray allSegments = arr.getJSONObject(i).getJSONArray("segments");
                 firstSegmentId = allSegments.get(0).toString();
-                secondSegmentId = allSegments.get(1).toString();
+                secondSegmentId = allSegments.get(0).toString();
                 //thirdSegmentId = allSegments.get(2).toString();
             }
         }
@@ -261,15 +267,15 @@ public class SearchTrips extends TestBase {
 
     @And("^Check Flight Details for one way from API$")
     public void checkFlightDetailsForOneWayFromAPI() throws IOException {
-        String itineraryResults = apiObj.sendRequestFlight("https://api.fly365stage.com/flight-search/search", oneWayTripAPI(), "post");
-        getDetailsOfItinerary(itineraryResults, 1);
+        String itineraryResults = apiObj.sendRequestFlight("https://nz.fly365stage.com/api/flight-search/search", oneWayTripAPI(), "post");
+        getDetailsOfItinerary(itineraryResults, 0);
         getDetailsOfLegs(itineraryResults);
         getDetailsOfSegments(itineraryResults);
     }
 
     @And("^Check Flight Details for round trip from API$")
     public void checkFlightDetailsForRoundTripFromAPI() throws IOException {
-        String itineraryResults = apiObj.sendRequestFlight("https://api.fly365stage.com/flight-search/search", roundTripAPI() , "post");
+        String itineraryResults = apiObj.sendRequestFlight("https://www.fly365stage.com/api/flight-search/search", roundTripAPI() , "post");
         getDetailsOfItinerary(itineraryResults, 1);
         getDetailsOfLegs(itineraryResults);
         getDetailsOfSegments(itineraryResults);
@@ -277,7 +283,7 @@ public class SearchTrips extends TestBase {
 
     @And("^Check Flight Details for multi city trip from API$")
     public void checkFlightDetailsForMultiCityTripFromAPI() throws IOException {
-        String itineraryResults = apiObj.sendRequestFlight("https://api.fly365stage.com/flight-search/search", multiCityAPI(), "post");
+        String itineraryResults = apiObj.sendRequestFlight("https://www.fly365stage.com/api/flight-search/search", multiCityAPI(), "post");
         getDetailsOfItinerary(itineraryResults, 1);
         getDetailsOfLegs(itineraryResults);
         getDetailsOfSegments(itineraryResults);
@@ -302,7 +308,6 @@ public class SearchTrips extends TestBase {
         Assert.assertEquals(itineraryCarrierAPI, driver.findElement(itineraryCarrierWEB).getText());
         Assert.assertEquals(stopCount(), driver.findElement(stopsWEB).getText());
         Assert.assertEquals(durationAPI, gmObj.changeTimeFormatInMinutes(driver.findElement(durationWEB).getText().replaceAll("[\\D]", " ").trim()));
-
         Assert.assertEquals(firstSegmentCarrierNameAPI, driver.findElement(firstSegmentCarrierNameWEB).getText());
         Assert.assertEquals(firstSegmentFlightNumberAPI, driver.findElement(firstSegmentflightNumberWEB).getText().replaceAll("[a-zA-Z\\s\\-]", ""));
         Assert.assertEquals(firstSegmentAircraftNameAPI, driver.findElement(firstSegmentAircraftNameWEB).getText());
@@ -316,8 +321,6 @@ public class SearchTrips extends TestBase {
         Assert.assertEquals(firstSegmentDestinationDepTimeAPI, driver.findElement(firstSegmentDestinationDepTimeWEB).getText().replaceAll("\\s\\-", ""));
         Assert.assertEquals(firstSegmentOriginDepDateAPI, gmObj.changeDateFormat(driver.findElement(firstSegmentOriginDepDateWEB).getText()));
         Assert.assertEquals(firstSegmentDestinationDepDateAPI, gmObj.changeDateFormat(driver.findElement(firstSegmentDestinationDepDateWEB).getText()));
-        //Assert.assertEquals(firstSegmentFlightTimeAPI,gmObj.changeTimeFormatInMinutes(driver.findElement(firstSegmentFlightTimeWEB).getText().replaceAll("[\\D]"," ").trim()));
-
         Assert.assertEquals(secondSegmentCarrierNameAPI, driver.findElement(secondSegmentCarrierNameWEB).getText());
         Assert.assertEquals(secondSegmentFlightNumberAPI, driver.findElement(secondSegmentflightNumberWEB).getText().replaceAll("[a-zA-Z\\s\\-]", ""));
         Assert.assertEquals(secondSegmentAircraftNameAPI, driver.findElement(secondSegmentAircraftNameWEB).getText());
@@ -331,6 +334,5 @@ public class SearchTrips extends TestBase {
         Assert.assertEquals(secondSegmentDestinationDepTimeAPI, driver.findElement(secondSegmentDestinationDepTimeWEB).getText().replaceAll("\\s\\-", ""));
         Assert.assertEquals(secondSegmentOriginDepDateAPI, gmObj.changeDateFormat(driver.findElement(secondSegmentOriginDepDateWEB).getText()));
         Assert.assertEquals(secondSegmentDestinationDepDateAPI, gmObj.changeDateFormat(driver.findElement(secondSegmentDestinationDepDateWEB).getText()));
-        //Assert.assertEquals(secondSegmentFlightTimeAPI,gmObj.changeTimeFormatInMinutes(driver.findElement(secondSegmentFlightTimeWEB).getText().replaceAll("[\\D]"," ").trim()));
     }
 }

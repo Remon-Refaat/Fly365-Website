@@ -133,6 +133,7 @@ public class ApplyCancelTest extends TestBase {
         driver.findElement(selectStatusOrderDetailsBTN).click();
         Thread.sleep(1500);
         WebElement orderStatusElmnt = driver.findElement(orderDetailsStatus);
+        Thread.sleep(1500);
         Assert.assertEquals(orderStatusElmnt.getText(), "To be refunded");
     }
 
@@ -165,5 +166,8 @@ public class ApplyCancelTest extends TestBase {
         APIUtility.sendRequestHub("https://internal.fly365" + domain + ".com/rules/rule", hubRulesApiObj.createRuleAPI(fakerRuleName ,
                 bookingApiObj.storeId , bookingApiObj.carrierCode, bookingApiObj.bookingCode,
                 "airport", bookingApiObj.depCity, "airport" , bookingApiObj.arrCity , cancelOption ,status), "post");
+        /*APIUtility.sendRequestHub("https://internal.fly365" + domain + ".com/rules/rule", hubRulesApiObj.createRuleAPI("testTestRule" ,
+                "fly365_nz" , "ms", "h",
+                "airport", "cai", "airport" , "JED" , cancelOption ,status), "post");*/
     }
 }

@@ -16,10 +16,14 @@ public class BookingCycleAPI {
     public static String itinaryIdFromSearchRequest = null;
     public static String cartIdForSelectedItinerary = null;
     public static String orderNumberCheckoutResponse = null;
+    public static String pnrNumberCheckoutResponse = null;
+
+    public static String depCity = null, arrCity = null, bookingCode = null, storeUser = null, storeId = null, carrierCode = null,
+            email = null, mobileNumber = null, airLineRef = null, paymentGateway = null, discountName = null, orderId = null, totalPrice;
     GeneralMethods gmObject = new GeneralMethods();
     public String oneWayAPI() {
         String departureDate1 = gmObject.addDateWithCertainPeriodAndFormat(10, "yyyy-MM-dd");
-        String oneWay = "{\"legs\": [{\"origin\": \"JED\",\"destination\": \"CAI\",\"departureDate\": \"" + departureDate1 + "\"}],\n" +
+        String oneWay = "{\"legs\": [{\"origin\": \"RUH\",\"destination\": \"CAI\",\"departureDate\": \"" + departureDate1 + "\"}],\n" +
                 " \"cabinClass\": \"Economy\",\"infant\": 0,\"child\": 0,\"adult\": 1}";
         return oneWay;
     }
@@ -47,11 +51,11 @@ public class BookingCycleAPI {
     public static String    getItineraryId(String returnedJsongString, int tripnumber) {
         JSONObject jObject = new JSONObject(returnedJsongString);
         JSONArray arr = jObject.getJSONArray("itineraries");
-        String itineraryId = null;
         for (int i = 0; i < arr.length(); i++) {
-            itineraryId = arr.getJSONObject(tripnumber - 1).getString("itineraryId");
+            itinaryIdFromSearchRequest = arr.getJSONObject(tripnumber - 1).getString("itineraryId");
+            System.out.println("***********************"+itinaryIdFromSearchRequest);
         }
-        return itineraryId;
+        return itinaryIdFromSearchRequest;
     }
 
     public static String createCart(String itineraryId, String domain) throws IOException {
@@ -73,7 +77,7 @@ public class BookingCycleAPI {
         APIUtility.sendRequestFlight("https://nz.fly365" + domain + ".com/api/flight/cart/" + cartID + "/passenger", addPassengerDetailsAPI, "post");
     }
 
-    public static String[] checkoutTrip(String cartID, String domain) throws IOException {
+    public static void checkoutTrip(String cartID, String domain) throws IOException {
         String addCardDetailsAPI = "{\n" +
                 "    \"method\": \"cc\",\n" +
                 "    \"type\": \"direct\",\n" +
@@ -98,22 +102,21 @@ public class BookingCycleAPI {
         String returnedJsonString = APIUtility.sendRequestFlight("https://nz.fly365" + domain + ".com/api/flight/cart/" + cartID + "/checkout", addCardDetailsAPI, "post");
 //To validate that the order no./pnr number is displayed correctly in retrieve my booking
         JSONObject jObject = new JSONObject(returnedJsonString);
-        String orderNumber = jObject.getJSONObject("order").get("orderNumber").toString();
+        orderNumberCheckoutResponse = jObject.getJSONObject("order").get("orderNumber").toString();
         orderIdCheckoutResponse = jObject.getJSONObject("order").get("orderId").toString();
-        String[] fly365AirlineRef = {orderNumber, orderIdCheckoutResponse};
-        String finalResponse = getresult(orderIdCheckoutResponse, orderNumber);
+        System.out.println(orderIdCheckoutResponse);
+        System.out.println(orderNumberCheckoutResponse);
+        String finalResponse = getresult(orderIdCheckoutResponse, orderNumberCheckoutResponse);
         getBookingResponse();
-        System.out.println(finalResponse);
-        return fly365AirlineRef;
     }
 
-    public static String depCity = null, arrCity = null, bookingCode = null, storeUser = null, storeId = null, carrierCode = null,
-            email = null, mobileNumber = null, airLineRef = null, flyRef = null, paymentGateway = null, discountName = null, orderId = null, totalPrice;
+
 
     public static void getBookingResponse() {
         ArrayList<String> bookingCodeArr = new ArrayList<String>();
         airLineRef = APIUtility.jsonPathEvaluator.get("products[0].confirmation.supplierConfirmationCode").toString();
-        flyRef = APIUtility.jsonPathEvaluator.get("products[0].confirmation.vendorConfirmationCode").toString();
+        pnrNumberCheckoutResponse = APIUtility.jsonPathEvaluator.get("products[0].confirmation.vendorConfirmationCode").toString();
+        System.out.println(pnrNumberCheckoutResponse);
         storeId = APIUtility.jsonPathEvaluator.get("storeId").toString();
         email = APIUtility.jsonPathEvaluator.get("customer.email").toString();
         mobileNumber = APIUtility.jsonPathEvaluator.get("customer.mobileNumber").toString();
@@ -164,7 +167,6 @@ public class BookingCycleAPI {
         for(int i =0 ; i < departures.length;i++){
             newStr.add("{\"origin\": \""+departures[i]+"\",\"destination\": \""+arrivals[i]+"\",\"departureDate\": \""+departureDates[i]+"\"}");
         }
-        System.out.println(newStr);
         String oneWay = "{\"legs\": "+newStr+",\n" +
                 " \"cabinClass\": \""+cabinClass+"\",\"infant\": "+infants+",\"child\": "+child+",\"adult\": "+adults+"}";
 
@@ -189,24 +191,22 @@ public class BookingCycleAPI {
         System.out.println(newStr);
         String passengerDetailsBody = "{\"customer\":{\"title\":\""+customerTitle+"\"," + "\"firstName\":\""+customerFirstName+"\"," +
             "\"lastName\":\""+customerLastName+"\",\"mobileNumber\":\""+phoneNumber+"\",\"email\":\""+email+"\"},\"passengers\":"+newStr+",\"specialRequest\":\""+specialRequest+"\"}}";
-        System.out.println(passengerDetailsBody);
-        System.out.println(APIUtility.sendRequestFlight("https://nz.fly365stage.com/api/flight/cart/" + cartID + "/passenger", passengerDetailsBody, "post"));
+        APIUtility.sendRequestFlight("https://nz.fly365stage.com/api/flight/cart/" + cartID + "/passenger", passengerDetailsBody, "post");
     }
 
-    public String[] checkoutItinerary(String cartID, String domain, String cardHolderName, String cardExpiryDate, String cardNumber, String cvv) throws IOException {
+    public void checkoutItinerary(String cartID, String domain, String cardHolderName, String cardExpiryDate, String cardNumber, String cvv) throws IOException {
         String addCardDetailsBody = "{\"type\":\"direct\",\"method\":\"cc\",\"card\":{\"id\":\"\",\"number\":\""+cardNumber+"\",\"cvv\":\""+cvv+"\",\"expiryDate\":\""+cardExpiryDate+"\"," +
                 "\"type\":\"cc-visa-credit\",\"cardType\":\"cc-visa-credit\",\"holderName\":\""+cardHolderName+"\",\"issuer\":\"bank\",\"typeLong\":\"\",\"name\":\" Card\",\"typeShort\":\"\"" +
                 ",\"default\":\"\"},\"billingAddress\":{\"address\":\"add 11\",\"addressLine2\":\"add 22\",\"zipCode\":\"101010\",\"state\":\"new Cairo\"}," +
                 "\"newsletterSubscription\":false,\"acceptTerms\":true,\"acknowledgeRisk\":true,\"holdFees\":{}}";
         String returnedJsonString = APIUtility.sendRequestFlight("https://nz.fly365" + domain + ".com/api/flight/cart/" + cartID + "/checkout", addCardDetailsBody, "post");
 //To validate that the order no./pnr number is displayed correctly in retrieve my booking
+        System.out.println("*******++++++++++**********"+returnedJsonString);
         JSONObject jObject = new JSONObject(returnedJsonString);
         orderNumberCheckoutResponse = jObject.getJSONObject("order").get("orderNumber").toString();
         orderIdCheckoutResponse = jObject.getJSONObject("order").get("orderId").toString();
         String[] fly365AirlineRef = {orderNumberCheckoutResponse, orderIdCheckoutResponse};
         String finalResponse = getresult(orderIdCheckoutResponse, orderNumberCheckoutResponse);
         getBookingResponse();
-        System.out.println(finalResponse);
-        return fly365AirlineRef;
     }
 }

@@ -1,13 +1,40 @@
 Feature: Apply Cancel on Bookings
 
-
+@cancelTest
   Scenario: Verify that customer can cancel booking when rule matches and successful message is displayed to customer
     Given Navigate to "NZ" Fly365 "stage" site
     #Given Delete All Rules
-    And Book a "round trip" trip from API for "stage" and get "order"
+    And Search for trip using API
+      | departures |  | arrivals |  | depDatesAfter |  | Adults |  | Infants |  | Child |  | CabinClass |
+      | CAI        |  | JED      |  | 10            |  | 1      |  | 0       |  | 0     |  | economy    |
+
+    And Choose trip number "2" and create cart
+    And Add passengers with this data
+      | Birthdates        | 1991-03-03                  |
+      | PassengerTypes    | ADT                         |
+      | Titles            | Mr                          |
+      | FirstNames        | Hassan                      |
+      | LastNames         | Sayed                       |
+      | PassportNumber    | 1234567                     |
+      | PassportExpiry    | 2024-03-03                  |
+      | PassportCountry   | Eg                          |
+      | FrequentFlyer     | 321321                      |
+      | Seats             |, ,                        |
+      | Meals             | WINDOW                      |
+      | SpecialAssist     | VVVVV                       |
+      | CustomerTitle     | Mr                          |
+      | CustomerFirstName | Khaled                      |
+      | CustomerLastName  | Aziz                        |
+      | PhoneNumber       | 20100000001                 |
+      | Email             | khaled.abdelaziz@fly365.com |
+      | SpecialRequest    | Test Request                |
+
+    And Checkout and get booking details
+      |cardHolderName   | |cardExpiryDate  | |cardNumber         | |cvv    |
+      |John Smith       | |0522            | |5123450000000008   | |123    |
     And Create "Active" "Refundable" Rule from API for "stage" matched with booking
     And Click on Find My Booking
-    And Add a valid email address "john.smith.fly365@gmail.com"
+    And Add a valid email address "khaled.abdelaziz@fly365.com"
     And Add a valid "orderNumber"
     And Press Find Booking
     And Click on Manage My Booking
@@ -73,7 +100,6 @@ Feature: Apply Cancel on Bookings
     Then Order Will Have To be Refunded status
     And Delete Created Rule From Database
 
-  @testCancel
   Scenario: Verify that canceled booking status for order details in hub is to be refunded
     Given Navigate to "NZ" Fly365 "stage" site
     #Given Delete All Rules
@@ -93,7 +119,7 @@ Feature: Apply Cancel on Bookings
     And  Open menu
     And  Open  "BackOffice"
     And Open Orders
-    And Search for Order Number from Quick Search
+    And Search for booking returned in "booking pnr response" Quick Search
     Then Order Details Will Have To be Refunded status
     And Delete Created Rule From Database
 
@@ -116,7 +142,7 @@ Feature: Apply Cancel on Bookings
   Scenario: Verify that customer can cancel round trip when rule matches
     Given Navigate to "NZ" Fly365 "stage" site
     #Given Delete All Rules
-    And Book a "one way" trip from API for "stage" and get "order"
+    And Book a "round trip" trip from API for "stage" and get "order"
     And Create "Active" "Refundable" Rule from API for "stage" matched with booking
     And Click on Find My Booking
     And Add a valid email address "john.smith.fly365@gmail.com"
@@ -164,33 +190,33 @@ Feature: Apply Cancel on Bookings
   @testRefactor
   Scenario: Verify that customer can cancel multi city trip when rule matchesGiven Navigate to "NZ" Fly365 "stage" site
     And Search for trip using API
-      |    departures    | |   arrivals   | |   depDatesAfter  | |     Adults   | |  Infants  | |  Child    | |   CabinClass   |
-      |        CAI,DXB   | |   DXB,CAI   | |       10,15      | |       1      | |     1     | |     1     | |     economy    |
+      | departures |  | arrivals |  | depDatesAfter |  | Adults |  | Infants |  | Child |  | CabinClass |
+      | CAI,DXB    |  | DXB,CAI  |  | 10,15         |  | 1      |  | 1       |  | 1     |  | economy    |
 
     And Choose trip number "2" and create cart
     #And Add passengers
-     # |Birthdates           | |PassengerTypes  | |Titles   | |FirstNames      | |LastNames      | |PassportNumber      | |PassportExpiry           | |PassportCountry| |FrequentFlyer   | |Seats         | |Meals             |         |SpecialAssist| |CustomerTitle| |CustomerFirstName| |CustomerLastName| |PhoneNumber| |Email|
-     # |1991-03-03,2015-09-08| |ADT,CNN         | |Mr,Mr    | |Hassan,Hamed    | |Sayed,Ragab    | |1234567,45456       | |2024-03-03,2022-03-03    | |Eg,AE          | |  ,45365        | |VOML,VOML     | |WINDOW,WINDOW     |         |WCHC,WCHC        | |Mr           | |Khaled           | |Aziz            | |20100000001| |khaled.abdelaziz@fly365.com|
+      #|Birthdates           | |PassengerTypes  | |Titles   | |FirstNames      | |LastNames      | |PassportNumber      | |PassportExpiry           | |PassportCountry| |FrequentFlyer   | |Seats         | |Meals             |         |SpecialAssist| |CustomerTitle| |CustomerFirstName| |CustomerLastName| |PhoneNumber| |Email|
+      #|1991-03-03,2015-09-08| |ADT,CNN         | |Mr,Mr    | |Hassan,Hamed    | |Sayed,Ragab    | |1234567,45456       | |2024-03-03,2022-03-03    | |Eg,AE          | |  ,45365        | |VOML,VOML     | |WINDOW,WINDOW     |         |WCHC,WCHC        | |Mr           | |Khaled           | |Aziz            | |20100000001| |khaled.abdelaziz@fly365.com|
 
     And Add passengers with this data
-      |Birthdates         |1991-03-03,2019-03-03,2014-04-03      |
-      |PassengerTypes     |ADT,INF,CNN                 |
-      |Titles             |Mr,Mr,Ms                    |
-      |FirstNames         |Hassan,Tarek,Salma              |
-      |LastNames          |Sayed,Aziz,Ramy               |
-      |PassportNumber     |1234567,4324234,3123213              |
-      |PassportExpiry     |2024-03-03,2021-01-01,2023-09-08      |
-      |PassportCountry    |Eg,AE,AE                 |
-      |FrequentFlyer      |321321,321321,321321                     |
-      |Seats              |VOML,VOML,VOML                  |
-      |Meals              |WINDOW,WINDOW,WINDOW              |
-      |SpecialAssist      | , , ,                  |
-      |CustomerTitle      |Mr                         |
-      |CustomerFirstName  |Khaled                     |
-      |CustomerLastName   |Aziz                       |
-      |PhoneNumber        |20100000001                |
-      |Email              |khaled.abdelaziz@fly365.com|
-      |SpecialRequest     |Test Request               |
+      | Birthdates        | 1991-03-03,2019-03-03,2014-04-03 |
+      | PassengerTypes    | ADT,INF,CNN                      |
+      | Titles            | Mr,Mr,Ms                         |
+      | FirstNames        | Hassan,Tarek,Salma               |
+      | LastNames         | Sayed,Aziz,Ramy                  |
+      | PassportNumber    | 1234567,4324234,3123213          |
+      | PassportExpiry    | 2024-03-03,2021-01-01,2023-09-08 |
+      | PassportCountry   | Eg,AE,AE                         |
+      | FrequentFlyer     | 321321,321321,321321             |
+      | Seats             | VOML,VOML,VOML                   |
+      | Meals             | WINDOW,WINDOW,WINDOW             |
+      | SpecialAssist     | , , ,                            |
+      | CustomerTitle     | Mr                               |
+      | CustomerFirstName | Khaled                           |
+      | CustomerLastName  | Aziz                             |
+      | PhoneNumber       | 20100000001                      |
+      | Email             | khaled.abdelaziz@fly365.com      |
+      | SpecialRequest    | Test Request                     |
 
     And Checkout and get booking details
       |cardHolderName   | |cardExpiryDate  | |cardNumber         | |cvv    |

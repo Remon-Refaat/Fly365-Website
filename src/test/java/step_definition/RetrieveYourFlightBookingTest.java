@@ -17,21 +17,21 @@ public class RetrieveYourFlightBookingTest extends TestBase {
     private By fly365RefHDR = By.xpath("(//strong[@class='txt-primary-second font-semibold'])[1]");
     private By airlineRefHDR = By.xpath("//strong[@class='text-primary-first font-semibold ml-1']");
 
-    public static String PNRNumber = null;
+    public static String retrievedBookingPnr = null;
 
     @Then("^The system will retrieve the details of the Booking for this \"(.*)\"$")
     public void theSystemWillRetrieveTheDetailsOfTheBookingForThis(String reference) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(retrieveYourFlightBookingHDR));
-        if (reference.equals("Airline Reference")) {
+        if (reference.equals("airlineReference")) {
             Assert.assertEquals(BookingCycleAPI.orderNumberCheckoutResponse, driver.findElement(airlineRefHDR).getText());
         }
-        if (reference.equals("Fly365 Reference")) {
-            Assert.assertEquals(HomeTest.pnrNumber, driver.findElement(fly365RefHDR).getText());
+        if (reference.equals("fly365Reference")) {
+            Assert.assertEquals(BookingCycleAPI.pnrNumberCheckoutResponse, driver.findElement(fly365RefHDR).getText());
         }
     }
 
     @And("^Get Fly Reference$")
     public void getFlyReference() {
-        PNRNumber = driver.findElement(fly365RefHDR).getText();
+        retrievedBookingPnr = driver.findElement(fly365RefHDR).getText();
     }
 }

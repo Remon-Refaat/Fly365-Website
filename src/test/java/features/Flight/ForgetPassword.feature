@@ -6,7 +6,7 @@ Feature: Forget Password
 
 
   Scenario: Customer forget password with exist email
-    And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
+    And insert new user at database "john.smith.fly365@gmail.com" "$2a$10$CBQKVE4xsSFH6mYiUSFiAODo0omGgQQbXV0Vmtngvs84gI0hXZoIC"
     And press on forget password link
     And enter email at forget password text "john.smith.fly365@gmail.com"
     When click on send email button
@@ -20,7 +20,7 @@ Feature: Forget Password
   @Sign_Out
   Scenario: User can change his/her password Successfully
     And Delete all messages in the Inbox
-    And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
+    And insert new user at database "john.smith.fly365@gmail.com" "$2a$10$CBQKVE4xsSFH6mYiUSFiAODo0omGgQQbXV0Vmtngvs84gI0hXZoIC"
     And press on forget password link
     And enter email at forget password text "john.smith.fly365@gmail.com"
     When click on send email button
@@ -37,7 +37,7 @@ Feature: Forget Password
   @Sign_Out
   Scenario: User can change his/her password Successfully
     And Delete all messages in the Inbox
-    And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
+    And insert new user at database "john.smith.fly365@gmail.com" "$2a$10$CBQKVE4xsSFH6mYiUSFiAODo0omGgQQbXV0Vmtngvs84gI0hXZoIC"
     And press on forget password link
     And enter email at forget password text "john.smith.fly365@gmail.com"
     When click on send email button
@@ -54,7 +54,7 @@ Feature: Forget Password
 
   Scenario: Verify that the Password reset requested email is sent successfully
     And Delete all messages in the Inbox
-    And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
+    And insert new user at database "john.smith.fly365@gmail.com" "$2a$10$CBQKVE4xsSFH6mYiUSFiAODo0omGgQQbXV0Vmtngvs84gI0hXZoIC"
     And press on forget password link
     And enter email at forget password text "john.smith.fly365@gmail.com"
     When click on send email button
@@ -66,7 +66,7 @@ Feature: Forget Password
   @Email_Logout
   Scenario: Verify that the Password reset successfully email is sent successfully
     And Delete all messages in the Inbox
-    And insert new user at database "john.smith.fly365@gmail.com" "$2y$04$E3GLR2vVV0AKfvwm6L0MDeKpVfFw4kR58wb9ohNN.TpGoF6fdpoK."
+    And insert new user at database "john.smith.fly365@gmail.com" "$2a$10$CBQKVE4xsSFH6mYiUSFiAODo0omGgQQbXV0Vmtngvs84gI0hXZoIC"
     And press on forget password link
     And enter email at forget password text "john.smith.fly365@gmail.com"
     When click on send email button

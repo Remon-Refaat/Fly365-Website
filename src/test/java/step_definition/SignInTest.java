@@ -20,18 +20,18 @@ public class SignInTest extends TestBase {
     private Faker fakerLogin = new Faker();
 
     private By LoginBTN = By.xpath("//button[contains(text(),'Login')]");
-    private By LoginHeaderBTN = By.xpath("//a[text()='SIGN IN']");
+    private By LoginHeaderBTN = By.xpath("//a[contains(text(),'SIGN IN')]");
     private By LoginEmailTXT = By.xpath("//input[@placeholder='john@example.com']");
     private By LoginPassWordTXT = By.xpath("//input[@placeholder='******************']");
     private By ProfileNameBTN = By.xpath("//span[@class='el-dropdown-link capitalize text-xs text-white el-dropdown-selfdefine']");
     private By LogoutBTN = By.xpath("//li[contains(text(),'Sign Out')]");
     private By AccountSettingBTN = By.xpath("//a[@class='account-links__link text-sm flex font-medium items-center link link-with-icon']");
     private By InvalidLogInMSG = By.xpath("//div[@class='tooltip error error']//span[@class='tooltiptext']");
-    private By PassWordErrorMSG = By.xpath("//body[@class='lang-en']/div/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first flex flex-col']/div[@class='form-container py-10']/div[@class='form-layout mx-auto bg-white rounded text-white relative']/div[@class='row']/div[@class='col-13 p-12']/div[@class='flex flex-col text-white']/div[@class='flex flex-col text-white']/form[@class='el-form']/div[@class='form-container']/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/span[1]");
+    private By PassWordErrorMSG = By.xpath("//span[contains(text(),'password')]");
     private By emptyPassWordErrorMSG = By.xpath("//div[2]/div[2]//div[2]/span");
-    private By EmailErrorMSG = By.xpath("//body[@class='lang-en']/div/div[@class='app-container']/div[@class='relative router-view-container border-t border-primary-first flex flex-col']/div[@class='form-container py-10']/div[@class='form-layout mx-auto bg-white rounded text-white relative']/div[@class='row']/div[@class='col-13 p-12']/div[@class='flex flex-col text-white']/div[@class='flex flex-col text-white']/form[@class='el-form']/div[@class='form-container']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/span[1]");
+    private By EmailErrorMSG = By.xpath("//span[contains(text(),'email')]");
     private By HomePageTitle = By.xpath("//a[text()='SIGN IN']");
-    private By SignInHeader = By.xpath("//div[@class='text-xs mb-8 text-primary-fourth']");
+    private By SignInHeader = By.xpath("//div[@class='text-sm mb-8 text-primary-fourth leading-normal']");
 
 
     @Then("^'Sign In' page is opened$")
@@ -96,7 +96,7 @@ public class SignInTest extends TestBase {
         //WebElement passWordErrorMessage = driver.findElement(PassWordErrorMSG);
         //Assert.assertTrue(passWordErrorMessage.isDisplayed());
         String PassWordErrorMSGText = driver.findElement(PassWordErrorMSG).getText();
-        Assert.assertEquals(PassWordErrorMSGText, "!password is too short (minimum is 8 characters)");
+        Assert.assertEquals(PassWordErrorMSGText, "password is too short (minimum is 8 characters)");
     }
 
     @Then("^user shall see password too long error message$")
@@ -105,7 +105,7 @@ public class SignInTest extends TestBase {
         //WebElement passWordErrorMessage = driver.findElement(PassWordErrorMSG);
         //Assert.assertTrue(passWordErrorMessage.isDisplayed());
         String PassWordErrorMSGText = driver.findElement(PassWordErrorMSG).getText();
-        Assert.assertEquals(PassWordErrorMSGText, "!password is too long (maximum is 50 characters)");
+        Assert.assertEquals(PassWordErrorMSGText, "password is too long (maximum is 50 characters)");
     }
 
     @Then("^user shall see empty password error message$")
@@ -126,7 +126,7 @@ public class SignInTest extends TestBase {
         //WebElement emailErrorMessage = driver.findElement(EmailErrorMSG);
         //Assert.assertTrue(emailErrorMessage.isDisplayed());
         String EMailErrorMSGText = driver.findElement(EmailErrorMSG).getText();
-        Assert.assertEquals(EMailErrorMSGText, "!Please enter a valid email");
+        Assert.assertEquals(EMailErrorMSGText, "Please enter a valid email");
     }
 
     @Then("^user shall see email error message$")
@@ -135,7 +135,7 @@ public class SignInTest extends TestBase {
         //WebElement emailErrorMessage = driver.findElement(EmailErrorMSG);
         //Assert.assertTrue(emailErrorMessage.isDisplayed());
         String EMailErrorMSGText = driver.findElement(EmailErrorMSG).getText();
-        Assert.assertEquals(EMailErrorMSGText, "!Please enter a valid email");
+        Assert.assertEquals(EMailErrorMSGText, "Please enter a valid email");
     }
 
     @And("^user enter an empty email$")
@@ -160,7 +160,7 @@ public class SignInTest extends TestBase {
 
     @And("^insert new user at database \"(.*)\" \"(.*)\"$")
     public void insertNewUserAtDataBase(String userEmail, String userHashPassWord) {
-        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "Select email from users where email = '" + userEmail + "'");
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "Select * from users where email = '" + userEmail + "'");
         if (DataBase.data != null) {
             DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "delete from users where email='" + userEmail + "'");
         }

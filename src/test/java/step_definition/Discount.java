@@ -208,12 +208,10 @@ public class Discount extends TestBase {
         String itinaryID = bookingApiObj.getItineraryId(allAvailableTrips, 2);
         String cardID = bookingApiObj.createCart(itinaryID, domain);
         bookingApiObj.addPassenger(cardID, domain);
-        String[] checkoutResponse = bookingApiObj.checkoutTrip(cardID, domain);
-        String finalResponse = bookingApiObj.getresult(checkoutResponse[1], checkoutResponse[0]);
+        String finalResponse = bookingApiObj.getresult(bookingApiObj.orderIdCheckoutResponse, bookingApiObj.orderNumberCheckoutResponse);
         JSONObject jObject = new JSONObject(finalResponse);
         JSONArray arr = jObject.getJSONArray("products");
         System.out.println(arr);
-
         String discountNAM = null;
         for (int i = 0; i < arr.length(); i++) {
             JSONArray array_1 = arr.getJSONObject(i).getJSONArray("options");

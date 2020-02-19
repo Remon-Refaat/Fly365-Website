@@ -45,7 +45,7 @@ public class Orders extends TestBase {
     @Then("^Assert that Fly reference is correct$")
     public void assertThatFlyReferenceIsCorrect() throws InterruptedException {
         Thread.sleep(4000);
-        Assert.assertEquals(driver.findElement(flyref).getText().trim(), bookingApiObj.flyRef);
+        Assert.assertEquals(driver.findElement(flyref).getText().trim(), bookingApiObj.pnrNumberCheckoutResponse);
     }
 
     @Then("^Assert that store user is correct$")

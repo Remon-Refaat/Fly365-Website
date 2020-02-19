@@ -17,6 +17,7 @@ import step_definition.FlightAndHubAPIs.BookingCycleAPI;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class HomeTest extends TestBase {
@@ -26,28 +27,26 @@ public class HomeTest extends TestBase {
     APIUtility apiObject = new APIUtility();
     BookingCycleAPI bookingApiObj = new BookingCycleAPI();
     ConfirmationTest ctobject = new ConfirmationTest();
-    public static String orderNumber = null;
-    public static String pnrNumber = null;
     public static String currentWindow = driver.getWindowHandle();
 
 
     private By aboutUsLINK = By.xpath("//a[text()='About us']");
-    private By firstContactUsLINK = By.xpath("//footer/div[1]//a[text()='Contact us']");
-    private By secondContactUsLINK = By.xpath("//footer/div[2]//a[text()='Contact Us']");
+    private By firstContactUsLINK = By.linkText("Contact Us");
+    private By secondContactUsLINK = By.xpath("//strong[contains(text(),'Contact us')]");
     private By signInLINK = By.xpath("//a[text()='Sign in']");
     private By signUpLINK = By.xpath("//a[text()='Sign up']");
-    private By fristSupportCentreLINK = By.xpath("//footer/div[1]//a[text()='Support Centre']");
-    private By secondSupportCentreLINK = By.xpath("//footer/div[2]//a[text()='Support Centre']");
+    private By fristSupportCentreLINK = By.xpath("//a[contains(text(),'Support Centre')]");
+    private By secondSupportCentreLINK = By.xpath("//div[@class='ml-2']/strong[contains(text(), 'Support Centre')]");
     private By faqsLINK = By.xpath("//a[text()='FAQs']");
     private By termsConditionsLINK = By.xpath("//a[text()='Terms and Conditions']");
     private By privacyPolicyLINK = By.xpath("//a[text()='Privacy policy']");
-    private By aftaLINK = By.xpath("//a[@title='Afta']");
-    private By logoFooterLink = By.xpath("//footer/div[2]/div/div/div[1]/div/div[1]/div/a");
-    private By logoHeaderLink = By.xpath("/html/body/div[1]/div[1]/div/div/div[1]/div/a");
+    private By aftaLINK = By.xpath("//img[@class='image-afta rounded']");
+    private By logoFooterLink = By.xpath("//*[@class='footer-content__logoimg -mt-3 text-white svg-icon svg-fill']");
+    private By logoHeaderLink = By.xpath("//a[@class='text-white inline-block router-link-active']");
     private By flightsLink = By.xpath("//div[1]/div[1]/div/div/div[1]/div/div/a[1]");
     private By offersLink = By.xpath("//div[1]/div[1]/div/div/div[1]/div/div/a[2]");
-    private By signInBTN = By.xpath("//a[text()='SIGN IN']");
-    private By homePageHDR = By.xpath("//h2/span");
+    private By signInBTN = By.linkText("SIGN IN");
+    private By homePageHDR = By.xpath("//span[@class='text-primary-second']");
     private By oneWayTAB = By.id("tab-oneWay");
     private By roundTripTAB = By.id("tab-roundTrip");
     private By multiCityTAB = By.id("tab-multiStop");
@@ -70,7 +69,7 @@ public class HomeTest extends TestBase {
     private By findMyBookingFindBookingBTN = By.xpath("//button[text()='FIND BOOKING']");
     private By addMoreCitiesLINK = By.xpath("//div[@class='flex items-center btn-add-more float-left text-white text-xs h-6 px-1 cursor-pointer leading-normal']");
     private By subscriptionTXT = By.xpath("//input[@placeholder='Your Email']");
-    private By subscribeBTN = By.xpath("//button[text()='subscribe']");
+    private By subscribeBTN = By.xpath("//button[@class='footer-newsletter__button-form btn text-sm font-normal btn-primary-second text-white absolute cursor-pointer']");
     private By subscriptionSuccessfullyMSG = By.xpath("/html/body/div[3]/div/div[1]/p");
     private By alreadySubscribedErrorMSG = By.xpath("//div[3]/div/div[1]/p");
     private By passengerRulesLINK = By.xpath("//*[contains(@id, 'el-popover-')]/div[2]/a");
@@ -83,7 +82,19 @@ public class HomeTest extends TestBase {
     private By findMyBookingEmptyRef1ErrorMSG = By.xpath("//div[@class='el-form-item is-error']//span[@class='tooltiptext with-arrow']/span[1]");
     private By findMyBookingEmptyRef2ErrorMSG = By.xpath("//span[contains(text(),'Please enter Fly365 Ref.')]");
     private By emptyEmailAtSubscribe = By.xpath("//div[@class='form-group']//span[@class='tooltiptext with-arrow']");
-
+    private By MobileappHeaderlink = By.xpath("//span[@class='pl-1 font-normal text-white']");
+    private By AppStoreButtonMobileAppPage = By.xpath("//div[@class='text-black ml-3']//strong[@class='text-base font-medium block'][contains(text(),'App Store')]");
+    private By GooglePlayButtonMobileAppPage =By.xpath("//div[@class='text-black ml-3']//strong[@class='text-base font-medium block'][contains(text(),'Google Play')]");
+    private By AppStoreButtonHomePage = By.xpath("//strong[contains(text(),'App Store')]");
+    private By GooglePlayButtonHomePage = By.xpath("//strong[contains(text(),'Google Play')]");
+    //private By AppstoreLink =By.xpath("//h1[@class='product-header__title app-header__title']");
+    private By StoreSelection =By.xpath("//html/body/div[1]/div/div[1]/div/div/div[2]/div/div[1]/span");//span[@class='el-dropdown-link capitalize font-normal text-xs text-white flex items-center el-dropdown-selfdefine']
+    private By AustraliaStore = By.xpath("//li[contains(text(),'Australia')]");//html/body/ul/li[2]
+    private By NewzealandStore=By.xpath("//html/body/ul/li[3]");//li[contains(text(),'New Zealand')]
+    private By WorldWideStore = By.xpath("//html/body/ul/li[1]");//span[contains(text(),'Worldwide')]
+    private By MalaysiaStore = By.xpath("//html/body/ul/li[4]"); //li[contains(text(),'Malaysia')]
+    private By GooglePlayHeader =By.xpath("//span[contains(text(),'Fly365, Everyday Low Fares')]");
+    private By AppstoreHeader =By.xpath("//h1[@class='product-header__title app-header__title']");
 
     @Given("^Navigate to \"(.*)\" Fly365 \"(.*)\" site$")
     public void NavigateToFly365Site(String store, String site) {
@@ -251,19 +262,10 @@ public class HomeTest extends TestBase {
         else if(tripType.contains("one")){
             allAvailableTrips = apiObject.sendRequestFlight(requestUrl, bookingApiObj.oneWayAPI(), "post");
         }
-        String itinaryID = bookingApiObj.getItineraryId(allAvailableTrips, 1);
-        String cardID = bookingApiObj.createCart(itinaryID, domain);
-        bookingApiObj.addPassenger(cardID, domain);
-        String[] checkoutResponse = bookingApiObj.checkoutTrip(cardID, domain);
-        orderNumber = checkoutResponse[0];
-        String orderIdCheckoutResponse = checkoutResponse[1];
-        System.out.println(orderNumber + orderIdCheckoutResponse );
-        /*if (reference.equals("order")) {
-            orderNumber = bookingApiObj.checkoutTrip(cardID, domain)[0];
-        }
-        if (reference.eqxuals("Fly365 Reference")) {
-            pnrNumber = bookingApiObj.checkoutTrip(cardID, domain)[1];
-        }*/
+        bookingApiObj.itinaryIdFromSearchRequest = bookingApiObj.getItineraryId(allAvailableTrips, 5);
+        bookingApiObj.cartIdForSelectedItinerary = bookingApiObj.createCart(bookingApiObj.itinaryIdFromSearchRequest, domain);
+        bookingApiObj.addPassenger(bookingApiObj.cartIdForSelectedItinerary, domain);
+        bookingApiObj.checkoutTrip(bookingApiObj.cartIdForSelectedItinerary, domain);
     }
 
 
@@ -280,13 +282,21 @@ public class HomeTest extends TestBase {
 
     @And("^Add a valid \"(.*)\"$")
     public void addAValid(String reference) {
-        //driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(orderNumber);
-       if (reference.equals("orderNumber")) {
+        if (reference.equals("orderNumber")) {
            driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(bookingApiObj.orderNumberCheckoutResponse);
        }
-       if (reference.equals("modifiedOrderNumber")) {
+       else if (reference.equals("modifiedOrderNumber")) {
            driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(ApplyModifyTest.modifiedOrderNumberFromApi);
        }
+        else if (reference.equals("oldOrderNumber")) {
+            driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(ApplyModifyTest.oldOrderNumber);
+        }
+        else if (reference.equals("pnrNumber") || reference.equalsIgnoreCase("fly365Reference")){
+            driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(bookingApiObj.pnrNumberCheckoutResponse);
+        }
+        else if (reference.equals("airlineReference")){
+            driver.findElement(findMyBookingAirlineFly365OrderTXT).sendKeys(bookingApiObj.airLineRef);
+        }
     }
 
     @And("^Add a valid Reference 'Fly365 Ref'$")
@@ -355,7 +365,7 @@ public class HomeTest extends TestBase {
 
     @And("^Add the email address \"(.*)\" to Subscription Email field$")
     public void addTheEmailAddressToSubscriptionEmailField(String emailAddress) {
-        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "Select email from newsletter_users where email = '" + emailAddress + "'");
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "Select * from newsletter_users where email = '" + emailAddress + "'");
         if (DataBase.data != null) {
             DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "delete from newsletter_users where email='" + emailAddress + "'");
         }
@@ -372,13 +382,13 @@ public class HomeTest extends TestBase {
 
     @Then("^Successfully validation message is displayed$")
     public void successfullyValidationMessageIsDisplayed() {
-        Assert.assertEquals(driver.findElement(subscriptionSuccessfullyMSG).getText(), "You've subscribed successfully. Tune in for our updates and special offers");
+        Assert.assertEquals(wait.until(ExpectedConditions.visibilityOfElementLocated(subscriptionSuccessfullyMSG)).getText(), "You've subscribed successfully. Tune in for our updates and special offers");
     }
 
 
     @And("^Add previously subscribed email address \"(.*)\" to Subscription Email field$")
     public void addPreviouslySubscribedEmailAddressToSubscriptionEmailField(String emailAddress) throws Throwable {
-        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "Select email from newsletter_users where email = '" + emailAddress +"'");
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "Select * from newsletter_users where email = '" + emailAddress +"'");
         if (DataBase.data == null) {
             DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "insert into newsletter_users (email, \"isSubscribed\",\"storeId\",\"groupId\", \"isRegistered\")values('" + emailAddress + "',True,'fly365_nz','fly365',False)");
         }
@@ -387,7 +397,7 @@ public class HomeTest extends TestBase {
 
     @Then("^Error validation message is displayed$")
     public void errorValidationMessageIsDisplayed() {
-        Assert.assertEquals(driver.findElement(alreadySubscribedErrorMSG).getText(),"You have already subscribed fly365");
+        Assert.assertEquals(driver.findElement(alreadySubscribedErrorMSG).getText(),"you have already subscribed fly365");
 
     }
 
@@ -437,11 +447,72 @@ public class HomeTest extends TestBase {
         String emptysubscriber = driver.findElement(emptyEmailAtSubscribe).getText();
         Assert.assertEquals(emptysubscriber, "!Please enter a valid email");
     }
+    @Then("^Google Play page opened correctly$")
+    public void googlePlayPageOpenedCorrectly() throws InterruptedException {
+        Thread.sleep(5000);
+
+        String OldTab = driver.getWindowHandle();
+        ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
+        newTab.remove(OldTab);
+        driver.switchTo().window(newTab.get(0));
+        String StoreHeader =driver.findElement(GooglePlayHeader).getText();
+        Assert.assertEquals(StoreHeader,"Fly365, Everyday Low Fares");
+    }
+    @Then("^App Store page opened correctly$")
+    public void appStorePageOpenedCorrectly() throws InterruptedException {
+        Thread.sleep(5000);
+
+        String OldTab = driver.getWindowHandle();
+        ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
+        newTab.remove(OldTab);
+        driver.switchTo().window(newTab.get(0));
+        String StoreHeader =driver.findElement(AppstoreHeader).getText();
+        Assert.assertEquals(StoreHeader,"Fly365, Everyday Low Fares 4+");
+
+    }
+
+    @And("^Press on Mobile app$")
+    public void pressOnMobileApp() {
+        driver.findElement(MobileappHeaderlink).click();
+    }
+
+    @Then("^Mobile app Page will be opened link on \"([^\"]*)\" and \"([^\"]*)\"$")
+    public void mobileAppPageWillBeOpenedLinkOnAnd(String store, String site) throws Throwable {
+        String MobilePageURL = driver.getCurrentUrl();
+        Assert.assertEquals(MobilePageURL,"https://" + store.toLowerCase() + ".fly365" + site.toLowerCase() + ".com/en/mobile-app");
+
+    }
+
+    @And("^Press on Available on App store button$")
+    public void pressOnAvailableOnAppStoreButton() {
+        driver.findElement(AppStoreButtonMobileAppPage).click();
+    }
+
+    @And("^Press On Get it on Google Play$")
+    public void pressOnGetItOnGooglePlay() {
+        driver.findElement(GooglePlayButtonMobileAppPage).click();
+    }
+
+    @And("^Press on Available on App store button on Home Page$")
+    public void pressOnAvailableOnAppStoreButtonOnHomePage() {
+        driver.findElement(AppStoreButtonHomePage).click();
+    }
+
+    @And("^Press on Get it on Google Play button on Home Page$")
+    public void pressOnGetItOnGooglePlayButtonOnHomePage() {
+        driver.findElement(GooglePlayButtonHomePage).click();
+    }
 
 
-    //private static String allAvailableTrips = null;
-    //private static String itinaryID = null;
-    private static String cartId = null;
+    @And("^Select Worldwide from store list and Validate URL on \"([^\"]*)\"$")
+    public void selectWorldwideFromStoreListAndValidateURLOn(String site) throws Throwable {
+        driver.findElement(StoreSelection).click();
+        driver.findElement(WorldWideStore).click();
+        String HomeURL = driver.getCurrentUrl();
+        Assert.assertEquals(HomeURL,"https://" +"www"+".fly365" + site.toLowerCase() + ".com/en");
+
+    }
+
     @And("^Search for trip using API$")
     public void searchForTripUsingAPI(DataTable Data) throws IOException {
         String requestUrl = "https://nz.fly365stage.com/api/flight-search/search";
@@ -499,10 +570,12 @@ public class HomeTest extends TestBase {
     @And("^Choose trip number \"([^\"]*)\" and create cart$")
     public void chooseTripNumberAndCreateCart(String tripNumber) throws Throwable {
         int tripNum= Integer.parseInt(tripNumber);
+        //System.out.println(APIUtility.jsonPathEvaluator);
+        //bookingApiObj.itinerariesSearchRequest = APIUtility.jsonPathEvaluator.getJsonObject("itineraries").toString();
         bookingApiObj.itinaryIdFromSearchRequest = bookingApiObj.getItineraryId(bookingApiObj.itinerariesSearchRequest, tripNum);
         System.out.println(bookingApiObj.itinerariesSearchRequest);
         System.out.println(bookingApiObj.itinaryIdFromSearchRequest);
-        System.out.println(bookingApiObj.createCart(bookingApiObj.itinaryIdFromSearchRequest , "stage"));
+        //System.out.println(bookingApiObj.createCart(bookingApiObj.itinaryIdFromSearchRequest , "stage"));
         bookingApiObj.cartIdForSelectedItinerary = bookingApiObj.createCart(bookingApiObj.itinaryIdFromSearchRequest, "stage");
     }
 
@@ -515,7 +588,58 @@ public class HomeTest extends TestBase {
             cardNumber = cardData.get("cardNumber");
             cvv = cardData.get("cvv");
         }
-        String[] checkoutResponse = bookingApiObj.checkoutItinerary(bookingApiObj.cartIdForSelectedItinerary, "stage", cardHolderName, cardExpiryDate, cardNumber, cvv);
+        bookingApiObj.checkoutItinerary(bookingApiObj.cartIdForSelectedItinerary, "stage", cardHolderName, cardExpiryDate, cardNumber, cvv);
 
     }
+
+
+    @Then("^Validate URL after changing  to New Zealand store on \"([^\"]*)\"$")
+    public void validateURLAfterChangingToNewZealandStoreOn(String site) throws Throwable {
+        String HomeURL = driver.getCurrentUrl();
+        Assert.assertEquals(HomeURL,"https://" +"nz"+ ".fly365" + site.toLowerCase() + ".com/en");
+    }
+
+    @And("^Select Worldwide from store$")
+    public void selectWorldwideFromStore() {
+        driver.findElement(StoreSelection).click();
+        driver.findElement(WorldWideStore).click();
+    }
+
+
+    @Then("^Url shall be changed to the correct Worldwide store URL on \"([^\"]*)\"$")
+    public void urlShallBeChangedToTheCorrectWorldwideStoreURLOn(String site) throws Throwable {
+        String HomeURL = driver.getCurrentUrl();
+        Assert.assertEquals(HomeURL,"https://" +"www"+".fly365" + site.toLowerCase() + ".com/en");
+    }
+
+    @And("^Select Malaysia from store list$")
+    public void selectMalaysiaFromStoreList() throws InterruptedException {
+        driver.findElement(StoreSelection).click();
+        Thread.sleep(2000);
+        driver.findElement(MalaysiaStore).click();
+        Thread.sleep(2000);
+    }
+
+    @Then("^Url shall be changed to the correct Malaysia store URL on \"([^\"]*)\"$")
+    public void urlShallBeChangedToTheCorrectMalaysiaStoreURLOn(String site) throws Throwable {
+        Thread.sleep(2000);
+        String HomeURL = driver.getCurrentUrl();
+        Thread.sleep(2000);
+        Assert.assertEquals(HomeURL,"https://" +"my"+ ".fly365" + site.toLowerCase() + ".com/en");
+    }
+
+    @And("^Select Australia from store list$")
+    public void selectAustraliaFromStoreList() {
+        driver.findElement(StoreSelection).click();
+        driver.findElement(AustraliaStore).click();
+    }
+
+    @Then("^Url shall be changed to the correct Australia store on \"([^\"]*)\"$")
+    public void urlShallBeChangedToTheCorrectAustraliaStoreOn(String site) throws Throwable {
+        String HomeURL = driver.getCurrentUrl();
+        Assert.assertEquals(HomeURL,"https://" + "au" + ".fly365" + site.toLowerCase() + ".com/en");
+    }
+
+
 }
+
