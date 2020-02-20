@@ -61,7 +61,7 @@ public class ApplyCancelTest extends TestBase {
     }
 
     @And("^Click Cancel Booking$")
-    public void clickCanelBooking() throws InterruptedException {
+    public void clickCanelBooking() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(cancelBookBTN));
         driver.findElement(cancelBookBTN).click();
     }
@@ -166,8 +166,6 @@ public class ApplyCancelTest extends TestBase {
         APIUtility.sendRequestHub("https://internal.fly365" + domain + ".com/rules/rule", hubRulesApiObj.createRuleAPI(fakerRuleName ,
                 bookingApiObj.storeId , bookingApiObj.carrierCode, bookingApiObj.bookingCode,
                 "airport", bookingApiObj.depCity, "airport" , bookingApiObj.arrCity , cancelOption ,status), "post");
-        /*APIUtility.sendRequestHub("https://internal.fly365" + domain + ".com/rules/rule", hubRulesApiObj.createRuleAPI("testTestRule" ,
-                "fly365_nz" , "ms", "h",
-                "airport", "cai", "airport" , "JED" , cancelOption ,status), "post");*/
+
     }
 }

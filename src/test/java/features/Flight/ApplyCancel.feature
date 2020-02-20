@@ -1,6 +1,5 @@
 Feature: Apply Cancel on Bookings
 
-@cancelTest
   Scenario: Verify that customer can cancel booking when rule matches and successful message is displayed to customer
     Given Navigate to "NZ" Fly365 "stage" site
     #Given Delete All Rules
@@ -26,7 +25,7 @@ Feature: Apply Cancel on Bookings
       | CustomerFirstName | Khaled                      |
       | CustomerLastName  | Aziz                        |
       | PhoneNumber       | 20100000001                 |
-      | Email             | khaled.abdelaziz@fly365.com |
+      | Email             | john.smith.fly365@gmail.com |
       | SpecialRequest    | Test Request                |
 
     And Checkout and get booking details
@@ -34,7 +33,7 @@ Feature: Apply Cancel on Bookings
       |John Smith       | |0522            | |5123450000000008   | |123    |
     And Create "Active" "Refundable" Rule from API for "stage" matched with booking
     And Click on Find My Booking
-    And Add a valid email address "khaled.abdelaziz@fly365.com"
+    And Add a valid email address "john.smith.fly365@gmail.com"
     And Add a valid "orderNumber"
     And Press Find Booking
     And Click on Manage My Booking
@@ -214,7 +213,7 @@ Feature: Apply Cancel on Bookings
       | CustomerFirstName | Khaled                           |
       | CustomerLastName  | Aziz                             |
       | PhoneNumber       | 20100000001                      |
-      | Email             | khaled.abdelaziz@fly365.com      |
+      | Email             | john.smith.fly365@gmail.com      |
       | SpecialRequest    | Test Request                     |
 
     And Checkout and get booking details

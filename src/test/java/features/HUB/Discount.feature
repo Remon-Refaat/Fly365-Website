@@ -65,7 +65,6 @@ Feature: Apply discount on flight trips
     Then Check Discount rule updated successfully
     And  Delete new discount from database
 
-  @discount
   Scenario: Verify that the super admin can disable all discount rules
     And Apply discount rule from API
     When Open hub login page
