@@ -8,17 +8,20 @@
 5. Download and unzip aninitial Maven project directory structure (withpre-loaded dependency file) from (https://github.com/selenium-guidebook/init-java/archive/master.zip).
 
 # How to Setup IntelliJ
+
 1. Download and install IntelliJ IDEA Community Edition (https://www.jetbrains.com/idea/download/)
 2. Launch IntelliJ and Open the Maven project directory you downloaded earlier by clicking File, Open, traverse to where you unzipped the download, select init-java- master, and click OK. Maven will load all of the requisite dependencies (e.g., JUnit and Selenium) behind the scenes
 3. Configure IntelliJ so it uses the JDK by following the SDK configuration instructions (https://www.jetbrains.com/help/idea/sdk.html#manage_sdks)
 
 # How To Install the Browser Driver for Firefox
+
 1. Visit the browser driver download page for Mozilla’s geckodriver (https://github.com/mozilla/geckodriver/releases/latest)
 2. Download the latest available version of the browser driver for your operating system
 3. Unzip the file (if zipped) and place the file in a known folder on your system
 4. Optional: Add this known folder to your system path
 
 # Automation Site Guidelines
+
 Please keep the following format among the whole project
 
 - Elements: Any elements should be written with combination of two phrases {Description}+{FieldType} where Description start with lowercase and FieldTypes as follows TXT: Text, DDL: Drop Down List, BTN: Button, BOX: Check Box, LINK: Link, TAB: Tab, MSG: Message, DPK: Date Picker, HDR: Header, LBL: Label, POPOVER: cabin/class pop over
@@ -34,7 +37,9 @@ For example, SignUpPageTest
 - Feature: It should be per system feature and it's name should be written capitalize first letters 
 For example, SignUp.feature
 - helper: This folder contains all general classes which configurable for all the project like, TestBase and DataBase Note: Any changes in these classes should be announced among the team before push to master branch
+
 # General Notes
+
 - Test data should be send within feature file except Faker Data
 - Scenario Outline should be written for using invalid paramters to the same field having the same expected result
 - Scenario with Data table should be written for scenarios required mutliaple data to fill
@@ -48,6 +53,7 @@ For example, SignUp.feature
 - mvn -Dbrowser=safari install -Dcucumber.options="--tags @Smoke"
 
 # Selenium Grid
+
 - Install hub through java -jar selenium-server-standalone-3.141.59.jar -role hub
 - Check hub on selenium grid dashboard through http://localhost:4444/grid/console
 - Install node for firefox through java -Dwebdriver.gecko.driver=“/Users/mohamedhassan/Downloads/myGitPRoject-master/Selenium/geckodriver" -jar selenium-server-standalone-3.141.59.jar -role node -hub http://localhost:4444/grid/console -browser browserName=firefox -port 5566
