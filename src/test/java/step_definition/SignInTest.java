@@ -20,18 +20,18 @@ public class SignInTest extends TestBase {
     private Faker fakerLogin = new Faker();
 
     private By LoginBTN = By.xpath("//button[contains(text(),'Login')]");
-    private By LoginHeaderBTN = By.xpath("//a[text()='SIGN IN']");
+    private By LoginHeaderBTN = By.xpath("//a[contains(text(),'SIGN IN')]");
     private By LoginEmailTXT = By.xpath("//input[@placeholder='john@example.com']");
     private By LoginPassWordTXT = By.xpath("//input[@placeholder='******************']");
     private By ProfileNameBTN = By.xpath("//span[@class='el-dropdown-link capitalize text-xs text-white el-dropdown-selfdefine']");
     private By LogoutBTN = By.xpath("//li[contains(text(),'Sign Out')]");
     private By AccountSettingBTN = By.xpath("//a[@class='account-links__link text-sm flex font-medium items-center link link-with-icon']");
     private By InvalidLogInMSG = By.xpath("//div[@class='tooltip error error']//span[@class='tooltiptext']");
-    private By PassWordErrorMSG = By.xpath("//span[@class='tooltiptext with-arrow']");
+    private By PassWordErrorMSG = By.xpath("//span[contains(text(),'password')]");
     private By emptyPassWordErrorMSG = By.xpath("//div[2]/div[2]//div[2]/span");
-    private By EmailErrorMSG = By.xpath("//span[@class='tooltiptext with-arrow']");
+    private By EmailErrorMSG = By.xpath("//span[contains(text(),'email')]");
     private By HomePageTitle = By.xpath("//a[text()='SIGN IN']");
-    private By SignInHeader = By.xpath("//div[@class='text-xs mb-8 text-primary-fourth']");
+    private By SignInHeader = By.xpath("//div[@class='text-sm mb-8 text-primary-fourth leading-normal']");
 
 
     @Then("^'Sign In' page is opened$")
@@ -83,20 +83,29 @@ public class SignInTest extends TestBase {
     @Then("^user shall see InValid Login Error Message$")
     public void userShallSeeInValidLogInErrorMessage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(InvalidLogInMSG));
-        WebElement ErrorMessage = driver.findElement(InvalidLogInMSG);
-        Assert.assertTrue(ErrorMessage.isDisplayed());
+        //WebElement ErrorMessage = driver.findElement(InvalidLogInMSG);
+        //Assert.assertTrue(ErrorMessage.isDisplayed());
         String InValidLoginMSGText = driver.findElement(InvalidLogInMSG).getText();
-        Assert.assertEquals(InValidLoginMSGText, "!Invalid login information, please check and try again.");
+        Assert.assertEquals(InValidLoginMSGText, "!invalid login information, please check and try again");
 
     }
 
-    @Then("^user shall see password error message$")
-    public void userShallSeePasswordErrorMessage() {
+    @Then("^user shall see password too short error message$")
+    public void userShallSeePasswordTooShortErrorMessage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(PassWordErrorMSG));
-        WebElement passWordErrorMessage = driver.findElement(PassWordErrorMSG);
-        Assert.assertTrue(passWordErrorMessage.isDisplayed());
+        //WebElement passWordErrorMessage = driver.findElement(PassWordErrorMSG);
+        //Assert.assertTrue(passWordErrorMessage.isDisplayed());
         String PassWordErrorMSGText = driver.findElement(PassWordErrorMSG).getText();
-        Assert.assertEquals(PassWordErrorMSGText, "!Password length must be between 8 to 50 characters");
+        Assert.assertEquals(PassWordErrorMSGText, "!password is too short (minimum is 8 characters)");
+    }
+
+    @Then("^user shall see password too long error message$")
+    public void userShallSeePasswordTooLongErrorMessage() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(PassWordErrorMSG));
+        //WebElement passWordErrorMessage = driver.findElement(PassWordErrorMSG);
+        //Assert.assertTrue(passWordErrorMessage.isDisplayed());
+        String PassWordErrorMSGText = driver.findElement(PassWordErrorMSG).getText();
+        Assert.assertEquals(PassWordErrorMSGText, "!password is too long (maximum is 50 characters)");
     }
 
     @Then("^user shall see empty password error message$")
@@ -114,17 +123,17 @@ public class SignInTest extends TestBase {
     @Then("^user shall see email empty error message$")
     public void userShallSeeEmptyEmailErrorMessage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(EmailErrorMSG));
-        WebElement emailErrorMessage = driver.findElement(EmailErrorMSG);
-        Assert.assertTrue(emailErrorMessage.isDisplayed());
+        //WebElement emailErrorMessage = driver.findElement(EmailErrorMSG);
+        //Assert.assertTrue(emailErrorMessage.isDisplayed());
         String EMailErrorMSGText = driver.findElement(EmailErrorMSG).getText();
-        Assert.assertEquals(EMailErrorMSGText, "!Please enter email");
+        Assert.assertEquals(EMailErrorMSGText, "!Please enter a valid email");
     }
 
     @Then("^user shall see email error message$")
     public void userShallSeeEmailErrorMessage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(EmailErrorMSG));
-        WebElement emailErrorMessage = driver.findElement(EmailErrorMSG);
-        Assert.assertTrue(emailErrorMessage.isDisplayed());
+        //WebElement emailErrorMessage = driver.findElement(EmailErrorMSG);
+        //Assert.assertTrue(emailErrorMessage.isDisplayed());
         String EMailErrorMSGText = driver.findElement(EmailErrorMSG).getText();
         Assert.assertEquals(EMailErrorMSGText, "!Please enter a valid email");
     }
@@ -151,11 +160,11 @@ public class SignInTest extends TestBase {
 
     @And("^insert new user at database \"(.*)\" \"(.*)\"$")
     public void insertNewUserAtDataBase(String userEmail, String userHashPassWord) {
-        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "Select email from users where email = '" + userEmail + "'");
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "Select * from users where email = '" + userEmail + "'");
         if (DataBase.data != null) {
             DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "delete from users where email='" + userEmail + "'");
         }
-        DataBase.execute_update("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "insert into users (email, \"lastName\",\"firstName\",password,\"storeId\", \"groupId\",\"title\",\"phoneNumber\",\"isActive\",\"isLocked\")values('" + userEmail + "','Smith','John','" + userHashPassWord + "','fly365_com','fly365','Mr','+20 136253637474',True,False)");
+        DataBase.execute_update("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "insert into users (email, \"lastName\",\"firstName\",password,\"storeId\", \"groupId\",\"title\",\"phoneNumber\",\"isActive\",\"isLocked\")values('" + userEmail + "','Smith','John','" + userHashPassWord + "','fly365_com','fly365','Mr','+201010101010',True,False)");
     }
 
     @And("^delete new user at database \"(.*)\"$")

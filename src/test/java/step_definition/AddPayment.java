@@ -8,7 +8,6 @@ import helper.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.postgresql.replication.PGReplicationConnectionImpl;
 import org.testng.Assert;
 
 import java.util.Map;
@@ -16,20 +15,19 @@ import java.util.Map;
 public class AddPayment extends TestBase {
     WebDriverWait wait = new WebDriverWait(driver, 60);
 
-    private By PaymentTab = By.xpath("//a[@class='account-links__link flex text-sm items-center link link-with-icon mr-5']");
-    private By PaymentHeaderTXT = By.xpath("//h3[@class='text-xl font-bold']");
-    private By AddPaymentBTN = By.xpath("//button[@class='btn px-3 py-2 m-auto md:mt-0 mt-4 btn-primary-second']");
-    private By SavePaymentBTN = By.xpath("//button[@class='btn btn-primary-second add-button']");
+    private By PaymentTab = By.xpath("//a[contains(text(),'PAYMENT')]");
+    private By AddPaymentBTN = By.xpath("//button[contains(text(),'ADD CREDIT CARD')]");
+    private By SavePaymentBTN = By.xpath("//button[contains(text(),'ADD')]");
     private By CardNoTXT = By.xpath("//input[@placeholder='xxxx xxxx xxxx xxxx']");
     private By CardHolderTXT = By.xpath("//input[@placeholder='John Doe']");
     private By EXPDateTXT = By.xpath("//input[@placeholder='MM/YY']");
     private By CVVTXT = By.xpath("//input[@placeholder='123']");
-    private By AddedCard = By.xpath("//button[text()='ADD']");
-    private By DeleteCardBTN = By.xpath("//button[text()='REMOVE CARD']");
+    private By AddedCard = By.xpath("//button[@class='btn btn-primary-second add-button']");
+    private By DeleteCardBTN = By.xpath("//button[contains(text(),'REMOVE CARD')]");
     private By ConfirmDeleteCardBTN = By.xpath("//button[@class='btn btn-primary-second w-32 ml-2']");
     private By ConfirmDeleteTXT = By.xpath("//h3[@class='mt-8 text-xl mb-2 font-bold flex justify-center']");
-    private By selectDefaultBTN = By.xpath("//button[text()='SELECT DEFAULT']");
-    private By cancelBTN = By.xpath("//button[text()='CANCEL']");
+    private By selectDefaultBTN = By.xpath("//button[contains(text(),'SELECT DEFAULT')]");
+    private By cancelBTN = By.xpath("//button[contains(text(),'CANCEL')]");
     private By cardAddSuccMSG = By.xpath("//p[contains(text(),'Card addedd successfully')]");
 
     private String hostName = "k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432";
@@ -38,21 +36,16 @@ public class AddPayment extends TestBase {
 
     @And("^User press on payment tab$")
     public void userPressOnPaymentTab() {
-
         wait.until(ExpectedConditions.visibilityOfElementLocated(PaymentTab));
         driver.findElement(PaymentTab).click();
-        String pHeaderText = driver.findElement(PaymentHeaderTXT).getText();
-        //wait.until(ExpectedConditions.visibilityOfElementLocated(AddPaymentBTN));
-        //Assert.assertEquals(pHeaderText, "My Credit Cards");
     }
 
     @And("^user press on add payment button$")
     public void userPressOnAddPaymentButton() {
-        // wait.until(ExpectedConditions.visibilityOfElementLocated(AddPaymentBTN));
+         wait.until(ExpectedConditions.visibilityOfElementLocated(AddPaymentBTN));
         driver.findElement(AddPaymentBTN).click();
-        // wait.until(ExpectedConditions.visibilityOfElementLocated(AddPaymentBTN));
         String SavePaymentBTNText = driver.findElement(SavePaymentBTN).getText();
-        //Assert.assertEquals(SavePaymentBTNText, "ADD");
+        Assert.assertEquals(SavePaymentBTNText, "ADD");
     }
 
     @And("^user add Payment$")
@@ -62,7 +55,7 @@ public class AddPayment extends TestBase {
         driver.findElement(EXPDateTXT).sendKeys("1234");
         driver.findElement(CVVTXT).sendKeys("123");
         driver.findElement(SavePaymentBTN).click();
-        // Assert.assertTrue(driver.findElement(AddedCard).isDisplayed());
+        Assert.assertTrue(driver.findElement(AddedCard).isDisplayed());
 
     }
 
@@ -81,8 +74,8 @@ public class AddPayment extends TestBase {
 
     @And("^Delete payment card from database$")
     public void deletePaymentCardFromDatabase() {
-        DataBase.execute_query_dbs(hostName,dbsName,"delete from user_cards where user_cards.\"lastFourDigits\" = '2134' AND user_cards.\"cardType\" = 'user_card'");
-        DataBase.execute_query_dbs(hostName,dbsName,"delete from user_cards where user_cards.\"lastFourDigits\" = '4242' AND user_cards.\"cardType\" = 'user_card'");
+        DataBase.execute_query_dbs(hostName, dbsName, "delete from user_cards where user_cards.\"lastFourDigits\" = '2134' AND user_cards.\"cardType\" = 'user_card'");
+        DataBase.execute_query_dbs(hostName, dbsName, "delete from user_cards where user_cards.\"lastFourDigits\" = '4242' AND user_cards.\"cardType\" = 'user_card'");
 
     }
 
@@ -100,7 +93,7 @@ public class AddPayment extends TestBase {
     }
 
     @And("^Click Save button$")
-    public void clickSaveBuuton() {
+    public void clickSaveButton() {
         driver.findElement(SavePaymentBTN).click();
     }
 

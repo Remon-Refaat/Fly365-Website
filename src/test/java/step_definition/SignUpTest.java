@@ -16,19 +16,20 @@ public class SignUpTest extends TestBase {
 
     WebDriverWait wait = new WebDriverWait(driver, 50);
 
+    private By signinBTN = By.xpath("//a[contains(text(),'SIGN IN')]");
     private By signUpHDR = By.xpath("//div[@class='text-xs mb-8 text-primary-fourth']");
-    private By signUpBTN = By.xpath("//li/a[text()='Sign up']");
+    private By signUpBTN = By.xpath("//a[@class='text-primary-second link-sign-up font-semibold no-underline']");
     private By firstNameTXT = By.xpath("//input[@placeholder='First Name']");
     private By lastNameTXT = By.xpath("//input[@placeholder='Family Name']");
     private By emailTXT = By.xpath("//input[@placeholder='john@example.com']");
     private By passwordTXT = By.xpath("//input[@placeholder='******************']");
-    private By creatAccountBTN = By.xpath("//button[text()='CREATE ACCOUNT']");
+    private By creatAccountBTN = By.xpath("//button[contains(text(),'CREATE ACCOUNT')]");
     private By validationNameErrorMSG = By.xpath("//span[text()='Name must be letters only']");
     private By validationEmailErrorMSG = By.xpath("//span[text()='Please enter a valid email']");
     private By validationPasswordErrorMSG = By.xpath("//span[text()='Password length must be between 8 to 50 characters']");
     private By firstNameRequiredErrorMSG = By.xpath("//span[text()='Please enter first name']");
     private By lastNameRequiredErrorMSG = By.xpath("//span[text()='Please enter family name']");
-    private By emailRequiredErrorMSG = By.xpath("//span[text()='Please enter email']");
+    private By emailRequiredErrorMSG = By.xpath("//span[contains(text(),'Please enter a valid email')]");
     private By passwordRequiredErrorMSG = By.xpath("//span[text()='Please enter password']");
     private By emailExitErrorMSG = By.xpath("//span[text()='email already existed']");
     private By showPasswordBTN = By.xpath("//span[text()='Show']");
@@ -37,8 +38,11 @@ public class SignUpTest extends TestBase {
     private By passwordNotDisplayedLBL = By.xpath("//div[@class='password-input el-input']/input[@type='password']");
 
 
+
+
     @And("Open Sign up page")
     public void openSignUpPage() {
+        driver.findElement(signinBTN).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(signUpBTN));
         driver.findElement(signUpBTN).click();
     }
@@ -72,7 +76,7 @@ public class SignUpTest extends TestBase {
 
     @And("The new record set on database")
     public void theNewRecordSetOnDatabase() {
-        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "select email from users where email='john.smith.fly365@gmail.com'");
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "select * from users where email='john.smith.fly365@gmail.com'");
         Assert.assertEquals(DataBase.data, "john.smith.fly365@gmail.com");
         DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "delete from users where email='john.smith.fly365@gmail.com'");
     }
@@ -141,7 +145,7 @@ public class SignUpTest extends TestBase {
     public void theSystemShouldDisplayValidationMessageForInvalidPassword() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(validationPasswordErrorMSG));
         String pass_error = driver.findElement(validationPasswordErrorMSG).getText();
-        Assert.assertEquals(pass_error, "Password length must be between 8 to 50 characters");
+        Assert.assertEquals(pass_error, "password is too short (minimum is 8 characters)");
     }
 
     @Then("^The system display validation message for email already exist$")
@@ -165,10 +169,10 @@ public class SignUpTest extends TestBase {
     }
 
     @And("^Delete the user \"(.*)\" if he exists in the database$")
-    public void deleteTheUserIfHeExistsInTheDatabase(String userEmail) throws Throwable {
-        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "Select email from users where email = '"+userEmail+"'");
+    public void deleteTheUserIfHeExistsInTheDatabase(String userEmail) {
+        DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432","user_api", "select * from users where email = '" + userEmail + "'");
         if (DataBase.data != null) {
-            DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "delete from users where email='"+userEmail+"'");
+            DataBase.execute_query_dbs("k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432", "user_api", "delete from users where email='" + userEmail + "'");
         }
     }
 

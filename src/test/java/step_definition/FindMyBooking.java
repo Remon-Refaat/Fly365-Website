@@ -26,9 +26,9 @@ public class FindMyBooking extends TestBase {
 
     By taxInvoiceBTN = By.xpath("//a[contains(text(),'Invoice PDF')]");
     By bookingConfirmationBTN = By.xpath("//a[contains(text(),'Ticket PDF')]");
-    By fly365RefVAL = By.xpath("//div//div[2]/div/div[1]/div/strong");
-    By airlineRefVAL = By.xpath("//div//div[2]/div/div[2]/div/strong");
-    By dateIssuedVAL = By.xpath("//div//div[2]/div/div[3]/div/strong");
+    By fly365RefVAL = By.xpath("(//strong[@class='txt-primary-second font-semibold'])[1]");
+    By airlineRefVAL = By.xpath("(//strong[@class='txt-primary-second font-semibold'])[2]");
+    By dateIssuedVAL = By.xpath("(//strong[@class='txt-primary-second font-semibold'])[3]");
     By firstTripDepartureDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-0-origin']//div[2]/span[2]");
     By secondTripDepartureDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-0-origin']//div[2]/span[2]");
     By firstTripArrivalDateVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-destination']/div[2]/span[2]");
@@ -37,8 +37,8 @@ public class FindMyBooking extends TestBase {
     By adultTaxVAL = By.xpath("//div[2]/div/div[1]/div[2]//div[2]/p[2]");
     By childFareVAL = By.xpath("//div[2]/div/div[2]/div[2]//div[2]/p[1]");
     By childTaxVAL = By.xpath("//div[2]/div/div[2]/div[2]//div[2]/p[2]");
-    By infantFareVAL = By.xpath("//div[4]//div[2]//div[3]/div[2]//div[2]/p[1]");
-    By infantTaxVAL = By.xpath("//div[4]//div[2]//div[3]/div[2]//div[2]/p[2]");
+    By infantFareVAL = By.xpath("(//p[@class='mb-2'])[11]");
+    By infantTaxVAL = By.xpath("(//p[@class='mb-2'])[12]");
     By creditCardVAL = By.xpath("//div[4]/div[2]//p[2]");
     By firstTripCarrierCodeVAL = By.xpath("//*[@id='itin-gp-undefined-optionset-0-option-0']/div/div[1]/div[1]//label");
     By secondTripCarrierCodeVAL = By.xpath("//*[@id='itin-gp-undefined-optionset-1-option-0']/div/div[1]/div[1]//label");
@@ -52,8 +52,8 @@ public class FindMyBooking extends TestBase {
     By secondTripDepartureTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-0-origin']//div[1]/span[3]");
     By firstTripArrivalTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-destination']/div[1]/span[3]");
     By secondTripArrivalTerminalVAL = By.xpath("//*[@id='itin-gp-0-optionset-1-option-0-segment-1-destination']/div[1]/span[3]");
-    By firstTripTotalTravelTimeVAL = By.xpath("//*[@id='itin-gp-undefined-optionset-0-option-0']/div/div[2]/div/div/div/div[3]//div[2]//div/div[1]/div/div[2]");
-    By secondTripTotalTravelTimeVAL = By.xpath("//*[@id='itin-gp-undefined-optionset-1-option-0']/div/div[2]/div/div/div/div[3]//div[2]//div/div[1]/div/div[2]");
+    By firstTripTotalTravelTimeVAL = By.xpath("(//span[@class='text-xs inline-block text-primary-fourth font-medium mb-1 flight-duration'])[1]");
+    By secondTripTotalTravelTimeVAL = By.xpath("//div[@id='itin-gp-0-optionset-1-option-0-segment-1-duration']//div[@class='text-xs inline-block font-semibold segment-duration'][contains(text(),'h -')]");
     By currencyVAL = By.xpath("//p[@class='text-lg font-bold uppercase']/span");
     By firstTripFirstDepartureAirlineVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-0-carrier']//label[1]");
     By firstTripSecondDepartureAirlineVAL = By.xpath("//*[@id='itin-gp-0-optionset-0-option-0-segment-1-carrier']//label[1]");
@@ -227,9 +227,9 @@ public class FindMyBooking extends TestBase {
 
     @And("^Download the tax invoice pdf$")
     public void downloadTheTaxInvoicePdf() throws InterruptedException {
-        Thread.sleep(16000);
+        Thread.sleep(20000);
         driver.findElement(taxInvoiceBTN).click();
-        Thread.sleep(5000);
+        Thread.sleep(7000);
     }
 
 

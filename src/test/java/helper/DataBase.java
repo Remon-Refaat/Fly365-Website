@@ -16,6 +16,7 @@ public class DataBase {
     public static String data;
 
 
+
     public static void execute_query_dbs(String hostName, String dbsName, String query) {
         try {
             String url = "jdbc:postgresql://" + hostName + "/" + dbsName;
@@ -28,8 +29,7 @@ public class DataBase {
                 System.out.println("ResultSet is empty");
             } else {
                 do {
-                    data = rs.getString("email");
-                    //System.out.println(data);
+                    data = rs.getString("id");
                 }
                 while (rs.next());
             }

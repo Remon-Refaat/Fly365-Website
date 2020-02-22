@@ -17,18 +17,18 @@ public class AddTraveller extends TestBase {
     private GeneralMethods gmObject = new GeneralMethods();
 
     private By TravellerTAB = By.xpath("//a[@class='account-links__link text-sm flex items-center link link-with-icon mr-5']");
-    private By AddTravellerBTN = By.xpath("//button[@class='btn px-3 py-2 btn-primary-second m-auto md:mt-0 mt-4']");
+    private By AddTravellerBTN = By.xpath("//button[@class='btn px-3 py-2 btn-primary-second m-auto mt-0']");
     private By TravellerHeaderTXT = By.xpath("//h3[@class='text-xl font-semibold']");
     private By SaveTravellerBTN = By.xpath("//button[@class='btn btn-primary-second w-full btn-add-traveller']");
     private By TravellerTitleDrop = By.xpath("//input[@placeholder='Title']");
     private By MRTitle = By.xpath("//div[1]/div[1]/ul[1]/li[span[text()='Mr']]");
     private By TravellerFirstNameTXT = By.xpath("//input[@placeholder='First name']");
     private By TravellerFamileyNameTXT = By.xpath("//input[@placeholder='Family name']");
-    private By TravellerBirthDateDayDrop = By.xpath("/html[1]/body[1]/div[1]/div[3]/div[1]/div[2]/div[2]/div[2]/form[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]");
+    private By TravellerBirthDateDayDrop = By.xpath("//body//div//div//div//div//div//div[1]//div[1]//div[2]//div[1]//div[1]//div[1]//div[1]//div[1]//input[1]");
     private By Day1 = By.xpath("/html[1]/body[1]/div[7]/div[1]/div[1]/ul[1]/li[2]");
-    private By TravellerBirthDateMonth = By.xpath("/html[1]/body[1]/div[1]/div[3]/div[1]/div[2]/div[2]/div[2]/form[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/input[1]");
+    private By TravellerBirthDateMonth = By.xpath("//body//div//div//div//div//div[1]//div[1]//div[2]//div[1]//div[1]//div[1]//div[2]//div[1]//input[1]");
     private By Month1 = By.xpath("/html[1]/body[1]/div[6]/div[1]/div[1]/ul[1]/li[4]");
-    private By TravellerBirthDateYear = By.xpath("/html[1]/body[1]/div[1]/div[3]/div[1]/div[2]/div[2]/div[2]/form[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/input[1]");
+    private By TravellerBirthDateYear = By.xpath("//body//div//div//div//div//div[1]//div[1]//div[2]//div[1]//div[1]//div[1]//div[3]//div[1]//input[1]");
     private By Year1 = By.xpath("/html[1]/body[1]/div[7]/div[1]/div[1]/ul[1]/li[2]");
     private By SaveTravellerInnerBTN = By.xpath("//button[@class='btn btn-primary-second w-full btn-add-traveller']");
     private By AddedTraveller = By.xpath("//label[contains(text(),'ID Type')]");
@@ -36,9 +36,9 @@ public class AddTraveller extends TestBase {
     private By confirmDeleteBTN = By.xpath("//button[text()='Confirm']");
     private By noTravelersFoundMSG = By.xpath("//h3[text()='Sorry you have not added a traveller']");
     private By successMessageTXT = By.xpath("//div[@class='el-notification__group is-with-icon']");
-    private By editTravelerBTN = By.xpath("//span[text()='Edit']");
-    private By editSaveBTN = By.xpath("//button[text()='Edit']");
-    private By cancelBTN = By.xpath("//button[text()='CANCEL']");
+    private By editTravelerBTN = By.xpath("//span[contains(text(),'Edit')]");
+    private By editSaveBTN = By.xpath("//button[contains(text(),'Edit')]");
+    private By cancelBTN = By.xpath("//button[contains(text(),'CANCEL')]");
 
     private String hostName = "k8stage1.cl9iojf4kdop.eu-west-1.rds.amazonaws.com:5432";
     private String dbsName = "user_api";
@@ -67,12 +67,12 @@ public class AddTraveller extends TestBase {
     @And("^user add traveller$")
     public void userEnterTravellerTitle() throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOfElementLocated(TravellerFirstNameTXT));
-        gmObject.selectFromDDL(TravellerTitleDrop,"Mr");
+        gmObject.selectFromDDL(TravellerTitleDrop, "Mr");
         driver.findElement(TravellerFirstNameTXT).sendKeys("john");
         driver.findElement(TravellerFamileyNameTXT).sendKeys("smith");
-        gmObject.selectFromDDL(TravellerBirthDateDayDrop,"7");
-        gmObject.selectFromDDL(TravellerBirthDateMonth,"June");
-        gmObject.selectFromDDL(TravellerBirthDateYear,"1988");
+        gmObject.selectFromDDL(TravellerBirthDateDayDrop, "7");
+        gmObject.selectFromDDL(TravellerBirthDateMonth, "June");
+        gmObject.selectFromDDL(TravellerBirthDateYear, "1988");
         driver.findElement(SaveTravellerInnerBTN).click();
         driver.findElement(cancelBTN).click();
         Assert.assertTrue(driver.findElement(AddedTraveller).isDisplayed());
@@ -100,14 +100,14 @@ public class AddTraveller extends TestBase {
 
     @Then("^Deleted user is removed from the list$")
     public void deletedUserIsRemovedFromTheList() {
-        Assert.assertEquals(driver.findElement(noTravelersFoundMSG).getText(),"Sorry you have not added a traveller");
+        Assert.assertEquals(driver.findElement(noTravelersFoundMSG).getText(), "Sorry you have not added a traveller");
     }
 
     @And("^User edit the saved traveler$")
     public void userEditTheSavedTraveler() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(editTravelerBTN));
         driver.findElement(editTravelerBTN).click();
-        driver.findElement(TravellerFirstNameTXT).sendKeys(Keys.chord(Keys.BACK_SPACE,Keys.BACK_SPACE,Keys.BACK_SPACE,Keys.BACK_SPACE));
+        driver.findElement(TravellerFirstNameTXT).sendKeys(Keys.chord(Keys.BACK_SPACE, Keys.BACK_SPACE, Keys.BACK_SPACE, Keys.BACK_SPACE));
         driver.findElement(TravellerFirstNameTXT).sendKeys("david");
         driver.findElement(editSaveBTN).click();
     }
